@@ -1,0 +1,59 @@
+{
+  "name": "linklist-studio",
+  "productName": "LinkList Studio",
+  "version": "1.0.0",
+  "description": "LinkList Studio (链表研习社) - 单链表代码解剖与默写训练工具",
+  "main": "electron/main.js",
+  "author": "LinkList Studio",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "verify": "node tools/verify.js",
+    "dist": "electron-builder --win portable",
+    "dist:dir": "electron-builder --win --dir"
+  },
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.linkliststudio.app",
+    "productName": "LinkList Studio",
+    "copyright": "LinkList Studio",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "shared/**/*",
+      "src/**/*",
+      "resources/reference/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/tcc",
+        "to": "tcc"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "LinkList-Studio-${version}-portable.exe"
+    },
+    "portable": {
+      "artifactName": "LinkList-Studio-${version}-portable.exe",
+      "unpackDirName": "LinkListStudio"
+    },
+    "compression": "maximum"
+  }
+}

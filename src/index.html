@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self' file:; style-src 'self' file:; font-src 'self' file:; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none';" />
+  <title>LinkList Studio</title>
+  <!-- 必须放在最前面：在首帧之前就定好主题，避免深色用户启动时闪白屏 -->
+  <script src="theme-boot.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ================= 左侧：模块列表 ================= -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">LL</div>
+        <div class="brand-text">
+          <div class="brand-title">LinkList Studio</div>
+          <div class="brand-sub">链表研习社 · 代码解剖与默写训练</div>
+        </div>
+      </div>
+
+      <!-- 教材切换：单链表 / 双向链表，各自独立的模块、草稿与进度 -->
+      <div class="book-switch">
+        <div class="segmented segmented-block" id="bookSwitch" role="group" aria-label="教材切换"></div>
+      </div>
+
+      <div class="sidebar-search">
+        <input id="searchInput" type="search" placeholder="搜索模块…" autocomplete="off" />
+      </div>
+
+      <nav class="module-list" id="moduleList" aria-label="模块列表"></nav>
+      <div class="sidebar-foot">
+        <div class="progress-mini" id="progressMini">
+          <div class="progress-mini-bar"><span id="progressMiniFill"></span></div>
+          <div class="progress-mini-text" id="progressMiniText">练习进度 0 / 11</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ================= 右侧：主内容区 ================= -->
+    <main class="content">
+
+      <header class="module-header">
+        <div class="mh-main">
+          <h1 class="mh-title">
+            <span class="mh-id" id="mhId">01</span>
+            <span id="mhName">头文件与 typedef</span>
+          </h1>
+          <p class="mh-summary" id="mhSummary"></p>
+          <div class="mh-meta">
+            <span class="chip chip-diff" id="mhDiff"></span>
+            <span class="chip chip-dep" id="mhDeps"></span>
+            <span class="chip chip-lines" id="mhLines"></span>
+          </div>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <div class="segmented" id="commentModes" role="group" aria-label="注释模式">
+          <button type="button" data-mode="detail">详细注释</button>
+          <button type="button" data-mode="short">精简注释</button>
+          <button type="button" data-mode="none">无注释</button>
+        </div>
+
+        <div class="segmented" id="viewModes" role="group" aria-label="视图模式">
+          <button type="button" data-view="read">阅读模式</button>
+          <button type="button" data-view="practice">练习模式</button>
+        </div>
+
+        <div class="toolbar-spacer"></div>
+
+        <button type="button" class="btn btn-ghost" id="btnPrev" title="上一个模块（←）">← 上一模块</button>
+        <button type="button" class="btn btn-ghost" id="btnNext" title="下一个模块（→）">下一模块 →</button>
+        <button type="button" class="btn btn-ghost" id="btnTheme" title="切换深色 / 浅色主题">深色</button>
+      </div>
+
+      <!-- ---------- 阅读模式 ---------- -->
+      <section class="pane pane-read" id="paneRead">
+        <div class="code-card">
+          <div class="code-card-head">
+            <span class="code-card-title" id="readCardTitle">模块代码</span>
+            <div class="code-card-actions">
+              <span class="hint" id="readHint">按 ← → 可快速切换模块</span>
+              <button type="button" class="btn btn-mini" id="btnCopyCode">复制代码</button>
+            </div>
+          </div>
+          <div class="code-view" id="codeView"></div>
+        </div>
+      </section>
+
+      <!-- ---------- 练习模式 ---------- -->
+      <section class="pane pane-practice" id="panePractice" hidden>
+        <div class="practice-split" id="practiceSplit">
+          <div class="editor-card">
+            <div class="code-card-head">
+              <span class="code-card-title">默写编辑器</span>
+              <div class="code-card-actions">
+                <span class="hint">Ctrl + Enter 编译运行</span>
+                <button type="button" class="btn btn-mini" id="btnScaffold">补全脚手架</button>
+                <button type="button" class="btn btn-mini" id="btnBlank">清空</button>
+              </div>
+            </div>
+            <div class="editor" id="editor">
+              <div class="editor-gutter"><div class="editor-gutter-inner" id="editorGutter"></div></div>
+              <div class="editor-highlight" id="editorHighlight"><code id="editorHighlightCode"></code></div>
+              <textarea id="editorInput" class="editor-input" spellcheck="false" wrap="off"
+                        autocomplete="off" autocapitalize="off" autocorrect="off"></textarea>
+            </div>
+          </div>
+
+          <aside class="ref-card" id="refCard">
+            <div class="code-card-head">
+              <span class="code-card-title" id="refCardTitle">官方实现</span>
+              <div class="code-card-actions">
+                <button type="button" class="btn btn-mini" id="btnDiff">对比</button>
+                <button type="button" class="btn btn-mini" id="btnCollapseRef">折叠</button>
+              </div>
+            </div>
+            <div class="ref-body" id="refBody">
+              <div class="code-view code-view-compact" id="refView"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ---------- 输出面板 ---------- -->
+      <section class="output" id="outputPanel">
+        <div class="output-head">
+          <button type="button" class="output-toggle" id="btnToggleOutput" aria-expanded="true">
+            <span class="caret" id="outputCaret">▾</span>
+            <span>输出面板</span>
+          </button>
+          <div class="output-status" id="outputStatus"></div>
+          <div class="toolbar-spacer"></div>
+          <button type="button" class="btn btn-primary" id="btnRun" title="Ctrl + Enter">
+            <span class="play" aria-hidden="true">▶</span> 运行
+          </button>
+          <button type="button" class="btn btn-ghost" id="btnReset">↺ 重置</button>
+          <button type="button" class="btn btn-ghost" id="btnCompare">⇄ 对比</button>
+        </div>
+        <div class="output-body" id="outputBody">
+          <div class="output-placeholder" id="outputPlaceholder">
+            点「运行」或按 Ctrl + Enter 编译并执行编辑器里的代码。
+          </div>
+          <div class="output-content" id="outputContent" hidden></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= 状态栏 ================= -->
+  <footer class="statusbar">
+    <div class="sb-group">
+      <span class="sb-dot" id="sbCompilerDot"></span>
+      <span id="sbCompiler">正在检测编译器…</span>
+    </div>
+    <div class="sb-group" id="sbModule">模块 01 / 12</div>
+    <div class="sb-group" id="sbState">未修改</div>
+    <div class="sb-group sb-right" id="sbRight"></div>
+  </footer>
+
+  <script src="highlight.js"></script>
+  <script src="diff.js"></script>
+  <script src="editor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

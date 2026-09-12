@@ -1,0 +1,15 @@
+# 统一用 LF 存储，避免不同平台 clone 下来换行符变化
+# （参考代码里的缩进与 ASCII 图示对格式敏感，必须保持一致）
+* text=auto eol=lf
+
+# 二进制文件不做任何转换
+*.exe   binary
+*.dll   binary
+*.a     binary
+*.ico   binary
+*.png   binary
+*.zip   binary
+
+# 自检产物与依赖目录
+node_modules/  export-ignore
+build-cache/   export-ignore

@@ -1,0 +1,268 @@
+'use strict';
+/*
+ * LinkList Studio —— 参考源码解析器
+ * ---------------------------------------------------------------------------
+ * 把 resources/reference/*.c 解析成"模块 / 三档注释"的结构化数据。
+ *
+ * 标记语法（全部是合法的 C 注释，所以参考文件本身可以直接编译）：
+ *
+ *   //%module | 编号 | 函数名 | 中文标题 | 难度 | 依赖编号(逗号分隔)
+ *   //%summary | 一句话作用
+ *   //@s  关键步骤注释    → 详细模式 + 精简模式 都显示
+ *   //@d  逐行补充/ASCII  → 只有详细模式显示
+ *   //%end
+ *   //%driver | 模块编号   ... //%driver-end     （练习模式脚手架用的测试驱动）
+ *
+ * 三档模式的唯一差别就是"保留哪些 //@ 行"：
+ *     详细 = @s + @d      精简 = @s      无注释 = 都不保留
+ * 代码行原样输出，所以签名、变量名、缩进在三种模式下逐字节一致。
+ */
+
+const MODULE_RE = /^\/\/%module\s*\|\s*([^|]*)\|\s*([^|]*)\|\s*([^|]*)\|\s*([^|]*)\|\s*(.*)$/;
+const SUMMARY_RE = /^\/\/%summary\s*\|\s*(.*)$/;
+const DRIVER_RE = /^\/\/%driver\s*\|\s*(.*)$/;
+
+/** 判断一行是否是"注释型"行（决定它在三档模式中是否出现） */
+function classify(rawLine) {
+  const trimmed = rawLine.trim();
+  if (trimmed.startsWith('//@s')) return { kind: 'short-detail', text: trimmed.slice(4).replace(/^\s?/, '') };
+  if (trimmed.startsWith('//@d')) return { kind: 'detail', text: trimmed.slice(4).replace(/^\s?/, '') };
+  if (/^\/\/[^@%]/.test(trimmed) || trimmed === '//') return { kind: 'plain-comment', text: trimmed.replace(/^\/\/\s?/, '') };
+  return null;
+}
+
+/** 把原始行还原成"输出行"：注释行 → // 文本，代码行 → 原样 */
+function toOutputLine(rawLine, info) {
+  const indent = rawLine.slice(0, rawLine.length - rawLine.trimStart().length);
+  if (info) return indent + '//' + (info.text ? ' ' + info.text : '');
+  return rawLine;
+}
+
+/**
+ * 解析单个模块体，产出三档渲染结果。
+ * body: string[]  模块内的原始行（不含 //%module 与 //%end）
+ */
+function renderModes(body) {
+  const out = { detail: [], short: [], none: [] };
+  for (const raw of body) {
+    const info = classify(raw);
+    if (info) {
+      if (info.kind !== 'detail') out.short.push(toOutputLine(raw, info));
+      out.detail.push(toOutputLine(raw, info));
+    } else {
+      out.detail.push(raw);
+      out.short.push(raw);
+      out.none.push(raw);
+    }
+  }
+  return {
+    detail: out.detail.join('\n'),
+    short: out.short.join('\n'),
+    none: out.none.join('\n'),
+  };
+}
+
+/** 去掉尾部连续空行 */
+function trimTrailingBlank(lines) {
+  const copy = lines.slice();
+  while (copy.length && copy[copy.length - 1].trim() === '') copy.pop();
+  return copy;
+}
+
+/**
+ * 解析一份或多份 .c 文本。
+ * @param {Array<{name:string, text:string}>} sources
+ */
+function parse(sources) {
+  const modules = [];
+  const drivers = {};
+  let current = null;
+  let driver = null;
+
+  for (const src of sources) {
+    const lines = src.text.replace(/\r\n?/g, '\n').split('\n');
+    for (const raw of lines) {
+      // —— driver 块 ——
+      const dm = raw.match(DRIVER_RE);
+      if (dm) {
+        driver = { id: dm[1].trim(), lines: [] };
+        continue;
+      }
+      if (driver) {
+        if (raw.trim() === '//%driver-end') {
+          drivers[driver.id] = trimTrailingBlank(driver.lines).join('\n');
+          driver = null;
+          continue;
+        }
+        driver.lines.push(raw);
+        continue;
+      }
+
+      // —— module 块 ——
+      const mm = raw.match(MODULE_RE);
+      if (mm) {
+        current = {
+          id: mm[1].trim(),
+          key: mm[2].trim(),
+          title: mm[3].trim(),
+          difficulty: parseInt(mm[4].trim(), 10) || 1,
+          deps: mm[5].trim() ? mm[5].split(',').map((s) => s.trim()).filter(Boolean) : [],
+          summary: '',
+          body: [],
+        };
+        continue;
+      }
+      if (current && /^\/\/%end\s*$/.test(raw)) {
+        const modes = renderModes(trimTrailingBlank(current.body));
+        const codeLines = modes.none.split('\n');
+        modules.push({
+          id: current.id,
+          key: current.key,
+          title: current.title,
+          difficulty: current.difficulty,
+          deps: current.deps,
+          summary: current.summary,
+          modes,
+          code: modes.none,
+          codeLineCount: codeLines.filter((l) => l.trim() !== '').length,
+        });
+        current = null;
+        continue;
+      }
+      if (current) {
+        const sm = raw.match(SUMMARY_RE);
+        if (sm) {
+          current.summary = sm[1].trim();
+        } else {
+          current.body.push(raw);
+        }
+      }
+      // 模块之外的裸行（文件头注释等）直接忽略
+    }
+  }
+
+  modules.sort((a, b) => a.id.localeCompare(b.id));
+  return { modules, drivers };
+}
+
+/** 拼装视图：模块 01..11 的无注释代码首尾相接，就是可编译的完整源码 */
+function assemble(modules, mode = 'none') {
+  return modules.map((m) => m.modes[mode]).join('\n\n') + '\n';
+}
+
+/**
+ * 函数名 → 模块编号。
+ * 直接取自 //%module 声明的函数名，比正则猜函数定义可靠得多。
+ */
+function buildFunctionIndex(modules) {
+  const index = new Map();
+  for (const m of modules) {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(m.key)) continue;
+    if (!index.has(m.key)) index.set(m.key, m.id);
+  }
+  return index;
+}
+
+/**
+ * 找出某段代码里引用到的、已知的参考函数名。
+ * @param {Set<string>|string|null} exclude 要忽略的函数名
+ */
+function referencedFunctions(code, fnIndex, exclude) {
+  const skip = exclude instanceof Set ? exclude : new Set(exclude ? [exclude] : []);
+  const found = new Set();
+  for (const fn of fnIndex.keys()) {
+    if (skip.has(fn)) continue;
+    const re = new RegExp('\\b' + fn.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\(');
+    if (re.test(code)) found.add(fn);
+  }
+  return found;
+}
+
+/**
+ * 为某个模块生成"练习脚手架"：给定代码 + 待默写空白 + 测试驱动。
+ * 目标是让用户填空之后立刻就能编译运行，形成闭环。
+ *
+ * @param {object} [options]
+ * @param {string} [options.fillCode] 传入目标模块的参考实现时，直接把空白处填好
+ *                                    （自检用：验证脚手架填完必能编译运行）
+ */
+function buildScaffold(modules, drivers, moduleId, options = {}) {
+  const byId = new Map(modules.map((m) => [m.id, m]));
+  const target = byId.get(moduleId);
+  if (!target) return null;
+
+  const fnIndex = buildFunctionIndex(modules);
+  const driverCode = drivers[moduleId] || '';
+
+  const neededIds = new Set();
+  if (moduleId !== '01') neededIds.add('01');
+  // 目标模块自己声明依赖的函数也必须给出：
+  // 用户写的 applist 会调用 creatNode，那就得先把 creatNode 放进来
+  for (const d of target.deps) {
+    const depId = d.padStart(2, '0');
+    if (depId !== moduleId) neededIds.add(depId);
+  }
+
+  // 推导"已给出"的模块集合：
+  //   有测试驱动 → 从驱动里用到的函数出发（驱动自身那个 main 不算依赖）；
+  //   没有驱动（模块 11 main）→ 从目标模块自己的参考实现出发。
+  // 再沿调用图做传递闭包，例如 applist 会带出 creatNode。
+  const seed = driverCode || target.code;
+  const excluded = new Set([target.key, 'main']);
+  const queue = [...referencedFunctions(seed, fnIndex, excluded)];
+  const seenFn = new Set(queue);
+  const enqueue = (code) => {
+    for (const fn of referencedFunctions(code, fnIndex, excluded)) {
+      if (!seenFn.has(fn)) {
+        seenFn.add(fn);
+        queue.push(fn);
+      }
+    }
+  };
+  for (const id of [...neededIds]) {
+    const owner = byId.get(id);
+    if (owner) enqueue(owner.code);
+  }
+  while (queue.length) {
+    const fn = queue.shift();
+    const owner = fnIndex.get(fn);
+    if (!owner || owner === moduleId) continue;
+    if (neededIds.has(owner)) continue;
+    neededIds.add(owner);
+    enqueue(byId.get(owner).code);
+  }
+
+  const given = [...neededIds]
+    .sort((a, b) => a.localeCompare(b))
+    .map((id) => byId.get(id))
+    .filter(Boolean)
+    .map((m) => `/* ======== [已给出] 模块 ${m.id} ${m.key} ======== */\n${m.code}`)
+    .join('\n\n');
+
+  const blankMarker = options.fillCode
+    ? options.fillCode
+    : [
+        '/* ====================================================================',
+        ` *  轮到你了：模块 ${target.id}  ${target.key}`,
+        ` *  作用：${target.summary}`,
+        ' *  提示：先写函数签名，再写循环定位，最后写指针操作。',
+        ' *  写完按 Ctrl + Enter 编译运行，点"对比"看与参考实现的差异。',
+        ' * ==================================================================== */',
+      ].join('\n');
+
+  const parts = [];
+  if (given) parts.push(given);
+  parts.push(blankMarker);
+  parts.push('');
+  if (driverCode) parts.push(`/* ======== 测试驱动（已给出，可自行修改） ======== */\n${driverCode}`);
+  return parts.join('\n\n') + '\n';
+}
+
+module.exports = {
+  parse,
+  assemble,
+  renderModes,
+  buildScaffold,
+  buildFunctionIndex,
+  referencedFunctions,
+};

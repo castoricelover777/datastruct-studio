@@ -41,7 +41,10 @@ function animDir() {
     : path.join(__dirname, '..', 'docs', 'animations');
 }
 
-app.setAppUserModelId('com.linkliststudio.app');
+app.setAppUserModelId('com.datastructstudio.app');
+
+/** 冷启动计时的起点（PRD 验收：< 3s） */
+const bootAt = Date.now();
 
 // ---------------------------------------------------------------------------
 // 路径解析（开发态 / 打包态）
@@ -437,13 +440,15 @@ function getCompilers() {
 }
 
 function createWindow() {
+  // LS_WINDOW=<宽>x<高> 可以指定窗口尺寸，用来验证"小屏不破版"（PRD 验收 9）
+  const sizeMatch = /^(\d+)x(\d+)$/.exec(process.env.LS_WINDOW || '');
   mainWindow = new BrowserWindow({
-    width: 1360,
-    height: 880,
+    width: sizeMatch ? Number(sizeMatch[1]) : 1360,
+    height: sizeMatch ? Number(sizeMatch[2]) : 880,
     minWidth: 1024,
     minHeight: 660,
     backgroundColor: '#FAFAFA',
-    title: 'LinkList Studio',
+    title: 'DataStruct Studio',
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
@@ -468,11 +473,14 @@ function createWindow() {
   });
 
   // 不在 ready-to-show 就显示：那时界面还没拿到数据，会闪一下空壳。
-  // 等界面把模块列表渲染完，通过 app:ready 通知我们再显示。
+  // 等界面把章节树渲染完，通过 app:ready 通知我们再显示。
   let shown = false;
   const showWindow = () => {
     if (shown || !mainWindow || mainWindow.isDestroyed()) return;
     shown = true;
+    // PRD 验收 10：冷启动 < 3s。这里量的是"进程起来到界面可用"的时长
+    const ms = Date.now() - bootAt;
+    console.log(`[boot] 冷启动到界面就绪：${ms} ms`);
     mainWindow.show();
     if (process.env.LS_CAPTURE) {
       // 截图时把窗口置顶并聚焦：被遮挡的窗口会被 Chromium 节流，

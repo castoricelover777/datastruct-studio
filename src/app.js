@@ -469,7 +469,11 @@
     const anim = m ? (anims.animations || {})[m.id] : null;
     state.currentAnim = anim || null;
 
-    if (!anim) {
+    // 练习模式聚焦默写，不显示动画（画面在阅读面板里，跟着一起隐藏，
+    // 否则会出现"播放条在动、画面看不见"的空转）
+    const inPractice = state.view === 'practice';
+
+    if (!anim || inPractice) {
       el.playerPanel.hidden = true;
       el.animCard.hidden = true;
       if (el.readSplit) el.readSplit.classList.add('no-anim');

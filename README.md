@@ -57,6 +57,47 @@
 
 ---
 
+## 模块演示动画
+
+每个代码模块配一段动画，把**那一句指针赋值到底改变了什么**演出来。
+下面的图是**动的**（SVG 内联 SMIL 动画，在 GitHub 上直接播放）：
+
+- 结点里的小圆点是指针域
+- **蓝色**是已有的连接，**绿色**是本步新建的结点与连接，**红色**是即将被摘除的结点
+- 橙色游标是当前指针（p / q / s），底部同步显示这一步对应的代码
+
+### 单链表
+
+| 04 尾插：走到尾再挂上（O(n)） | 05 头插：不遍历，O(1) |
+| --- | --- |
+| ![尾插](docs/animations/singly-04-applist.svg) | ![头插](docs/animations/singly-05-HeadInsert.svg) |
+
+| 08 按位插入：定位前驱 + 两句指针 | 09 按位删除：摘链再 free |
+| --- | --- |
+| ![按位插入](docs/animations/singly-08-ListInsert.svg) | ![按位删除](docs/animations/singly-09-ListDelete.svg) |
+
+### 双向链表
+
+| 09 四指针插入：①③ 指出去、②④ 指回来 | 10 用 p->prior 删除，不必再找前驱 |
+| --- | --- |
+| ![四指针插入](docs/animations/doubly-09-ListInsert.svg) | ![用 prior 删除](docs/animations/doubly-10-ListDelete.svg) |
+
+| 12 反向遍历：单链表做不到的事 | 05 头插必须判空，否则当场崩 |
+| --- | --- |
+| ![反向遍历](docs/animations/doubly-12-printListReverse.svg) | ![头插判空](docs/animations/doubly-05-HeadInsert.svg) |
+
+<br>
+
+**全部 26 个模块动画**（单链表 12 个 + 双向链表 14 个）都在 [`docs/animations/`](docs/animations/)，
+每个模块一个 `.svg`。想逐个细看可以本地打开 `docs/animations/index.html` ——
+那是一个自包含的画廊页，按教材分组，每张卡片都带模块名与一句话说明。
+
+> 动画是声明式生成的：场景定义在 `tools/anim/scenes-*.js`，渲染核心在 `tools/anim/render.js`，
+> 跑 `node tools/make-animations.js` 就能重新生成全部动画与画廊；
+> `node tools/anim/lint.js` 会体检所有场景（坐标 NaN、动画缺失、时间轴非递增等）。
+
+---
+
 ## 功能一览（对照 PRD）
 
 ### 3.1 模块化代码阅读器

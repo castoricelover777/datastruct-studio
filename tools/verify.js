@@ -137,8 +137,7 @@ function main() {
         // tree.json 的摘要要和实际模块数对得上
         const treeSec = ch.sections.find((s) => s.id === sec.id);
         check(!treeSec || treeSec.moduleCount === sum,
-          `${sec.id} 的摘要模块数（${treeSec && treeSec.moduleCount}）与实际（${sum}）不一致`);
-      } else {
+          `${sec.id} 的摘要模块数（${treeSec && treeSec.moduleCount}）与实际（${sum}）不一致`);      } else {
         const metas = dsec.modules || [];
         check(metas.length > 0, `节 ${sec.id} 没有模块`);
         visitModules(sec.id, code.modules || {}, metas);

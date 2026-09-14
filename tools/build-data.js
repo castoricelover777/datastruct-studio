@@ -324,6 +324,10 @@ function main() {
       chTree.sections.push({
         ...sectionEntry,
         moduleCount: sectionModules.length,
+        // 练习模块数（排除"完整源码"这类拼装视图）——
+        // 界面上的总进度要用它，而 tree.json 必须自带这个数，
+        // 否则只能数"已加载的章"，进度会随着懒加载越数越多
+        practiceCount: sectionModules.filter((m) => !m.isAssembly).length,
         animationCount: Object.keys(animOut.animations).length,
         hasContent: true,
         views: isBig ? (sectionEntry.views || []).map((v) => ({ id: v.id, title: v.title, moduleCount: v.modules.length })) : undefined,

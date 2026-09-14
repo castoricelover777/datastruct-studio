@@ -222,11 +222,17 @@
   }
 
   function updateProgress() {
-    const all = [...state.moduleIndex.values()].map((e) => e.module).filter((m) => !m.isAssembly);
-    const total = all.length || 1;
-    const passed = all.filter((m) => state.results[m.id] === 'passed').length;
-    el.progressMiniFill.style.width = Math.round((passed / total) * 100) + '%';
-    el.progressMiniText.textContent = `通过 ${passed} / ${all.length}`;
+    // 总数取自 tree.json 自带的 practiceCount —— 它不依赖懒加载，
+    // 用 moduleIndex 数的话，进度会随着展开更多章而"越数越多"
+    let total = 0;
+    for (const ch of state.tree.chapters) {
+      for (const sec of ch.sections) {
+        if (sec.hasContent) total += (sec.practiceCount || 0);
+      }
+    }
+    const passed = Object.values(state.results).filter((v) => v === 'passed').length;
+    el.progressMiniFill.style.width = Math.round((passed / (total || 1)) * 100) + '%';
+    el.progressMiniText.textContent = `通过 ${passed} / ${total}`;
   }
 
   // ============================================================ 按需加载

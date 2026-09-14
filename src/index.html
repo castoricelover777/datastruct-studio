@@ -4,57 +4,55 @@
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none'; script-src 'self' file:; style-src 'self' file:; font-src 'self' file:; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none';" />
-  <title>LinkList Studio</title>
+  <title>DataStruct Studio</title>
   <!-- 必须放在最前面：在首帧之前就定好主题，避免深色用户启动时闪白屏 -->
   <script src="theme-boot.js"></script>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-v2.css" />
 </head>
 <body>
   <div class="app">
 
-    <!-- ================= 左侧：模块列表 ================= -->
+    <!-- ================= 左侧：三层导航树 ================= -->
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-mark">LL</div>
+        <div class="brand-mark">DS</div>
         <div class="brand-text">
-          <div class="brand-title">LinkList Studio</div>
-          <div class="brand-sub">链表研习社 · 代码解剖与默写训练</div>
+          <div class="brand-title">DataStruct Studio</div>
+          <div class="brand-sub">数据结构研习社</div>
         </div>
-      </div>
-
-      <!-- 教材切换：单链表 / 双向链表，各自独立的模块、草稿与进度 -->
-      <div class="book-switch">
-        <div class="segmented segmented-block" id="bookSwitch" role="group" aria-label="教材切换"></div>
+        <button type="button" class="icon-btn" id="btnCollapseSidebar" title="折叠侧栏（Ctrl+B）">‹</button>
       </div>
 
       <div class="sidebar-search">
-        <input id="searchInput" type="search" placeholder="搜索模块…" autocomplete="off" />
+        <input id="searchInput" type="search" placeholder="搜索模块，如 AVL / BFS / 快排" autocomplete="off" />
+        <button type="button" class="icon-btn" id="btnClearSearch" title="清空">✕</button>
       </div>
 
-      <nav class="module-list" id="moduleList" aria-label="模块列表"></nav>
+      <nav class="tree" id="tree" aria-label="课程目录"></nav>
+
       <div class="sidebar-foot">
-        <div class="progress-mini" id="progressMini">
+        <div class="progress-mini">
           <div class="progress-mini-bar"><span id="progressMiniFill"></span></div>
-          <div class="progress-mini-text" id="progressMiniText">练习进度 0 / 11</div>
+          <div class="progress-mini-text" id="progressMiniText">练习进度 0 / 0</div>
         </div>
+        <button type="button" class="link-btn" id="btnCoverage">模块覆盖清单</button>
       </div>
     </aside>
 
-    <!-- ================= 右侧：主内容区 ================= -->
+    <!-- ================= 右侧：内容区 ================= -->
     <main class="content">
-
       <header class="module-header">
-        <div class="mh-main">
-          <h1 class="mh-title">
-            <span class="mh-id" id="mhId">01</span>
-            <span id="mhName">头文件与 typedef</span>
-          </h1>
-          <p class="mh-summary" id="mhSummary"></p>
-          <div class="mh-meta">
-            <span class="chip chip-diff" id="mhDiff"></span>
-            <span class="chip chip-dep" id="mhDeps"></span>
-            <span class="chip chip-lines" id="mhLines"></span>
-          </div>
+        <div class="mh-line1">
+          <span class="mh-breadcrumb" id="mhBreadcrumb"></span>
+        </div>
+        <h1 class="mh-title"><span class="mh-id" id="mhId">—</span><span id="mhName">请选择一个模块</span></h1>
+        <p class="mh-summary" id="mhSummary"></p>
+        <div class="mh-meta">
+          <span class="chip chip-diff" id="mhDiff"></span>
+          <span class="chip chip-dep" id="mhDeps"></span>
+          <span class="chip chip-lines" id="mhLines"></span>
+          <span class="chip chip-status" id="mhStatus"></span>
         </div>
       </header>
 
@@ -64,36 +62,48 @@
           <button type="button" data-mode="short">精简注释</button>
           <button type="button" data-mode="none">无注释</button>
         </div>
-
         <div class="segmented" id="viewModes" role="group" aria-label="视图模式">
           <button type="button" data-view="read">阅读模式</button>
           <button type="button" data-view="practice">练习模式</button>
         </div>
-
         <div class="toolbar-spacer"></div>
-
-        <button type="button" class="btn btn-ghost" id="btnPrev" title="上一个模块（←）">← 上一模块</button>
-        <button type="button" class="btn btn-ghost" id="btnNext" title="下一个模块（→）">下一模块 →</button>
-        <button type="button" class="btn btn-ghost" id="btnTheme" title="切换深色 / 浅色主题">深色</button>
+        <span class="kbd-hint" id="kbdHint"></span>
+        <button type="button" class="btn btn-ghost" id="btnPrev">← 上一模块</button>
+        <button type="button" class="btn btn-ghost" id="btnNext">下一模块 →</button>
       </div>
 
-      <!-- ---------- 阅读模式 ---------- -->
+      <!-- 大模块（链表）的单/双/对比三视图 -->
+      <div class="big-tabs" id="bigTabs" hidden></div>
+
       <section class="pane pane-read" id="paneRead">
-        <div class="code-card">
-          <div class="code-card-head">
-            <span class="code-card-title" id="readCardTitle">模块代码</span>
-            <div class="code-card-actions">
-              <span class="hint" id="readHint">按 ← → 可快速切换模块</span>
-              <button type="button" class="btn btn-mini" id="btnCopyCode">复制代码</button>
+        <div class="read-split">
+          <!-- 左：动画画面。右：代码。并排才看得见"动画走到哪、代码高亮到哪"（PRD 4.3） -->
+          <div class="anim-card" id="animCard" hidden>
+            <div class="code-card-head">
+              <span class="code-card-title" id="animCardTitle">动画演示</span>
+              <div class="code-card-actions">
+                <span class="pl-legend">蓝＝已有连接　绿＝本步新建　红＝即将摘除</span>
+                <button type="button" class="btn btn-mini" id="btnCollapseAnim">折叠</button>
+              </div>
             </div>
+            <div class="anim-body" id="animBody"></div>
           </div>
-          <div class="code-view" id="codeView"></div>
+
+          <div class="code-card">
+            <div class="code-card-head">
+              <span class="code-card-title" id="readCardTitle"></span>
+              <div class="code-card-actions">
+                <span class="hint">点代码行可跳到对应动画步骤</span>
+                <button type="button" class="btn btn-mini" id="btnCopyCode">复制代码</button>
+              </div>
+            </div>
+            <div class="code-view" id="codeView"></div>
+          </div>
         </div>
       </section>
 
-      <!-- ---------- 练习模式 ---------- -->
       <section class="pane pane-practice" id="panePractice" hidden>
-        <div class="practice-split" id="practiceSplit">
+        <div class="practice-split">
           <div class="editor-card">
             <div class="code-card-head">
               <span class="code-card-title">默写编辑器</span>
@@ -109,6 +119,14 @@
               <textarea id="editorInput" class="editor-input" spellcheck="false" wrap="off"
                         autocomplete="off" autocapitalize="off" autocorrect="off"></textarea>
             </div>
+            <div class="io-tabs" id="ioTabs">
+              <button type="button" data-io="code" class="is-active">代码</button>
+              <button type="button" data-io="stdin">输入</button>
+            </div>
+            <div class="stdin-box" id="stdinBox" hidden>
+              <textarea id="stdinInput" spellcheck="false"
+                        placeholder="这里写程序运行时从键盘读入的内容（scanf 会依次读它）。留空表示程序不需要输入。"></textarea>
+            </div>
           </div>
 
           <aside class="ref-card" id="refCard">
@@ -119,53 +137,81 @@
                 <button type="button" class="btn btn-mini" id="btnCollapseRef">折叠</button>
               </div>
             </div>
-            <div class="ref-body" id="refBody">
-              <div class="code-view code-view-compact" id="refView"></div>
-            </div>
+            <div class="ref-body"><div class="code-view code-view-compact" id="refView"></div></div>
           </aside>
         </div>
       </section>
 
-      <!-- ---------- 输出面板 ---------- -->
+      <!-- 对比视图：同一个操作，单链表 / 双链表并排 -->
+      <section class="pane pane-compare" id="paneCompare" hidden>
+        <div class="compare-head">
+          <span class="code-card-title" id="compareTitle">对比视图</span>
+          <div class="toolbar-spacer"></div>
+          <label class="sync-toggle">
+            <input type="checkbox" id="syncScroll" checked /> <span>滚动同步</span>
+          </label>
+          <span class="hint" id="compareHint">红底＝双链表多出来的 prior 相关行</span>
+        </div>
+        <div class="compare-grid">
+          <div class="compare-col">
+            <div class="compare-col-head" id="compareLeftHead">单链表</div>
+            <div class="code-view code-view-compact" id="compareLeft"></div>
+          </div>
+          <div class="compare-col">
+            <div class="compare-col-head" id="compareRightHead">双链表</div>
+            <div class="code-view code-view-compact" id="compareRight"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 动画播放器：PRD 4.2，固定在每个模块底部 -->
+      <section class="player-panel" id="playerPanel" hidden>
+        <div id="playerHost"></div>
+      </section>
       <section class="output" id="outputPanel">
         <div class="output-head">
           <button type="button" class="output-toggle" id="btnToggleOutput" aria-expanded="true">
-            <span class="caret" id="outputCaret">▾</span>
-            <span>输出面板</span>
+            <span class="caret" id="outputCaret">▾</span><span>输出面板</span>
           </button>
           <div class="output-status" id="outputStatus"></div>
           <div class="toolbar-spacer"></div>
           <button type="button" class="btn btn-primary" id="btnRun" title="Ctrl + Enter">
             <span class="play" aria-hidden="true">▶</span> 运行
           </button>
-          <button type="button" class="btn btn-ghost" id="btnReset">↺ 重置</button>
           <button type="button" class="btn btn-ghost" id="btnCompare">⇄ 对比</button>
         </div>
         <div class="output-body" id="outputBody">
           <div class="output-placeholder" id="outputPlaceholder">
-            点「运行」或按 Ctrl + Enter 编译并执行编辑器里的代码。
+            写完之后按 <b>Ctrl + Enter</b> 编译运行；点「对比」逐行核对与官方实现的差异。
           </div>
           <div class="output-content" id="outputContent" hidden></div>
         </div>
       </section>
-
     </main>
   </div>
 
-  <!-- ================= 状态栏 ================= -->
   <footer class="statusbar">
-    <div class="sb-group">
-      <span class="sb-dot" id="sbCompilerDot"></span>
-      <span id="sbCompiler">正在检测编译器…</span>
-    </div>
-    <div class="sb-group" id="sbModule">模块 01 / 12</div>
-    <div class="sb-group" id="sbState">未修改</div>
-    <div class="sb-group sb-right" id="sbRight"></div>
+    <div class="sb-group"><span class="sb-dot" id="sbCompilerDot"></span><span id="sbCompiler">正在检测编译器…</span></div>
+    <div class="sb-group" id="sbModule">—</div>
+    <div class="sb-group sb-state" id="sbState">未修改</div>
+    <div class="sb-group sb-right" id="sbVersion"></div>
   </footer>
+
+  <!-- 覆盖清单弹层 -->
+  <div class="modal" id="coverageModal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <span class="modal-title">模块内容覆盖清单（对照陈越课程大纲）</span>
+        <button type="button" class="icon-btn" id="btnCloseCoverage">✕</button>
+      </div>
+      <div class="modal-body" id="coverageBody"></div>
+    </div>
+  </div>
 
   <script src="highlight.js"></script>
   <script src="diff.js"></script>
   <script src="editor.js"></script>
+  <script src="player.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

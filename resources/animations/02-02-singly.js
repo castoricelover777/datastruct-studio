@@ -6,7 +6,7 @@
  * 在哪些时间段可见；箭头额外的 at 控制"生长"动画的起点。
  */
 
-const { NODE_Y, NODE_H } = require('./render');
+const { NODE_Y, NODE_H } = require('../../tools/anim/render');
 
 const TOP = NODE_Y;                 // 结点上沿 96
 const BOT = NODE_Y + NODE_H;        // 结点下沿 142
@@ -17,7 +17,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-01-typedef',
+    id: '02-02-singly-01-typedef',
     no: '01',
     title: '头文件与 typedef',
     sub: '一个结点里到底装了什么',
@@ -53,7 +53,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-04-applist',
+    id: '02-02-singly-04-applist',
     no: '04',
     title: 'applist —— 尾部追加节点',
     sub: '从头走到尾，把新结点挂上去',
@@ -94,7 +94,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-10-printList',
+    id: '02-02-singly-10-printList',
     no: '10',
     title: 'printList —— 打印链表',
     sub: '走一遍，把每个数据打出来',
@@ -137,7 +137,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-02-creatNode',
+    id: '02-02-singly-02-creatNode',
     no: '02',
     title: 'creatNode —— 创建新结点',
     sub: '申请一块内存，填好两个域',
@@ -177,7 +177,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-03-InitList',
+    id: '02-02-singly-03-InitList',
     no: '03',
     title: 'InitList —— 初始化链表',
     sub: '建立只有头结点的空表',
@@ -213,7 +213,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-05-HeadInsert',
+    id: '02-02-singly-05-HeadInsert',
     no: '05',
     title: 'HeadInsert —— 头插法插入',
     sub: '不遍历，直接插在头结点后面',
@@ -256,7 +256,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-06-GetElem_L',
+    id: '02-02-singly-06-GetElem_L',
     no: '06',
     title: 'GetElem_L —— 按位查找',
     sub: '数到第 i 个结点，把它的数据取出来',
@@ -304,7 +304,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-07-LocateElem',
+    id: '02-02-singly-07-LocateElem',
     no: '07',
     title: 'LocateElem —— 按值查找',
     sub: '逐个比对数据域，返回命中的结点',
@@ -351,7 +351,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-08-ListInsert',
+    id: '02-02-singly-08-ListInsert',
     no: '08',
     title: 'ListInsert —— 按位插入',
     sub: '先定位前驱，再改两根指针',
@@ -402,7 +402,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-09-ListDelete',
+    id: '02-02-singly-09-ListDelete',
     no: '09',
     title: 'ListDelete —— 按位删除',
     sub: '定位前驱，摘掉结点再释放',
@@ -452,7 +452,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-11-freeList',
+    id: '02-02-singly-11-freeList',
     no: '11',
     title: 'freeList —— 释放整条链表',
     sub: '逐个 free，最后把头结点也还回去',
@@ -498,7 +498,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'singly-12-main',
+    id: '02-02-singly-12-main',
     no: '12',
     title: 'main —— 把操作串起来跑一遍',
     sub: '一步一打印，让输出自己说明对错',

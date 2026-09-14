@@ -215,7 +215,7 @@
       const prefix = linePrefixes && linePrefixes[i]
         ? `<span class="dl-mark">${escapeHtml(linePrefixes[i])}</span>`
         : '';
-      body += `<span class="ln${extra}">${prefix}${hl[i] || ''}</span>`;
+      body += `<span class="ln${extra}" data-line="${ln}">${prefix}${hl[i] || ''}</span>`;
     }
 
     return `<div class="cv-inner"><div class="cv-gutter">${gutter}</div><pre class="cv-code">${body}</pre></div>`;

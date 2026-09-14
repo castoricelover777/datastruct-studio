@@ -3,14 +3,14 @@
  * 双向链表 14 个模块的演示动画（场景定义）
  */
 
-const { NODE_Y, NODE_H } = require('./render');
+const { NODE_Y, NODE_H } = require('../../tools/anim/render');
 const MID = NODE_Y + NODE_H / 2;
 
 module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-01-typedef',
+    id: '02-02-doubly-01-typedef',
     no: '01',
     title: '头文件与 typedef',
     sub: '比单链表多了一个指针：prior',
@@ -50,7 +50,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-02-creatNode',
+    id: '02-02-doubly-02-creatNode',
     no: '02',
     title: 'creatNode —— 创建新结点',
     sub: '两个指针都必须置 NULL',
@@ -92,7 +92,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-03-InitList',
+    id: '02-02-doubly-03-InitList',
     no: '03',
     title: 'InitList —— 初始化链表',
     sub: '头结点的两个指针都是 NULL',
@@ -129,7 +129,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-04-applist',
+    id: '02-02-doubly-04-applist',
     no: '04',
     title: 'applist —— 尾部追加节点',
     sub: '比单链表多改一根指针',
@@ -177,7 +177,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-05-HeadInsert',
+    id: '02-02-doubly-05-HeadInsert',
     no: '05',
     title: 'HeadInsert —— 头插法插入',
     sub: '双向头插必须判空，否则当场崩',
@@ -228,7 +228,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-06-GetElem_L',
+    id: '02-02-doubly-06-GetElem_L',
     no: '06',
     title: 'GetElem_L —— 按位查找',
     sub: '这一段和单链表完全一样',
@@ -273,7 +273,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-07-LocateElem',
+    id: '02-02-doubly-07-LocateElem',
     no: '07',
     title: 'LocateElem —— 按值查找',
     sub: '找到之后，前驱后继都能说清',
@@ -323,7 +323,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-08-ModifyElem',
+    id: '02-02-doubly-08-ModifyElem',
     no: '08',
     title: 'ModifyElem —— 按位修改',
     sub: '定位之后只改数据，不动指针',
@@ -372,7 +372,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-09-ListInsert',
+    id: '02-02-doubly-09-ListInsert',
     no: '09',
     title: 'ListInsert —— 按位插入',
     sub: '四根指针，缺一根就是断链',
@@ -427,7 +427,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-10-ListDelete',
+    id: '02-02-doubly-10-ListDelete',
     no: '10',
     title: 'ListDelete —— 按位删除',
     sub: '双向链表不必再找前驱',
@@ -482,7 +482,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-11-printList',
+    id: '02-02-doubly-11-printList',
     no: '11',
     title: 'printList —— 正向打印',
     sub: '沿 next 走一遍',
@@ -529,7 +529,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-12-printListReverse',
+    id: '02-02-doubly-12-printListReverse',
     no: '12',
     title: 'printListReverse —— 反向打印',
     sub: '单链表做不到的事',
@@ -580,7 +580,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-13-freeList',
+    id: '02-02-doubly-13-freeList',
     no: '13',
     title: 'freeList —— 释放整条链表',
     sub: '释放只用到 next 方向',
@@ -630,7 +630,7 @@ module.exports = [
 
   // =========================================================================
   {
-    id: 'doubly-14-main',
+    id: '02-02-doubly-14-main',
     no: '14',
     title: 'main —— 正反向对照着测',
     sub: '每一步都从两个方向验证',

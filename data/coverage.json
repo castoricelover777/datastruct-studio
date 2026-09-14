@@ -1,0 +1,182 @@
+{
+ "generatedAt": "2026-09-14T13:43:57.268Z",
+ "coverage": [
+  {
+   "section": "01-01",
+   "title": "算法复杂度",
+   "status": "done",
+   "modules": 5,
+   "animations": 0,
+   "ran": 4
+  },
+  {
+   "section": "01-02",
+   "title": "最大子列和问题",
+   "status": "done",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "02-01",
+   "title": "线性表",
+   "status": "done",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "02-02",
+   "title": "链表",
+   "status": "done",
+   "modules": 28,
+   "animations": 26,
+   "ran": 26
+  },
+  {
+   "section": "02-03",
+   "title": "堆栈",
+   "status": "done",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "02-04",
+   "title": "队列",
+   "status": "done",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "02-05",
+   "title": "应用实例",
+   "status": "done",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "03-01",
+   "title": "二叉树基础",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "03-02",
+   "title": "二叉搜索树",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "03-03",
+   "title": "平衡二叉树 AVL",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "03-04",
+   "title": "堆",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "03-05",
+   "title": "哈夫曼树",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "03-06",
+   "title": "并查集",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "04-01",
+   "title": "图的表示",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "04-02",
+   "title": "图的遍历 DFS/BFS",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "04-03",
+   "title": "最短路径",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "04-04",
+   "title": "最小生成树",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "04-05",
+   "title": "拓扑排序",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "05-01",
+   "title": "冒泡 / 插入 / 希尔",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "05-02",
+   "title": "堆排序 / 归并排序",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "05-03",
+   "title": "快速排序",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "05-04",
+   "title": "表排序 / 基数排序",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "06-01",
+   "title": "散列函数设计",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "06-02",
+   "title": "开放地址法",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  },
+  {
+   "section": "06-03",
+   "title": "分离链接法",
+   "status": "pending",
+   "modules": 0,
+   "animations": 0
+  }
+ ]
+}

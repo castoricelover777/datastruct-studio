@@ -17,34 +17,29 @@ const { spawn, spawnSync } = require('child_process');
 const P = require('../shared/parse');
 
 /**
- * 教材（模板）清单。
- * 每本教材是一套独立的参考代码 + 测试驱动，模块编号各自从 01 开始，
- * 练习草稿、进度、上次浏览的模块也都按教材分开存放。
+/**
+ * 数据结构 / 模块 / 三档注释 / 动画关键帧全部是 JSON，放在 data/ 下。
+ * 应用只读这些数据（按章懒加载）；源是 resources/ 下可编译的 .c 与场景脚本，
+ * 由 tools/build-data.js 编译过去。
  */
-const BOOKS = [
-  {
-    id: 'singly',
-    name: '单链表',
-    subtitle: '带头结点 · 8 个基础操作',
-    dir: 'singly',
-    parts: ['part1_basics.c', 'part2_search.c', 'part3_io.c'],
-    driver: 'drivers.c',
-  },
-  {
-    id: 'doubly',
-    name: '双向链表',
-    subtitle: 'DuLinkList · 增删查改',
-    dir: 'doubly',
-    parts: [
-      'part1_basics.c',
-      'part2_build.c',
-      'part3_search.c',
-      'part4_insertdelete.c',
-      'part5_io.c',
-    ],
-    driver: 'drivers.c',
-  },
-];
+function dataDir() {
+  return isPackaged ? path.join(app.getAppPath(), 'data') : path.join(__dirname, '..', 'data');
+}
+
+function readData(rel) {
+  return JSON.parse(fs.readFileSync(path.join(dataDir(), rel), 'utf8'));
+}
+
+/**
+ * 动画 SVG 的位置。
+ * 生成时落在 docs/animations/（GitHub README 直接 <img> 引用就能播放），
+ * 打包时通过 files 一并带上，桌面版和在线版共用同一份文件。
+ */
+function animDir() {
+  return isPackaged
+    ? path.join(app.getAppPath(), 'docs', 'animations')
+    : path.join(__dirname, '..', 'docs', 'animations');
+}
 
 app.setAppUserModelId('com.linkliststudio.app');
 
@@ -68,70 +63,6 @@ function tccDir() {
   return isPackaged
     ? path.join(process.resourcesPath, 'tcc')
     : path.join(__dirname, '..', 'resources', 'tcc');
-}
-
-// ---------------------------------------------------------------------------
-// 参考数据
-// ---------------------------------------------------------------------------
-/** 解析一本教材的参考代码 */
-function loadBook(book) {
-  const dir = path.join(referenceDir(), book.dir);
-  const sources = book.parts.map((f) => ({
-    name: f,
-    text: fs.readFileSync(path.join(dir, f), 'utf8'),
-  }));
-  sources.push({ name: book.driver, text: fs.readFileSync(path.join(dir, book.driver), 'utf8') });
-  return P.parse(sources);
-}
-
-/** 依赖模块的显示名：函数就用函数名；01 是类型定义，单独给个好读的名字 */
-function depLabel(m) {
-  return /^[A-Za-z_][A-Za-z0-9_]*$/.test(m.key) ? m.key : '结构体定义';
-}
-
-/** 把一本教材的解析结果整理成界面需要的形状 */
-function buildModulePayload(book, reference) {
-  const { modules } = reference;
-  const byId = new Map(modules.map((m) => [m.id, m]));
-
-  const list = modules.map((m) => ({
-    id: m.id,
-    key: m.key,
-    title: m.title,
-    summary: m.summary,
-    difficulty: m.difficulty,
-    deps: m.deps,
-    depLabels: m.deps.map((d) => (byId.get(d) ? depLabel(byId.get(d)) : d)),
-    modes: m.modes,
-    codeLineCount: m.codeLineCount,
-    isAssembly: false,
-    hasPractice: true,
-  }));
-
-  // 最后一本模块之后追加"完整源码（拼装视图）"，编号顺延一位
-  const lastId = modules.length ? modules[modules.length - 1].id : '00';
-  const assemblyId = String(parseInt(lastId, 10) + 1).padStart(2, '0');
-
-  list.push({
-    id: assemblyId,
-    key: '完整源码',
-    title: '完整源码（拼装视图）',
-    summary: `把上面 ${modules.length} 个模块按顺序拼在一起，就是一份可以直接编译运行的完整程序。`
-      + '切换注释模式可以看到它"带注释 / 不带注释"的两种样子——代码部分完全一致。',
-    difficulty: 0,
-    deps: modules.map((m) => m.id),
-    depLabels: [],
-    modes: {
-      detail: P.assemble(modules, 'detail'),
-      short: P.assemble(modules, 'short'),
-      none: P.assemble(modules, 'none'),
-    },
-    codeLineCount: P.assemble(modules, 'none').split('\n').filter((l) => l.trim()).length,
-    isAssembly: true,
-    hasPractice: false,
-  });
-
-  return list;
 }
 
 // ---------------------------------------------------------------------------
@@ -260,6 +191,15 @@ function runProcess(exe, args, options = {}) {
     child.stdout.on('data', (d) => { stdout += d.toString('utf8'); });
     child.stderr.on('data', (d) => { stderr += d.toString('utf8'); });
 
+    // 自定义测试输入：把用户填的内容喂给程序的 stdin，喂完就关掉，
+    // 否则 scanf 会一直等下去（表现为"运行超时"）
+    if (options.stdin) {
+      try {
+        child.stdin.write(String(options.stdin));
+      } catch { /* 忽略 */ }
+    }
+    try { child.stdin.end(); } catch { /* 忽略 */ }
+
     const timer = setTimeout(() => {
       timedOut = true;
       // 用户很容易写出不推进的死循环，这里必须能整棵进程树杀掉
@@ -357,6 +297,7 @@ async function compileAndRun(source, options = {}) {
   const run = await runProcess(outFile, [], {
     cwd: workDir,
     timeoutMs: options.runTimeoutMs || DEFAULT_RUN_TIMEOUT,
+    stdin: options.stdin || '',
   });
   const runMs = Date.now() - runStarted;
   const limit = Math.round((options.runTimeoutMs || DEFAULT_RUN_TIMEOUT) / 1000);
@@ -401,47 +342,49 @@ function readJson(file, fallback) {
 
 /**
  * 读取设置并做一次规范化。
- * 兼容更早的版本：那时只有单链表，用的是扁平的 lastModuleId。
+ * v2.0 不再分教材，但旧版本留下的字段（bookId / lastModule / lastModuleId）
+ * 一律忽略而不是报错 —— 老用户的文件读进来不会炸。
  */
 function readSettings() {
   const s = readJson(settingsFile(), {});
-  const out = {
+  return {
     theme: s.theme === 'dark' ? 'dark' : 'light',
     mode: ['detail', 'short', 'none'].includes(s.mode) ? s.mode : 'detail',
     view: ['read', 'practice'].includes(s.view) ? s.view : 'read',
     refCollapsed: !!s.refCollapsed,
-    bookId: BOOKS.some((b) => b.id === s.bookId) ? s.bookId : BOOKS[0].id,
-    lastModule: {},
+    sidebarCollapsed: !!s.sidebarCollapsed,
+    moduleId: typeof s.moduleId === 'string' ? s.moduleId : (typeof s.lastModuleId === 'string' ? s.lastModuleId : null),
+    viewId: typeof s.viewId === 'string' ? s.viewId : null,
+    expanded: (s.expanded && typeof s.expanded === 'object') ? s.expanded : {},
   };
-  if (typeof s.lastModuleId === 'string') out.lastModule.singly = s.lastModuleId;
-  if (s.lastModule && typeof s.lastModule === 'object') {
-    for (const [k, v] of Object.entries(s.lastModule)) {
-      if (typeof v === 'string') out.lastModule[k] = v;
-    }
-  }
-  return out;
 }
 
 /**
- * 读取练习草稿，按教材分组。
- * 兼容旧格式：扁平结构视为单链表的草稿，不会丢。
+ * 读取练习草稿。v2.0 直接按模块 id 存：{ drafts: {模块id: 源码}, results: {模块id: 'passed'} }。
+ * 兼容 v1.0 的两层结构（{singly:{01:...}}）与更早的扁平结构，尽量不丢用户的默写。
  */
 function readDrafts() {
   const raw = readJson(draftsFile(), {});
-  const values = Object.values(raw);
-  const legacy = values.length > 0 && values.every((v) => typeof v === 'string');
-  if (legacy) {
-    const out = { singly: raw };
-    for (const book of BOOKS) if (book.id !== 'singly') out[book.id] = {};
-    return out;
+  if (raw && typeof raw.drafts === 'object' && raw.drafts !== null) {
+    return { drafts: raw.drafts, results: raw.results && typeof raw.results === 'object' ? raw.results : {} };
   }
-  const out = {};
-  for (const book of BOOKS) {
-    out[book.id] = (raw[book.id] && typeof raw[book.id] === 'object' && !Array.isArray(raw[book.id]))
-      ? raw[book.id]
-      : {};
+  const values = Object.values(raw || {});
+  if (values.length && values.every((v) => typeof v === 'string')) {
+    // v1.0 最早期的扁平结构：只可能是单链表的草稿，键就是模块编号
+    return { drafts: raw, results: {} };
   }
-  return out;
+  // v1.0 的两层结构：把 singly/doubly 下的模块号补成新 id
+  const drafts = {};
+  for (const [book, map] of Object.entries(raw || {})) {
+    if (!map || typeof map !== 'object') continue;
+    const prefix = book === 'singly' ? '02-02-singly' : book === 'doubly' ? '02-02-doubly' : book;
+    for (const [mid, text] of Object.entries(map)) {
+      if (typeof text !== 'string') continue;
+      const key = /^\d{2}$/.test(mid) ? `${prefix}-${mid}` : mid;
+      drafts[key] = text;
+    }
+  }
+  return { drafts, results: {} };
 }
 
 function writeJson(file, value) {
@@ -458,32 +401,34 @@ function writeJson(file, value) {
 // 窗口
 // ---------------------------------------------------------------------------
 let mainWindow = null;
-let booksCache = null;
 let compilerCache = null;
 
-/**
- * 把每本教材的参考数据、模块载荷、脚手架一次算好并缓存。
- * 脚手架在这里预生成，是为了让切换教材/模块在界面上是同步的，
- * 不会出现"先闪一下上一份内容再填进来"的抖动。
- */
-function getBooks() {
-  if (!booksCache) {
-    booksCache = BOOKS.map((book) => {
-      const reference = loadBook(book);
-      const scaffolds = {};
-      for (const m of reference.modules) {
-        scaffolds[m.id] = P.buildScaffold(reference.modules, reference.drivers, m.id);
-      }
-      return {
-        id: book.id,
-        name: book.name,
-        subtitle: book.subtitle,
-        modules: buildModulePayload(book, reference),
-        scaffolds,
-      };
-    });
+/** 章节树很小，启动时读一次缓存起来；其余数据按需读、读完缓存 */
+let treeCache = null;
+const sectionCache = new Map();
+
+function getTree() {
+  if (!treeCache) treeCache = readData('tree.json');
+  return treeCache;
+}
+
+/** 按需读数据，读完缓存。sectionId 支持两种形式：'ch:01'（章）与 '01-01'（节） */
+function getSection(sectionId) {
+  const id = String(sectionId);
+  if (!/^(ch:\d{2}|\d{2}-\d{2})$/.test(id)) throw new Error('非法的数据 id：' + id);
+  if (!sectionCache.has(id)) {
+    if (id.startsWith('ch:')) {
+      sectionCache.set(id, readData(path.join('chapters', `${id.slice(3)}.json`)));
+    } else {
+      const code = readData(path.join('code', `${id}.json`));
+      const animFile = path.join(dataDir(), 'animations', `${id}.json`);
+      const animations = fs.existsSync(animFile)
+        ? JSON.parse(fs.readFileSync(animFile, 'utf8'))
+        : { section: id, animations: {} };
+      sectionCache.set(id, { code, animations });
+    }
   }
-  return booksCache;
+  return sectionCache.get(id);
 }
 
 function getCompilers() {
@@ -581,13 +526,15 @@ function createWindow() {
 
         const probe = await wc.executeJavaScript(`(function () {
           var q = function (s) { return document.querySelector(s); };
-          var active = q('.module-item.is-active');
+          var active = q('.tree-module.is-active');
           var view = q('#viewModes button.is-active');
           var mode = q('#commentModes button.is-active');
           var ta = q('#editorInput');
           var out = q('#outputContent');
+          var pl = q('#playerPanel');
           return JSON.stringify({
-            module: active ? active.dataset.id : null,
+            module: active ? active.dataset.module : null,
+            activeName: active ? (active.querySelector('.tm-name') || {}).textContent : null,
             view: view ? view.dataset.view : null,
             mode: mode ? mode.dataset.mode : null,
             theme: document.documentElement.dataset.theme,
@@ -595,13 +542,21 @@ function createWindow() {
             compiler: (q('#sbCompiler') || {}).textContent,
             practiceDisabled: !!(q('#viewModes button[data-view="practice"]') || {}).disabled,
             panePracticeHidden: !!q('#panePractice').hidden,
+            paneCompareHidden: !!q('#paneCompare').hidden,
             progress: (q('#progressMiniText') || {}).textContent,
             title: document.title,
             editorHead: ta && ta.value ? ta.value.replace(/\\s+/g, ' ').slice(0, 90) : '',
             editorChars: ta && ta.value ? ta.value.length : 0,
             refLines: document.querySelectorAll('#refView .ln').length,
             hasMarker: !!(ta && ta.value && ta.value.indexOf('轮到你了') >= 0),
-            outputHead: out ? out.textContent.replace(/\\s+/g, ' ').slice(0, 150) : ''
+            outputHead: out ? out.textContent.replace(/\\s+/g, ' ').slice(0, 150) : '',
+            playerHidden: pl ? pl.hidden : null,
+            playerSvg: !!q('.pl-canvas svg'),
+            playerMarks: document.querySelectorAll('.pl-mark').length,
+            playerStep: (q('.pl-step') || {}).textContent,
+            playerTime: (q('[data-el="cur"]') || {}).textContent,
+            animHit: document.querySelectorAll('#codeView .ln.is-anim-hit').length,
+            bigTabs: Array.prototype.map.call(document.querySelectorAll('#bigTabs button'), function (b) { return b.dataset.view + (b.classList.contains('is-active') ? '*' : ''); }).join(',')
           });
         })()`);
         console.log(`[state] ${probe}`);
@@ -663,12 +618,32 @@ ipcMain.handle('app:init', () => {
   return {
     appVersion: app.getVersion(),
     electron: process.versions.electron,
-    books: getBooks(),
+    tree: getTree(),                 // 章节树（很小，启动即得）
     compilers: getCompilers(),
     settings: readSettings(),
     drafts: readDrafts(),
     runTimeoutMs: DEFAULT_RUN_TIMEOUT,
   };
+});
+
+/** 按节取一套数据：三档代码 + 脚手架 + 预期输出 + 动画关键帧 */
+ipcMain.handle('section:load', (_event, sectionId) => getSection(String(sectionId)));
+
+/**
+ * 读取动画 SVG 文本。
+ * 不用 fetch 是因为渲染层跑在 file:// 下，fetch 会被 CORS 拦掉；
+ * 走 IPC 读文件最稳，也顺便把路径限制在 docs/animations 里。
+ */
+ipcMain.handle('anim:svg', (_event, relPath) => {
+  const safe = path.basename(String(relPath || ''));
+  const file = path.join(animDir(), safe);
+  if (!fs.existsSync(file)) return null;
+  return fs.readFileSync(file, 'utf8');
+});
+
+ipcMain.handle('coverage:load', () => {
+  const f = path.join(dataDir(), 'coverage.json');
+  return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null;
 });
 
 ipcMain.handle('app:detectCompilers', () => {
@@ -688,6 +663,7 @@ ipcMain.handle('compile:run', async (_event, payload) => {
   return compileAndRun(source, {
     compilers: getCompilers(),
     runTimeoutMs: (payload && payload.runTimeoutMs) || DEFAULT_RUN_TIMEOUT,
+    stdin: (payload && payload.stdin) || '',
   });
 });
 
@@ -713,9 +689,9 @@ ipcMain.handle('clipboard:write', (_event, text) => {
 
 // ---------------------------------------------------------------------------
 app.whenReady().then(() => {
-  // 预热：把参考数据与编译器检测提前做完，界面打开就是就绪状态
-  getBooks();
-  getCompilers();
+  // 预热：章节树很小，读一次就好；编译器检测放到后台，不挡窗口显示
+  try { getTree(); } catch (e) { console.error('章节树读取失败：', e.message); }
+  setTimeout(() => { try { getCompilers(); } catch { /* 忽略 */ } }, 0);
   createWindow();
 
   app.on('activate', () => {

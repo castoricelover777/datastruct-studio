@@ -76,10 +76,12 @@ function trimTrailingBlank(lines) {
 function parse(sources) {
   const modules = [];
   const drivers = {};
+  const preambles = [];
   let current = null;
   let driver = null;
 
   for (const src of sources) {
+    preambles.push(extractPreamble(src.text));
     const lines = src.text.replace(/\r\n?/g, '\n').split('\n');
     for (const raw of lines) {
       // —— driver 块 ——
@@ -142,7 +144,37 @@ function parse(sources) {
   }
 
   modules.sort((a, b) => a.id.localeCompare(b.id));
-  return { modules, drivers };
+  // 把各文件的前置代码合并去重（脚手架要用）
+  const preamble = [...new Set(preambles.filter(Boolean))].join('\n');
+  return { modules, drivers, preamble };
+}
+
+/** 去掉块注释与行注释，只留代码 */
+function stripComments(code) {
+  return String(code)
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .split('\n')
+    .map((l) => l.replace(/\/\/.*$/, ''))
+    .join('\n')
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+}
+
+/**
+ * 取出「第一个模块标记之前」的代码 —— 也就是 #include、#define 这类
+ * 每个模块都要用到、但不值得单独做成一个模块的公共前缀。
+ *
+ * v1.0 的链表把它们放进了"模块 01 头文件与 typedef"；新章节直接写在文件头
+ * 更自然，所以这里统一提取出来，脚手架会自动带上。
+ */
+function extractPreamble(text) {
+  const head = [];
+  for (const line of String(text).split('\n')) {
+    // 遇到任何训练标记就停：//%module 或 //%driver 都算
+    if (/^\s*\/\/%(module|driver)\b/.test(line)) break;
+    head.push(line);
+  }
+  return stripComments(head.join('\n'));
 }
 
 /** 拼装视图：模块 01..11 的无注释代码首尾相接，就是可编译的完整源码 */
@@ -251,6 +283,8 @@ function buildScaffold(modules, drivers, moduleId, options = {}) {
       ].join('\n');
 
   const parts = [];
+  // 公共前缀（#include / #define）必须放在最前面，否则 printf 之类的会报未声明
+  if (options.preamble) parts.push(options.preamble);
   if (given) parts.push(given);
   parts.push(blankMarker);
   parts.push('');

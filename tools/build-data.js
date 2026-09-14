@@ -194,9 +194,9 @@ function buildView(dir, prefix, scenes, gcc) {
   // 完整源码（拼装视图）—— 把本视图所有模块拼起来，是能直接跑的完整程序
   const asmId = `${prefix}-${String(parseInt(modules[modules.length - 1].id, 10) + 1).padStart(2, '0')}`;
   const assembled = {
-    detail: P.assemble(modules, 'detail'),
-    short: P.assemble(modules, 'short'),
-    none: P.assemble(modules, 'none'),
+    detail: P.assemble(modules, 'detail', preamble),
+    short: P.assemble(modules, 'short', preamble),
+    none: P.assemble(modules, 'none', preamble),
   };
   out.push({
     id: asmId,

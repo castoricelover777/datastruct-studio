@@ -56,6 +56,12 @@ const SIZE = {
   doubly: { nodeW: 96, priorW: 28, dataW: 40, nextW: 28, gap: 44 },
 };
 
+// 数组（格子阵列）几何 —— 顺序表 / 栈 / 队列 / 复杂度计数都用它
+const CELL_W = 58;
+const CELL_H = 46;
+const CELL_GAP = 2;
+const CELL_Y = 104;
+
 // 顶部标题与底部字幕
 const TITLE_Y = 40;
 const SUB_Y = 63;
@@ -402,9 +408,125 @@ function renderProgress(total, color) {
 }
 
 // ---------------------------------------------------------------------------
+// 数组 / 格子阵列渲染
+//   顺序表、栈、队列、复杂度计数、最大子列和 —— 这些内容的共同形态是
+//   "一排格子 + 几个指针"，所以单独做一套，比套用链表渲染自然得多。
+// ---------------------------------------------------------------------------
+
+/** 格子阵列的水平布局 */
+function layoutCells(n) {
+  const total = n * CELL_W + (n - 1) * CELL_GAP;
+  const left = Math.max(PAD_X, (W - total) / 2);
+  return {
+    n, left, right: left + total,
+    x: (i) => left + i * (CELL_W + CELL_GAP),
+    center: (i) => left + i * (CELL_W + CELL_GAP) + CELL_W / 2,
+  };
+}
+
+/** 格子底座：空位一直画着，让人看出"数组有多大、用到哪儿了" */
+function renderCellBase(i, geo) {
+  const x = geo.x(i);
+  return `<rect x="${x}" y="${CELL_Y}" width="${CELL_W}" height="${CELL_H}" rx="6" `
+    + `fill="${PAL.slotEmpty}" stroke="${PAL.faint}" stroke-width="1" stroke-dasharray="3 3"/>`
+    + `<text x="${geo.center(i)}" y="${CELL_Y + CELL_H + 16}" text-anchor="middle" `
+    + `font-family="${MONO}" font-size="10.5" fill="${PAL.dim}">${i}</text>`;
+}
+
+/** 有值的格子 */
+function renderCell(c, geo, total) {
+  const x = geo.x(c.at);
+  const accent = c.accent || null;
+  const stroke = accent === 'new' ? PAL.green : accent === 'del' ? PAL.red
+    : accent === 'hot' ? PAL.amber : PAL.line;
+  const fill = accent === 'new' ? PAL.greenSoft : accent === 'del' ? PAL.redSoft
+    : accent === 'hot' ? '#FFF6E0' : PAL.nodeFill;
+
+  const g = [];
+  g.push(`<rect x="${x}" y="${CELL_Y}" width="${CELL_W}" height="${CELL_H}" rx="6" `
+    + `fill="${fill}" stroke="${stroke}" stroke-width="${accent ? 2 : 1.4}"/>`);
+  g.push(`<text x="${x + CELL_W / 2}" y="${CELL_Y + CELL_H / 2 + 5.5}" text-anchor="middle" `
+    + `font-family="${MONO}" font-size="15" fill="${PAL.ink}">${esc(c.value)}</text>`);
+
+  const anims = [animOpacity(c.vis, total)];
+  if (c.rise != null) anims.push(animRise(c.rise, total, 14));
+  return `<g opacity="0">${anims.join('')}${g.join('')}</g>`;
+}
+
+/** 指针标注（top / front / rear / i / j），画在格子上方 */
+function renderArrayPointer(p, geo, total) {
+  const x = geo.center(p.at);
+  const y = CELL_Y - 13;
+  const color = p.color || PAL.amber;
+  return `<g opacity="0">${animOpacity(p.vis, total)}`
+    + `<path d="M ${x} ${y + 9} l -6 -9 l 12 0 Z" fill="${color}"/>`
+    + `<text x="${x}" y="${y - 3}" text-anchor="middle" font-family="${MONO}" `
+    + `font-size="12" font-weight="600" fill="${color}">${esc(p.label)}</text></g>`;
+}
+
+/** 格子高亮框（强调"这一步动的是哪一格"） */
+function renderCellHighlight(b, geo, total) {
+  const x = geo.x(b.at) - 3;
+  const color = b.color || PAL.blue;
+  return `<g opacity="0">${animOpacity(b.vis, total, 0.12)}`
+    + `<rect x="${x}" y="${CELL_Y - 3}" width="${CELL_W + 6}" height="${CELL_H + 6}" rx="9" `
+    + `fill="${color}" fill-opacity="0.10" stroke="${color}" stroke-width="1.6"/></g>`;
+}
+
+/** 说明性箭头（两格之间，或格子到格子外） */
+function renderCellArrow(a, geo, total) {
+  const y = CELL_Y + CELL_H + 32;
+  const x1 = geo.center(a.from);
+  const x2 = geo.center(a.to);
+  const color = a.color || PAL.blue;
+  return `<g opacity="0">${animOpacity(a.vis, total)}`
+    + `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${color}" stroke-width="1.5" `
+    + `stroke-dasharray="4 3"/>`
+    + `<text x="${(x1 + x2) / 2}" y="${y + 15}" text-anchor="middle" font-family="${FONT}" `
+    + `font-size="11" fill="${color}">${esc(a.text || '')}</text></g>`;
+}
+
+/** 数组类场景的整体渲染 */
+function renderArrayScene(scene) {
+  const total = scene.total || 9;
+  const n = scene.slots || 8;
+  const geo = layoutCells(n);
+  const accentColor = scene.accentColor || PAL.blue;
+  const body = [];
+
+  body.push(renderProgress(total, accentColor));
+  body.push(`<text x="${PAD_X}" y="${TITLE_Y}" font-family="${FONT}" font-size="19" font-weight="600" `
+    + `fill="${PAL.ink}">${esc(scene.no)} · ${esc(scene.title)}</text>`);
+  body.push(`<text x="${PAD_X}" y="${SUB_Y}" font-family="${FONT}" font-size="12.5" `
+    + `fill="${PAL.dim}">${esc(scene.sub || '')}</text>`);
+  if (scene.bookTag) {
+    body.push(`<text x="${W - PAD_X}" y="${TITLE_Y}" text-anchor="end" font-family="${FONT}" `
+      + `font-size="12.5" fill="${accentColor}">${esc(scene.bookTag)}</text>`);
+  }
+
+  // 底座 → 高亮 → 格子 → 指针 → 箭头 → 标注 → 字幕
+  for (let i = 0; i < n; i++) body.push(renderCellBase(i, geo));
+  for (const b of scene.highlights || []) body.push(renderCellHighlight(b, geo, total));
+  for (const c of scene.cells || []) body.push(renderCell(c, geo, total));
+  for (const p of scene.pointers || []) body.push(renderArrayPointer(p, geo, total));
+  for (const a of scene.cellArrows || []) body.push(renderCellArrow(a, geo, total));
+  for (const note of scene.notes || []) body.push(renderNote(note, total));
+  body.push(renderCaption(scene));
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" `
+    + `role="img" aria-label="${esc(scene.title)}">`
+    + `<rect width="${W}" height="${H}" fill="${PAL.bg}"/>`
+    + body.join('')
+    + `</svg>`;
+}
+
+// ---------------------------------------------------------------------------
 // 场景渲染
 // ---------------------------------------------------------------------------
 function renderScene(scene) {
+  // 数组/格子类内容走另一套渲染（顺序表、栈、队列、复杂度……）
+  if (scene.variant === 'array') return renderArrayScene(scene);
+
   const total = scene.total || 8;
   const variant = scene.variant || 'singly';
   const accentColor = scene.accentColor || PAL.blue;

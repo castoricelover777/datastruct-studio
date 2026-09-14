@@ -1,27 +1,29 @@
 {
- "generatedAt": "2026-09-14T13:43:57.268Z",
+ "generatedAt": "2026-09-14T13:57:33.256Z",
  "coverage": [
   {
    "section": "01-01",
    "title": "算法复杂度",
    "status": "done",
    "modules": 5,
-   "animations": 0,
+   "animations": 4,
    "ran": 4
   },
   {
    "section": "01-02",
    "title": "最大子列和问题",
    "status": "done",
-   "modules": 0,
-   "animations": 0
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "02-01",
    "title": "线性表",
    "status": "done",
-   "modules": 0,
-   "animations": 0
+   "modules": 7,
+   "animations": 6,
+   "ran": 6
   },
   {
    "section": "02-02",
@@ -35,22 +37,25 @@
    "section": "02-03",
    "title": "堆栈",
    "status": "done",
-   "modules": 0,
-   "animations": 0
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "02-04",
    "title": "队列",
    "status": "done",
-   "modules": 0,
-   "animations": 0
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "02-05",
    "title": "应用实例",
    "status": "done",
-   "modules": 0,
-   "animations": 0
+   "modules": 5,
+   "animations": 4,
+   "ran": 4
   },
   {
    "section": "03-01",

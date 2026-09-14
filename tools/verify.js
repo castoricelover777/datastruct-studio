@@ -94,6 +94,8 @@ function main() {
           check(typeof payload.expectedOutput === 'string' && payload.expectedOutput.length > 0,
             `${meta.id} 缺少真跑出来的预期输出`);
         }
+        // PRD 验收 4：每个模块至少一段动画（"完整源码"是拼装视图，不算）
+        check(meta.hasAnimation === true, `${meta.id} 没有配动画（PRD 要求每个模块至少一段）`);
       }
     }
   };

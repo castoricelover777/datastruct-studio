@@ -108,7 +108,12 @@ function parse(sources) {
           key: mm[2].trim(),
           title: mm[3].trim(),
           difficulty: parseInt(mm[4].trim(), 10) || 1,
-          deps: mm[5].trim() ? mm[5].split(',').map((s) => s.trim()).filter(Boolean) : [],
+          // 依赖字段可能写成 "01,02" 也可能写成表格风格的 "01,02 |"，
+          // 所以先砍掉最后一个竖线之后的内容，再按逗号切
+          deps: (() => {
+            const raw5 = mm[5].split('|')[0].trim();
+            return raw5 ? raw5.split(',').map((s) => s.trim()).filter(Boolean) : [];
+          })(),
           summary: '',
           body: [],
         };
@@ -177,9 +182,12 @@ function extractPreamble(text) {
   return stripComments(head.join('\n'));
 }
 
-/** 拼装视图：模块 01..11 的无注释代码首尾相接，就是可编译的完整源码 */
-function assemble(modules, mode = 'none') {
-  return modules.map((m) => m.modes[mode]).join('\n\n') + '\n';
+/** 拼装视图：模块 01..N 的代码首尾相接，就是可编译的完整源码 */
+function assemble(modules, mode = 'none', preamble = '') {
+  const body = modules.map((m) => m.modes[mode]).join('\n\n');
+  // 带上公共前缀（#include / #define）：v1.0 把它们放在"模块 01 头文件"里，
+  // 新章节直接写在文件头，不带上就编不过
+  return (preamble ? preamble + '\n\n' : '') + body + '\n';
 }
 
 /**

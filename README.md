@@ -210,12 +210,17 @@ npm run dist      # 打包 Windows 便携版
 
 | 文件 | 说明 |
 | --- | --- |
-| `DataStruct-Studio-2.0.0-portable.exe` | 单文件便携版，双击即用，无需安装 |
+| **[DataStruct-Studio-2.0.0-portable.exe](https://github.com/castoricelover777/datastruct-studio/releases/latest)** | 单文件便携版，双击即用，无需安装，**也无需装编译器**（内置 TCC） |
 | 在线版 | https://castoricelover777.github.io/datastruct-studio/ |
+| 一页纸说明 | [docs/使用说明.md](docs/使用说明.md) |
 | 源码 | 本仓库 |
 
-> **打包状态**：桌面版代码已是 v2.0，Release 上的安装包仍在重新打包中；
-> 在线版页面也还在跟进 v2.0 的数据层。两者完成前，先从源码 `npm start` 体验完整功能。
+**实测数据**：冷启动 209~223 ms（PRD 要求 < 3s）· 自检 2645 项 0 失败 ·
+gcc 与内置 TCC 两条编译路径都验证通过 · 1366×768 不破版。
+
+```
+SHA256  BDF6841ECF0F09156C621E9DC67B46420CB5F7DE577DD6C4E5283BBC93D3D9A5
+```
 
 ---
 

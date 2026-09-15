@@ -521,9 +521,262 @@ function renderArrayScene(scene) {
 }
 
 // ---------------------------------------------------------------------------
+// 树渲染（二叉树为主，也能画多叉树）
+//   布局用最省事的办法：**中序遍历定列号、深度定行号**。
+//   这样画出来的二叉树天然不会左右打架，也符合纸上的习惯画法。
+// ---------------------------------------------------------------------------
+const TREE_COL_W = 58;
+const TREE_LEVEL_H = 68;
+const TREE_TOP = 88;
+const TREE_R = 19;
+
+/** 中序遍历给每个结点排好列，深度决定行 */
+function layoutTree(root) {
+  const pos = new Map();
+  let col = 0;
+  (function walk(node, path, depth) {
+    if (!node) return;
+    walk(node.l, path + '.l', depth + 1);
+    pos.set(path, { col: col++, depth });
+    walk(node.r, path + '.r', depth + 1);
+  })(root, 'root', 0);
+
+  const width = col * TREE_COL_W;
+  const left = Math.max(PAD_X, (W - width) / 2);
+  return {
+    pos,
+    cols: col,
+    at(path) {
+      const p = pos.get(path);
+      if (!p) return null;
+      return {
+        x: left + p.col * TREE_COL_W + TREE_COL_W / 2,
+        y: TREE_TOP + p.depth * TREE_LEVEL_H,
+      };
+    },
+  };
+}
+
+/** 按路径（root / root.l / root.r.l …）取出树里的结点 */
+function treeNodeAt(root, path) {
+  let node = root;
+  for (const step of String(path).split('.').slice(1)) {
+    if (!node) return null;
+    node = step === 'l' ? node.l : node.r;
+  }
+  return node;
+}
+
+/** 一个树结点：圆 + 值 */
+function renderTreeNode(node, p, state, total) {
+  const st = state || {};
+  const accent = st.accent || null;
+  const stroke = accent === 'new' ? PAL.green : accent === 'del' ? PAL.red
+    : accent === 'hot' ? PAL.amber : accent === 'visited' ? PAL.blue : PAL.line;
+  const fill = accent === 'new' ? PAL.greenSoft : accent === 'del' ? PAL.redSoft
+    : accent === 'hot' ? '#FFF6E0' : accent === 'visited' ? PAL.blueSoft : PAL.nodeFill;
+
+  const g = [];
+  g.push(`<circle cx="${p.x}" cy="${p.y}" r="${TREE_R}" fill="${fill}" stroke="${stroke}" `
+    + `stroke-width="${accent ? 2.4 : 1.4}"/>`);
+  const text = node.v == null ? '' : String(node.v);
+  g.push(`<text x="${p.x}" y="${p.y + 5.5}" text-anchor="middle" font-family="${MONO}" `
+    + `font-size="${text.length > 2 ? 12 : 15}" fill="${PAL.ink}">${esc(text)}</text>`);
+  // 平衡因子之类的角标（AVL 用）
+  if (st.badge) {
+    g.push(`<text x="${p.x + TREE_R - 2}" y="${p.y - TREE_R + 3}" text-anchor="middle" `
+      + `font-family="${MONO}" font-size="10.5" font-weight="600" fill="${PAL.dim}">${esc(st.badge)}</text>`);
+  }
+
+  const anims = [animOpacity(st.vis || [[0, total]], total)];
+  if (st.rise != null) anims.push(animRise(st.rise, total, 16));
+  return `<g opacity="0">${anims.join('')}${g.join('')}</g>`;
+}
+
+/** 父子之间的连线（从圆周到圆周，不戳进结点里） */
+function renderTreeEdge(from, to, state, total) {
+  const st = state || {};
+  const accent = st.accent || null;
+  const stroke = accent === 'new' ? PAL.green : accent === 'del' ? PAL.red
+    : accent === 'hot' ? PAL.amber : PAL.faint;
+  const len = Math.hypot(to.x - from.x, to.y - from.y) || 1;
+  const dx = (to.x - from.x) / len;
+  const dy = (to.y - from.y) / len;
+  const x1 = from.x + dx * TREE_R;
+  const y1 = from.y + dy * TREE_R;
+  const x2 = to.x - dx * TREE_R;
+  const y2 = to.y - dy * TREE_R;
+  return `<g opacity="0">${animOpacity(st.vis || [[0, total]], total)}`
+    + `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" `
+    + `stroke-width="${accent ? 2.4 : 1.4}"/></g>`;
+}
+
+/** 树类场景的整体渲染 */
+function renderTreeScene(scene) {
+  const total = scene.total || 9;
+  const color = scene.accentColor || '#10B981';
+  const geo = layoutTree(scene.tree || { v: '' });
+  const body = [];
+
+  body.push(renderProgress(total, color));
+  body.push(`<text x="${PAD_X}" y="${TITLE_Y}" font-family="${FONT}" font-size="19" font-weight="600" `
+    + `fill="${PAL.ink}">${esc(scene.no)} · ${esc(scene.title)}</text>`);
+  body.push(`<text x="${PAD_X}" y="${SUB_Y}" font-family="${FONT}" font-size="12.5" `
+    + `fill="${PAL.dim}">${esc(scene.sub || '')}</text>`);
+  if (scene.bookTag) {
+    body.push(`<text x="${W - PAD_X}" y="${TITLE_Y}" text-anchor="end" font-family="${FONT}" `
+      + `font-size="12.5" fill="${color}">${esc(scene.bookTag)}</text>`);
+  }
+
+  const nodeStates = scene.nodes || {};
+  const edgeStates = scene.edges || {};
+  const paths = [...geo.pos.keys()].sort((a, b) => {
+    const da = geo.pos.get(a).depth;
+    const db = geo.pos.get(b).depth;
+    return da - db || a.localeCompare(b);
+  });
+
+  // 先画所有边再画所有结点，结点会盖住线的端点
+  for (const path of paths) {
+    if (path === 'root') continue;
+    const child = geo.at(path);
+    const parentPath = path.slice(0, path.lastIndexOf('.'));
+    const parent = geo.at(parentPath || 'root');
+    if (child && parent) body.push(renderTreeEdge(parent, child, edgeStates[path], total));
+  }
+  for (const path of paths) {
+    const node = treeNodeAt(scene.tree, path);
+    const p = geo.at(path);
+    if (node && p) body.push(renderTreeNode(node, p, nodeStates[path], total));
+  }
+
+  for (const note of scene.notes || []) body.push(renderNote(note, total));
+  body.push(renderCaption(scene));
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" `
+    + `role="img" aria-label="${esc(scene.title)}">`
+    + `<rect width="${W}" height="${H}" fill="${PAL.bg}"/>`
+    + body.join('')
+    + `</svg>`;
+}
+
+// ---------------------------------------------------------------------------
+// 图渲染（顶点 + 边 + 权值）
+//   顶点坐标由场景直接给出 —— 图没有"天然"的布局，
+//   与其猜一个，不如让作者照着要讲的那张图摆位置，反而更可控。
+// ---------------------------------------------------------------------------
+const G_R = 21;
+
+/** 顶点上的附加状态（颜色、角标如 dist / indegree） */
+function graphNodeStyle(st) {
+  const accent = st.accent || null;
+  return {
+    stroke: accent === 'new' ? PAL.green : accent === 'del' ? PAL.red
+      : accent === 'hot' ? PAL.amber : accent === 'visited' ? PAL.blue
+      : accent === 'done' ? PAL.dim : PAL.line,
+    fill: accent === 'new' ? PAL.greenSoft : accent === 'del' ? PAL.redSoft
+      : accent === 'hot' ? '#FFF6E0' : accent === 'visited' ? PAL.blueSoft
+      : accent === 'done' ? '#F1F3F5' : PAL.nodeFill,
+    width: accent ? 2.6 : 1.5,
+  };
+}
+
+function renderGraphNode(n, total) {
+  const st = n.state || {};
+  const s = graphNodeStyle(st);
+  const g = [];
+  g.push(`<circle cx="${n.x}" cy="${n.y}" r="${G_R}" fill="${s.fill}" stroke="${s.stroke}" `
+    + `stroke-width="${s.width}"/>`);
+  const text = String(n.label == null ? n.id : n.label);
+  g.push(`<text x="${n.x}" y="${n.y + 5.5}" text-anchor="middle" font-family="${MONO}" `
+    + `font-size="${text.length > 2 ? 12 : 15}" fill="${PAL.ink}">${esc(text)}</text>`);
+  // dist / indegree 这类角标，画在结点右下角
+  if (st.badge) {
+    g.push(`<text x="${n.x}" y="${n.y + G_R + 15}" text-anchor="middle" font-family="${MONO}" `
+      + `font-size="11" fill="${st.badgeColor || PAL.dim}">${esc(st.badge)}</text>`);
+  }
+  const anims = [animOpacity(st.vis || [[0, total]], total)];
+  if (st.rise != null) anims.push(animRise(st.rise, total, 14));
+  return `<g opacity="0">${anims.join('')}${g.join('')}</g>`;
+}
+
+function renderGraphEdge(e, byId, total) {
+  const a = byId.get(e.from);
+  const b = byId.get(e.to);
+  if (!a || !b) return '';
+  const st = e.state || {};
+  const accent = st.accent || null;
+  const stroke = accent === 'new' ? PAL.green : accent === 'del' ? PAL.red
+    : accent === 'hot' ? PAL.amber : accent === 'visited' ? PAL.blue : PAL.faint;
+  const width = accent ? 3 : (e.dashed ? 1.4 : 1.8);
+
+  const len = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+  const ux = (b.x - a.x) / len;
+  const uy = (b.y - a.y) / len;
+  const shrink = G_R + (e.directed ? 7 : 1);
+  const x1 = a.x + ux * G_R;
+  const y1 = a.y + uy * G_R;
+  const x2 = b.x - ux * shrink;
+  const y2 = b.y - uy * shrink;
+
+  const g = [];
+  g.push(`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" `
+    + `stroke-width="${width}"${e.dashed ? ' stroke-dasharray="5 4"' : ''}/>`);
+  if (e.directed) {
+    const px = -uy;
+    const py = ux;
+    const tipX = b.x - ux * (G_R + 1);
+    const tipY = b.y - uy * (G_R + 1);
+    g.push(`<path d="M ${tipX} ${tipY} L ${tipX - ux * 9 + px * 4.5} ${tipY - uy * 9 + py * 4.5} `
+      + `L ${tipX - ux * 9 - px * 4.5} ${tipY - uy * 9 - py * 4.5} Z" fill="${stroke}"/>`);
+  }
+  // 权值标在中点稍微往法线方向偏一点，免得压在线上
+  if (e.w != null) {
+    const mx = (x1 + x2) / 2 - uy * 11;
+    const my = (y1 + y2) / 2 + ux * 11 + 4;
+    g.push(`<text x="${mx}" y="${my}" text-anchor="middle" font-family="${MONO}" font-size="11" `
+      + `font-weight="600" fill="${accent ? stroke : PAL.dim}">${esc(e.w)}</text>`);
+  }
+  return `<g opacity="0">${animOpacity(st.vis || [[0, total]], total)}${g.join('')}</g>`;
+}
+
+function renderGraphScene(scene) {
+  const total = scene.total || 9;
+  const color = scene.accentColor || '#8250DF';
+  const nodes = scene.gnodes || [];
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const body = [];
+
+  body.push(renderProgress(total, color));
+  body.push(`<text x="${PAD_X}" y="${TITLE_Y}" font-family="${FONT}" font-size="19" font-weight="600" `
+    + `fill="${PAL.ink}">${esc(scene.no)} · ${esc(scene.title)}</text>`);
+  body.push(`<text x="${PAD_X}" y="${SUB_Y}" font-family="${FONT}" font-size="12.5" `
+    + `fill="${PAL.dim}">${esc(scene.sub || '')}</text>`);
+  if (scene.bookTag) {
+    body.push(`<text x="${W - PAD_X}" y="${TITLE_Y}" text-anchor="end" font-family="${FONT}" `
+      + `font-size="12.5" fill="${color}">${esc(scene.bookTag)}</text>`);
+  }
+
+  for (const e of scene.gedges || []) body.push(renderGraphEdge(e, byId, total));
+  for (const n of nodes) body.push(renderGraphNode(n, total));
+  for (const note of scene.notes || []) body.push(renderNote(note, total));
+  body.push(renderCaption(scene));
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" `
+    + `role="img" aria-label="${esc(scene.title)}">`
+    + `<rect width="${W}" height="${H}" fill="${PAL.bg}"/>`
+    + body.join('')
+    + `</svg>`;
+}
+
+// ---------------------------------------------------------------------------
 // 场景渲染
 // ---------------------------------------------------------------------------
 function renderScene(scene) {
+  // 图类内容（邻接矩阵、DFS/BFS、最短路、最小生成树、拓扑排序）
+  if (scene.variant === 'graph') return renderGraphScene(scene);
+  // 树类内容（二叉树、BST、AVL、堆、哈夫曼……）
+  if (scene.variant === 'tree') return renderTreeScene(scene);
   // 数组/格子类内容走另一套渲染（顺序表、栈、队列、复杂度……）
   if (scene.variant === 'array') return renderArrayScene(scene);
 

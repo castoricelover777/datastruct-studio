@@ -44,9 +44,21 @@
           "summary": "链式存储：结点散落各处，靠指针串起来。单链表与双链表放在同一个大模块里对照着学。",
           "status": "done",
           "views": [
-            { "id": "singly", "title": "单链表", "summary": "每个结点只有一个 next，能往后不能往前" },
-            { "id": "doubly", "title": "双链表", "summary": "多一个 prior，能反向走、删除不必找前驱" },
-            { "id": "compare", "title": "对比", "summary": "同一件事，两种写法并排看差异" }
+            {
+              "id": "singly",
+              "title": "单链表",
+              "summary": "每个结点只有一个 next，能往后不能往前"
+            },
+            {
+              "id": "doubly",
+              "title": "双链表",
+              "summary": "多一个 prior，能反向走、删除不必找前驱"
+            },
+            {
+              "id": "compare",
+              "title": "对比",
+              "summary": "同一件事，两种写法并排看差异"
+            }
           ]
         },
         {
@@ -75,12 +87,37 @@
       "color": "#10B981",
       "intro": "一对多的层次关系",
       "sections": [
-        { "id": "03-01", "title": "二叉树基础", "status": "pending" },
-        { "id": "03-02", "title": "二叉搜索树", "status": "pending" },
-        { "id": "03-03", "title": "平衡二叉树 AVL", "status": "pending" },
-        { "id": "03-04", "title": "堆", "status": "pending" },
-        { "id": "03-05", "title": "哈夫曼树", "status": "pending" },
-        { "id": "03-06", "title": "并查集", "status": "pending" }
+        {
+          "id": "03-01",
+          "title": "二叉树基础",
+          "status": "done",
+          "summary": "二叉树的结点结构与四种遍历：先序、中序、后序、层序，以及递归为什么能"
+        },
+        {
+          "id": "03-02",
+          "title": "二叉搜索树",
+          "status": "pending"
+        },
+        {
+          "id": "03-03",
+          "title": "平衡二叉树 AVL",
+          "status": "pending"
+        },
+        {
+          "id": "03-04",
+          "title": "堆",
+          "status": "pending"
+        },
+        {
+          "id": "03-05",
+          "title": "哈夫曼树",
+          "status": "pending"
+        },
+        {
+          "id": "03-06",
+          "title": "并查集",
+          "status": "pending"
+        }
       ]
     },
     {
@@ -89,11 +126,31 @@
       "color": "#8250DF",
       "intro": "多对多的网状关系",
       "sections": [
-        { "id": "04-01", "title": "图的表示", "status": "pending" },
-        { "id": "04-02", "title": "图的遍历 DFS/BFS", "status": "pending" },
-        { "id": "04-03", "title": "最短路径", "status": "pending" },
-        { "id": "04-04", "title": "最小生成树", "status": "pending" },
-        { "id": "04-05", "title": "拓扑排序", "status": "pending" }
+        {
+          "id": "04-01",
+          "title": "图的表示",
+          "status": "pending"
+        },
+        {
+          "id": "04-02",
+          "title": "图的遍历 DFS/BFS",
+          "status": "pending"
+        },
+        {
+          "id": "04-03",
+          "title": "最短路径",
+          "status": "pending"
+        },
+        {
+          "id": "04-04",
+          "title": "最小生成树",
+          "status": "pending"
+        },
+        {
+          "id": "04-05",
+          "title": "拓扑排序",
+          "status": "pending"
+        }
       ]
     },
     {
@@ -102,10 +159,26 @@
       "color": "#F97316",
       "intro": "把无序变成有序，是最高频的基础操作",
       "sections": [
-        { "id": "05-01", "title": "冒泡 / 插入 / 希尔", "status": "pending" },
-        { "id": "05-02", "title": "堆排序 / 归并排序", "status": "pending" },
-        { "id": "05-03", "title": "快速排序", "status": "pending" },
-        { "id": "05-04", "title": "表排序 / 基数排序", "status": "pending" }
+        {
+          "id": "05-01",
+          "title": "冒泡 / 插入 / 希尔",
+          "status": "pending"
+        },
+        {
+          "id": "05-02",
+          "title": "堆排序 / 归并排序",
+          "status": "pending"
+        },
+        {
+          "id": "05-03",
+          "title": "快速排序",
+          "status": "pending"
+        },
+        {
+          "id": "05-04",
+          "title": "表排序 / 基数排序",
+          "status": "pending"
+        }
       ]
     },
     {
@@ -114,9 +187,21 @@
       "color": "#0891B2",
       "intro": "用空间换时间，把查找做到接近 O(1)",
       "sections": [
-        { "id": "06-01", "title": "散列函数设计", "status": "pending" },
-        { "id": "06-02", "title": "开放地址法", "status": "pending" },
-        { "id": "06-03", "title": "分离链接法", "status": "pending" }
+        {
+          "id": "06-01",
+          "title": "散列函数设计",
+          "status": "pending"
+        },
+        {
+          "id": "06-02",
+          "title": "开放地址法",
+          "status": "pending"
+        },
+        {
+          "id": "06-03",
+          "title": "分离链接法",
+          "status": "pending"
+        }
       ]
     }
   ]

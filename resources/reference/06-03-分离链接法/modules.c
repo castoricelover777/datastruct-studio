@@ -451,7 +451,7 @@ Status Delete(HashTable H, ElementType Key)
 //%end
 
 //%module | 06 | PrintTable | PrintTable —— 打印与分布统计 | 1 | 01,02 |
-//@summary | 打印每条链表，统计长度分布。
+//%summary | 打印每条链表，统计长度分布。
 //@d ============ 为什么专门统计"链表长度分布" ============
 //@d
 //@d 因为对分离链接法来说，**性能直接由最长的链表决定**。

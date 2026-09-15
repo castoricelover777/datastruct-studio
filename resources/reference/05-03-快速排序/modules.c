@@ -339,7 +339,7 @@ void QSort(ElementType A[], int Left, int Right)
 //%end
 
 //%module | 05 | QuickSort | QuickSort —— 对外接口 | 1 | 01,04 |
-//@summary | 一行调用，顺手处理空数组。
+//%summary | 一行调用，顺手处理空数组。
 //@d ============ 为什么还要包一层 ============
 //@d
 //@d 因为 QSort 需要 Left 和 Right 两个参数，而使用者只想传"数组 + 长度"。
@@ -366,7 +366,7 @@ void QuickSort(ElementType A[], int N)
 //%end
 
 //%module | 06 | PrintArray | PrintArray —— 打印与检查 | 1 | 01 |
-//@summary | 打印数组、检查是否有序。
+//%summary | 打印数组、检查是否有序。
 //@d 和 05-02 一样的两件自查工具。
 //@d 排序算法的 bug 常常只在特定排列下暴露，所以每次改完都要验一遍。
 

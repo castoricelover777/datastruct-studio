@@ -601,7 +601,7 @@ int FindDouble(HashTable H, ElementType Key, int *probes)
 //%end
 
 //%module | 07 | PrintTable | PrintTable —— 打印与统计 | 1 | 01,02 |
-//@summary | 打印散列表、算平均探测次数。
+//%summary | 打印散列表、算平均探测次数。
 //@d ============ 平均探测次数才是关键指标 ============
 //@d
 //@d 三种探测方式"能不能找到"都能做到。区别在于**要找几次**。

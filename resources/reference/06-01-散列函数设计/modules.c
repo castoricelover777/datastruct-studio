@@ -139,7 +139,7 @@ void DestroyTable(HashTable H)
 //%end
 
 //%module | 02 | NextPrime | NextPrime —— 找一个素数当表长 | 2 | 01 |
-//@summary | 从 N 往上找第一个素数，用来当表长。
+//%summary | 从 N 往上找第一个素数，用来当表长。
 //@d ============ 为什么表长要取素数 ============
 //@d
 //@d 因为最常用的散列函数是"除留余数法" `k % TableSize`。
@@ -427,7 +427,7 @@ Index HashStringBad(const char *Key, int TableSize)
 //%end
 
 //%module | 06 | PrintHash | PrintHash —— 打印与统计 | 1 | 01 |
-//@summary | 打印散列表、统计分布均匀程度。
+//%summary | 打印散列表、统计分布均匀程度。
 //@d ============ 怎么判断"散列函数好不好" ============
 //@d
 //@d 一个直观的指标：**看各个格子被用到的次数是否均匀**。

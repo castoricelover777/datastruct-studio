@@ -189,7 +189,10 @@ int main(void)
     p = LocateElem(L, 10);
     if (p != NULL)
     {
-        printf("找到 10：它的前驱是头结点（data 是 %d，属于垃圾值，不该读）\n", p->prior->data);
+        /* 注意：头结点的 data 从来没被赋值（InitList 只管两个指针），
+           这里故意**不打印它的值** —— 那个值是 malloc 给的随机内容，
+           每次运行都不一样，打出来既不是知识、还会让产物每次都变。 */
+        printf("找到 10：它的前驱是头结点（头结点的 data 是未初始化的，读它就是未定义行为）\n");
     }
 
     p = LocateElem(L, 99);

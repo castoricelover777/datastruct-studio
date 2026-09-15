@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:43:23.875Z",
+ "generatedAt": "2026-09-15T04:45:11.385Z",
  "coverage": [
   {
    "section": "01-01",
@@ -100,9 +100,10 @@
   {
    "section": "03-06",
    "title": "并查集",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "04-01",

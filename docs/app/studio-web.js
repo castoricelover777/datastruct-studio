@@ -11,7 +11,9 @@
 (function () {
   'use strict';
 
-  const VER = '2.0.0';
+  // 和 package.json 的 version 保持一致 —— 侧边栏会显示成 v2.1.1-web，
+  // 用户才能对上"我拿的是哪一版"
+  const VER = '2.1.1';
 
   async function getJson(path) {
     const r = await fetch(path, { cache: 'no-cache' });

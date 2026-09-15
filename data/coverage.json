@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T05:02:19.773Z",
+ "generatedAt": "2026-09-15T05:04:21.227Z",
  "coverage": [
   {
    "section": "01-01",
@@ -188,9 +188,10 @@
   {
    "section": "06-02",
    "title": "开放地址法",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "06-03",

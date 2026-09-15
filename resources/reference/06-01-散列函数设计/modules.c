@@ -82,7 +82,7 @@ typedef int ElementType;
 typedef int Index;
 
 //@s 散列表的最大容量
-#define MAXTABLESIZE 1000
+#define MAXTABLESIZE 20000
 
 //@s 每格的状态
 typedef enum
@@ -165,15 +165,14 @@ void DestroyTable(HashTable H)
 //@d 复杂度上，试除是 O(√p)，而素数之间的平均间隔是 O(log p)，
 //@d 所以找下一个素数的开销可以接受 —— 而且它只在建表时做一次。
 
-//@s 返回不小于 N 的下一个素数
+//@s 取不小于 N 的下一个素数（和 06-01 一样）
 int NextPrime(int N)
 {
 //@s 循环用
     int i;
-//@s 待检查的数
+//@s 待检查
     int p;
 
-//@s 小素数直接返回
     if (N <= 2)
     {
         return 2;
@@ -183,14 +182,14 @@ int NextPrime(int N)
         return 3;
     }
 
-//@s 先保证 p 是奇数（偶数除 2 外都不是素数）
-//@d N 是奇数就试 N+2，N 是偶数就试 N+1 —— 都跳到奇数上。
-    p = (N % 2 != 0) ? N + 2 : N + 1;
+//@s 先看 N 本身是不是素数（N 是偶数就先加一到奇数）
+    p = (N % 2 != 0) ? N : N + 1;
 
 //@s 往上找
+//@d 上界要留足余量 —— 否则 p 一超界就直接返回非素数了。
     while (p <= MAXTABLESIZE)
     {
-//@s 从 √p 往下试除
+//@s 从 p/2 往下试除
         for (i = (int)(p / 2); i > 2; i--)
         {
             if (p % i == 0)

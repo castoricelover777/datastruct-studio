@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:49:57.184Z",
+ "generatedAt": "2026-09-15T04:51:56.434Z",
  "coverage": [
   {
    "section": "01-01",
@@ -132,9 +132,10 @@
   {
    "section": "04-04",
    "title": "最小生成树",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 7,
+   "animations": 6,
+   "ran": 6
   },
   {
    "section": "04-05",

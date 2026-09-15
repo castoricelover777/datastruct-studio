@@ -152,7 +152,8 @@
         {
           "id": "04-04",
           "title": "最小生成树",
-          "status": "pending"
+          "status": "done",
+          "summary": "最小生成树：Prim 加点法与 Kruskal 加边法，以及 Prim 和 Dijkstra 只差一行这件事。"
         },
         {
           "id": "04-05",

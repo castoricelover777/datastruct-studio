@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T05:00:31.073Z",
+ "generatedAt": "2026-09-15T05:02:19.773Z",
  "coverage": [
   {
    "section": "01-01",
@@ -180,9 +180,10 @@
   {
    "section": "06-01",
    "title": "散列函数设计",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "06-02",

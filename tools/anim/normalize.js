@@ -123,13 +123,66 @@ function unstackNotes(scene) {
   return fixed;
 }
 
+/**
+ * ③ 同一格子的"变形"要首尾相接。
+ *
+ * 排序类动画靠"同一位置在时间轴上换值"来表现元素移动，写法是：
+ *
+ *     cell(0, '5', [[0.6, 4.4]]),   ← 4.4 秒之前是 5
+ *     cell(0, '1', [[4.4, 99]]),    ← 之后变成 1
+ *
+ * 但手写时极容易把前一个的结束写成 9 或 99，于是两个数字在同一格上
+ * **同时可见、叠在一起** —— 看上去就是"数字显示不正常 / 位置不对"。
+ * 这里按起点排序，强制让前一个的结束等于后一个的开始。
+ */
+function chainCells(scene) {
+  const total = scene.total || 9;
+  const byAt = new Map();
+  for (const c of scene.cells || []) {
+    if (!byAt.has(c.at)) byAt.set(c.at, []);
+    byAt.get(c.at).push(c);
+  }
+
+  let fixed = 0;
+  for (const arr of byAt.values()) {
+    if (arr.length < 2) continue;
+
+    // 展开成单段，按起点排序
+    const segs = [];
+    for (const c of arr) {
+      const iv = c.vis && c.vis.length ? c.vis : [[0, total]];
+      for (const [b, e] of iv) segs.push({ c, b, e: e === undefined ? total : e });
+    }
+    segs.sort((p, q) => p.b - q.b);
+
+    // **无条件串联**：同一格只要有多段，就把前一段接到后一段的起点上。
+    //
+    // 不只在"检测到重叠"时才动手 —— 因为还有一个同样常见的毛病：
+    // 前一段结束得早、后一段开始得晚，中间留出一段**空档**，
+    // 那一瞬间格子上什么都没有（看上去像数字丢了）。
+    // 对排序这类"连续数组"来说，格子留空本来就没有语义，所以直接补齐。
+    for (let i = 0; i < segs.length; i++) {
+      const s = segs[i];
+      const next = segs[i + 1];
+      const end = next ? next.b : total;
+      if (end > s.b) {
+        s.c.vis = [[s.b, end]];
+        fixed++;
+      }
+    }
+  }
+  return fixed;
+}
+
 /** 就地规范化一个场景，返回改动摘要 */
 function normalizeScene(scene) {
   if (!scene || typeof scene !== 'object') return scene;
   const aligned = alignStart(scene);
   const unstacked = unstackNotes(scene);
+  const chained = chainCells(scene);
   if (aligned) scene.__aligned = aligned;
   if (unstacked) scene.__unstacked = unstacked;
+  if (chained) scene.__chained = chained;
   return scene;
 }
 

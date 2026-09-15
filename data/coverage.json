@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:57:26.076Z",
+ "generatedAt": "2026-09-15T04:58:55.142Z",
  "coverage": [
   {
    "section": "01-01",
@@ -164,9 +164,10 @@
   {
    "section": "05-03",
    "title": "快速排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "05-04",

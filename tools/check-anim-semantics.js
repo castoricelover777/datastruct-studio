@@ -150,6 +150,70 @@ function saysNoChange(text) {
 }
 
 // ---------------------------------------------------------------------------
+// 结点类场景（链表 / 树 / 图）
+// ---------------------------------------------------------------------------
+//
+// 这几类的"画面"不是格子阵列，但语义核验的同一套逻辑照样能用：
+// 把每个结点/顶点当成"有值的东西"，看它出现/消失的时刻和文案对不对得上。
+//
+// 只在**结点出现或消失的那一步**检查，避免把普通讲解步骤误判成不符。
+
+/** 取一个结点的显示值：链表用 value，树用 tree 映射，图用 label */
+function nodeTextOf(sc, key) {
+  if (/^\d/.test(key)) return key;                    // 图的顶点 id 本身就是数字
+  let cur = sc.tree;
+  if (cur && key !== 'root') {
+    for (const seg of key.split('.').slice(1)) {
+      if (!cur || typeof cur !== 'object') { cur = undefined; break; }
+      cur = cur[seg];
+    }
+  }
+  if (cur !== undefined && cur !== null && typeof cur !== 'object') return String(cur);
+  return null;
+}
+
+/** 这个场景里"可见的结点值"在 t 时刻的集合 */
+function nodeValuesAt(sc, t) {
+  const out = new Set();
+  for (const [key, n] of Object.entries(sc.nodes || {})) {
+    if (!visibleAt(n.vis, t)) continue;
+    const v = nodeTextOf(sc, key);
+    if (v !== null) out.add(v);
+  }
+  for (const g of sc.gnodes || []) {
+    if (visibleAt(g.state && g.state.vis, t)) out.add(g.id);
+  }
+  return out;
+}
+
+function checkNodeScene(sc, file) {
+  const total = sc.total || 9;
+  const steps = (sc.steps || []).filter((s) => typeof s.t === 'number').sort((a, b) => a.t - b.t);
+  if (!steps.length) return;
+  const EPS = 0.02;
+
+  // 只提供 --detail 的时间线 dump；不做自动判定。
+  //
+  // 试过"结点出现/消失但文案没点名值"这条，误报 44 处全是噪音 ——
+  // 链表里"造出新结点 s（数据域填 e）"这种写法本来就不需要在文案里写数值，
+  // 画面出现一个新结点和文案并不矛盾。所以结点类场景目前只保证：
+  // 机械问题交给 lint-anim，语义判定只覆盖格子阵列。
+  if (!(detailId && sc.id.includes(detailId))) return;
+
+  console.log('\n===== ' + sc.id + '  ' + (sc.title || '') + '  variant=' + sc.variant
+    + '  total=' + total + ' =====');
+  for (let i = 0; i < steps.length; i++) {
+    const s = steps[i];
+    const end = (i + 1 < steps.length ? steps[i + 1].t : total) - EPS;
+    console.log(`  t=${String(s.t).padStart(5)} 画面结点值=[${[...nodeValuesAt(sc, s.t + EPS)].join(' ')}]`
+      + `  步末=[${[...nodeValuesAt(sc, Math.max(s.t + EPS, end))].join(' ')}]`);
+    console.log(`      ${s.text}`);
+  }
+  console.log('  终态: [' + [...nodeValuesAt(sc, total - EPS)].join(' ') + ']');
+  void file;
+}
+
+// ---------------------------------------------------------------------------
 // 主循环
 // ---------------------------------------------------------------------------
 const problems = [];
@@ -171,7 +235,7 @@ for (const f of files) {
   if (!Array.isArray(scenes)) continue;
 
   for (const sc of scenes) {
-    if (sc.variant !== 'array') continue;    // 第一版只做格子阵列（排序/散列/栈队列）
+    if (sc.variant !== 'array') { checkNodeScene(sc, f); continue; }
     sceneCount++;
     const total = sc.total || 9;
     const steps = (sc.steps || []).filter((s) => typeof s.t === 'number')
@@ -284,6 +348,23 @@ for (const f of files) {
           add(f, sc.id, '⑤ 文案点名的数值画面里没有',
             `t=${s.t} 文案「${text.slice(0, 44)}」点名 ${nums.join('/')}，`
             + `画面是 [${[...shownVals].join(' ')}]`);
+        }
+      }
+
+      // ⑥ 文案写"下标 N 是 V"这类**位置断言**，格子 N 就必须是 V
+      //
+      // 这条精确可判定：文案自己把下标和值都写出来了，画面骗不了人。
+      // （试过更宽的"文案里的数字要能在画面里找到"，把"h(k)=9−4=5 落在 6"
+      //   这种散列探测过程全当成了断言，误报一片，所以收窄成这个格式。）
+      for (const m of text.matchAll(/(?:下标|A\[|位置)\s*(\d+)[^\d]{0,4}(?:是|为|=|->|→)\s*(-?\d+)/g)) {
+        const at = Number(m[1]);
+        const want = m[2];
+        if (at >= atEnd.length) continue;
+        const snap = atEnd[at];
+        if (snap !== null && snap !== want) {
+          add(f, sc.id, '⑥ 文案的位置断言和画面对不上',
+            `t=${s.t} 文案「${text.slice(0, 44)}」说下标 ${at} 是 ${want}，`
+            + `画面那一格是「${snap}」（整行 [${atEnd.map((v) => v === null ? '·' : v).join(' ')}]）`);
         }
       }
     }

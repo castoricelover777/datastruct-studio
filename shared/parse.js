@@ -194,11 +194,40 @@ function assemble(modules, mode = 'none', preamble = '') {
  * 函数名 → 模块编号。
  * 直接取自 //%module 声明的函数名，比正则猜函数定义可靠得多。
  */
+/** C 语言的关键字，提取函数名时要排除掉 */
+const C_KEYWORDS = new Set([
+  'if', 'else', 'while', 'for', 'do', 'switch', 'case', 'return', 'sizeof',
+  'struct', 'union', 'enum', 'typedef', 'static', 'const', 'void', 'int',
+  'char', 'long', 'short', 'float', 'double', 'unsigned', 'signed',
+]);
+
+/**
+ * 从一段 C 代码里提取所有**定义的**函数名。
+ * 匹配"返回类型 + 名字 + (...) {"这种形式，跳过 if/while 之类的关键字。
+ * 一个模块里定义多个函数是很常见的（比如 Height 模块里有 GetHeight、
+ * UpdateHeight、BalanceFactor），只靠 key 建索引会漏掉后面几个。
+ */
+function definedFunctions(code) {
+  const out = [];
+  const re = /(?:^|\n)[ \t]*(?:static\s+)?[A-Za-z_][A-Za-z0-9_ \t*]*?\b([A-Za-z_][A-Za-z0-9_]*)\s*\([^;{}]*\)\s*\n?[ \t]*\{/g;
+  let m;
+  while ((m = re.exec(code)) !== null) {
+    const name = m[1];
+    if (!C_KEYWORDS.has(name) && out.indexOf(name) < 0) out.push(name);
+  }
+  return out;
+}
+
 function buildFunctionIndex(modules) {
   const index = new Map();
   for (const m of modules) {
-    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(m.key)) continue;
-    if (!index.has(m.key)) index.set(m.key, m.id);
+    if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(m.key) && !index.has(m.key)) {
+      index.set(m.key, m.id);
+    }
+    // 模块代码里定义的其他函数也归到这个模块名下
+    for (const fn of definedFunctions(m.code)) {
+      if (!index.has(fn)) index.set(fn, m.id);
+    }
   }
   return index;
 }

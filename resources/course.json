@@ -102,7 +102,8 @@
         {
           "id": "03-03",
           "title": "平衡二叉树 AVL",
-          "status": "pending"
+          "status": "done",
+          "summary": "平衡二叉树 AVL：平衡因子、四种旋转（LL/RR/LR/RL）、插入后自动恢复平衡。"
         },
         {
           "id": "03-04",

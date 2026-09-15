@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:33:30.584Z",
+ "generatedAt": "2026-09-15T04:36:17.844Z",
  "coverage": [
   {
    "section": "01-01",
@@ -76,9 +76,10 @@
   {
    "section": "03-03",
    "title": "平衡二叉树 AVL",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 12,
+   "animations": 11,
+   "ran": 11
   },
   {
    "section": "03-04",

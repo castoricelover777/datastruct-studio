@@ -148,6 +148,7 @@ function main() {
 
   // ---------------------------------------------------------------- 动画
   console.log('\n[2] 动画');
+  const declaredSvg = new Set();
   for (const ch of tree.chapters) {
     for (const sec of ch.sections) {
       const f = path.join(DATA, 'animations', `${sec.id}.json`);
@@ -167,6 +168,7 @@ function main() {
           check(typeof s.text === 'string' && s.text.length > 0, `${id} 有关键帧没有说明文字`);
         }
         const svgFile = path.join(DOC_ANIM, path.basename(a.svg || ''));
+        declaredSvg.add(path.basename(a.svg || ''));
         if (check(fs.existsSync(svgFile), `${id} 的 SVG 不存在：${a.svg}`)) {
           const svg = fs.readFileSync(svgFile, 'utf8');
           check(!/NaN|undefined/.test(svg), `${id} 的 SVG 里出现了 NaN/undefined`);
@@ -175,6 +177,14 @@ function main() {
         }
       }
     }
+  }
+
+  // 孤儿 SVG：产物目录是"生成式"的，场景 id 改名后旧文件会留在这里。
+  // 它不参与应用播放，但会一直挂在 Pages 上被当成内容 —— 曾经就漏过一个
+  // （03-01-08-main，场景改成 FreeTree 后没人删）。make-animations.js 会在
+  // 生成时清掉，这里再兜一道，防止手滑绕过生成脚本。
+  for (const f of fs.readdirSync(DOC_ANIM).filter((x) => x.endsWith('.svg'))) {
+    check(declaredSvg.has(f), `孤儿 SVG：docs/animations/${f}（没有任何场景定义，应以场景 id 为准删掉）`);
   }
   console.log(`  动画 ${animCount} 段`);
 

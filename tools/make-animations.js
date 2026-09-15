@@ -59,7 +59,27 @@ function main() {
   }
   console.log(`\n生成 ${written.length} 段动画 -> docs/animations/`);
 
-  if (!filter) writeGallery(written);
+  if (!filter) {
+    cleanOrphans(new Set(all.map((x) => `${x.scene.id}.svg`)));
+    writeGallery(written);
+  }
+}
+
+/**
+ * 删掉产物目录里"没有对应场景"的旧 SVG。
+ *
+ * 场景 id 一改名（比如 03-01-08-main → 03-01-08-FreeTree），旧文件就留在这里：
+ * 它不再被应用引用，但会一直挂在 Pages 上被当成内容，而且没有任何工具会发现。
+ * 只在全量生成时清理，带 filter 的调试运行绝不删东西。
+ */
+function cleanOrphans(keep) {
+  const removed = fs.readdirSync(OUT)
+    .filter((f) => f.endsWith('.svg') && !keep.has(f));
+  for (const f of removed) {
+    fs.unlinkSync(path.join(OUT, f));
+    console.log(`  清理孤儿 SVG：${f}（已无对应场景）`);
+  }
+  if (removed.length) console.log(`\n共清理 ${removed.length} 个孤儿 SVG`);
 }
 
 /** 画廊：按节分组，自包含单文件 */

@@ -82,18 +82,24 @@
       <div class="big-tabs" id="bigTabs" hidden></div>
 
       <section class="pane pane-read" id="paneRead">
-        <div class="read-split">
+        <div class="read-split" id="readSplit">
           <!-- 左：动画画面。右：代码。并排才看得见"动画走到哪、代码高亮到哪"（PRD 4.3） -->
           <div class="anim-card" id="animCard" hidden>
             <div class="code-card-head">
               <span class="code-card-title" id="animCardTitle">动画演示</span>
               <div class="code-card-actions">
                 <span class="pl-legend">蓝＝已有连接　绿＝本步新建　红＝即将摘除</span>
+                <button type="button" class="btn btn-mini" id="btnFitAnim" title="恢复默认大小">复位</button>
                 <button type="button" class="btn btn-mini" id="btnCollapseAnim">折叠</button>
               </div>
             </div>
             <div class="anim-body" id="animBody"></div>
+            <!-- 横条：拖动改动画高度 -->
+            <div class="split-h" id="splitH" title="上下拖动，调整动画区高度"></div>
           </div>
+
+          <!-- 竖条：拖动改左右宽度 -->
+          <div class="split-v" id="splitV" title="左右拖动，调整动画与代码的宽度比例"></div>
 
           <div class="code-card">
             <div class="code-card-head">

@@ -41,6 +41,7 @@
     playerPanel: $('playerPanel'), playerHost: $('playerHost'),
     animCard: $('animCard'), animBody: $('animBody'), animCardTitle: $('animCardTitle'),
     btnCollapseAnim: $('btnCollapseAnim'), readSplit: document.querySelector('.read-split'),
+    splitV: $('splitV'), splitH: $('splitH'), btnFitAnim: $('btnFitAnim'),
 
     outputPanel: $('outputPanel'), btnToggleOutput: $('btnToggleOutput'), outputCaret: $('outputCaret'),
     outputPlaceholder: $('outputPlaceholder'), outputContent: $('outputContent'),
@@ -73,6 +74,8 @@
     refCollapsed: false,
     sidebarCollapsed: false,
     animCollapsed: false,
+    animWidth: null,      // 动画面板宽度（用户拖过竖条才有值）
+    animHeight: null,     // 动画区高度（用户拖过横条才有值）
     compiler: null,
     runTimeoutMs: 8000,
     player: null,
@@ -124,6 +127,7 @@
       theme: state.theme, mode: state.mode, view: state.view,
       moduleId: state.moduleId, viewId: state.viewId, expanded: state.expanded,
       refCollapsed: state.refCollapsed, sidebarCollapsed: state.sidebarCollapsed,
+      animWidth: state.animWidth, animHeight: state.animHeight,
     };
     store('settings', s);
     if (window.studio && window.studio.saveSettings) window.studio.saveSettings(s);
@@ -909,6 +913,102 @@
       onEditorChange();
     });
 
+    // ── 可拖拽的动画面板 ────────────────────────────────────────────
+    // 竖条调左右宽度、横条调动画高度，两边的尺寸都会记进设置。
+    //
+    // 为什么不用 CSS 的 resize 属性：那个只能改一个元素自己的尺寸，
+    // 而这里"左右宽度"要改的是栅格列宽（也就是 .read-split），
+    // 不是动画面板本身的宽度。所以自己接指针事件更直接。
+    function applyPanelSize() {
+      const split = el.readSplit;
+      if (!split) return;
+      if (state.animWidth) split.style.setProperty('--anim-w', state.animWidth + 'px');
+      else split.style.removeProperty('--anim-w');
+
+      if (state.animHeight) {
+        el.animBody.style.setProperty('--anim-h', state.animHeight + 'px');
+        el.animBody.classList.add('is-resized');
+      } else {
+        el.animBody.style.removeProperty('--anim-h');
+        el.animBody.classList.remove('is-resized');
+      }
+    }
+
+    function bindSplit(handle, opts) {
+      if (!handle) return;
+      let startPos = 0;
+      let startVal = 0;
+
+      handle.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        handle.setPointerCapture(e.pointerId);
+        handle.classList.add('is-dragging');
+        document.body.classList.add(opts.bodyClass);
+        startPos = opts.axis === 'x' ? e.clientX : e.clientY;
+        startVal = opts.read();
+        const move = function (ev) {
+          const now = opts.axis === 'x' ? ev.clientX : ev.clientY;
+          opts.write(startVal + (now - startPos));
+        };
+        const up = function () {
+          handle.classList.remove('is-dragging');
+          document.body.classList.remove(opts.bodyClass);
+          handle.removeEventListener('pointermove', move);
+          handle.removeEventListener('pointerup', up);
+          handle.removeEventListener('pointercancel', up);
+          applyPanelSize();
+          saveSettings();
+        };
+        handle.addEventListener('pointermove', move);
+        handle.addEventListener('pointerup', up);
+        handle.addEventListener('pointercancel', up);
+      });
+
+      // 双击恢复默认
+      handle.addEventListener('dblclick', function () {
+        opts.reset();
+        applyPanelSize();
+        saveSettings();
+      });
+    }
+
+    bindSplit(el.splitV, {
+      axis: 'x',
+      bodyClass: 'is-resizing-col',
+      read() {
+        const box = el.animCard.getBoundingClientRect();
+        return box.width;
+      },
+      write(v) {
+        // 夹在合理范围内：太窄看不清动画，太宽代码就没地方了
+        const total = el.readSplit.getBoundingClientRect().width;
+        state.animWidth = Math.max(300, Math.min(Math.round(v), Math.round(total - 320)));
+      },
+      reset() { state.animWidth = null; },
+    });
+
+    bindSplit(el.splitH, {
+      axis: 'y',
+      bodyClass: 'is-resizing-row',
+      read() {
+        return el.animBody.getBoundingClientRect().height;
+      },
+      write(v) {
+        // 上边界要留出标题和播放器，下边界别把动画压没
+        state.animHeight = Math.max(120, Math.min(Math.round(v), 560));
+      },
+      reset() { state.animHeight = null; },
+    });
+
+    if (el.btnFitAnim) {
+      el.btnFitAnim.addEventListener('click', function () {
+        state.animWidth = null;
+        state.animHeight = null;
+        applyPanelSize();
+        saveSettings();
+      });
+    }
+
     el.ioTabs.addEventListener('click', function (e) {
       const b = e.target.closest('button[data-io]');
       if (!b) return;
@@ -1009,6 +1109,8 @@
     state.expanded = persisted.expanded || {};
     state.refCollapsed = !!persisted.refCollapsed;
     state.sidebarCollapsed = !!persisted.sidebarCollapsed;
+    state.animWidth = persisted.animWidth || null;
+    state.animHeight = persisted.animHeight || null;
     el.app.classList.toggle('sidebar-collapsed', state.sidebarCollapsed);
 
     const draftData = restore('drafts', {});

@@ -223,7 +223,8 @@
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(430px, 42%) minmax(0, 1fr);
+  /* 列宽由 --anim-w 控制，用户拖竖条时会改它 */
+  grid-template-columns: minmax(320px, var(--anim-w, 42%)) 6px minmax(0, 1fr);
   gap: 1px;
   background: var(--border);
 }
@@ -239,7 +240,7 @@
 }
 .anim-card[hidden] { display: none; }
 .anim-body {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   display: flex;
   align-items: center;
@@ -247,6 +248,38 @@
   background: #fff;
   overflow: hidden;
 }
+/* 用户拖过横条之后，动画区用固定高度，不再自适应 */
+.anim-body.is-resized { flex: 0 0 auto; height: var(--anim-h, 210px); }
+
+/* ── 可拖拽的分隔条 ───────────────────────────────────────────────
+   竖条调左右宽度、横条调动画高度。视觉上做得很细（6px），
+   但命中区域向两侧各扩 3px，免得不好点中。 */
+.split-v, .split-h {
+  position: relative;
+  background: transparent;
+  transition: background .12s;
+  z-index: 3;
+}
+.split-v { cursor: col-resize; }
+.split-h { cursor: row-resize; height: 6px; flex: 0 0 auto; }
+.split-v::after, .split-h::after {
+  content: '';
+  position: absolute;
+  background: var(--border);
+  transition: background .12s;
+}
+.split-v::after { left: 2px; top: 0; bottom: 0; width: 2px; }
+.split-h::after { top: 2px; left: 0; right: 0; height: 2px; }
+.split-v:hover, .split-h:hover,
+.split-v.is-dragging, .split-h.is-dragging { background: var(--accent-soft, #EAF2FF); }
+.split-v:hover::after, .split-h:hover::after,
+.split-v.is-dragging::after, .split-h.is-dragging::after { background: var(--accent, #3B82F6); }
+/* 拖动时整页光标锁定，免得移到别的元素上变成别的指针 */
+body.is-resizing-col, body.is-resizing-col * { cursor: col-resize !important; user-select: none !important; }
+body.is-resizing-row, body.is-resizing-row * { cursor: row-resize !important; user-select: none !important; }
+/* 折叠动画时竖条没意义，藏掉 */
+.anim-card[hidden] ~ .split-v, .read-split.no-anim .split-v { display: none; }
+.read-split.no-anim { grid-template-columns: minmax(0, 1fr); }
 .anim-body .pl-canvas { display: block; padding: 10px 12px; background: #fff; width: 100%; }
 .anim-body .pl-canvas svg { display: block; width: 100%; height: auto; }
 .anim-card.is-collapsed .anim-body { display: none; }

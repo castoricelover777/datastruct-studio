@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const { renderScene } = require('./anim/render');
+const { normalizeScene } = require('./anim/normalize');
 
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'resources', 'animations');
@@ -33,7 +34,10 @@ function loadScenes() {
       console.error(`  ✗ 加载 ${f} 失败：${e.message}`);
       continue;
     }
-    for (const s of Array.isArray(scenes) ? scenes : []) out.push({ section, scene: s });
+    for (const s of Array.isArray(scenes) ? scenes : []) {
+      // 规范化的原因见 tools/anim/normalize.js：修"开头空白"和"标注重叠"
+      out.push({ section, scene: normalizeScene(s) });
+    }
   }
   return out;
 }

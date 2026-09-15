@@ -748,10 +748,46 @@ function renderGraphEdge(e, byId, total) {
   return `<g opacity="0">${animOpacity(st.vis || [[0, total]], total)}${g.join('')}</g>`;
 }
 
+/**
+ * 把一批坐标整体缩放到"安全区"里。
+ *
+ * 图类场景的顶点坐标是手写的，很容易写到 y=270 这种位置 ——
+ * 而字幕在 y=214、进度条更靠下，于是结点会压在文字上。
+ * 与其逐个场景去调坐标，不如在这里统一压回安全区：
+ * 按比例缩放 + 居中，保持相对布局不变。
+ */
+const SAFE = { x0: 90, x1: 870, y0: 84, y1: 198 };
+
+function fitSafeArea(nodes) {
+  if (!nodes.length) return nodes;
+  const xs = nodes.map((n) => n.x);
+  const ys = nodes.map((n) => n.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+
+  const spanX = Math.max(1, maxX - minX);
+  const spanY = Math.max(1, maxY - minY);
+  const scaleX = Math.min(1, (SAFE.x1 - SAFE.x0) / spanX);
+  const scaleY = Math.min(1, (SAFE.y1 - SAFE.y0) / spanY);
+
+  if (scaleX >= 1 && scaleY >= 1) return nodes;
+
+  // 缩放后居中放回安全区
+  const newSpanX = spanX * scaleX;
+  const newSpanY = spanY * scaleY;
+  const offX = SAFE.x0 + (SAFE.x1 - SAFE.x0 - newSpanX) / 2 - minX * scaleX;
+  const offY = SAFE.y0 + (SAFE.y1 - SAFE.y0 - newSpanY) / 2 - minY * scaleY;
+
+  return nodes.map((n) => Object.assign({}, n, {
+    x: Math.round(n.x * scaleX + offX),
+    y: Math.round(n.y * scaleY + offY),
+  }));
+}
+
 function renderGraphScene(scene) {
   const total = scene.total || 9;
   const color = scene.accentColor || '#8250DF';
-  const nodes = scene.gnodes || [];
+  const nodes = fitSafeArea(scene.gnodes || []);
   const byId = new Map(nodes.map((n) => [n.id, n]));
   const body = [];
 
@@ -835,4 +871,4 @@ function renderScene(scene) {
     + `</svg>`;
 }
 
-module.exports = { renderScene, PAL, W, H, FONT, MONO, PAD_X, NODE_Y, NODE_H, SIZE };
+module.exports = { renderScene, fitSafeArea };

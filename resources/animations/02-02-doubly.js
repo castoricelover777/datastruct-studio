@@ -593,6 +593,8 @@ module.exports = [
       { id: 'n1', slot: 1, value: '10', vis: [[0, 2.4]] },
       { id: 'n2', slot: 2, value: '20', vis: [[0, 4.0]] },
       { id: 'n3', slot: 3, value: '30', vis: [[0, 5.6]] },
+      // 释放完画面不能空着：摆个"空表"标记，对应最后那句"L 置 NULL"
+      { id: 'null', slot: 0, tag: 'L = NULL', vis: [[7.4, 9.6]] },
     ],
     arrows: [
       { from: 'head', to: 'n1', at: 0, vis: [[0, 2.4]] },
@@ -639,7 +641,9 @@ module.exports = [
     accentColor: '#8250DF',
     total: 12.4,
     nodes: [
-      { id: 'head', slot: 0, role: 'head', tag: 'L', vis: [[0.8, 10.4]] },
+      // 头结点一直摆到结尾：最后 2 秒在讲"把正反向对照当校验和"，
+      // 画面不能是空的（原来 10.4s 起全空）
+      { id: 'head', slot: 0, role: 'head', tag: 'L', vis: [[0.8, 12.4]] },
       { id: 'a', slot: 1, value: '10', vis: [[2.0, 7.4]], rise: 2.0 },
       { id: 'b', slot: 2, value: '20', vis: [[2.4, 8.2]], rise: 2.4 },
       { id: 'c', slot: 3, value: '30', vis: [[2.8, 9.0]], rise: 2.8 },

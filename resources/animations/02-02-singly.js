@@ -464,6 +464,9 @@ module.exports = [
       { id: 'n1', slot: 1, value: '10', vis: [[0, 2.4]] },
       { id: 'n2', slot: 2, value: '20', vis: [[0, 4.0]] },
       { id: 'n3', slot: 3, value: '30', vis: [[0, 5.6]] },
+      // 全部释放之后画面不能是空的：摆一个"空表"标记，
+      // 正好对应最后那句"把 L 置 NULL"（原来 7.4~9.6s 整段空白）
+      { id: 'null', slot: 0, tag: 'L = NULL', vis: [[7.4, 9.6]] },
     ],
     arrows: [
       { from: 'head', to: 'n1', at: 0, vis: [[0, 2.4]] },

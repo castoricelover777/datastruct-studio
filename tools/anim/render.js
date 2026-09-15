@@ -490,15 +490,50 @@ function renderCell(c, geo, total) {
   return `<g opacity="0">${anims.join('')}${g.join('')}</g>`;
 }
 
-/** 指针标注（top / front / rear / i / j），画在格子上方 */
-function renderArrayPointer(p, geo, total) {
-  const x = geo.center(p.at);
+/**
+ * 指针标注（top / front / rear / i / j），画在格子上方。
+ *
+ * `dx` 是"同格错开"用的水平偏移：多个指针指向同一格时（典型是 InitQueue 的
+ * front = rear = 0），标签会精确重叠成一团看不清的字。调用方算好偏移传进来，
+ * 有偏移时补一条从标签到指针尖的引出线 —— 既看得清、也看得出来它们指的是同一格。
+ */
+function renderArrayPointer(p, geo, total, dx = 0) {
+  const baseX = geo.center(p.at);
+  const x = baseX + dx;
   const y = CELL_Y - 13;
   const color = p.color || PAL.amber;
+  const leader = dx === 0 ? ''
+    : `<path d="M ${x} ${y + 1} L ${baseX} ${y + 2}" stroke="${color}" stroke-width="0.9" `
+      + `stroke-dasharray="2 2"/>`;
   return `<g opacity="0">${animOpacity(p.vis, total)}`
-    + `<path d="M ${x} ${y + 9} l -6 -9 l 12 0 Z" fill="${color}"/>`
+    + `<path d="M ${baseX} ${y + 9} l -6 -9 l 12 0 Z" fill="${color}"/>${leader}`
     + `<text x="${x}" y="${y - 3}" text-anchor="middle" font-family="${MONO}" `
     + `font-size="12" font-weight="600" fill="${color}">${esc(p.label)}</text></g>`;
+}
+
+/**
+ * 算出一组指针各自的水平偏移：同一格上有多条指针时把它们左右分开。
+ * 宽度按字符数估（monospace 12px 约 7.2px/字符），不追求精确，够分开就行。
+ */
+function pointerOffsets(pointers) {
+  const bySlot = new Map();
+  (pointers || []).forEach((p, i) => {
+    if (!bySlot.has(p.at)) bySlot.set(p.at, []);
+    bySlot.get(p.at).push(i);
+  });
+  const offsets = new Array((pointers || []).length).fill(0);
+  for (const idxs of bySlot.values()) {
+    if (idxs.length < 2) continue;
+    const gap = 10;
+    const widths = idxs.map((i) => String(pointers[i].label || '').length * 7.2);
+    const totalW = widths.reduce((a, b) => a + b, 0) + gap * (idxs.length - 1);
+    let cursor = -totalW / 2;
+    idxs.forEach((i, k) => {
+      offsets[i] = cursor + widths[k] / 2;
+      cursor += widths[k] + gap;
+    });
+  }
+  return offsets;
 }
 
 /** 格子高亮框（强调"这一步动的是哪一格"） */
@@ -546,7 +581,8 @@ function renderArrayScene(scene) {
   for (let i = 0; i < n; i++) body.push(renderCellBase(i, geo));
   for (const b of scene.highlights || []) body.push(renderCellHighlight(b, geo, total));
   for (const c of scene.cells || []) body.push(renderCell(c, geo, total));
-  for (const p of scene.pointers || []) body.push(renderArrayPointer(p, geo, total));
+  const pOffsets = pointerOffsets(scene.pointers);
+  (scene.pointers || []).forEach((p, i) => body.push(renderArrayPointer(p, geo, total, pOffsets[i])));
   for (const a of scene.cellArrows || []) body.push(renderCellArrow(a, geo, total));
   for (const note of scene.notes || []) body.push(renderNote(note, total));
   body.push(renderCaption(scene));

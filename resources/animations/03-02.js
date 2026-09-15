@@ -218,16 +218,18 @@ module.exports = [
       r: { v: '14', l: { v: '13' } },
     },
     nodes: {
-      'root': { vis: [[5.6, 12]], accent: 'new' },
-      'root.l': { vis: [[5.6, 12]] },
-      'root.l.l': { vis: [[5.6, 12]] },
-      'root.l.r': { vis: [[5.6, 12]] },
-      'root.l.r.l': { vis: [[5.6, 12]] },
-      'root.l.r.r': { vis: [[5.6, 12]] },
-      'root.r': { vis: [[5.6, 12]] },
-      'root.r.l': { vis: [[5.6, 12]] },
+      // 整棵树从头到尾都该在画面上：前 5.6 秒讲的是"删叶子 / 只有一个孩子"，
+      // 那两种情况正要指着这棵树说 —— 原来这里写 [[5.6, 12]]，前面 47% 是空屏。
+      'root': { vis: [[0, 12]], accent: 'new' },
+      'root.l': { vis: [[0, 12]] },
+      'root.l.l': { vis: [[0, 12]] },
+      'root.l.r': { vis: [[0, 12]] },
+      'root.l.r.l': { vis: [[0, 12]] },
+      'root.l.r.r': { vis: [[0, 12]] },
+      'root.r': { vis: [[0, 12]] },
+      'root.r.l': { vis: [[0, 12]] },
     },
-    edges: allEdges([[5.6, 12]]),
+    edges: allEdges([[0, 12]]),
     notes: [
       { x: 480, y: 232, anchor: 'middle', text: '情况① 叶子：直接拿掉', size: 12.5,
         color: GREEN, vis: [[0.6, 3.0]] },

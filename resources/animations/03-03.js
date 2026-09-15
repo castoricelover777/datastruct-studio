@@ -298,7 +298,9 @@ module.exports = [
       'root.l.r': { vis: [[0, 2.8]], accent: 'del' },
       'root.l': { vis: [[0, 3.8]], accent: 'del' },
       'root.r': { vis: [[0, 4.8]], accent: 'del' },
-      'root': { vis: [[0, 5.8]], accent: 'del' },
+      // 根留到结尾：最后 2 秒在讲"顺序反了会怎样"，指的就是这个根
+      // （原来和别的结点一起在 5.8s 消失，6.4~8.0s 是空屏）
+      'root': { vis: [[0, 8]], accent: 'del' },
     }),
     edges: edgesAll({ v: '4', l: { v: '2', l: { v: '1' }, r: { v: '3' } }, r: { v: '6' } }, [[0, 6.4]]),
     notes: [

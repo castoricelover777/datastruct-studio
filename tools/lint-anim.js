@@ -190,6 +190,42 @@ for (const f of files) {
         }
       }
     }
+
+    // ---- 格子阵列：同一格上的多条指针会不会叠成一团 ----
+    //
+    // 渲染时同格指针会自动左右错开 + 补引出线，但错开后总宽不能超过"一格 + 两侧余量"，
+    // 否则标签会压到隔壁格子上，反而更乱。这里按同一个估算口径先拦一道。
+    // 典型场景：InitQueue 的 front = rear = 0（两条指针重合在空队列上，这是要讲的点）。
+    if (kind === 'array' && (sc.pointers || []).length >= 2) {
+      const bySlot = new Map();
+      (sc.pointers || []).forEach((p) => {
+        if (!bySlot.has(p.at)) bySlot.set(p.at, []);
+        bySlot.get(p.at).push(p);
+      });
+      for (const [at, ps] of bySlot) {
+        if (ps.length < 2) continue;
+        // 时间窗不重叠的靠时间切换，不会同时出现
+        let overlap = false;
+        for (let i = 0; i < ps.length; i++) {
+          for (let j = i + 1; j < ps.length; j++) {
+            for (const [b1, e1] of ps[i].vis || [[0, total]]) {
+              for (const [b2, e2] of ps[j].vis || [[0, total]]) {
+                if (b1 < (e2 === undefined ? total : e2) && b2 < (e1 === undefined ? total : e1)) overlap = true;
+              }
+            }
+          }
+        }
+        if (!overlap) continue;
+        const totalW = ps.reduce((acc, p) => acc + String(p.label || '').length * 7.2, 0)
+          + 10 * (ps.length - 1);
+        const LIMIT = CELL_W + 40;
+        if (totalW > LIMIT) {
+          add(f, sc.id, '同格指针标签会压到隔壁',
+            `下标 ${at} 上有 ${ps.length} 条指针同时可见（${ps.map((p) => p.label).join(' / ')}），`
+            + `错开后总宽约 ${Math.round(totalW)}px，超过一格加余量（${LIMIT}px）—— 标签改短，或错开它们的时间`);
+        }
+      }
+    }
   }
 }
 

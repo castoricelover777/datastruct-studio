@@ -182,9 +182,12 @@
 
       if (q && !secParts.length) continue;
 
+      const hasAnyContent = ch.sections.some((s) => s.hasContent);
       const body = secParts.length
         ? secParts.join('')
-        : `<div class="tree-empty">${ch.sections.some((s) => s.hasContent) ? '展开以加载' : '内容规划中'}</div>`;
+        : `<div class="tree-empty">${hasAnyContent
+          ? (state.chapters[ch.id] ? '本节暂无可练习的模块' : '点击这一行加载')
+          : '内容规划中'}</div>`;
 
       parts.push(`<div class="tree-chapter${collapsed ? ' is-collapsed' : ''}" data-chapter="${ch.id}">`
         + `<button type="button" class="tc-head">`
@@ -795,7 +798,13 @@
       const chBtn = e.target.closest('.tc-head');
       if (chBtn) {
         const chId = chBtn.closest('.tree-chapter').dataset.chapter;
-        const willExpand = state.expanded[chId] === false;
+        const chMeta = state.tree.chapters.find((c) => c.id === chId);
+        const hasContent = !!chMeta && chMeta.sections.some((s) => s.hasContent);
+        // 关键：除了"第一章"之外，其余章初始是**展开但没有内容**的占位状态。
+        // 如果不把这种情况算作"需要展开"，第一次点击会被判成折叠 ——
+        // 用户看到的就是"点一下没反应（内容没加载），要再点一次才行"。
+        const notLoadedYet = hasContent && !state.chapters[chId];
+        const willExpand = state.expanded[chId] === false || notLoadedYet;
         state.expanded[chId] = willExpand;
         if (willExpand) await ensureChapter(chId);
         renderTree();
@@ -1014,13 +1023,8 @@
       state.results = Object.assign({}, initData.drafts.results || {}, state.results);
     }
 
-    if (!Object.keys(state.expanded).length) {
-      for (const ch of state.tree.chapters) {
-        if (ch.sections.some((s) => s.hasContent)) { state.expanded[ch.id] = true; break; }
-      }
-    }
-
-    // 预加载第一个有内容的章，保证启动就能看到模块
+    // 只预加载第一个有内容的章，保证启动就能看到模块。
+    // 其余的章**保持"展开但没有内容"的占位状态**，点一下才真正加载。
     const firstCh = state.tree.chapters.find((c) => c.sections.some((s) => s.hasContent));
     if (firstCh) await ensureChapter(firstCh.id);
 

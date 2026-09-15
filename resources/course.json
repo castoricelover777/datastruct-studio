@@ -158,7 +158,8 @@
         {
           "id": "04-05",
           "title": "拓扑排序",
-          "status": "pending"
+          "status": "done",
+          "summary": "拓扑排序：AOV 网、Kahn 入度法、DFS 逆后序，以及用拓扑序判断有向图有没有环。"
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:51:56.434Z",
+ "generatedAt": "2026-09-15T04:53:53.574Z",
  "coverage": [
   {
    "section": "01-01",
@@ -140,9 +140,10 @@
   {
    "section": "04-05",
    "title": "拓扑排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "05-01",

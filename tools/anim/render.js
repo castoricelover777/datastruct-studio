@@ -526,9 +526,10 @@ function renderArrayScene(scene) {
 //   这样画出来的二叉树天然不会左右打架，也符合纸上的习惯画法。
 // ---------------------------------------------------------------------------
 const TREE_COL_W = 58;
-const TREE_LEVEL_H = 68;
-const TREE_TOP = 88;
+const TREE_TOP = 84;
 const TREE_R = 19;
+// 按深度自适应行距：3 层的树用 60px 很舒展，4 层再用 60 就画出画面了
+const TREE_AREA_H = 118;
 
 /** 中序遍历给每个结点排好列，深度决定行 */
 function layoutTree(root) {
@@ -543,15 +544,22 @@ function layoutTree(root) {
 
   const width = col * TREE_COL_W;
   const left = Math.max(PAD_X, (W - width) / 2);
+  // 最深那一层决定行距：总高度控制在 TREE_AREA_H 以内
+  let maxDepth = 0;
+  for (const v of pos.values()) if (v.depth > maxDepth) maxDepth = v.depth;
+  const levelH = maxDepth > 0
+    ? Math.max(36, Math.min(62, TREE_AREA_H / maxDepth))
+    : 62;
   return {
     pos,
     cols: col,
+    levelH,
     at(path) {
       const p = pos.get(path);
       if (!p) return null;
       return {
         x: left + p.col * TREE_COL_W + TREE_COL_W / 2,
-        y: TREE_TOP + p.depth * TREE_LEVEL_H,
+        y: TREE_TOP + p.depth * levelH,
       };
     },
   };

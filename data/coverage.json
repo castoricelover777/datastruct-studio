@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:31:22.260Z",
+ "generatedAt": "2026-09-15T04:33:30.584Z",
  "coverage": [
   {
    "section": "01-01",
@@ -68,9 +68,10 @@
   {
    "section": "03-02",
    "title": "二叉搜索树",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 10,
+   "animations": 9,
+   "ran": 9
   },
   {
    "section": "03-03",

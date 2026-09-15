@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-14T14:38:46.435Z",
+ "generatedAt": "2026-09-15T05:07:07.013Z",
  "coverage": [
   {
    "section": "01-01",
@@ -60,128 +60,146 @@
   {
    "section": "03-01",
    "title": "二叉树基础",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 10,
+   "animations": 9,
+   "ran": 9
   },
   {
    "section": "03-02",
    "title": "二叉搜索树",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 10,
+   "animations": 9,
+   "ran": 9
   },
   {
    "section": "03-03",
    "title": "平衡二叉树 AVL",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 12,
+   "animations": 11,
+   "ran": 11
   },
   {
    "section": "03-04",
    "title": "堆",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 10,
+   "animations": 9,
+   "ran": 9
   },
   {
    "section": "03-05",
    "title": "哈夫曼树",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "03-06",
    "title": "并查集",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "04-01",
    "title": "图的表示",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "04-02",
    "title": "图的遍历 DFS/BFS",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 7,
+   "animations": 6,
+   "ran": 6
   },
   {
    "section": "04-03",
    "title": "最短路径",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "04-04",
    "title": "最小生成树",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 7,
+   "animations": 6,
+   "ran": 6
   },
   {
    "section": "04-05",
    "title": "拓扑排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "05-01",
    "title": "冒泡 / 插入 / 希尔",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 7,
+   "animations": 6,
+   "ran": 6
   },
   {
    "section": "05-02",
    "title": "堆排序 / 归并排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "05-03",
    "title": "快速排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "05-04",
    "title": "表排序 / 基数排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "06-01",
    "title": "散列函数设计",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "06-02",
    "title": "开放地址法",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "06-03",
    "title": "分离链接法",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   }
  ]
 }

@@ -149,7 +149,10 @@
     const parts = [];
 
     for (const ch of state.tree.chapters) {
-      const collapsed = state.expanded[ch.id] === false;
+      // 只有显式记过 true 的章才是展开的。
+      // 用 !== true 而不是 === false，是为了让"没记录过的章"（比如升级后新增的
+      // 03~06）默认折叠 —— 否则它们会显示成"展开但空白"，点一下反而折叠。
+      const collapsed = state.expanded[ch.id] !== true;
       const secParts = [];
 
       for (const sec of ch.sections) {
@@ -1023,8 +1026,18 @@
       state.results = Object.assign({}, initData.drafts.results || {}, state.results);
     }
 
-    // 只预加载第一个有内容的章，保证启动就能看到模块。
-    // 其余的章**保持"展开但没有内容"的占位状态**，点一下才真正加载。
+    // 启动时的初始状态：**所有章一律折叠**，点哪一章才展开哪一章。
+    //
+    // 这里刻意**不恢复上次的展开状态**。原因是"折叠状态"和"内容有没有加载"
+    // 是两件事：如果按上次的记录把某一章显示成展开、但内容又还没加载，
+    // 那一章看上去是"展开的空壳"，点一下反而被判成折叠 —— 表现就是点不开。
+    // 统一从"全部折叠"开始，交互上就没有歧义了。
+    state.expanded = {};
+    for (const ch of state.tree.chapters) {
+      state.expanded[ch.id] = false;
+    }
+
+    // 第一个有内容的章预加载，用户点开时不用等
     const firstCh = state.tree.chapters.find((c) => c.sections.some((s) => s.hasContent));
     if (firstCh) await ensureChapter(firstCh.id);
 

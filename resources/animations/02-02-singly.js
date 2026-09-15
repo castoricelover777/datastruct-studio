@@ -6,11 +6,11 @@
  * 在哪些时间段可见；箭头额外的 at 控制"生长"动画的起点。
  */
 
-const { NODE_Y, NODE_H } = require('../../tools/anim/render');
+const { NODE_Y, NODE_H, MID_Y } = require('../../tools/anim/render');
 
 const TOP = NODE_Y;                 // 结点上沿 96
 const BOT = NODE_Y + NODE_H;        // 结点下沿 142
-const MID = (TOP + BOT) / 2;        // 119
+const MID = MID_Y;                  // 结点竖直中心 119（必须用 render 导出的值）
 const OUT_Y = 186;                  // 结点下方的"输出/结果"行
 
 module.exports = [

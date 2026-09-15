@@ -3,8 +3,8 @@
  * 双向链表 14 个模块的演示动画（场景定义）
  */
 
-const { NODE_Y, NODE_H } = require('../../tools/anim/render');
-const MID = NODE_Y + NODE_H / 2;
+const { NODE_Y, MID_Y } = require('../../tools/anim/render');
+const MID = MID_Y;                  // 结点竖直中心 119（必须用 render 导出的值）
 
 module.exports = [
 

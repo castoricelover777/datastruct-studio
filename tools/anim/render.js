@@ -885,4 +885,15 @@ function renderScene(scene) {
     + `</svg>`;
 }
 
-module.exports = { renderScene, fitSafeArea };
+module.exports = {
+  renderScene,
+  fitSafeArea,
+  // 场景文件要按结点几何摆标注和引出线，必须能拿到这几个值。
+  // 曾经这里只导出上面两个函数，而 02-02-singly.js / 02-02-doubly.js 写了
+  // `const { NODE_Y, NODE_H } = require(...)` —— 解构 undefined 不报错，
+  // 于是 MID 变成 NaN，所有引出线和标注静默画到画面外，直到 verify 的
+  // "SVG 里出现 NaN" 才暴露。
+  NODE_Y,
+  NODE_H,
+  MID_Y,
+};

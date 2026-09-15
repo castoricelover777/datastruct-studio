@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:41:21.407Z",
+ "generatedAt": "2026-09-15T04:43:23.875Z",
  "coverage": [
   {
    "section": "01-01",
@@ -92,9 +92,10 @@
   {
    "section": "03-05",
    "title": "哈夫曼树",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 9,
+   "animations": 8,
+   "ran": 8
   },
   {
    "section": "03-06",

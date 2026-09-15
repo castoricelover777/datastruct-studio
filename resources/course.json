@@ -146,7 +146,8 @@
         {
           "id": "04-03",
           "title": "最短路径",
-          "status": "pending"
+          "status": "done",
+          "summary": "Dijkstra 单源最短路径：dist/collected/path 三个数组、每轮收录最近的顶点并松弛邻居。"
         },
         {
           "id": "04-04",

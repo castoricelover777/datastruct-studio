@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:48:07.641Z",
+ "generatedAt": "2026-09-15T04:49:57.184Z",
  "coverage": [
   {
    "section": "01-01",
@@ -124,9 +124,10 @@
   {
    "section": "04-03",
    "title": "最短路径",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 6,
+   "animations": 5,
+   "ran": 5
   },
   {
    "section": "04-04",

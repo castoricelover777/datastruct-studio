@@ -1,4 +1,5 @@
 'use strict';
+const { clampNotes } = require('./clamp-notes');
 /**
  * 动画场景规范化。
  *
@@ -105,18 +106,25 @@ function unstackNotes(scene) {
     }
     if (!overlaps) continue;
 
-    // 串联：每条尽量保持原时长，但起点不能早于前一条的终点
+    // 串联：每条尽量保持原时长，但起点不能早于前一条的终点。
+    // 关键是**每条都要留下可见时长** —— 否则会出现 [[10,10]] 这种
+    // 时长为零的标注，等于这句话永远看不到。
+    // 串联时每条都要**给后面留出位置**。
+    // 之前只写 `end = min(total, start + want)`，第一条长标注就直接铺到
+    // 结尾了，后面几条全被压在最后一小段里，照样重叠。
     let cursor = segs[0].b;
     for (let i = 0; i < segs.length; i++) {
       const s = segs[i];
+      const remaining = segs.length - i - 1;      // 后面还剩几条
+      const reserve = remaining * minLen;          // 给它们预留的时长
       const want = Math.max(minLen, s.e - s.b);
       const start = Math.max(s.b, cursor);
-      const end = Math.min(total, start + want);
-      s.n.vis = [[start, end]];
-      cursor = end;
+      const end = Math.min(total - reserve, start + want);
+      s.n.vis = [[start, Math.max(start + minLen, end)]];
+      cursor = s.n.vis[0][1];
       fixed++;
     }
-    // 最后一条如果还有空间就延长到结尾
+    // 最后一条接到结尾
     const last = segs[segs.length - 1];
     if (last.n.vis.length && cursor < total) last.n.vis[0][1] = total;
   }
@@ -178,11 +186,14 @@ function chainCells(scene) {
 function normalizeScene(scene) {
   if (!scene || typeof scene !== 'object') return scene;
   const aligned = alignStart(scene);
-  const unstacked = unstackNotes(scene);
   const chained = chainCells(scene);
+  // 先把 y 钉死，再按"同位置的标注"串时间 —— 顺序反了会漏掉重叠
+  const clamped = clampNotes(scene);
+  const unstacked = unstackNotes(scene);
   if (aligned) scene.__aligned = aligned;
   if (unstacked) scene.__unstacked = unstacked;
   if (chained) scene.__chained = chained;
+  if (clamped) scene.__clamped = clamped;
   return scene;
 }
 

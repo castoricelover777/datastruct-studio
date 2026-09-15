@@ -116,11 +116,14 @@ for (const f of files) {
       for (const b of sc.highlights || []) {
         if (b.at < 0 || b.at >= slots) add(f, sc.id, '高亮越界', `highlight.at=${b.at} 超出 slots=${slots}`);
       }
-      // notes 的 y 不能压在格子行上
+      // notes 的 y 必须落在"格子底"和"字幕"之间的空白里
       for (const n of sc.notes || []) {
-        if (n.y !== undefined && n.y >= CELL_Y - 6 && n.y <= CELL_Y + CELL_H + 6) {
-          add(f, sc.id, '标注压在格子上', `note y=${n.y} 落在格子行 [${CELL_Y}, ${CELL_Y + CELL_H}]`);
+        if (n.y === undefined) continue;
+        if (n.y >= CELL_Y - 6 && n.y <= CELL_Y + CELL_H + 6) {
+          add(f, sc.id, '标注压在格子上', `note y=${n.y} 落在格子行`);
         }
+        if (n.y > 208 && n.y < 214) add(f, sc.id, '标注贴住字幕', `note y=${n.y}`);
+        if (n.y > 214) add(f, sc.id, '标注压住字幕/代码/进度条', `note y=${n.y}（安全上限 208，字幕在 214、代码 240、进度条 268）`);
       }
       // 文字太长会横向超出
       for (const n of sc.notes || []) {

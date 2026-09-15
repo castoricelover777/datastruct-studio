@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:58:55.142Z",
+ "generatedAt": "2026-09-15T05:00:31.073Z",
  "coverage": [
   {
    "section": "01-01",
@@ -172,9 +172,10 @@
   {
    "section": "05-04",
    "title": "表排序 / 基数排序",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "06-01",

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:45:11.385Z",
+ "generatedAt": "2026-09-15T04:46:38.073Z",
  "coverage": [
   {
    "section": "01-01",
@@ -108,9 +108,10 @@
   {
    "section": "04-01",
    "title": "图的表示",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 8,
+   "animations": 7,
+   "ran": 7
   },
   {
    "section": "04-02",

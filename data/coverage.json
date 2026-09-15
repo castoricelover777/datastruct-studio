@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T04:46:38.073Z",
+ "generatedAt": "2026-09-15T04:48:07.641Z",
  "coverage": [
   {
    "section": "01-01",
@@ -116,9 +116,10 @@
   {
    "section": "04-02",
    "title": "图的遍历 DFS/BFS",
-   "status": "pending",
-   "modules": 0,
-   "animations": 0
+   "status": "done",
+   "modules": 7,
+   "animations": 6,
+   "ran": 6
   },
   {
    "section": "04-03",

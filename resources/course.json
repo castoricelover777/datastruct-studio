@@ -140,7 +140,8 @@
         {
           "id": "04-02",
           "title": "图的遍历 DFS/BFS",
-          "status": "pending"
+          "status": "done",
+          "summary": "图的遍历：DFS 一路钻到底（递归与栈两版）、BFS 用队列一层层扩散，以及非连通图的处理。"
         },
         {
           "id": "04-03",

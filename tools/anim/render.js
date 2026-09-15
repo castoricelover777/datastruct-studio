@@ -78,11 +78,28 @@ const esc = (s) => String(s == null ? '' : s)
 /** 生成"按时间段可见"的 SMIL opacity 动画 */
 function animOpacity(ranges, total, fade = 0.14) {
   if (!ranges || ranges.length === 0) return '<animate attributeName="opacity" values="0" dur="1s"/>';
+
+  // 场景里到处用 `vis: [[0, 99]]` 表示"从头到尾都在"。那个 99 是**哨兵值**，
+  // 不是秒数 —— 直接拿它算淡出，会得到 `99/total` 的 keyTimes（12 秒的场景就是
+  // 8.25），于是元素在正片放到 2/3 时就淡出，剩下的时间画面是空的：
+  // 用户截到的 TableSort 那排空框就是这么来的（188 个 SVG 全中，1990 个元素）。
+  //
+  // 所以：结束时刻**超出总时长**的一律视为"活到循环结尾"，淡出改成收在 total 上，
+  // 停在 opacity=1 —— 循环回 t=0 时也是 1，接得上，不会闪。
   const pts = [];
   for (const [s, e] of ranges) {
-    const a = Math.max(0, s - fade);
-    const b = Math.max(a, e - fade);
-    pts.push([a, 0], [Math.max(a, s), 1], [b, 1], [e, 0]);
+    const a = Math.max(0, Math.min(total, s - fade));
+    const on = Math.max(a, Math.min(total, s));       // 完全显现的时刻
+    // 判"是否活到结尾"要用**原始** e，不能用夹过边的值（先夹再判会让条件恒真）。
+    // 也别漏掉 [a,0] 这个淡入点（只写 [on,1] 会让元素从头到尾都是 0）。
+    if (e >= total) {
+      // 活到结尾（[[0, 99]] 这类哨兵写法）：淡入之后一直亮到循环结束。
+      // 停在 opacity=1 而不是淡出，回到 t=0 也是 1，循环接得上不会闪。
+      pts.push([a, 0], [on, 1], [total, 1]);
+    } else {
+      const b = Math.max(a, Math.min(total, e - fade));
+      pts.push([a, 0], [on, 1], [b, 1], [e, 0]);
+    }
   }
   pts.sort((x, y) => x[0] - y[0]);
   // 同一时刻只保留一个值；并保证时间严格递增
@@ -98,7 +115,14 @@ function animOpacity(ranges, total, fade = 0.14) {
   if (seq[seq.length - 1][0] < total) seq.push([total, 0]);
 
   const values = seq.map((p) => p[1]).join(';');
-  const keyTimes = seq.map((p) => (p[0] / total).toFixed(4)).join(';');
+  // 最后一道保险：keyTimes 必须落在 [0,1]。场景里到处都是 [[0, 99]] 这种哨兵写法，
+  // 一旦哪条路径忘了按 total 归一，就会写出 8.25 这种非法 keyTimes ——
+  // 浏览器会把动画当成坏数据，元素在正片中途整段消失（用户截到的空框就是这个）。
+  const times = seq.map((p) => Math.max(0, Math.min(1, p[0] / total)));
+  if (times.some((t) => !Number.isFinite(t))) {
+    throw new Error('animOpacity: keyTimes 出现非有限值，ranges=' + JSON.stringify(ranges));
+  }
+  const keyTimes = times.map((t) => t.toFixed(4)).join(';');
   return `<animate attributeName="opacity" values="${values}" keyTimes="${keyTimes}" `
     + `dur="${total}s" repeatCount="indefinite" calcMode="linear"/>`;
 }

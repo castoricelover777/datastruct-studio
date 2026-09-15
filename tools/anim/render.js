@@ -40,7 +40,7 @@ const MONO = "ui-monospace,'Cascadia Code','JetBrains Mono',Consolas,monospace";
 
 // 画布
 const W = 960;
-const H = 300;
+const H = 340;
 
 // 链表几何
 const NODE_Y = 96;
@@ -65,9 +65,9 @@ const CELL_Y = 104;
 // 顶部标题与底部字幕
 const TITLE_Y = 40;
 const SUB_Y = 63;
-const CAPTION_Y = 214;
-const CODE_Y = 240;
-const BAR_Y = 268;
+const CAPTION_Y = 250;
+const CODE_Y = 276;
+const BAR_Y = 308;
 
 // ---------------------------------------------------------------------------
 // 小工具
@@ -378,6 +378,19 @@ function renderNote(n, total) {
 }
 
 /** 底部步骤字幕 + 当前代码 */
+/**
+ * 把 \`**强调**\` 转成 SVG 的 tspan（粗体）。
+ * 场景文案里到处在用这个写法，直接输出会把星号画出来。
+ */
+function mdBold(text) {
+  const src = String(text == null ? '' : text);
+  const parts = src.split(/\*\*/);
+  if (parts.length === 1) return esc(src);
+  return parts.map((p, i) => (i % 2 === 1
+    ? `<tspan font-weight="700">${esc(p)}</tspan>`
+    : esc(p))).join('');
+}
+
 function renderCaption(scene) {
   const { steps, total } = scene;
   const out = [];
@@ -386,7 +399,7 @@ function renderCaption(scene) {
     const vis = [[s.t, end]];
     out.push(`<g opacity="0">${animOpacity(vis, total, 0.18)}`
       + `<text x="${PAD_X}" y="${CAPTION_Y}" font-family="${FONT}" font-size="14" `
-      + `fill="${PAL.ink}">${esc(s.text)}</text>`
+      + `fill="${PAL.ink}">${mdBold(s.text)}</text>`
       + (s.code
         ? `<text x="${PAD_X}" y="${CODE_Y}" font-family="${MONO}" font-size="12.5" `
           + `fill="${PAL.blue}">${esc(s.code)}</text>`
@@ -475,7 +488,8 @@ function renderCellHighlight(b, geo, total) {
 
 /** 说明性箭头（两格之间，或格子到格子外） */
 function renderCellArrow(a, geo, total) {
-  const y = CELL_Y + CELL_H + 32;
+  // 虚线紧贴格子下方；文字离虚线近一点，把 210 那一行让给 notes
+  const y = CELL_Y + CELL_H + 30;
   const x1 = geo.center(a.from);
   const x2 = geo.center(a.to);
   const color = a.color || PAL.blue;

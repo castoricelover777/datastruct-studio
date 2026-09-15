@@ -96,6 +96,28 @@ for (const f of files) {
       }
     }
 
+    // ---- 排序类：要求"全程都有数字" ----
+    // 排序场景的格子代表数组，任何时刻都该是满的。
+    // 之前出过"cells 只写了结果、没写初始数组"的毛病，
+    // 表现就是打开播放器看到 6 个空框（用户报的"数字消失"）。
+    //
+    // 只对 bookTag 是"排序"的场景卡这一条 —— 像"初始化顺序表""中缀转后缀"
+    // 这类场景，格子本来就是逐渐出现的，那是有意为之。
+    if (kind === 'array' && sc.bookTag === '排序' && (sc.cells || []).length) {
+      const slots = sc.slots || 8;
+      const checkPts = [0, total * 0.2, total * 0.4, total * 0.6, total * 0.8, total * 0.99];
+      for (const tt of checkPts) {
+        const tl = Math.round(tt * 100) / 100;
+        const have = new Set();
+        for (const c of sc.cells || []) {
+          if (visibleAt(c.vis, tl)) have.add(c.at);
+        }
+        if (have.size === 0) {
+          add(f, sc.id, '格子全程应有值', `t=${tl} 时所有格子都是空的（cells 只有结果、缺初始数组？）`);
+        }
+      }
+    }
+
     // ---- 第一个元素出现的时刻（用来诊断"开头长时间空白"）----
     let firstAt = Infinity;
     for (const el of els) {
@@ -122,8 +144,8 @@ for (const f of files) {
         if (n.y >= CELL_Y - 6 && n.y <= CELL_Y + CELL_H + 6) {
           add(f, sc.id, '标注压在格子上', `note y=${n.y} 落在格子行`);
         }
-        if (n.y > 208 && n.y < 214) add(f, sc.id, '标注贴住字幕', `note y=${n.y}`);
-        if (n.y > 214) add(f, sc.id, '标注压住字幕/代码/进度条', `note y=${n.y}（安全上限 208，字幕在 214、代码 240、进度条 268）`);
+        if (n.y > 216 && n.y < 250) add(f, sc.id, '标注贴住字幕', `note y=${n.y}`);
+        if (n.y > 250) add(f, sc.id, '标注压住字幕/代码/进度条', `note y=${n.y}（应固定在 210；字幕 250、代码 276、进度条 308）`);
       }
       // 文字太长会横向超出
       for (const n of sc.notes || []) {

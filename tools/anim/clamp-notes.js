@@ -14,7 +14,7 @@
  * 因此这里不做"分行"，只把 y 统一钉到这一行上；
  * 同时可见的多条标注由 normalize.js 里的 unstackNotes 用**时间**串开。
  */
-const NOTE_Y = 186;
+const NOTE_Y = 210;
 
 function clampNotes(scene) {
   const notes = scene.notes || [];

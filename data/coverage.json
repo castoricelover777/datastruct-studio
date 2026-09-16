@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-16T09:50:24.877Z",
+ "generatedAt": "2026-09-15T14:24:25.661Z",
  "coverage": [
   {
    "section": "01-01",
@@ -200,14 +200,6 @@
    "modules": 8,
    "animations": 7,
    "ran": 7
-  },
-  {
-   "section": "07-01",
-   "title": "KMP 字符串匹配",
-   "status": "done",
-   "modules": 7,
-   "animations": 6,
-   "ran": 6
   }
  ]
 }

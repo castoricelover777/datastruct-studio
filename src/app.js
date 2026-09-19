@@ -24,7 +24,7 @@
     mhDiff: $('mhDiff'), mhDeps: $('mhDeps'), mhLines: $('mhLines'), mhStatus: $('mhStatus'),
 
     commentModes: $('commentModes'), viewModes: $('viewModes'), kbdHint: $('kbdHint'),
-    btnPrev: $('btnPrev'), btnNext: $('btnNext'), bigTabs: $('bigTabs'),
+    btnPrev: $('btnPrev'), btnNext: $('btnNext'), bigTabs: $('bigTabs'), btnTheme: $('btnTheme'),
 
     paneRead: $('paneRead'), readCardTitle: $('readCardTitle'), codeView: $('codeView'), btnCopyCode: $('btnCopyCode'),
     panePractice: $('panePractice'), editorInput: $('editorInput'), editorGutter: $('editorGutter'),
@@ -65,7 +65,7 @@
     viewId: null,
     mode: 'detail',
     view: 'read',
-    theme: 'light',
+    theme: 'light',   // 真正的取值在 init() 里由 applyTheme() 从设置读出来
 
     drafts: {},
     results: {},
@@ -858,6 +858,12 @@
     el.btnPrev.addEventListener('click', function () { stepModule(-1); });
     el.btnNext.addEventListener('click', function () { stepModule(1); });
 
+    // 深色 / 浅色切换。按钮文字说的是"点了会变成什么"，所以深色时显示"浅色"。
+    el.btnTheme.addEventListener('click', function () {
+      applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+      saveSettings();
+    });
+
     el.btnCopyCode.addEventListener('click', async function () {
       const m = currentModule();
       const payload = m ? codeOf(m.id) : null;
@@ -1099,11 +1105,20 @@
       : `${c.name}${c.version ? ' ' + c.version : ''}`;
   }
 
+  /**
+   * 应用主题。只改 <html data-theme>，颜色全部交给 styles.css 里的变量。
+   * 按钮文字写"点了会变成什么"，所以深色时显示"浅色"。
+   */
+  function applyTheme(theme) {
+    state.theme = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = state.theme;
+    if (el.btnTheme) el.btnTheme.textContent = state.theme === 'dark' ? '浅色' : '深色';
+  }
+
   // ============================================================ 启动
   async function init() {
     const persisted = restore('settings', {});
-    state.theme = persisted.theme === 'dark' ? 'dark' : 'light';
-    document.documentElement.dataset.theme = state.theme;
+    applyTheme(persisted.theme);
     state.mode = ['detail', 'short', 'none'].indexOf(persisted.mode) >= 0 ? persisted.mode : 'detail';
     state.view = ['read', 'practice'].indexOf(persisted.view) >= 0 ? persisted.view : 'read';
     state.expanded = persisted.expanded || {};

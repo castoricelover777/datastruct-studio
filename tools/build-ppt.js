@@ -13,17 +13,17 @@ const deckA = [];
 
 // --- 01 封面 ---
 deckA.push(coverPage({
-  kicker: 'RESEARCH INSTITUTE / FIRST REVIEW',
-  title: '我不会写代码，但我知道该怎么学',
+  kicker: '研究所入所第一次考核',
+  title: '我做了个东西，用来学数据结构',
   bigLines: '数据结构\n研习社',
-  subLines: '大一新生 · 开学第二周动手\n代码全部 AI 生成 · 学习流程我自己设计',
+  subLines: '大一，开学第二周开始做的\n代码是 AI 写的，我提要求、自己用',
   footer: '软件工程（本科）· 深信息 · 2026-09-23',
   boxes: [
-    [654, 176, '01 / 定学什么', 16],
-    [654, 258, '02 / 定怎么学', 16],
-    [654, 340, '03 / 看不懂就弄懂', 16],
+    [654, 176, '01 先想清楚学什么', 16],
+    [654, 258, '02 想清楚怎么练', 16],
+    [654, 340, '03 自己拿它学，卡手就改', 15],
   ],
-  notes: '封面。开场第一句即交代：所有代码为 AI 生成。三个盒子=我做的三件事，取代原来的技术流水线。',
+  notes: '封面。去除「学习流程我自己设计」等升格表述，改为学生本人的三件事：想清楚学什么、怎么练、自己用着改。',
 }));
 
 // --- 02 知识图谱 ---
@@ -33,7 +33,7 @@ deckA.push(coverPage({
   b.push(rect(ML, 284, 168, 92, { fill: C.red, stroke: null }));
   b.push(txt(60, 296, 148, 68, '软件工程\n大一 · 开学第二周', { size: 15, bold: true, color: C.paper, lh: 1.4 }));
   const rows = [
-    ['01', '编程与算法', 'C 语言 · 数据结构 · 算法', '在学', true],
+    ['01', '编程与算法', 'C 语言 · 数据结构 · 算法', '两样写过题', true],
     ['02', '系统基础', '计组 · 操作系统 · 网络 · 数据库', '还没上到', false],
     ['03', '软件工程方法', '版本控制 · 构建 · 测试 · 交付', '项目让我入门', true],
     ['04', '开发技术', '桌面应用 · 前端 · SVG 可视化', '跟着做过', false],
@@ -50,11 +50,94 @@ deckA.push(coverPage({
   });
   b.push(vline(700, 152, 312, { color: C.rule, width: 0.5 }));
   b.push(txt(726, 156, 186, 24, '我的真实位置', { size: 12, color: C.mut }));
-  b.push(txt(724, 194, 190, 130, '图上我连一个\n「已掌握」\n都不敢标。', { size: 22, bold: true, lh: 1.3 }));
-  b.push(txt(724, 296, 190, 130, '这不是短板，\n是起点——\n我知道每一块\n大概什么时候学。', { size: 16, color: C.mut, lh: 1.4 }));
-  b.push(txt(724, 434, 220, 24, '兴趣方向已经明确', { size: 12, color: C.red }));
-  deckA.push(contentPage(2, 'PROFESSIONAL KNOWLEDGE MAP', '我的专业知识图谱', b,
+  b.push(txt(724, 194, 190, 130, '六块里我只写过\n一块半。', { size: 22, bold: true, lh: 1.3 }));
+  b.push(txt(724, 296, 190, 140, '一块半 = C 语言（牛客 50\n题）和数据结构（链表的\n增删查改刷过题）。\n其余四块半是 ○ 或 ·。', { size: 14, color: C.mut, lh: 1.45 }));
+  b.push(txt(724, 440, 220, 24, '○ 跟做过　· 还没碰过', { size: 11, color: C.red }));
+  deckA.push(contentPage(2, '', '我的专业知识图谱', b,
     '六分支专业全景；状态标注为学生本人自评。全部代码为 AI 生成，图上标的是「我学到哪」，不是「我写出过什么」。'));
+}
+
+// --- 03 图谱怎么建出来的 ---
+{
+  const b = [];
+  b.push(txt(ML, 152, 700, 24, '我没有去学每一块，只是先把"要学什么"弄清楚。', { size: 16, bold: true }));
+  const steps = [
+    ['01', '先问自己一个问题', '我这四年到底要学什么？课本目录只讲一门课，讲不了整个专业。'],
+    ['02', '把答案分成六块', '按"这东西是干嘛的"分：写程序 / 懂机器 / 做工程 / 做产品 / 搞智能 / 保安全'],
+    ['03', '去找每块大概讲什么', '搜"计算机专业核心课程"、看培养方案；课程内容只是初步了解，没真正去学'],
+    ['04', '标上我现在在哪', '每块写一句：在学 / 跟着做过 / 还没上到。写不出"会"就不写。'],
+  ];
+  steps.forEach((s, i) => {
+    const y = 190 + i * 62;
+    b.push(rect(ML, y, 864, 50, { fill: i === 3 ? C.red : C.paper, stroke: i === 3 ? null : '#b3b0a8' }));
+    b.push(txt(64, y + 12, 40, 28, s[0], { size: 16, bold: true, color: i === 3 ? C.paper : C.mut }));
+    b.push(txt(116, y + 12, 200, 28, s[1], { size: 17, bold: true, color: i === 3 ? C.paper : C.ink }));
+    b.push(txt(326, y + 14, 570, 28, s[2], { size: 13, color: i === 3 ? C.paper : C.mut }));
+  });
+  b.push(hline(ML, 440, 864, { color: '#a9a49b', width: 0.8 }));
+  b.push(txt(ML, 452, 864, 26, '这次只做到"知道每块大概讲什么、大概什么时候学"，没有往下学。', { size: 13, bold: true }));
+  b.push(txt(ML, 478, 864, 26, '先把地图画出来，比急着啃某一门课有用。', { size: 13, color: C.mut }));
+  deckA.push(contentPage(3, '', '图谱是怎么建出来的', b,
+    '四步构建法为学生的真实做法。第 3 步如实写明：课程内容只是初步了解，没有真正去学。'));
+}
+
+// --- 04 六个分支里具体有什么 ---
+{
+  const b = [];
+  // ● 学过：真的学过一段时间，能自己写一点
+  // ○ 用过：只在项目里跟着做过，或看得懂但写不出
+  // · 没学：还没碰过
+  const blocks = [
+    ['01', '编程与算法', ['● C 语言与指针（牛客 50 题）', '● 数据结构（在学，链表的增删查改刷过题）', '· 算法与复杂度', '· 设计模式']],
+    ['02', '系统基础', ['· 计算机组成原理', '· 操作系统', '· 计算机网络', '· 数据库']],
+    ['03', '软件工程方法', ['○ 版本控制 Git', '○ 构建打包交付', '· 需求与设计', '· 测试与质量']],
+    ['04', '开发技术', ['· 前端 HTML/CSS/JS', '· 后端与服务器', '○ 桌面应用（跟做过）', '○ 数据可视化（跟做过）']],
+    ['05', 'AI 与 Agent', ['○ 大模型与 Prompt（天天在用）', '· 数学基础', '· 机器学习 / 深度学习', '· RAG 与 Agent 原理']],
+    ['06', '网络与信息安全', ['· 密码学', '· 网络安全', '· Web 安全', '· 安全开发习惯']],
+  ];
+  blocks.forEach((blk, i) => {
+    const col = i % 2, row = Math.floor(i / 2);
+    const x = 48 + col * 448, y = 140 + row * 116;
+    b.push(txt(x, y, 44, 28, blk[0], { size: 16, color: C.mut, bold: true }));
+    b.push(txt(x + 48, y - 2, 260, 26, blk[1], { size: 17, bold: true, color: i === 4 ? C.red : C.ink }));
+    b.push(txt(x, y + 30, 424, 84, blk[2].join('\n'), { size: 12, color: C.mut, lh: 1.55 }));
+  });
+  b.push(hline(ML, 496, 864, { color: '#a9a49b', width: 0.8 }));
+  b.push(txt(ML, 504, 864, 24, '● 学过　　○ 只在项目里跟着做过，或看得懂但写不出　　· 还没碰过', { size: 11, bold: true }));
+  deckA.push(contentPage(4, '', '六个分支里具体有什么', b,
+    '六个分支的细项为学生自己列的。三级标注：● 学过 / ○ 只在项目里跟做过或看得懂写不出 / · 还没碰过；只有数据结构标为 ●。'));
+}
+
+// --- 05 这些认识是从哪来的（真实来源） ---
+{
+  const b = [];
+  b.push(txt(ML, 152, 700, 24, '我没有把六块都学会，只是先搞清楚每块在讲什么。', { size: 16, bold: true }));
+  b.push(txt(ML, 184, 240, 22, '分支', { size: 11, color: C.mut }));
+  b.push(txt(300, 184, 270, 22, '这一块讲什么', { size: 11, color: C.mut }));
+  b.push(txt(580, 184, 292, 22, '我的认识从哪来', { size: 11, color: C.mut }));
+  b.push(hline(ML, 206, 864, { color: '#c3bfb7' }));
+  const rows = [
+    ['01 编程与算法', '写程序、写对、写快', '自己学过：C 语言 50 题、链表增删查改', true],
+    ['02 系统基础', '机器怎么造、怎么管、怎么连', '看培养方案知道这四门在大二', false],
+    ['03 软件工程方法', '一个软件从想法到交付的全过程', '看过软件工程课的概要描述', true],
+    ['04 开发技术', '把东西做出来给人用', '做这个项目的时候跟着做过', true],
+    ['05 AI 与 Agent', '让机器自己找答案', '平时天天在用，还没学过原理', false],
+    ['06 网络与信息安全', '让东西不被看、不被改、一直能用', '还没有，只听说过大概', false],
+  ];
+  rows.forEach((r, i) => {
+    const y = 218 + i * 38;
+    if (r[3]) {
+      b.push(rect(ML, y - 6, 864, 36, { fill: C.band, stroke: null }));
+      b.push(rect(ML, y - 6, 3, 36, { fill: C.ink, stroke: null }));
+    }
+    b.push(txt(60, y, 240, 28, r[0], { size: 14, bold: true }));
+    b.push(txt(300, y + 2, 270, 26, r[1], { size: 12, color: C.mut }));
+    b.push(txt(580, y + 2, 300, 26, r[2], { size: 12, color: r[3] ? C.ink : C.mut }));
+  });
+  b.push(hline(ML, 456, 864, { color: '#c3bfb7' }));
+  b.push(txt(ML, 466, 864, 26, '说清楚：加底色的三行是我真碰过的；另外三行我只是知道它讲什么，还没学。', { size: 12, color: C.mut }));
+  deckA.push(contentPage(5, '', '这些认识是从哪来的', b,
+    '六行的「认识从哪来」均为学生自述的真实来源：自己学过的、看过概要描述的、跟着做过的，以及尚未接触的。这一页对应考核任务一里「主动了解专业相关知识」。'));
 }
 
 // --- 03 学习过程 ---
@@ -88,7 +171,7 @@ deckA.push(coverPage({
     if (i < 2) b.push(hline(640, y + 94, 272, { color: C.rule, width: 0.5 }));
   });
   b.push(txt(640, 434, 272, 24, '第三条分量最重', { size: 12, color: C.red }));
-  deckA.push(contentPage(3, 'LEARNING PROCESS · COMMIT HISTORY', '学习过程：7 天 56 次提交', b,
+  deckA.push(contentPage(6, '', '这七天我做了什么', b,
     '提交数据来自仓库 git 历史实测；无提交的两天已如实标注。'));
 }
 
@@ -96,14 +179,14 @@ deckA.push(coverPage({
 {
   const b = [];
   b.push(txt(ML, 152, 300, 22, '代码不是我写的', { size: 11, color: C.red, ls: 1.2 }));
-  b.push(txt(ML, 180, 400, 140, '不会写代码，\n那就把「怎么学」\n设计出来。', { size: 28, bold: true, lh: 1.25 }));
-  b.push(txt(60, 344, 380, 96, '项目里所有代码，包括 C 语言\n代码，全部由 AI 生成。\n下面四件事是代码替不了的。', { size: 13, color: C.mut, lh: 1.5 }));
+  b.push(txt(ML, 180, 400, 140, '我不会写代码，\n所以我把"怎么学"\n想清楚，让它去做。', { size: 28, bold: true, lh: 1.25 }));
+  b.push(txt(60, 344, 380, 96, '整个项目的代码，包括 C 语言\n那些，都是 AI 写的。\n下面这四件事它替不了我。', { size: 13, color: C.mut, lh: 1.5 }));
   b.push(vline(474, 152, 312, { color: C.rule, width: 0.5 }));
   const four = [
-    ['01', '定学什么', '按课程顺序规划 25 节、214 个模块的次序'],
-    ['02', '定怎么学', '每个模块要三种注释版本：全 / 精简 / 无'],
-    ['03', '看不懂就弄懂', '发现过它写得不对的地方，回去比对教材'],
-    ['04', '固定成流程', '做成能一直用的东西，后面每节照着走'],
+    ['01', '想清楚学什么', '照着课程顺序排，先学哪一节后学哪一节'],
+    ['02', '想清楚怎么练', '每个模块要三种版本：全注释 / 少注释 / 没注释'],
+    ['03', '看不懂就问', '有几处我觉得它讲得不对，回去翻了教材'],
+    ['04', '自己拿它学', '哪一步卡住了，我就让它改'],
   ];
   four.forEach((r, i) => {
     const y = 158 + i * 60;
@@ -112,40 +195,39 @@ deckA.push(coverPage({
     b.push(txt(560, y + 4, 330, 26, r[1], { size: 17, bold: true, color: i === 1 ? C.paper : C.ink }));
     b.push(txt(560, y + 28, 330, 22, r[2], { size: 11, color: i === 1 ? C.paper : C.mut }));
   });
-  b.push(txt(ML, 452, 400, 22, '「三种注释版本」是这套东西的核心。', { size: 12, color: C.red }));
-  b.push(txt(508, 452, 400, 22, '五步闭环：分块读 → 遮注释 → 默写 → 编译 → 对照', { size: 11, color: C.mut }));
-  deckA.push(contentPage(4, 'WHAT AI CANNOT DO FOR ME', '我做的四件事', b,
-    '明确交代：全部代码为 AI 生成。四件事是学生本人所做的设计与判断，也是本次汇报的立论。'));
+  b.push(txt(ML, 462, 420, 22, '三种注释版本是我提的，这条最关键。', { size: 12, color: C.red }));
+  b.push(txt(508, 462, 400, 22, '我自己练的顺序：读一遍 → 遮掉注释 → 默写 → 编译 → 对教材', { size: 11, color: C.mut }));
+  deckA.push(contentPage(7, '', '我做的四件事', b,
+    '明确交代：全部代码为 AI 生成。四件事为学生的真实角色——想清楚学什么与怎么练、遇疑去查、自己使用并提改进。'));
 }
 
-// --- 05 架构 ---
+// --- 05 改一次东西要跑几个地方 ---
 {
   const b = [];
-  const layers = [
-    ['01', '真源层', ['resources', '58 个 .c 与 81 个 .h', '代码全部 AI 生成'], false],
-    ['02', '数据层', ['data', '模块 · 三档注释 · 元数据', '所有渲染的唯一输入'], false],
-    ['03', '动画层', ['docs/animations', '188 段 SMIL 动画', '由中间层纯计算生成'], false],
-    ['04', '交付层', ['便携 exe 与在线版', 'electron-builder 打包', 'GitHub Pages 静态托管'], false],
+  const steps = [
+    ['01', '内容', 'resources', 'C 代码和注释放这儿，只改这一份'],
+    ['02', '整理成数据', 'data', '跑一条命令，把代码拆成模块和三档注释'],
+    ['03', '生成动画', 'docs/animations', '再跑一条，出来 188 段动画'],
+    ['04', '变成能用的东西', 'exe 和网页', '最后跑一条，打包成便携版和在线版'],
   ];
-  layers.forEach((L, i) => {
-    const y = 152 + i * 66;
-    b.push(rect(ML, y, 60, 48, { fill: C.red, stroke: null }));
-    b.push(txt(52, y + 10, 52, 28, L[0], { size: 18, bold: true, color: C.paper }));
-    b.push(txt(124, y + 1, 176, 28, L[1], { size: 18, bold: true }));
-    b.push(txt(124, y + 29, 200, 24, L[2][0], { size: 12, color: C.mut }));
-    b.push(txt(340, y + 2, 330, 26, L[2][1], { size: 12 }));
-    b.push(txt(340, y + 30, 330, 24, L[2][2], { size: 11, color: C.mut }));
+  steps.forEach((L, i) => {
+    const y = 156 + i * 70;
+    b.push(rect(ML, y, 52, 50, { fill: C.red, stroke: null }));
+    b.push(txt(56, y + 13, 44, 28, L[0], { size: 17, bold: true, color: C.paper }));
+    b.push(txt(116, y + 2, 160, 28, L[1], { size: 18, bold: true }));
+    b.push(txt(116, y + 30, 190, 24, L[2], { size: 12, color: C.mut }));
+    b.push(txt(320, y + 14, 350, 28, L[3], { size: 13, color: C.mut }));
   });
-  b.push(hline(ML, 424, 592, { color: '#a9a49b', width: 0.8 }));
-  b.push(txt(ML, 434, 610, 24, '四条命令串起全链：build-data → make-animations → build-web → verify', { size: 11, color: C.mut }));
-  b.push(vline(672, 152, 312, { color: C.rule, width: 0.5 }));
-  b.push(txt(700, 152, 212, 22, '我踩过的坑', { size: 12, color: C.mut }));
-  b.push(txt(700, 184, 220, 46, '一份真源', { size: 28, bold: true, color: C.red }));
-  b.push(txt(700, 236, 212, 90, 'C 文件是唯一一份，\n文档、动画、网页\n都从它生成。', { size: 14, color: C.mut, lh: 1.4 }));
-  b.push(hline(700, 326, 212, { color: C.rule, width: 0.5 }));
-  b.push(txt(700, 338, 212, 130, '一开始不是这样。\n改一次代码要改三个\n地方，改漏了好几次。\n这套走法是我定的，\n实现是 AI 写的。', { size: 14, lh: 1.4 }));
-  deckA.push(contentPage(5, 'ARCHITECTURE · FOUR LAYERS', '我的文件是怎么走的', b,
-    '四层流水线。「一份真源」是学生踩坑后提出的做法，代码实现为 AI 生成——图中已如实标注。'));
+  b.push(hline(ML, 436, 620, { color: '#a9a49b', width: 0.8 }));
+  b.push(txt(ML, 446, 620, 26, '每次改完跑一下检查，10738 条，有问题立刻知道。', { size: 12, color: C.mut }));
+  b.push(vline(700, 152, 312, { color: C.rule, width: 0.5 }));
+  b.push(txt(726, 156, 186, 24, '我做这个的来由', { size: 12, color: C.mut }));
+  b.push(txt(724, 192, 200, 46, '改漏过好几次', { size: 26, bold: true, color: C.red }));
+  b.push(txt(724, 248, 200, 120, '一开始网页、动画、文档\n是三份，改一处得手动\n把另外两处也改掉。\n我好几次改了一半就忘了。', { size: 14, color: C.mut, lh: 1.5 }));
+  b.push(hline(700, 378, 212, { color: C.rule, width: 0.5 }));
+  b.push(txt(724, 390, 200, 90, '我就提了一句：能不能\n只改一份，别的自己跟\n着变。具体怎么实现是\nAI 的事。', { size: 14, lh: 1.5 }));
+  deckA.push(contentPage(8, '', '改一次东西，要跑几个地方', b,
+    '标题与措辞避开架构术语。右侧如实写明：学生只提出「只改一份、其余自动跟进」这个要求，实现由 AI 完成。'));
 }
 
 // --- 06 成果与质量门 ---
@@ -176,46 +258,46 @@ deckA.push(coverPage({
   });
   b.push(hline(ML, 456, 864, { color: '#c3bfb7' }));
   b.push(txt(ML, 466, 864, 24, '质量门不是「我觉得对」，是 10738 条断言全过——敢连发 6 个版本靠的就是它。', { size: 12, color: C.mut }));
-  deckA.push(contentPage(6, 'RESULTS AND QUALITY GATE', '成果与质量门', b,
+  deckA.push(contentPage(9, '', '现在做出来什么样', b,
     '全部指标来自仓库与构建产物实测，无估算。'));
 }
 
-// --- 07 从框架到方向 ---
+// --- 07 我做这个的来由 ---
 {
   const b = [];
-  b.push(txt(ML, 152, 500, 24, '为什么是 Agent 方向 · 一条推导链', { size: 12, color: C.mut }));
+  b.push(txt(ML, 152, 560, 24, '从"我想学"到"我试了一下"，中间是这么走的', { size: 12, color: C.mut }));
   const chain = [
-    ['01', '画完六分支', '强项与短板都看清了', false],
-    ['02', '选 Agent 方向', '门槛是代码 + API + 循环', false],
-    ['03', '先建知识库', 'Agent 的上限取决于上下文', false],
-    ['04', '已建成 214 模块', 'RAG 检索那一半已完成', true],
+    ['01', '想学会数据结构', '看得懂但写不出，\n就自己做了个工具练', false],
+    ['02', '顺手攒下 186 模块', '一边学一边做，\n内容就攒在这儿了', false],
+    ['03', '六块里对 AI 最感兴趣', '平时本来就在用\n大模型', false],
+    ['04', '拿它试了个小实验', '把现成的模块喂给\n模型，让它照着答', true],
   ];
   chain.forEach((s, i) => {
     const x = 48 + i * 200;
     const hot = s[3];
-    b.push(rect(x, 184, 184, 92, { fill: hot ? C.red : C.box, stroke: hot ? null : '#b3b0a8' }));
-    b.push(txt(x + 12, 194, 160, 22, s[0], { size: 13, color: hot ? C.paper : C.mut }));
-    b.push(txt(x + 12, 216, 160, 26, s[1], { size: 17, bold: true, color: hot ? C.paper : C.ink }));
-    b.push(txt(x + 12, 244, 160, 28, s[2], { size: 11, color: hot ? C.paper : C.mut, lh: 1.25 }));
+    b.push(rect(x, 180, 184, 104, { fill: hot ? C.red : C.box, stroke: hot ? null : '#b3b0a8' }));
+    b.push(txt(x + 12, 190, 160, 22, s[0], { size: 12.5, color: hot ? C.paper : C.mut }));
+    b.push(txt(x + 12, 212, 162, 46, s[1], { size: 15, bold: true, color: hot ? C.paper : C.ink, lh: 1.3 }));
+    b.push(txt(x + 12, 248, 160, 30, s[2], { size: 10.5, color: hot ? C.paper : C.mut, lh: 1.3 }));
     if (i < chain.length - 1) b.push(txt(x + 184, 220, 16, 24, '→', { size: 14, color: C.mut, align: 'center' }));
   });
-  b.push(txt(ML, 292, 400, 26, '下一步 · 三件事', { size: 16, bold: true }));
+  b.push(txt(ML, 296, 500, 26, '说清楚 · 我不是在给 Agent 铺路', { size: 16, bold: true }));
+  b.push(txt(ML, 328, 864, 30, '那 186 个模块是学数据结构顺手攒下来的，不是因为要做 Agent 才去建的。', { size: 14, color: C.mut }));
+  b.push(txt(ML, 354, 864, 30, '检索那个小实验做得也一般，有时候搜不准。我只做了检索这一半，生成是调现成的接口。', { size: 14, color: C.mut }));
+  b.push(txt(ML, 396, 500, 26, '接下来想做的事', { size: 16, bold: true }));
   const nx = [
-    ['01', '把检索层接上 LLM 生成层', '214 个模块天然是分好块的语料'],
-    ['02', '接 GitHub Actions', '让 10738 条检查在每次提交自动跑'],
-    ['03', '补可访问性', '键盘操作与屏幕阅读器，188 段动画目前不可及'],
+    ['01', '把那个检索工具做好用一点', '现在搜不准，我想先把这块弄明白'],
+    ['02', '继续把数据结构学下去', '图、排序、散列我自己还没学到'],
+    ['03', '还想试试让检查自动跑', '现在是每次自己手动跑一遍'],
   ];
   nx.forEach((s, i) => {
-    const y = 324 + i * 44;
-    b.push(txt(ML, y, 40, 26, s[0], { size: 16, color: C.red, bold: true }));
-    b.push(txt(92, y, 400, 28, s[1], { size: 17, bold: true }));
-    b.push(txt(510, y + 3, 400, 26, s[2], { size: 12, color: C.mut }));
-    if (i < 2) b.push(hline(ML, y + 36, 864, { color: C.rule, width: 0.5 }));
+    const y = 424 + i * 30;
+    b.push(txt(ML, y, 40, 26, s[0], { size: 14, color: C.red, bold: true }));
+    b.push(txt(88, y, 330, 26, s[1], { size: 15, bold: true }));
+    b.push(txt(430, y + 2, 480, 24, s[2], { size: 12, color: C.mut }));
   });
-  b.push(hline(ML, 462, 864, { color: '#a9a49b', width: 0.8 }));
-  b.push(txt(ML, 470, 864, 24, '权威来源：陈越《数据结构》教材与课程 · 项目中的真实缺陷复盘', { size: 11, color: C.mut }));
-  deckA.push(contentPage(7, 'FROM MAP TO DIRECTION', '从知识框架走到我选的方向', b,
-    '推导链把任务一的知识框架与任务二的项目连接起来；三步为真实的后续计划。'));
+  deckA.push(contentPage(10, '', '我做这个的来由', b,
+    '四步按真实时间顺序：先为学数据结构而做，内容逐年攒下，兴趣在 AI，最后才顺手做了检索实验。并明确写出「不是为 Agent 铺路」。'));
 }
 
 // ══════════════════════════════════════════════════════════

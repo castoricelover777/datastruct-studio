@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 明确交代：全部代码为 AI 生成。四件事是学生本人所做的设计与判断，也是本次汇报的立论。
+notes: 六个分支的细项为学生自己列的。三级标注：● 学过 / ○ 只在项目里跟做过或看得懂写不出 / · 还没碰过；只有数据结构标为 ●。
 elements:
   - elementId: g1
     elementType: line
@@ -550,27 +550,6 @@ elements:
     border:
       width: 0.35
       color: '#e3ddd4'
-  - elementId: t1
-    elementType: text
-    bounds:
-      - 48
-      - 27
-      - 665
-      - 20
-    content:
-      text: |-
-        WHAT AI CANNOT DO FOR ME
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
-      fontSize: 10
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      letterSpacing: 1.2
-
   - elementId: l1
     elementType: line
     bounds:
@@ -586,7 +565,7 @@ elements:
       color: '#68665F'
       width: 0.6
 
-  - elementId: t2
+  - elementId: t1
     elementType: text
     bounds:
       - 754
@@ -596,14 +575,18 @@ elements:
     content:
       text: |-
         04
-      fontFamily: *ff
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
       align: right
 
-  - elementId: t3
+  - elementId: t2
     elementType: text
     bounds:
       - 48
@@ -612,367 +595,351 @@ elements:
       - 64
     content:
       text: |-
-        我做的四件事
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+        六个分支里具体有什么
+      fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t6
+  - elementId: t5
     elementType: text
     bounds:
       - 48
-      - 152
-      - 300
-      - 22
+      - 140
+      - 44
+      - 28
     content:
       text: |-
-        代码不是我写的
+        01
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 16
       lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
-      letterSpacing: 1.2
+      color: '#62625c'
+      bold: true
+
+  - elementId: t6
+    elementType: text
+    bounds:
+      - 96
+      - 138
+      - 260
+      - 26
+    content:
+      text: |-
+        编程与算法
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
 
   - elementId: t7
     elementType: text
     bounds:
       - 48
-      - 180
-      - 400
-      - 140
+      - 170
+      - 424
+      - 84
     content:
       text: |-
-        不会写代码，
-        那就把「怎么学」
-        设计出来。
+        ● C 语言与指针（牛客 50 题）
+        ● 数据结构（在学，链表的增删查改刷过题）
+        · 算法与复杂度
+        · 设计模式
       fontFamily: *ff
-      fontSize: 28
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      fontSize: 12
+      lineHeight: 1.55
+      color: '#62625c'
+      bold: false
 
   - elementId: t8
     elementType: text
     bounds:
-      - 60
-      - 344
-      - 380
-      - 96
+      - 496
+      - 140
+      - 44
+      - 28
     content:
       text: |-
-        项目里所有代码，包括 C 语言
-        代码，全部由 AI 生成。
-        下面四件事是代码替不了的。
+        02
       fontFamily: *ff
-      fontSize: 13
-      lineHeight: 1.5
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 544
+      - 138
+      - 260
+      - 26
+    content:
+      text: |-
+        系统基础
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 496
+      - 170
+      - 424
+      - 84
+    content:
+      text: |-
+        · 计算机组成原理
+        · 操作系统
+        · 计算机网络
+        · 数据库
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.55
+      color: '#62625c'
+      bold: false
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 48
+      - 256
+      - 44
+      - 28
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 96
+      - 254
+      - 260
+      - 26
+    content:
+      text: |-
+        软件工程方法
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 48
+      - 286
+      - 424
+      - 84
+    content:
+      text: |-
+        ○ 版本控制 Git
+        ○ 构建打包交付
+        · 需求与设计
+        · 测试与质量
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.55
+      color: '#62625c'
+      bold: false
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 496
+      - 256
+      - 44
+      - 28
+    content:
+      text: |-
+        04
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 544
+      - 254
+      - 260
+      - 26
+    content:
+      text: |-
+        开发技术
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 496
+      - 286
+      - 424
+      - 84
+    content:
+      text: |-
+        · 前端 HTML/CSS/JS
+        · 后端与服务器
+        ○ 桌面应用（跟做过）
+        ○ 数据可视化（跟做过）
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.55
+      color: '#62625c'
+      bold: false
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 48
+      - 372
+      - 44
+      - 28
+    content:
+      text: |-
+        05
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 96
+      - 370
+      - 260
+      - 26
+    content:
+      text: |-
+        AI 与 Agent
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t19
+    elementType: text
+    bounds:
+      - 48
+      - 402
+      - 424
+      - 84
+    content:
+      text: |-
+        ○ 大模型与 Prompt（天天在用）
+        · 数学基础
+        · 机器学习 / 深度学习
+        · RAG 与 Agent 原理
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.55
+      color: '#62625c'
+      bold: false
+
+  - elementId: t20
+    elementType: text
+    bounds:
+      - 496
+      - 372
+      - 44
+      - 28
+    content:
+      text: |-
+        06
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t21
+    elementType: text
+    bounds:
+      - 544
+      - 370
+      - 260
+      - 26
+    content:
+      text: |-
+        网络与信息安全
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t22
+    elementType: text
+    bounds:
+      - 496
+      - 402
+      - 424
+      - 84
+    content:
+      text: |-
+        · 密码学
+        · 网络安全
+        · Web 安全
+        · 安全开发习惯
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.55
       color: '#62625c'
       bold: false
 
   - elementId: l2
     elementType: line
     bounds:
-      - 474
-      - 152
+      - 48
+      - 496
+      - 864
       - 1
-      - 312
     viewBox:
+      - 864
       - 1
-      - 312
-    points: 0,0 0,312
+    points: 0,0 864,0
     border:
-      color: '#ded8ce'
-      width: 0.5
+      color: '#a9a49b'
+      width: 0.8
 
-  - elementId: s1
-    elementType: shape
-    bounds:
-      - 508
-      - 158
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t9
-    elementType: text
-    bounds:
-      - 522
-      - 164
-      - 36
-      - 24
-    content:
-      text: |-
-        01
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: true
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 560
-      - 162
-      - 330
-      - 26
-    content:
-      text: |-
-        定学什么
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 560
-      - 186
-      - 330
-      - 22
-    content:
-      text: |-
-        按课程顺序规划 25 节、214 个模块的次序
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 508
-      - 218
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 522
-      - 224
-      - 36
-      - 24
-    content:
-      text: |-
-        02
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: true
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 560
-      - 222
-      - 330
-      - 26
-    content:
-      text: |-
-        定怎么学
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: true
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 560
-      - 246
-      - 330
-      - 22
-    content:
-      text: |-
-        每个模块要三种注释版本：全 / 精简 / 无
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: false
-
-  - elementId: s3
-    elementType: shape
-    bounds:
-      - 508
-      - 278
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 522
-      - 284
-      - 36
-      - 24
-    content:
-      text: |-
-        03
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: true
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 560
-      - 282
-      - 330
-      - 26
-    content:
-      text: |-
-        看不懂就弄懂
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 560
-      - 306
-      - 330
-      - 22
-    content:
-      text: |-
-        发现过它写得不对的地方，回去比对教材
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s4
-    elementType: shape
-    bounds:
-      - 508
-      - 338
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 522
-      - 344
-      - 36
-      - 24
-    content:
-      text: |-
-        04
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: true
-
-  - elementId: t19
-    elementType: text
-    bounds:
-      - 560
-      - 342
-      - 330
-      - 26
-    content:
-      text: |-
-        固定成流程
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t20
-    elementType: text
-    bounds:
-      - 560
-      - 366
-      - 330
-      - 22
-    content:
-      text: |-
-        做成能一直用的东西，后面每节照着走
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t21
+  - elementId: t23
     elementType: text
     bounds:
       - 48
-      - 452
-      - 400
-      - 22
+      - 504
+      - 864
+      - 24
     content:
       text: |-
-        「三种注释版本」是这套东西的核心。
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
-
-  - elementId: t22
-    elementType: text
-    bounds:
-      - 508
-      - 452
-      - 400
-      - 22
-    content:
-      text: |-
-        五步闭环：分块读 → 遮注释 → 默写 → 编译 → 对照
+        ● 学过　　○ 只在项目里跟着做过，或看得懂但写不出　　· 还没碰过
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#252824'
+      bold: true
 
-  - elementId: t4
+  - elementId: t3
     elementType: text
     bounds:
       - 48
@@ -981,14 +948,14 @@ elements:
       - 16
     content:
       text: |-
-        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+        数据结构研习社 · 研究所入所第一次考核
       fontFamily: *ff
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: t5
+  - elementId: t4
     elementType: text
     bounds:
       - 860

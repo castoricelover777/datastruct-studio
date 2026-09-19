@@ -2,7 +2,7 @@ pageType: cover
 background:
   type: solid
   color: '#F0EAE0'
-notes: 封面。开场第一句即交代：所有代码为 AI 生成。三个盒子=我做的三件事，取代原来的技术流水线。
+notes: 封面。去除「学习流程我自己设计」等升格表述，改为学生本人的三件事：想清楚学什么、怎么练、自己用着改。
 elements:
   - elementId: t1
     elementType: text
@@ -13,7 +13,7 @@ elements:
       - 18
     content:
       text: |-
-        RESEARCH INSTITUTE / FIRST REVIEW
+        研究所入所第一次考核
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -49,12 +49,8 @@ elements:
       - 64
     content:
       text: |-
-        我不会写代码，但我知道该怎么学
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+        我做了个东西，用来学数据结构
+      fontFamily: *ff
       fontSize: 31
       lineHeight: 1.25
       color: '#252824'
@@ -103,11 +99,7 @@ elements:
       text: |-
         数据结构
         研习社
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 64
       lineHeight: 1.15
       color: '#252824'
@@ -122,8 +114,8 @@ elements:
       - 90
     content:
       text: |-
-        大一新生 · 开学第二周动手
-        代码全部 AI 生成 · 学习流程我自己设计
+        大一，开学第二周开始做的
+        代码是 AI 写的，我提要求、自己用
       fontFamily: *ff
       fontSize: 23
       lineHeight: 1.3
@@ -559,7 +551,7 @@ elements:
       - 26
     content:
       text: |-
-        01 / 定学什么
+        01 先想清楚学什么
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.25
@@ -591,7 +583,7 @@ elements:
       - 26
     content:
       text: |-
-        02 / 定怎么学
+        02 想清楚怎么练
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.25
@@ -620,9 +612,9 @@ elements:
       - 26
     content:
       text: |-
-        03 / 看不懂就弄懂
+        03 自己拿它学，卡手就改
       fontFamily: *ff
-      fontSize: 16
+      fontSize: 15
       lineHeight: 1.25
       color: '#F0EAE0'
       bold: false

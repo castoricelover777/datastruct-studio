@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 提交数据来自仓库 git 历史实测；无提交的两天已如实标注。
+notes: 四步构建法为学生的真实做法。第 3 步如实写明：课程内容只是初步了解，没有真正去学。
 elements:
   - elementId: g1
     elementType: line
@@ -550,27 +550,6 @@ elements:
     border:
       width: 0.35
       color: '#e3ddd4'
-  - elementId: t1
-    elementType: text
-    bounds:
-      - 48
-      - 27
-      - 665
-      - 20
-    content:
-      text: |-
-        LEARNING PROCESS · COMMIT HISTORY
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
-      fontSize: 10
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      letterSpacing: 1.2
-
   - elementId: l1
     elementType: line
     bounds:
@@ -586,7 +565,7 @@ elements:
       color: '#68665F'
       width: 0.6
 
-  - elementId: t2
+  - elementId: t1
     elementType: text
     bounds:
       - 754
@@ -596,14 +575,18 @@ elements:
     content:
       text: |-
         03
-      fontFamily: *ff
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
       align: right
 
-  - elementId: t3
+  - elementId: t2
     elementType: text
     bounds:
       - 48
@@ -612,596 +595,326 @@ elements:
       - 64
     content:
       text: |-
-        学习过程：7 天 56 次提交
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+        图谱是怎么建出来的
+      fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t6
+  - elementId: t5
     elementType: text
     bounds:
       - 48
       - 152
-      - 560
-      - 22
+      - 700
+      - 24
     content:
       text: |-
-        开学第二周 · 七日提交曲线 · 共 56 次提交 · 峰值 43 次
+        我没有去学每一块，只是先把"要学什么"弄清楚。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 16
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#252824'
+      bold: true
 
   - elementId: s1
     elementType: shape
     bounds:
-      - 56
-      - 388
-      - 52
-      - 8
+      - 48
+      - 190
+      - 864
+      - 50
     shapeName: rect
     fill:
       type: solid
-      color: '#c9c4ba'
-
-  - elementId: t7
-    elementType: text
-    bounds:
-      - 58
-      - 354
-      - 48
-      - 28
-    content:
-      text: |-
-        1
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t8
-    elementType: text
-    bounds:
-      - 42
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-12
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 134
-      - 394
-      - 52
-      - 2
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t9
-    elementType: text
-    bounds:
-      - 136
-      - 360
-      - 48
-      - 28
-    content:
-      text: |-
-        —
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 120
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-13
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s3
-    elementType: shape
-    bounds:
-      - 212
-      - 360
-      - 52
-      - 36
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 214
-      - 326
-      - 48
-      - 28
-    content:
-      text: |-
-        8
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 198
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-14
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s4
-    elementType: shape
-    bounds:
-      - 290
-      - 200
-      - 52
-      - 196
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 292
-      - 166
-      - 48
-      - 28
-    content:
-      text: |-
-        43
-      fontFamily: *ff
-      fontSize: 22
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-      align: center
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 276
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-15
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s5
-    elementType: shape
-    bounds:
-      - 368
-      - 382
-      - 52
-      - 14
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 370
-      - 348
-      - 48
-      - 28
-    content:
-      text: |-
-        3
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 354
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-16
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s6
-    elementType: shape
-    bounds:
-      - 446
-      - 394
-      - 52
-      - 2
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 448
-      - 360
-      - 48
-      - 28
-    content:
-      text: |-
-        —
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 432
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-17
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s7
-    elementType: shape
-    bounds:
-      - 524
-      - 388
-      - 52
-      - 8
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t19
-    elementType: text
-    bounds:
-      - 526
-      - 354
-      - 48
-      - 28
-    content:
-      text: |-
-        1
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t20
-    elementType: text
-    bounds:
-      - 510
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-18
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: l2
-    elementType: line
-    bounds:
-      - 56
-      - 396
-      - 520
-      - 1
-    viewBox:
-      - 520
-      - 1
-    points: 0,0 520,0
+      color: '#F0EAE0'
     border:
-      color: '#a9a49b'
-      width: 0.8
+      color: '#b3b0a8'
+      width: 0.7
 
-  - elementId: t21
+  - elementId: t6
     elementType: text
     bounds:
-      - 48
-      - 434
-      - 560
-      - 22
-    content:
-      text: |-
-        09-13 与 09-17 无提交。
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l3
-    elementType: line
-    bounds:
-      - 620
-      - 152
-      - 1
-      - 300
-    viewBox:
-      - 1
-      - 300
-    points: 0,0 0,300
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t22
-    elementType: text
-    bounds:
-      - 640
-      - 152
-      - 48
-      - 44
+      - 64
+      - 202
+      - 40
+      - 28
     content:
       text: |-
         01
       fontFamily: *ff
-      fontSize: 26
+      fontSize: 16
       lineHeight: 1.25
       color: '#62625c'
-      bold: false
+      bold: true
 
-  - elementId: t23
+  - elementId: t7
     elementType: text
     bounds:
-      - 692
-      - 150
-      - 220
-      - 26
+      - 116
+      - 202
+      - 200
+      - 28
     content:
       text: |-
-        开学第五天动手
+        先问自己一个问题
       fontFamily: *ff
-      fontSize: 18
+      fontSize: 17
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t24
+  - elementId: t8
     elementType: text
     bounds:
-      - 692
-      - 180
-      - 220
-      - 70
+      - 326
+      - 204
+      - 570
+      - 28
     content:
       text: |-
-        9/12 开学第 5 天立项，
-        先做了个链表小工具。
+        我这四年到底要学什么？课本目录只讲一门课，讲不了整个专业。
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.4
+      fontSize: 13
+      lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: l4
-    elementType: line
+  - elementId: s2
+    elementType: shape
     bounds:
-      - 640
-      - 246
-      - 272
-      - 1
-    viewBox:
-      - 272
-      - 1
-    points: 0,0 272,0
+      - 48
+      - 252
+      - 864
+      - 50
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
     border:
-      color: '#ded8ce'
-      width: 0.5
+      color: '#b3b0a8'
+      width: 0.7
 
-  - elementId: t25
+  - elementId: t9
     elementType: text
     bounds:
-      - 640
-      - 256
-      - 48
-      - 44
+      - 64
+      - 264
+      - 40
+      - 28
     content:
       text: |-
         02
       fontFamily: *ff
-      fontSize: 26
+      fontSize: 16
       lineHeight: 1.25
       color: '#62625c'
-      bold: false
+      bold: true
 
-  - elementId: t26
+  - elementId: t10
     elementType: text
     bounds:
-      - 692
-      - 254
-      - 220
-      - 26
+      - 116
+      - 264
+      - 200
+      - 28
     content:
       text: |-
-        主动扩大范围
+        把答案分成六块
       fontFamily: *ff
-      fontSize: 18
+      fontSize: 17
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t27
+  - elementId: t11
     elementType: text
     bounds:
-      - 692
-      - 284
-      - 220
-      - 70
+      - 326
+      - 266
+      - 570
+      - 28
     content:
       text: |-
-        发现只覆盖一章没用，
-        9/14 重做成全课程平台。
+        按"这东西是干嘛的"分：写程序 / 懂机器 / 做工程 / 做产品 / 搞智能 / 保安全
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.4
+      fontSize: 13
+      lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: l5
-    elementType: line
+  - elementId: s3
+    elementType: shape
     bounds:
-      - 640
-      - 350
-      - 272
-      - 1
-    viewBox:
-      - 272
-      - 1
-    points: 0,0 272,0
+      - 48
+      - 314
+      - 864
+      - 50
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
     border:
-      color: '#ded8ce'
-      width: 0.5
+      color: '#b3b0a8'
+      width: 0.7
 
-  - elementId: t28
+  - elementId: t12
     elementType: text
     bounds:
-      - 640
-      - 360
-      - 48
-      - 44
+      - 64
+      - 326
+      - 40
+      - 28
     content:
       text: |-
         03
       fontFamily: *ff
-      fontSize: 26
+      fontSize: 16
       lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
+      color: '#62625c'
+      bold: true
 
-  - elementId: t29
+  - elementId: t13
     elementType: text
     bounds:
-      - 692
-      - 358
-      - 220
-      - 26
+      - 116
+      - 326
+      - 200
+      - 28
     content:
       text: |-
-        敢加也敢删
+        去找每块大概讲什么
       fontFamily: *ff
-      fontSize: 18
+      fontSize: 17
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t30
+  - elementId: t14
     elementType: text
     bounds:
-      - 692
-      - 388
-      - 220
-      - 70
+      - 326
+      - 328
+      - 570
+      - 28
     content:
       text: |-
-        9/16 新增第 07 章，
-        判定不达标，主动回退，
-        并删除该 Release。
+        搜"计算机专业核心课程"、看培养方案；课程内容只是初步了解，没真正去学
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.4
+      fontSize: 13
+      lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: t31
+  - elementId: s4
+    elementType: shape
+    bounds:
+      - 48
+      - 376
+      - 864
+      - 50
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t15
     elementType: text
     bounds:
-      - 640
-      - 434
-      - 272
-      - 24
+      - 64
+      - 388
+      - 40
+      - 28
     content:
       text: |-
-        第三条分量最重
+        04
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 16
       lineHeight: 1.25
-      color: '#B5392A'
+      color: '#F0EAE0'
+      bold: true
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 116
+      - 388
+      - 200
+      - 28
+    content:
+      text: |-
+        标上我现在在哪
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: true
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 326
+      - 390
+      - 570
+      - 28
+    content:
+      text: |-
+        每块写一句：在学 / 跟着做过 / 还没上到。写不出"会"就不写。
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#F0EAE0'
       bold: false
 
-  - elementId: t4
+  - elementId: l2
+    elementType: line
+    bounds:
+      - 48
+      - 440
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#a9a49b'
+      width: 0.8
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 48
+      - 452
+      - 864
+      - 26
+    content:
+      text: |-
+        这次只做到"知道每块大概讲什么、大概什么时候学"，没有往下学。
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t19
+    elementType: text
+    bounds:
+      - 48
+      - 478
+      - 864
+      - 26
+    content:
+      text: |-
+        先把地图画出来，比急着啃某一门课有用。
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t3
     elementType: text
     bounds:
       - 48
@@ -1210,14 +923,14 @@ elements:
       - 16
     content:
       text: |-
-        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+        数据结构研习社 · 研究所入所第一次考核
       fontFamily: *ff
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: t5
+  - elementId: t4
     elementType: text
     bounds:
       - 860

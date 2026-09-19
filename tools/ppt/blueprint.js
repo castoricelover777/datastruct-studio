@@ -59,12 +59,13 @@ function contentPage(pageNo, kicker, title, body, notes) {
   reset();
   const els = [];
   els.push(...grid());                                   // 网格最先绘制，避免遮挡正文
-  els.push(txt(ML, 27, 665, 20, kicker, { size: 10, color: C.mut, first: true, ls: 1.2 }));
+  // kicker 为空就不画（真人做 PPT 不会每页都顶一行英文小标题）
+  if (kicker) els.push(txt(ML, 27, 665, 20, kicker, { size: 10, color: C.mut, ls: 1.2 }));
   els.push(hline(ML, 50, 864, { color: '#68665F' }));
-  els.push(txt(754, 46, 158, 13, String(pageNo).padStart(2, '0'), { size: 9, color: C.mut, align: 'right' }));
-  els.push(txt(ML, 76, 864, 64, title, { size: 32, bold: true, first: true }));
+  els.push(txt(754, 46, 158, 13, String(pageNo).padStart(2, '0'), { size: 9, color: C.mut, align: 'right', first: true }));
+  els.push(txt(ML, 76, 864, 64, title, { size: 32, bold: true }));
   els.push(...body);
-  els.push(txt(ML, 505, 760, 16, '数据结构研习社 · DataStruct Studio · 研究所入所第一次考核', { size: 9, color: C.mut }));
+  els.push(txt(ML, 505, 760, 16, '数据结构研习社 · 研究所入所第一次考核', { size: 9, color: C.mut }));
   els.push(txt(860, 504, 48, 18, String(pageNo).padStart(2, '0'), { size: 11, color: C.ink }));
   return `pageType: content\nbackground:\n  type: solid\n  color: '${C.paper}'\nnotes: ${oneLine(notes)}\nelements:\n${els.join('\n')}\n`;
 }
@@ -73,12 +74,12 @@ function contentPage(pageNo, kicker, title, body, notes) {
 function coverPage({ kicker, title, bigLines, subLines, footer, boxes, pageNo = '01', notes }) {
   reset();
   const els = [];
-  els.push(txt(ML, 24, 700, 18, kicker, { size: 10, color: '#68665F', first: true, ls: 1.2 }));
+  if (kicker) els.push(txt(ML, 24, 700, 18, kicker, { size: 10, color: '#68665F', ls: 1.2, first: true }));
   els.push(hline(ML, 50, 864, { color: '#68665F' }));
-  els.push(txt(ML, 68, 864, 64, title, { size: 31, bold: true, first: true }));
+  els.push(txt(ML, 68, 864, 64, title, kicker ? { size: 31, bold: true } : { size: 31, bold: true, first: true }));
   els.push(txt(ML, 505, 760, 16, footer, { size: 9, color: '#68665F' }));
   els.push(txt(860, 504, 48, 18, pageNo, { size: 11, color: C.ink }));
-  els.push(txt(ML, 168, 480, 180, bigLines, { size: 64, bold: true, lh: 1.15, first: true }));
+  els.push(txt(ML, 168, 480, 180, bigLines, { size: 64, bold: true, lh: 1.15 }));
   els.push(txt(52, 366, 460, 90, subLines, { size: 23, color: '#68665F', lh: 1.3 }));
   // 右侧装饰网格
   for (let x = 565; x <= 905; x += 49) els.push(vline(x, 140, 315, { color: '#d8d2c8', width: 0.25 }));

@@ -50,11 +50,7 @@ elements:
     content:
       text: |-
         研究所入所第一次考核 · 准备计划
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 31
       lineHeight: 1.25
       color: '#252824'
@@ -103,11 +99,7 @@ elements:
       text: |-
         6 小时
         准备计划
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 64
       lineHeight: 1.15
       color: '#252824'

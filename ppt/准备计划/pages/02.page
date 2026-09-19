@@ -560,11 +560,7 @@ elements:
     content:
       text: |-
         PROJECT SELECTION
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 10
       lineHeight: 1.25
       color: '#62625c'
@@ -596,7 +592,11 @@ elements:
     content:
       text: |-
         02
-      fontFamily: *ff
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
@@ -613,11 +613,7 @@ elements:
     content:
       text: |-
         项目选型：不新做，用现有项目
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
@@ -1021,7 +1017,7 @@ elements:
       - 16
     content:
       text: |-
-        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+        数据结构研习社 · 研究所入所第一次考核
       fontFamily: *ff
       fontSize: 9
       lineHeight: 1.25

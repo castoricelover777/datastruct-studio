@@ -35,16 +35,28 @@ function para(text, opts) {
 function build(srcText, title) {
   const lines = srcText.replace(/\r\n/g, '\n').split('\n');
   const body = [];
+  // 标题识别：文档第一行是题目；「一、二、」是一级；「4.1」是二级
+  const isH1 = (l, i) => i === 0 && l.trim().length > 0;
+  const isH2 = (l) => /^[一二三四五六七八九十]+、/.test(l.trim());
+  const isH3 = (l) => /^\d+\.\d+\s/.test(l.trim());
+  let firstDone = false;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].replace(/\s+$/, '');
     const next = (lines[i + 1] || '').trim();
-    // 下一行是 === 分隔线 → 当前行是标题
+    // 兼容老格式：下一行是 === 分隔线 → 当前行是标题
     if (/^=+$/.test(next) && line.trim()) {
       body.push(para(line.trim(), { center: true, bold: true, size: 24 }));
-      i++; // 跳过 === 行
+      i++;
       continue;
     }
-    if (/^=+$/.test(line.trim())) continue; // 无主的 === 行直接丢掉
+    if (/^=+$/.test(line.trim())) continue;
+    if (isH1(line, i) && !firstDone) {
+      firstDone = true;
+      body.push(para(line.trim(), { center: true, bold: true, size: 30 }));
+      continue;
+    }
+    if (isH2(line)) { body.push(para(line.trim(), { center: true, bold: true, size: 22 })); continue; }
+    if (isH3(line)) { body.push(para(line.trim(), { bold: true, size: 18 })); continue; }
     const mono = MONO_CHARS.test(line);
     body.push(para(line, { mono, size: mono ? 19 : 21 }));
   }

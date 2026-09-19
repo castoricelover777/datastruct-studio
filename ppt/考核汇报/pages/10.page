@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 六行的「认识从哪来」均为学生自述的真实来源：自己学过的、看过概要描述的、跟着做过的，以及尚未接触的。这一页对应考核任务一里「主动了解专业相关知识」。
+notes: 四步按真实时间顺序：先为学数据结构而做，内容逐年攒下，兴趣在 AI，最后才顺手做了检索实验。并明确写出「不是为 Agent 铺路」。
 elements:
   - elementId: g1
     elementType: line
@@ -574,7 +574,7 @@ elements:
       - 13
     content:
       text: |-
-        05
+        10
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -595,7 +595,7 @@ elements:
       - 64
     content:
       text: |-
-        这些认识是从哪来的
+        我做这个的来由
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
@@ -607,29 +607,44 @@ elements:
     bounds:
       - 48
       - 152
-      - 700
+      - 560
       - 24
     content:
       text: |-
-        我没有把六块都学会，只是先搞清楚每块在讲什么。
+        从"我想学"到"我试了一下"，中间是这么走的
       fontFamily: *ff
-      fontSize: 16
+      fontSize: 12
       lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      color: '#62625c'
+      bold: false
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 48
+      - 180
+      - 184
+      - 104
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#E7E0D4'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
 
   - elementId: t6
     elementType: text
     bounds:
-      - 48
-      - 184
-      - 240
+      - 60
+      - 190
+      - 160
       - 22
     content:
       text: |-
-        分支
+        01
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 12.5
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -637,102 +652,80 @@ elements:
   - elementId: t7
     elementType: text
     bounds:
-      - 300
-      - 184
-      - 270
-      - 22
+      - 60
+      - 212
+      - 162
+      - 46
     content:
       text: |-
-        这一块讲什么
+        想学会数据结构
       fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      fontSize: 15
+      lineHeight: 1.3
+      color: '#252824'
+      bold: true
 
   - elementId: t8
     elementType: text
     bounds:
-      - 580
-      - 184
-      - 292
-      - 22
+      - 60
+      - 248
+      - 160
+      - 30
     content:
       text: |-
-        我的认识从哪来
+        看得懂但写不出，
+        就自己做了个工具练
       fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
+      fontSize: 10.5
+      lineHeight: 1.3
       color: '#62625c'
       bold: false
-
-  - elementId: l2
-    elementType: line
-    bounds:
-      - 48
-      - 206
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#c3bfb7'
-      width: 0.6
-
-  - elementId: s1
-    elementType: shape
-    bounds:
-      - 48
-      - 212
-      - 864
-      - 36
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#ead7cc'
-
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 48
-      - 212
-      - 3
-      - 36
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#252824'
 
   - elementId: t9
     elementType: text
     bounds:
-      - 60
-      - 218
-      - 240
-      - 28
+      - 232
+      - 220
+      - 16
+      - 24
     content:
       text: |-
-        01 编程与算法
+        →
       fontFamily: *ff
       fontSize: 14
       lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 248
+      - 180
+      - 184
+      - 104
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#E7E0D4'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
 
   - elementId: t10
     elementType: text
     bounds:
-      - 300
-      - 220
-      - 270
-      - 26
+      - 260
+      - 190
+      - 160
+      - 22
     content:
       text: |-
-        写程序、写对、写快
+        02
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 12.5
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -740,223 +733,207 @@ elements:
   - elementId: t11
     elementType: text
     bounds:
-      - 580
-      - 220
-      - 300
-      - 26
+      - 260
+      - 212
+      - 162
+      - 46
     content:
       text: |-
-        自己学过：C 语言 50 题、链表增删查改
+        顺手攒下 186 模块
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
+      fontSize: 15
+      lineHeight: 1.3
       color: '#252824'
-      bold: false
+      bold: true
 
   - elementId: t12
     elementType: text
     bounds:
-      - 60
-      - 256
-      - 240
-      - 28
+      - 260
+      - 248
+      - 160
+      - 30
     content:
       text: |-
-        02 系统基础
+        一边学一边做，
+        内容就攒在这儿了
       fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      fontSize: 10.5
+      lineHeight: 1.3
+      color: '#62625c'
+      bold: false
 
   - elementId: t13
     elementType: text
     bounds:
-      - 300
-      - 258
-      - 270
-      - 26
+      - 432
+      - 220
+      - 16
+      - 24
     content:
       text: |-
-        机器怎么造、怎么管、怎么连
+        →
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
       color: '#62625c'
       bold: false
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 580
-      - 258
-      - 300
-      - 26
-    content:
-      text: |-
-        看培养方案知道这四门在大二
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      align: center
 
   - elementId: s3
     elementType: shape
     bounds:
-      - 48
-      - 288
-      - 864
-      - 36
+      - 448
+      - 180
+      - 184
+      - 104
     shapeName: rect
     fill:
       type: solid
-      color: '#ead7cc'
+      color: '#E7E0D4'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
 
-  - elementId: s4
-    elementType: shape
+  - elementId: t14
+    elementType: text
     bounds:
-      - 48
-      - 288
-      - 3
-      - 36
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#252824'
+      - 460
+      - 190
+      - 160
+      - 22
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 12.5
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
 
   - elementId: t15
     elementType: text
     bounds:
-      - 60
-      - 294
-      - 240
-      - 28
+      - 460
+      - 212
+      - 162
+      - 46
     content:
       text: |-
-        03 软件工程方法
+        六块里对 AI 最感兴趣
       fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
+      fontSize: 15
+      lineHeight: 1.3
       color: '#252824'
       bold: true
 
   - elementId: t16
     elementType: text
     bounds:
-      - 300
-      - 296
-      - 270
-      - 26
+      - 460
+      - 248
+      - 160
+      - 30
     content:
       text: |-
-        一个软件从想法到交付的全过程
+        平时本来就在用
+        大模型
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
+      fontSize: 10.5
+      lineHeight: 1.3
       color: '#62625c'
       bold: false
 
   - elementId: t17
     elementType: text
     bounds:
-      - 580
-      - 296
-      - 300
-      - 26
+      - 632
+      - 220
+      - 16
+      - 24
     content:
       text: |-
-        看过软件工程课的概要描述
+        →
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
-      color: '#252824'
+      color: '#62625c'
       bold: false
+      align: center
 
-  - elementId: s5
+  - elementId: s4
     elementType: shape
     bounds:
-      - 48
-      - 326
-      - 864
-      - 36
+      - 648
+      - 180
+      - 184
+      - 104
     shapeName: rect
     fill:
       type: solid
-      color: '#ead7cc'
-
-  - elementId: s6
-    elementType: shape
-    bounds:
-      - 48
-      - 326
-      - 3
-      - 36
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#252824'
+      color: '#B5392A'
 
   - elementId: t18
     elementType: text
     bounds:
-      - 60
-      - 332
-      - 240
-      - 28
+      - 660
+      - 190
+      - 160
+      - 22
     content:
       text: |-
-        04 开发技术
+        04
       fontFamily: *ff
-      fontSize: 14
+      fontSize: 12.5
       lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      color: '#F0EAE0'
+      bold: false
 
   - elementId: t19
     elementType: text
     bounds:
-      - 300
-      - 334
-      - 270
-      - 26
+      - 660
+      - 212
+      - 162
+      - 46
     content:
       text: |-
-        把东西做出来给人用
+        拿它试了个小实验
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      fontSize: 15
+      lineHeight: 1.3
+      color: '#F0EAE0'
+      bold: true
 
   - elementId: t20
     elementType: text
     bounds:
-      - 580
-      - 334
-      - 300
-      - 26
+      - 660
+      - 248
+      - 160
+      - 30
     content:
       text: |-
-        做这个项目的时候跟着做过
+        把现成的模块喂给
+        模型，让它照着答
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#252824'
+      fontSize: 10.5
+      lineHeight: 1.3
+      color: '#F0EAE0'
       bold: false
 
   - elementId: t21
     elementType: text
     bounds:
-      - 60
-      - 370
-      - 240
-      - 28
+      - 48
+      - 296
+      - 500
+      - 26
     content:
       text: |-
-        05 AI 与 Agent
+        说清楚 · 我不是在给 Agent 铺路
       fontFamily: *ff
-      fontSize: 14
+      fontSize: 16
       lineHeight: 1.25
       color: '#252824'
       bold: true
@@ -964,15 +941,15 @@ elements:
   - elementId: t22
     elementType: text
     bounds:
-      - 300
-      - 372
-      - 270
-      - 26
+      - 48
+      - 328
+      - 864
+      - 30
     content:
       text: |-
-        让机器自己找答案
+        那 186 个模块是学数据结构顺手攒下来的，不是因为要做 Agent 才去建的。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -980,15 +957,15 @@ elements:
   - elementId: t23
     elementType: text
     bounds:
-      - 580
-      - 372
-      - 300
-      - 26
+      - 48
+      - 354
+      - 864
+      - 30
     content:
       text: |-
-        平时天天在用，还没学过原理
+        检索那个小实验做得也一般，有时候搜不准。我只做了检索这一半，生成是调现成的接口。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -996,15 +973,15 @@ elements:
   - elementId: t24
     elementType: text
     bounds:
-      - 60
-      - 408
-      - 240
-      - 28
+      - 48
+      - 396
+      - 500
+      - 26
     content:
       text: |-
-        06 网络与信息安全
+        接下来想做的事
       fontFamily: *ff
-      fontSize: 14
+      fontSize: 16
       lineHeight: 1.25
       color: '#252824'
       bold: true
@@ -1012,60 +989,141 @@ elements:
   - elementId: t25
     elementType: text
     bounds:
-      - 300
-      - 410
-      - 270
+      - 48
+      - 424
+      - 40
       - 26
     content:
       text: |-
-        让东西不被看、不被改、一直能用
+        01
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#B5392A'
+      bold: true
 
   - elementId: t26
     elementType: text
     bounds:
-      - 580
-      - 410
-      - 300
+      - 88
+      - 424
+      - 330
       - 26
     content:
       text: |-
-        还没有，只听说过大概
+        把那个检索工具做好用一点
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t27
+    elementType: text
+    bounds:
+      - 430
+      - 426
+      - 480
+      - 24
+    content:
+      text: |-
+        现在搜不准，我想先把这块弄明白
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: l3
-    elementType: line
-    bounds:
-      - 48
-      - 456
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#c3bfb7'
-      width: 0.6
-
-  - elementId: t27
+  - elementId: t28
     elementType: text
     bounds:
       - 48
-      - 466
-      - 864
+      - 454
+      - 40
       - 26
     content:
       text: |-
-        说清楚：加底色的三行是我真碰过的；另外三行我只是知道它讲什么，还没学。
+        02
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t29
+    elementType: text
+    bounds:
+      - 88
+      - 454
+      - 330
+      - 26
+    content:
+      text: |-
+        继续把数据结构学下去
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t30
+    elementType: text
+    bounds:
+      - 430
+      - 456
+      - 480
+      - 24
+    content:
+      text: |-
+        图、排序、散列我自己还没学到
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t31
+    elementType: text
+    bounds:
+      - 48
+      - 484
+      - 40
+      - 26
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t32
+    elementType: text
+    bounds:
+      - 88
+      - 484
+      - 330
+      - 26
+    content:
+      text: |-
+        还想试试让检查自动跑
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t33
+    elementType: text
+    bounds:
+      - 430
+      - 486
+      - 480
+      - 24
+    content:
+      text: |-
+        现在是每次自己手动跑一遍
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -1097,7 +1155,7 @@ elements:
       - 18
     content:
       text: |-
-        05
+        10
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25

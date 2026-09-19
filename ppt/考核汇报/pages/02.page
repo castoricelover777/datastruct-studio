@@ -550,27 +550,6 @@ elements:
     border:
       width: 0.35
       color: '#e3ddd4'
-  - elementId: t1
-    elementType: text
-    bounds:
-      - 48
-      - 27
-      - 665
-      - 20
-    content:
-      text: |-
-        PROFESSIONAL KNOWLEDGE MAP
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
-      fontSize: 10
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      letterSpacing: 1.2
-
   - elementId: l1
     elementType: line
     bounds:
@@ -586,7 +565,7 @@ elements:
       color: '#68665F'
       width: 0.6
 
-  - elementId: t2
+  - elementId: t1
     elementType: text
     bounds:
       - 754
@@ -596,14 +575,18 @@ elements:
     content:
       text: |-
         02
-      fontFamily: *ff
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
       align: right
 
-  - elementId: t3
+  - elementId: t2
     elementType: text
     bounds:
       - 48
@@ -613,11 +596,7 @@ elements:
     content:
       text: |-
         我的专业知识图谱
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
@@ -725,7 +704,7 @@ elements:
       - 24
     content:
       text: |-
-        在学
+        两样写过题
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -1167,9 +1146,8 @@ elements:
       - 130
     content:
       text: |-
-        图上我连一个
-        「已掌握」
-        都不敢标。
+        六块里我只写过
+        一块半。
       fontFamily: *ff
       fontSize: 22
       lineHeight: 1.3
@@ -1182,16 +1160,16 @@ elements:
       - 724
       - 296
       - 190
-      - 130
+      - 140
     content:
       text: |-
-        这不是短板，
-        是起点——
-        我知道每一块
-        大概什么时候学。
+        一块半 = C 语言（牛客 50
+        题）和数据结构（链表的
+        增删查改刷过题）。
+        其余四块半是 ○ 或 ·。
       fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.4
+      fontSize: 14
+      lineHeight: 1.45
       color: '#62625c'
       bold: false
 
@@ -1199,19 +1177,19 @@ elements:
     elementType: text
     bounds:
       - 724
-      - 434
+      - 440
       - 220
       - 24
     content:
       text: |-
-        兴趣方向已经明确
+        ○ 跟做过　· 还没碰过
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 11
       lineHeight: 1.25
       color: '#B5392A'
       bold: false
 
-  - elementId: t4
+  - elementId: t3
     elementType: text
     bounds:
       - 48
@@ -1220,14 +1198,14 @@ elements:
       - 16
     content:
       text: |-
-        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+        数据结构研习社 · 研究所入所第一次考核
       fontFamily: *ff
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: t5
+  - elementId: t4
     elementType: text
     bounds:
       - 860

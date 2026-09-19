@@ -122,8 +122,8 @@ elements:
       - 90
     content:
       text: |-
-        覆盖 25 节 214 个模块的学习平台。
-        让「看懂」变成「写得出」。
+        大一新生 · 开学第二周动手
+        自学陈越《数据结构》做的学习平台
       fontFamily: *ff
       fontSize: 23
       lineHeight: 1.3

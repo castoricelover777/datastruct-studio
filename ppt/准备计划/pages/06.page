@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 三项均有仓库与构建产物作为证据。
+notes: 三项均有仓库提交记录作为证据；均与「技术基础」无关，与「执行力」有关。
 elements:
   - elementId: g1
     elementType: line
@@ -679,7 +679,7 @@ elements:
       - 60
     content:
       text: |-
-        执行力有数据
+        开学第五天就动手
       fontFamily: *ff
       fontSize: 19
       lineHeight: 1.3
@@ -695,7 +695,7 @@ elements:
       - 60
     content:
       text: |-
-        7 天 56 次提交，
+        9/12 立项，
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.3
@@ -739,7 +739,7 @@ elements:
       - 60
     content:
       text: |-
-        质量意识有证据
+        执行力有数据
       fontFamily: *ff
       fontSize: 19
       lineHeight: 1.3
@@ -755,7 +755,7 @@ elements:
       - 60
     content:
       text: |-
-        10738 条自动检查，
+        两周 56 次提交，
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.3
@@ -802,7 +802,7 @@ elements:
       - 60
     content:
       text: |-
-        自我否定有证据
+        自己加的自己删了
       fontFamily: *ff
       fontSize: 19
       lineHeight: 1.3
@@ -818,7 +818,7 @@ elements:
       - 60
     content:
       text: |-
-        加了一章，判定不达标，
+        加了一章，判定不合格，
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.3
@@ -865,7 +865,7 @@ elements:
       - 26
     content:
       text: |-
-        这三张牌直接命中「学习过程」这一评分维度，比任何形容词都有说服力。
+        这三样都不是「我技术强」，而是「我真的在做事」——正好是考核要的。
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25

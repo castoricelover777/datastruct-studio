@@ -648,7 +648,7 @@ elements:
       - 28
     content:
       text: |-
-        Q4
+        Q1
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
@@ -664,7 +664,7 @@ elements:
       - 28
     content:
       text: |-
-        数据怎么流动
+        你大几？学过什么？
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
@@ -680,7 +680,7 @@ elements:
       - 26
     content:
       text: |-
-        四层流水线图，从 C 文件讲到 exe
+        大一开学第二周；C 暑假自学，数据结构提前在学
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -711,7 +711,7 @@ elements:
       - 28
     content:
       text: |-
-        Q6
+        Q5
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
@@ -727,7 +727,7 @@ elements:
       - 28
     content:
       text: |-
-        动画怎么生成
+        数据怎么流动
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
@@ -743,7 +743,7 @@ elements:
       - 26
     content:
       text: |-
-        数据层给帧，渲染层算坐标与透明度
+        真源 → 数据 → 动画 → 交付，四层 + 一条检查
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -774,7 +774,7 @@ elements:
       - 28
     content:
       text: |-
-        Q9
+        Q7
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
@@ -790,7 +790,7 @@ elements:
       - 28
     content:
       text: |-
-        举个修过的 bug
+        动画怎么生成
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
@@ -806,7 +806,7 @@ elements:
       - 26
     content:
       text: |-
-        keyTimes 必须正好为 1，否则动画被静默丢弃
+        数据写每帧状态，算坐标，生成 SVG 动画标签
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -837,7 +837,7 @@ elements:
       - 28
     content:
       text: |-
-        Q13
+        Q10
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
@@ -853,7 +853,7 @@ elements:
       - 28
     content:
       text: |-
-        Agent 与普通程序的区别
+        举个修过的 bug
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
@@ -869,7 +869,7 @@ elements:
       - 26
     content:
       text: |-
-        确定性的输入输出 对 循环里的决策
+        keyTimes 末项必须正好为 1，否则动画被静默丢弃
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -900,7 +900,7 @@ elements:
       - 28
     content:
       text: |-
-        Q15
+        Q14
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
@@ -916,7 +916,7 @@ elements:
       - 28
     content:
       text: |-
-        RAG 是什么
+        Agent 与普通程序的区别
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
@@ -932,7 +932,7 @@ elements:
       - 26
     content:
       text: |-
-        先检索私有知识，再让模型基于片段回答
+        路线定死 对 自己在循环里决定下一步
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -963,7 +963,7 @@ elements:
       - 28
     content:
       text: |-
-        Q21
+        Q16
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
@@ -979,7 +979,7 @@ elements:
       - 28
     content:
       text: |-
-        如果给你更多时间
+        RAG 是什么
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
@@ -995,7 +995,7 @@ elements:
       - 26
     content:
       text: |-
-        RAG 生成层 · GitHub Actions · 可访问性
+        先在自己知识库里搜片段，再让模型照片段答
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -1003,6 +1003,69 @@ elements:
       bold: false
 
   - elementId: l7
+    elementType: line
+    bounds:
+      - 48
+      - 414
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t25
+    elementType: text
+    bounds:
+      - 48
+      - 422
+      - 50
+      - 28
+    content:
+      text: |-
+        Q22
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t26
+    elementType: text
+    bounds:
+      - 110
+      - 422
+      - 300
+      - 28
+    content:
+      text: |-
+        如果给你更多时间
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t27
+    elementType: text
+    bounds:
+      - 430
+      - 425
+      - 482
+      - 26
+    content:
+      text: |-
+        接好生成层 · 检查上 GitHub · 补可访问性
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l8
     elementType: line
     bounds:
       - 48
@@ -1017,7 +1080,7 @@ elements:
       color: '#a9a49b'
       width: 0.8
 
-  - elementId: t25
+  - elementId: t28
     elementType: text
     bounds:
       - 48
@@ -1033,7 +1096,7 @@ elements:
       color: '#B5392A'
       bold: false
 
-  - elementId: t26
+  - elementId: t29
     elementType: text
     bounds:
       - 48

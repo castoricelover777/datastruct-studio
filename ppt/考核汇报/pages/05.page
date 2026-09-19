@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 四层流水线为本项目核心架构，数字来自仓库实测。
+notes: 四层流水线；「一份真源」是踩坑后改出来的做法，非事先设计。
 elements:
   - elementId: g1
     elementType: line
@@ -612,7 +612,7 @@ elements:
       - 64
     content:
       text: |-
-        架构：单一真源的构建流水线
+        我的文件是怎么走的
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -1046,7 +1046,7 @@ elements:
       - 22
     content:
       text: |-
-        关键设计决策
+        我踩过的坑
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -1062,7 +1062,7 @@ elements:
       - 46
     content:
       text: |-
-        单一真源
+        一份真源
       fontFamily: *ff
       fontSize: 28
       lineHeight: 1.25
@@ -1078,8 +1078,8 @@ elements:
       - 90
     content:
       text: |-
-        C 源文件是唯一手写的
-        内容，文档、动画、网站
+        C 文件是唯一写的地方，
+        文档、动画、网页
         全部自动生成。
       fontFamily: *ff
       fontSize: 14
@@ -1111,11 +1111,12 @@ elements:
       - 130
     content:
       text: |-
-        不这么做，改一次代码
-        就要手动改三处，
-        三处必然不一致。
+        一开始不是这样。
+        改一次代码要改三个
+        地方，改漏了好几次，
+        才改成自动生成。
       fontFamily: *ff
-      fontSize: 16
+      fontSize: 15
       lineHeight: 1.4
       color: '#252824'
       bold: false

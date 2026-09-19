@@ -16,7 +16,7 @@ deckA.push(coverPage({
   kicker: 'RESEARCH INSTITUTE / FIRST REVIEW',
   title: '从一个真问题，到一个完整工程',
   bigLines: '数据结构\n研习社',
-  subLines: '覆盖 25 节 214 个模块的学习平台。\n让「看懂」变成「写得出」。',
+  subLines: '大一新生 · 开学第二周动手\n自学陈越《数据结构》做的学习平台',
   footer: '软件工程（本科）· 深信息 · 2026-09-23',
   boxes: [
     [654, 176, '01 / 输入 · C 源文件', 16],
@@ -31,14 +31,14 @@ deckA.push(coverPage({
   const b = [];
   b.push(txt(ML, 152, 610, 22, '专业全景 · 六个分支 · 每个分支标注我当前的位置', { size: 12, color: C.mut }));
   b.push(rect(ML, 284, 168, 92, { fill: C.red, stroke: null }));
-  b.push(txt(60, 300, 148, 62, '软件工程\n（本科）', { size: 19, bold: true, color: C.paper, lh: 1.25 }));
+  b.push(txt(60, 296, 148, 68, '软件工程\n大一 · 开学第二周', { size: 15, bold: true, color: C.paper, lh: 1.4 }));
   const rows = [
-    ['01', '编程与算法', 'C 语言 · 数据结构 · 算法', '项目落地于此', true],
-    ['02', '系统基础', '计组 · 操作系统 · 网络 · 数据库', '地基 · 待补', false],
-    ['03', '软件工程方法', '需求 · 设计 · 测试 · 构建 · 交付', '我的强项', true],
-    ['04', '开发技术', '桌面应用 · 前端 · SVG 可视化', '有实践', false],
+    ['01', '编程与算法', 'C 语言 · 数据结构 · 算法', '在学', true],
+    ['02', '系统基础', '计组 · 操作系统 · 网络 · 数据库', '还没上到', false],
+    ['03', '软件工程方法', '版本控制 · 构建 · 测试 · 交付', '项目让我入门', true],
+    ['04', '开发技术', '桌面应用 · 前端 · SVG 可视化', '跟着做过', false],
     ['05', 'AI 与 Agent', 'LLM · Prompt · RAG · Agent', '我的兴趣方向', true],
-    ['06', '网络与信息安全', '安全开发 · Web 安全 · 密码学', '有待补', false],
+    ['06', '网络与信息安全', '安全开发 · Web 安全 · 密码学', '还没上到', false],
   ];
   rows.forEach((r, i) => {
     const y = 152 + i * 52;
@@ -49,10 +49,10 @@ deckA.push(coverPage({
     if (i < rows.length - 1) b.push(hline(232, y + 44, 432, { color: C.rule, width: 0.5 }));
   });
   b.push(vline(700, 152, 312, { color: C.rule, width: 0.5 }));
-  b.push(txt(726, 156, 186, 24, '两点自我认知', { size: 12, color: C.mut }));
-  b.push(txt(724, 190, 190, 120, '强项在软件工程\n方法与开发技术。', { size: 22, bold: true, lh: 1.25 }));
-  b.push(txt(724, 300, 190, 120, '短板在系统基础\n与数学基础，\n这是我大二要补的。', { size: 18, color: C.mut, lh: 1.3 }));
-  b.push(txt(724, 430, 220, 24, '兴趣方向已经明确', { size: 12, color: C.red }));
+  b.push(txt(726, 156, 186, 24, '我的真实位置', { size: 12, color: C.mut }));
+  b.push(txt(724, 194, 190, 130, '图上我连一个\n「已掌握」\n都不敢标。', { size: 22, bold: true, lh: 1.3 }));
+  b.push(txt(724, 296, 190, 130, '这不是短板，\n是起点——\n我知道每一块\n大概什么时候学。', { size: 16, color: C.mut, lh: 1.4 }));
+  b.push(txt(724, 434, 220, 24, '兴趣方向已经明确', { size: 12, color: C.red }));
   deckA.push(contentPage(2, 'PROFESSIONAL KNOWLEDGE MAP', '我的专业知识图谱', b,
     '六分支专业全景；状态标注为学生本人自评。'));
 }
@@ -61,7 +61,7 @@ deckA.push(coverPage({
 {
   const b = [];
   const days = [['09-12', 1], ['09-13', 0], ['09-14', 8], ['09-15', 43], ['09-16', 3], ['09-17', 0], ['09-18', 1]];
-  b.push(txt(ML, 152, 400, 22, '七日提交曲线 · 共 56 次提交 · 峰值 43 次', { size: 12, color: C.mut }));
+  b.push(txt(ML, 152, 560, 22, '开学第二周 · 七日提交曲线 · 共 56 次提交 · 峰值 43 次', { size: 12, color: C.mut }));
   const baseY = 396, maxH = 196, bw = 52;
   days.forEach((d, i) => {
     const x = 56 + i * 78;
@@ -76,8 +76,8 @@ deckA.push(coverPage({
   b.push(txt(ML, 434, 560, 22, '09-13 与 09-17 无提交。', { size: 11, color: C.mut }));
   b.push(vline(620, 152, 300, { color: C.rule, width: 0.5 }));
   const stories = [
-    ['01', '主动扩大范围', '9/12 立项只做链表，\n9/14 重构为覆盖全课程的平台。', false],
-    ['02', '高强度迭代', '9/15 一天 43 次提交，\nv2.1.0 到 v2.1.3，修 8 处动画缺陷。', false],
+    ['01', '开学第五天动手', '9/12 开学第 5 天立项，\n先做了个链表小工具。', false],
+    ['02', '主动扩大范围', '发现只覆盖一章没用，\n9/14 重做成全课程平台。', false],
     ['03', '敢加也敢删', '9/16 新增第 07 章，\n判定不达标，主动回退，\n并删除该 Release。', true],
   ];
   stories.forEach((s, i) => {
@@ -133,13 +133,13 @@ deckA.push(coverPage({
   b.push(hline(ML, 424, 592, { color: '#a9a49b', width: 0.8 }));
   b.push(txt(ML, 434, 610, 24, '四条命令串起全链：build-data → make-animations → build-web → verify', { size: 11, color: C.mut }));
   b.push(vline(672, 152, 312, { color: C.rule, width: 0.5 }));
-  b.push(txt(700, 152, 212, 22, '关键设计决策', { size: 12, color: C.mut }));
-  b.push(txt(700, 184, 220, 46, '单一真源', { size: 28, bold: true, color: C.red }));
-  b.push(txt(700, 236, 212, 90, 'C 源文件是唯一手写的\n内容，文档、动画、网站\n全部自动生成。', { size: 14, color: C.mut, lh: 1.4 }));
+  b.push(txt(700, 152, 212, 22, '我踩过的坑', { size: 12, color: C.mut }));
+  b.push(txt(700, 184, 220, 46, '一份真源', { size: 28, bold: true, color: C.red }));
+  b.push(txt(700, 236, 212, 90, 'C 文件是唯一写的地方，\n文档、动画、网页\n全部自动生成。', { size: 14, color: C.mut, lh: 1.4 }));
   b.push(hline(700, 326, 212, { color: C.rule, width: 0.5 }));
-  b.push(txt(700, 338, 212, 130, '不这么做，改一次代码\n就要手动改三处，\n三处必然不一致。', { size: 16, lh: 1.4 }));
-  deckA.push(contentPage(5, 'ARCHITECTURE · FOUR LAYERS', '架构：单一真源的构建流水线', b,
-    '四层流水线为本项目核心架构，数字来自仓库实测。'));
+  b.push(txt(700, 338, 212, 130, '一开始不是这样。\n改一次代码要改三个\n地方，改漏了好几次，\n才改成自动生成。', { size: 15, lh: 1.4 }));
+  deckA.push(contentPage(5, 'ARCHITECTURE · FOUR LAYERS', '我的文件是怎么走的', b,
+    '四层流水线；「一份真源」是踩坑后改出来的做法，非事先设计。'));
 }
 
 // --- 06 成果与质量门 ---
@@ -222,7 +222,7 @@ deckB.push(coverPage({
   kicker: 'PREPARATION PLAN / 09-19 → 09-23',
   title: '研究所入所第一次考核 · 准备计划',
   bigLines: '6 小时\n准备计划',
-  subLines: '9/19 至 9/23 · 线下 · 汇报 9/23 19:30\n项目已定，不再新做。',
+  subLines: '9/19 至 9/23 · 线下 · 汇报 9/23 19:30\n大一新生 · 开学第二周 · 6 小时以内',
   footer: '软件工程（本科）· 深信息 · 配套《考核准备规划》文档',
   boxes: [
     [660, 176, '读代码 · 2.5 h'],
@@ -351,9 +351,9 @@ deckB.push(coverPage({
   const b = [];
   b.push(txt(ML, 152, 500, 24, '你手里已经有的东西 · 全部可验证', { size: 12, color: C.mut }));
   const cards = [
-    ['01', '执行力有数据', '7 天 56 次提交，', '峰值一天 43 次'],
-    ['02', '质量意识有证据', '10738 条自动检查，', '失败 0 个'],
-    ['03', '自我否定有证据', '加了一章，判定不达标，', '自己回退删掉'],
+    ['01', '开学第五天就动手', '9/12 立项，', '那时才开学第一周'],
+    ['02', '执行力有数据', '两周 56 次提交，', '一天最多 43 次'],
+    ['03', '自己加的自己删了', '加了一章，判定不合格，', '退回去删掉'],
   ];
   cards.forEach((c, i) => {
     const x = 48 + i * 296;
@@ -364,9 +364,9 @@ deckB.push(coverPage({
   });
   b.push(hline(ML, 398, 864, { color: '#a9a49b', width: 0.8 }));
   b.push(txt(ML, 410, 864, 28, '考核原话：现阶段技术基础不是决定性因素，但需要具备较强的学习主动性和执行力。', { size: 15, bold: true }));
-  b.push(txt(ML, 444, 864, 26, '这三张牌直接命中「学习过程」这一评分维度，比任何形容词都有说服力。', { size: 12, color: C.mut }));
+  b.push(txt(ML, 444, 864, 26, '这三样都不是「我技术强」，而是「我真的在做事」——正好是考核要的。', { size: 12, color: C.mut }));
   deckB.push(contentPage(6, 'THREE PROVEN STRENGTHS', '上台要打的三张牌', b,
-    '三项均有仓库与构建产物作为证据。'));
+    '三项均有仓库提交记录作为证据；均与「技术基础」无关，与「执行力」有关。'));
 }
 
 // --- 07 必背清单 ---
@@ -374,12 +374,13 @@ deckB.push(coverPage({
   const b = [];
   b.push(txt(ML, 152, 500, 24, '22 问里优先背这 6 道', { size: 12, color: C.mut }));
   const qs = [
-    ['Q4', '数据怎么流动', '四层流水线图，从 C 文件讲到 exe'],
-    ['Q6', '动画怎么生成', '数据层给帧，渲染层算坐标与透明度'],
-    ['Q9', '举个修过的 bug', 'keyTimes 必须正好为 1，否则动画被静默丢弃'],
-    ['Q13', 'Agent 与普通程序的区别', '确定性的输入输出 对 循环里的决策'],
-    ['Q15', 'RAG 是什么', '先检索私有知识，再让模型基于片段回答'],
-    ['Q21', '如果给你更多时间', 'RAG 生成层 · GitHub Actions · 可访问性'],
+    ['Q1', '你大几？学过什么？', '大一开学第二周；C 暑假自学，数据结构提前在学'],
+    ['Q5', '数据怎么流动', '真源 → 数据 → 动画 → 交付，四层 + 一条检查'],
+    ['Q7', '动画怎么生成', '数据写每帧状态，算坐标，生成 SVG 动画标签'],
+    ['Q10', '举个修过的 bug', 'keyTimes 末项必须正好为 1，否则动画被静默丢弃'],
+    ['Q14', 'Agent 与普通程序的区别', '路线定死 对 自己在循环里决定下一步'],
+    ['Q16', 'RAG 是什么', '先在自己知识库里搜片段，再让模型照片段答'],
+    ['Q22', '如果给你更多时间', '接好生成层 · 检查上 GitHub · 补可访问性'],
   ];
   qs.forEach((q, i) => {
     const y = 182 + i * 40;

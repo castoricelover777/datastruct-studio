@@ -14,16 +14,16 @@ const deckA = [];
 // --- 01 封面 ---
 deckA.push(coverPage({
   kicker: 'RESEARCH INSTITUTE / FIRST REVIEW',
-  title: '从一个真问题，到一个完整工程',
+  title: '我不会写代码，但我知道该怎么学',
   bigLines: '数据结构\n研习社',
-  subLines: '大一新生 · 开学第二周动手\n自学陈越《数据结构》做的学习平台',
+  subLines: '大一新生 · 开学第二周动手\n代码全部 AI 生成 · 学习流程我自己设计',
   footer: '软件工程（本科）· 深信息 · 2026-09-23',
   boxes: [
-    [654, 176, '01 / 输入 · C 源文件', 16],
-    [654, 258, '02 / 迁移 · 构建流水线', 16],
-    [654, 340, '03 / 验证 · 10738 条检查', 15],
+    [654, 176, '01 / 定学什么', 16],
+    [654, 258, '02 / 定怎么学', 16],
+    [654, 340, '03 / 看不懂就弄懂', 16],
   ],
-  notes: '封面。所有数字均为仓库实测值，非估算。',
+  notes: '封面。开场第一句即交代：所有代码为 AI 生成。三个盒子=我做的三件事，取代原来的技术流水线。',
 }));
 
 // --- 02 知识图谱 ---
@@ -54,7 +54,7 @@ deckA.push(coverPage({
   b.push(txt(724, 296, 190, 130, '这不是短板，\n是起点——\n我知道每一块\n大概什么时候学。', { size: 16, color: C.mut, lh: 1.4 }));
   b.push(txt(724, 434, 220, 24, '兴趣方向已经明确', { size: 12, color: C.red }));
   deckA.push(contentPage(2, 'PROFESSIONAL KNOWLEDGE MAP', '我的专业知识图谱', b,
-    '六分支专业全景；状态标注为学生本人自评。'));
+    '六分支专业全景；状态标注为学生本人自评。全部代码为 AI 生成，图上标的是「我学到哪」，不是「我写出过什么」。'));
 }
 
 // --- 03 学习过程 ---
@@ -92,31 +92,37 @@ deckA.push(coverPage({
     '提交数据来自仓库 git 历史实测；无提交的两天已如实标注。'));
 }
 
-// --- 04 真问题 + 五步闭环 ---
+// --- 04 我做的四件事 + 五步闭环 ---
 {
   const b = [];
-  b.push(txt(ML, 152, 380, 22, 'THE PROBLEM', { size: 11, color: C.mut, ls: 1.2 }));
-  b.push(txt(ML, 184, 400, 130, '看懂，\n不等于写得出。', { size: 34, bold: true, lh: 1.2 }));
-  b.push(txt(ML, 326, 400, 140, '合上书自己写链表，指针就卡住了。\n问题不是不够努力，而是缺一条\n从「看到」走到「写出」的路。', { size: 18, color: C.mut, lh: 1.45 }));
-  b.push(vline(476, 152, 312, { color: C.rule, width: 0.5 }));
-  const steps = ['分模块读代码', '切三档注释裸看', '空白默写', '编译验证', '与官方实现对照'];
-  steps.forEach((s, i) => {
-    const y = 166 + i * 58;
-    const hot = i === 3;
-    b.push(rect(508, y, 300, 48, { fill: hot ? C.red : C.box, stroke: hot ? null : '#b3b0a8' }));
-    b.push(txt(526, y + 9, 260, 28, `${i + 1}  ${s}`, { size: 17, color: hot ? C.paper : C.ink, bold: hot }));
+  b.push(txt(ML, 152, 300, 22, '代码不是我写的', { size: 11, color: C.red, ls: 1.2 }));
+  b.push(txt(ML, 180, 400, 140, '不会写代码，\n那就把「怎么学」\n设计出来。', { size: 28, bold: true, lh: 1.25 }));
+  b.push(txt(60, 344, 380, 96, '项目里所有代码，包括 C 语言\n代码，全部由 AI 生成。\n下面四件事是代码替不了的。', { size: 13, color: C.mut, lh: 1.5 }));
+  b.push(vline(474, 152, 312, { color: C.rule, width: 0.5 }));
+  const four = [
+    ['01', '定学什么', '按课程顺序规划 25 节、214 个模块的次序'],
+    ['02', '定怎么学', '每个模块要三种注释版本：全 / 精简 / 无'],
+    ['03', '看不懂就弄懂', '发现过它写得不对的地方，回去比对教材'],
+    ['04', '固定成流程', '做成能一直用的东西，后面每节照着走'],
+  ];
+  four.forEach((r, i) => {
+    const y = 158 + i * 60;
+    b.push(rect(508, y, 396, 50, { fill: i === 1 ? C.red : C.box, stroke: i === 1 ? null : '#b3b0a8' }));
+    b.push(txt(522, y + 6, 36, 24, r[0], { size: 14, color: i === 1 ? C.paper : C.mut, bold: true }));
+    b.push(txt(560, y + 4, 330, 26, r[1], { size: 17, bold: true, color: i === 1 ? C.paper : C.ink }));
+    b.push(txt(560, y + 28, 330, 22, r[2], { size: 11, color: i === 1 ? C.paper : C.mut }));
   });
-  b.push(txt(828, 168, 84, 220, '任意一步\n通不过，\n就退回\n上一步。', { size: 14, color: C.mut, lh: 1.45 }));
-  b.push(txt(508, 458, 420, 24, '闭环的终点不是「看懂」，是「编译通过」。', { size: 13, color: C.mut }));
-  deckA.push(contentPage(4, 'THE PROBLEM AND THE LOOP', '真问题与我的五步闭环', b,
-    '五步闭环为本项目核心机制；突出「编译验证」为闭环终点。'));
+  b.push(txt(ML, 452, 400, 22, '「三种注释版本」是这套东西的核心。', { size: 12, color: C.red }));
+  b.push(txt(508, 452, 400, 22, '五步闭环：分块读 → 遮注释 → 默写 → 编译 → 对照', { size: 11, color: C.mut }));
+  deckA.push(contentPage(4, 'WHAT AI CANNOT DO FOR ME', '我做的四件事', b,
+    '明确交代：全部代码为 AI 生成。四件事是学生本人所做的设计与判断，也是本次汇报的立论。'));
 }
 
 // --- 05 架构 ---
 {
   const b = [];
   const layers = [
-    ['01', '真源层', ['resources', '58 个 .c 与 81 个 .h', '我唯一手写维护的部分'], false],
+    ['01', '真源层', ['resources', '58 个 .c 与 81 个 .h', '代码全部 AI 生成'], false],
     ['02', '数据层', ['data', '模块 · 三档注释 · 元数据', '所有渲染的唯一输入'], false],
     ['03', '动画层', ['docs/animations', '188 段 SMIL 动画', '由中间层纯计算生成'], false],
     ['04', '交付层', ['便携 exe 与在线版', 'electron-builder 打包', 'GitHub Pages 静态托管'], false],
@@ -135,11 +141,11 @@ deckA.push(coverPage({
   b.push(vline(672, 152, 312, { color: C.rule, width: 0.5 }));
   b.push(txt(700, 152, 212, 22, '我踩过的坑', { size: 12, color: C.mut }));
   b.push(txt(700, 184, 220, 46, '一份真源', { size: 28, bold: true, color: C.red }));
-  b.push(txt(700, 236, 212, 90, 'C 文件是唯一写的地方，\n文档、动画、网页\n全部自动生成。', { size: 14, color: C.mut, lh: 1.4 }));
+  b.push(txt(700, 236, 212, 90, 'C 文件是唯一一份，\n文档、动画、网页\n都从它生成。', { size: 14, color: C.mut, lh: 1.4 }));
   b.push(hline(700, 326, 212, { color: C.rule, width: 0.5 }));
-  b.push(txt(700, 338, 212, 130, '一开始不是这样。\n改一次代码要改三个\n地方，改漏了好几次，\n才改成自动生成。', { size: 15, lh: 1.4 }));
+  b.push(txt(700, 338, 212, 130, '一开始不是这样。\n改一次代码要改三个\n地方，改漏了好几次。\n这套走法是我定的，\n实现是 AI 写的。', { size: 14, lh: 1.4 }));
   deckA.push(contentPage(5, 'ARCHITECTURE · FOUR LAYERS', '我的文件是怎么走的', b,
-    '四层流水线；「一份真源」是踩坑后改出来的做法，非事先设计。'));
+    '四层流水线。「一份真源」是学生踩坑后提出的做法，代码实现为 AI 生成——图中已如实标注。'));
 }
 
 // --- 06 成果与质量门 ---
@@ -391,7 +397,7 @@ deckB.push(coverPage({
   });
   b.push(hline(ML, 430, 864, { color: '#a9a49b', width: 0.8 }));
   b.push(txt(ML, 442, 864, 26, 'Q9 那段 keyTimes 的故事要练到能一口气讲完——它是你最能打的一张牌。', { size: 13, color: C.red }));
-  b.push(txt(ML, 470, 864, 24, 'AI 辅助必须主动说：主动坦白 + 一个只有你知道的细节 = 可信；被问出来 = 崩。', { size: 12, color: C.mut }));
+  b.push(txt(ML, 470, 864, 24, '代码不是我写的——这件事第一句就主动说清，别等人问。被问出来 = 一票否决。', { size: 12, color: C.red }));
   deckB.push(contentPage(7, 'MUST-PREPARE ANSWERS', '上台前必背', b,
     '完整 22 问与应答骨架见规划文档第 5 节。'));
 }

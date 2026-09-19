@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 六分支专业全景；状态标注为学生本人自评。
+notes: 六分支专业全景；状态标注为学生本人自评。全部代码为 AI 生成，图上标的是「我学到哪」，不是「我写出过什么」。
 elements:
   - elementId: g1
     elementType: line

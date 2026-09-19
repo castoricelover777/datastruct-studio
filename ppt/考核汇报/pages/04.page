@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 五步闭环为本项目核心机制；突出「编译验证」为闭环终点。
+notes: 明确交代：全部代码为 AI 生成。四件事是学生本人所做的设计与判断，也是本次汇报的立论。
 elements:
   - elementId: g1
     elementType: line
@@ -559,7 +559,7 @@ elements:
       - 20
     content:
       text: |-
-        THE PROBLEM AND THE LOOP
+        WHAT AI CANNOT DO FOR ME
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -612,7 +612,7 @@ elements:
       - 64
     content:
       text: |-
-        真问题与我的五步闭环
+        我做的四件事
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -628,15 +628,15 @@ elements:
     bounds:
       - 48
       - 152
-      - 380
+      - 300
       - 22
     content:
       text: |-
-        THE PROBLEM
+        代码不是我写的
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25
-      color: '#62625c'
+      color: '#B5392A'
       bold: false
       letterSpacing: 1.2
 
@@ -644,41 +644,42 @@ elements:
     elementType: text
     bounds:
       - 48
-      - 184
+      - 180
       - 400
-      - 130
+      - 140
     content:
       text: |-
-        看懂，
-        不等于写得出。
+        不会写代码，
+        那就把「怎么学」
+        设计出来。
       fontFamily: *ff
-      fontSize: 34
-      lineHeight: 1.2
+      fontSize: 28
+      lineHeight: 1.25
       color: '#252824'
       bold: true
 
   - elementId: t8
     elementType: text
     bounds:
-      - 48
-      - 326
-      - 400
-      - 140
+      - 60
+      - 344
+      - 380
+      - 96
     content:
       text: |-
-        合上书自己写链表，指针就卡住了。
-        问题不是不够努力，而是缺一条
-        从「看到」走到「写出」的路。
+        项目里所有代码，包括 C 语言
+        代码，全部由 AI 生成。
+        下面四件事是代码替不了的。
       fontFamily: *ff
-      fontSize: 18
-      lineHeight: 1.45
+      fontSize: 13
+      lineHeight: 1.5
       color: '#62625c'
       bold: false
 
   - elementId: l2
     elementType: line
     bounds:
-      - 476
+      - 474
       - 152
       - 1
       - 312
@@ -694,9 +695,9 @@ elements:
     elementType: shape
     bounds:
       - 508
-      - 166
-      - 300
-      - 48
+      - 158
+      - 396
+      - 50
     shapeName: rect
     fill:
       type: solid
@@ -708,88 +709,58 @@ elements:
   - elementId: t9
     elementType: text
     bounds:
-      - 526
-      - 175
-      - 260
-      - 28
+      - 522
+      - 164
+      - 36
+      - 24
     content:
       text: |-
-        1  分模块读代码
+        01
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 560
+      - 162
+      - 330
+      - 26
+    content:
+      text: |-
+        定学什么
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
       color: '#252824'
+      bold: true
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 560
+      - 186
+      - 330
+      - 22
+    content:
+      text: |-
+        按课程顺序规划 25 节、214 个模块的次序
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
       bold: false
 
   - elementId: s2
     elementType: shape
     bounds:
       - 508
-      - 224
-      - 300
-      - 48
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 526
-      - 233
-      - 260
-      - 28
-    content:
-      text: |-
-        2  切三档注释裸看
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: false
-
-  - elementId: s3
-    elementType: shape
-    bounds:
-      - 508
-      - 282
-      - 300
-      - 48
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 526
-      - 291
-      - 260
-      - 28
-    content:
-      text: |-
-        3  空白默写
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: false
-
-  - elementId: s4
-    elementType: shape
-    bounds:
-      - 508
-      - 340
-      - 300
-      - 48
+      - 218
+      - 396
+      - 50
     shapeName: rect
     fill:
       type: solid
@@ -798,26 +769,58 @@ elements:
   - elementId: t12
     elementType: text
     bounds:
-      - 526
-      - 349
-      - 260
-      - 28
+      - 522
+      - 224
+      - 36
+      - 24
     content:
       text: |-
-        4  编译验证
+        02
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: true
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 560
+      - 222
+      - 330
+      - 26
+    content:
+      text: |-
+        定怎么学
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
       color: '#F0EAE0'
       bold: true
 
-  - elementId: s5
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 560
+      - 246
+      - 330
+      - 22
+    content:
+      text: |-
+        每个模块要三种注释版本：全 / 精简 / 无
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: false
+
+  - elementId: s3
     elementType: shape
     bounds:
       - 508
-      - 398
-      - 300
-      - 48
+      - 278
+      - 396
+      - 50
     shapeName: rect
     fill:
       type: solid
@@ -826,53 +829,145 @@ elements:
       color: '#b3b0a8'
       width: 0.7
 
-  - elementId: t13
+  - elementId: t15
     elementType: text
     bounds:
-      - 526
-      - 407
-      - 260
-      - 28
+      - 522
+      - 284
+      - 36
+      - 24
     content:
       text: |-
-        5  与官方实现对照
+        03
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 560
+      - 282
+      - 330
+      - 26
+    content:
+      text: |-
+        看不懂就弄懂
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
       color: '#252824'
-      bold: false
+      bold: true
 
-  - elementId: t14
+  - elementId: t17
     elementType: text
     bounds:
-      - 828
-      - 168
-      - 84
-      - 220
+      - 560
+      - 306
+      - 330
+      - 22
     content:
       text: |-
-        任意一步
-        通不过，
-        就退回
-        上一步。
+        发现过它写得不对的地方，回去比对教材
       fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.45
+      fontSize: 11
+      lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: t15
-    elementType: text
+  - elementId: s4
+    elementType: shape
     bounds:
       - 508
-      - 458
-      - 420
+      - 338
+      - 396
+      - 50
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#E7E0D4'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 522
+      - 344
+      - 36
       - 24
     content:
       text: |-
-        闭环的终点不是「看懂」，是「编译通过」。
+        04
       fontFamily: *ff
-      fontSize: 13
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t19
+    elementType: text
+    bounds:
+      - 560
+      - 342
+      - 330
+      - 26
+    content:
+      text: |-
+        固定成流程
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t20
+    elementType: text
+    bounds:
+      - 560
+      - 366
+      - 330
+      - 22
+    content:
+      text: |-
+        做成能一直用的东西，后面每节照着走
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t21
+    elementType: text
+    bounds:
+      - 48
+      - 452
+      - 400
+      - 22
+    content:
+      text: |-
+        「三种注释版本」是这套东西的核心。
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: false
+
+  - elementId: t22
+    elementType: text
+    bounds:
+      - 508
+      - 452
+      - 400
+      - 22
+    content:
+      text: |-
+        五步闭环：分块读 → 遮注释 → 默写 → 编译 → 对照
+      fontFamily: *ff
+      fontSize: 11
       lineHeight: 1.25
       color: '#62625c'
       bold: false

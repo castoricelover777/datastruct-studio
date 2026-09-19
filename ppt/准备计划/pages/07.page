@@ -1105,11 +1105,11 @@ elements:
       - 24
     content:
       text: |-
-        AI 辅助必须主动说：主动坦白 + 一个只有你知道的细节 = 可信；被问出来 = 崩。
+        代码不是我写的——这件事第一句就主动说清，别等人问。被问出来 = 一票否决。
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
-      color: '#62625c'
+      color: '#B5392A'
       bold: false
 
   - elementId: t4

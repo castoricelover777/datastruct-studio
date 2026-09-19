@@ -2,7 +2,7 @@ pageType: cover
 background:
   type: solid
   color: '#F0EAE0'
-notes: 封面。所有数字均为仓库实测值，非估算。
+notes: 封面。开场第一句即交代：所有代码为 AI 生成。三个盒子=我做的三件事，取代原来的技术流水线。
 elements:
   - elementId: t1
     elementType: text
@@ -49,7 +49,7 @@ elements:
       - 64
     content:
       text: |-
-        从一个真问题，到一个完整工程
+        我不会写代码，但我知道该怎么学
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -123,7 +123,7 @@ elements:
     content:
       text: |-
         大一新生 · 开学第二周动手
-        自学陈越《数据结构》做的学习平台
+        代码全部 AI 生成 · 学习流程我自己设计
       fontFamily: *ff
       fontSize: 23
       lineHeight: 1.3
@@ -559,7 +559,7 @@ elements:
       - 26
     content:
       text: |-
-        01 / 输入 · C 源文件
+        01 / 定学什么
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.25
@@ -591,7 +591,7 @@ elements:
       - 26
     content:
       text: |-
-        02 / 迁移 · 构建流水线
+        02 / 定怎么学
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.25
@@ -620,9 +620,9 @@ elements:
       - 26
     content:
       text: |-
-        03 / 验证 · 10738 条检查
+        03 / 看不懂就弄懂
       fontFamily: *ff
-      fontSize: 15
+      fontSize: 16
       lineHeight: 1.25
       color: '#F0EAE0'
       bold: false

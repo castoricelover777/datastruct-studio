@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 四层流水线；「一份真源」是踩坑后改出来的做法，非事先设计。
+notes: 四层流水线。「一份真源」是学生踩坑后提出的做法，代码实现为 AI 生成——图中已如实标注。
 elements:
   - elementId: g1
     elementType: line
@@ -708,7 +708,7 @@ elements:
       - 24
     content:
       text: |-
-        我唯一手写维护的部分
+        代码全部 AI 生成
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25
@@ -1078,9 +1078,9 @@ elements:
       - 90
     content:
       text: |-
-        C 文件是唯一写的地方，
+        C 文件是唯一一份，
         文档、动画、网页
-        全部自动生成。
+        都从它生成。
       fontFamily: *ff
       fontSize: 14
       lineHeight: 1.4
@@ -1113,10 +1113,11 @@ elements:
       text: |-
         一开始不是这样。
         改一次代码要改三个
-        地方，改漏了好几次，
-        才改成自动生成。
+        地方，改漏了好几次。
+        这套走法是我定的，
+        实现是 AI 写的。
       fontFamily: *ff
-      fontSize: 15
+      fontSize: 14
       lineHeight: 1.4
       color: '#252824'
       bold: false

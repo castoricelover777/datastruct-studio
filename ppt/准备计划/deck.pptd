@@ -1,0 +1,16 @@
+version: v2
+title: 研究所入所第一次考核 · 准备计划
+size:
+  - 960
+  - 540
+template:
+  id: dsh-engineering-blueprint
+  name: Engineering Blueprint
+pages:
+  - pages/01.page
+  - pages/02.page
+  - pages/03.page
+  - pages/04.page
+  - pages/05.page
+  - pages/06.page
+  - pages/07.page

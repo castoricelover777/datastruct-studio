@@ -1,0 +1,906 @@
+pageType: content
+background:
+  type: solid
+  color: '#F0EAE0'
+notes: 三项均有仓库与构建产物作为证据。
+elements:
+  - elementId: g1
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g2
+    elementType: line
+    bounds:
+      - 72
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g3
+    elementType: line
+    bounds:
+      - 96
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g4
+    elementType: line
+    bounds:
+      - 120
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g5
+    elementType: line
+    bounds:
+      - 144
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g6
+    elementType: line
+    bounds:
+      - 168
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g7
+    elementType: line
+    bounds:
+      - 192
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g8
+    elementType: line
+    bounds:
+      - 216
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g9
+    elementType: line
+    bounds:
+      - 240
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g10
+    elementType: line
+    bounds:
+      - 264
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g11
+    elementType: line
+    bounds:
+      - 288
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g12
+    elementType: line
+    bounds:
+      - 312
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g13
+    elementType: line
+    bounds:
+      - 336
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g14
+    elementType: line
+    bounds:
+      - 360
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g15
+    elementType: line
+    bounds:
+      - 384
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g16
+    elementType: line
+    bounds:
+      - 408
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g17
+    elementType: line
+    bounds:
+      - 432
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g18
+    elementType: line
+    bounds:
+      - 456
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g19
+    elementType: line
+    bounds:
+      - 480
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g20
+    elementType: line
+    bounds:
+      - 504
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g21
+    elementType: line
+    bounds:
+      - 528
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g22
+    elementType: line
+    bounds:
+      - 552
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g23
+    elementType: line
+    bounds:
+      - 576
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g24
+    elementType: line
+    bounds:
+      - 600
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g25
+    elementType: line
+    bounds:
+      - 624
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g26
+    elementType: line
+    bounds:
+      - 648
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g27
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g28
+    elementType: line
+    bounds:
+      - 48
+      - 174
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g29
+    elementType: line
+    bounds:
+      - 48
+      - 198
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g30
+    elementType: line
+    bounds:
+      - 48
+      - 222
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g31
+    elementType: line
+    bounds:
+      - 48
+      - 246
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g32
+    elementType: line
+    bounds:
+      - 48
+      - 270
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g33
+    elementType: line
+    bounds:
+      - 48
+      - 294
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g34
+    elementType: line
+    bounds:
+      - 48
+      - 318
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g35
+    elementType: line
+    bounds:
+      - 48
+      - 342
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g36
+    elementType: line
+    bounds:
+      - 48
+      - 366
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g37
+    elementType: line
+    bounds:
+      - 48
+      - 390
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g38
+    elementType: line
+    bounds:
+      - 48
+      - 414
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g39
+    elementType: line
+    bounds:
+      - 48
+      - 438
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: t1
+    elementType: text
+    bounds:
+      - 48
+      - 27
+      - 665
+      - 20
+    content:
+      text: |-
+        THREE PROVEN STRENGTHS
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 10
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      letterSpacing: 1.2
+
+  - elementId: l1
+    elementType: line
+    bounds:
+      - 48
+      - 50
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#68665F'
+      width: 0.6
+
+  - elementId: t2
+    elementType: text
+    bounds:
+      - 754
+      - 46
+      - 158
+      - 13
+    content:
+      text: |-
+        06
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: right
+
+  - elementId: t3
+    elementType: text
+    bounds:
+      - 48
+      - 76
+      - 864
+      - 64
+    content:
+      text: |-
+        上台要打的三张牌
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 32
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t6
+    elementType: text
+    bounds:
+      - 48
+      - 152
+      - 500
+      - 24
+    content:
+      text: |-
+        你手里已经有的东西 · 全部可验证
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 48
+      - 186
+      - 272
+      - 190
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
+
+  - elementId: t7
+    elementType: text
+    bounds:
+      - 68
+      - 204
+      - 232
+      - 26
+    content:
+      text: |-
+        01
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 68
+      - 234
+      - 232
+      - 60
+    content:
+      text: |-
+        执行力有数据
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.3
+      color: '#252824'
+      bold: true
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 68
+      - 302
+      - 232
+      - 60
+    content:
+      text: |-
+        7 天 56 次提交，
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.3
+      color: '#62625c'
+      bold: false
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 344
+      - 186
+      - 272
+      - 190
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 364
+      - 204
+      - 232
+      - 26
+    content:
+      text: |-
+        02
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: false
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 364
+      - 234
+      - 232
+      - 60
+    content:
+      text: |-
+        质量意识有证据
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.3
+      color: '#F0EAE0'
+      bold: true
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 364
+      - 302
+      - 232
+      - 60
+    content:
+      text: |-
+        10738 条自动检查，
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.3
+      color: '#F0EAE0'
+      bold: false
+
+  - elementId: s3
+    elementType: shape
+    bounds:
+      - 640
+      - 186
+      - 272
+      - 190
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 660
+      - 204
+      - 232
+      - 26
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 660
+      - 234
+      - 232
+      - 60
+    content:
+      text: |-
+        自我否定有证据
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.3
+      color: '#252824'
+      bold: true
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 660
+      - 302
+      - 232
+      - 60
+    content:
+      text: |-
+        加了一章，判定不达标，
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.3
+      color: '#62625c'
+      bold: false
+
+  - elementId: l2
+    elementType: line
+    bounds:
+      - 48
+      - 398
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#a9a49b'
+      width: 0.8
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 48
+      - 410
+      - 864
+      - 28
+    content:
+      text: |-
+        考核原话：现阶段技术基础不是决定性因素，但需要具备较强的学习主动性和执行力。
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 48
+      - 444
+      - 864
+      - 26
+    content:
+      text: |-
+        这三张牌直接命中「学习过程」这一评分维度，比任何形容词都有说服力。
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t4
+    elementType: text
+    bounds:
+      - 48
+      - 505
+      - 760
+      - 16
+    content:
+      text: |-
+        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t5
+    elementType: text
+    bounds:
+      - 860
+      - 504
+      - 48
+      - 18
+    content:
+      text: |-
+        06
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+

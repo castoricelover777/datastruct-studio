@@ -1,0 +1,965 @@
+pageType: content
+background:
+  type: solid
+  color: '#F0EAE0'
+notes: 对应考核通知的两项任务；当前完成度自查见规划文档第 0.2 节。
+elements:
+  - elementId: g1
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g2
+    elementType: line
+    bounds:
+      - 72
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g3
+    elementType: line
+    bounds:
+      - 96
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g4
+    elementType: line
+    bounds:
+      - 120
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g5
+    elementType: line
+    bounds:
+      - 144
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g6
+    elementType: line
+    bounds:
+      - 168
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g7
+    elementType: line
+    bounds:
+      - 192
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g8
+    elementType: line
+    bounds:
+      - 216
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g9
+    elementType: line
+    bounds:
+      - 240
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g10
+    elementType: line
+    bounds:
+      - 264
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g11
+    elementType: line
+    bounds:
+      - 288
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g12
+    elementType: line
+    bounds:
+      - 312
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g13
+    elementType: line
+    bounds:
+      - 336
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g14
+    elementType: line
+    bounds:
+      - 360
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g15
+    elementType: line
+    bounds:
+      - 384
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g16
+    elementType: line
+    bounds:
+      - 408
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g17
+    elementType: line
+    bounds:
+      - 432
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g18
+    elementType: line
+    bounds:
+      - 456
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g19
+    elementType: line
+    bounds:
+      - 480
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g20
+    elementType: line
+    bounds:
+      - 504
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g21
+    elementType: line
+    bounds:
+      - 528
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g22
+    elementType: line
+    bounds:
+      - 552
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g23
+    elementType: line
+    bounds:
+      - 576
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g24
+    elementType: line
+    bounds:
+      - 600
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g25
+    elementType: line
+    bounds:
+      - 624
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g26
+    elementType: line
+    bounds:
+      - 648
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g27
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g28
+    elementType: line
+    bounds:
+      - 48
+      - 174
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g29
+    elementType: line
+    bounds:
+      - 48
+      - 198
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g30
+    elementType: line
+    bounds:
+      - 48
+      - 222
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g31
+    elementType: line
+    bounds:
+      - 48
+      - 246
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g32
+    elementType: line
+    bounds:
+      - 48
+      - 270
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g33
+    elementType: line
+    bounds:
+      - 48
+      - 294
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g34
+    elementType: line
+    bounds:
+      - 48
+      - 318
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g35
+    elementType: line
+    bounds:
+      - 48
+      - 342
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g36
+    elementType: line
+    bounds:
+      - 48
+      - 366
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g37
+    elementType: line
+    bounds:
+      - 48
+      - 390
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g38
+    elementType: line
+    bounds:
+      - 48
+      - 414
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g39
+    elementType: line
+    bounds:
+      - 48
+      - 438
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: t1
+    elementType: text
+    bounds:
+      - 48
+      - 27
+      - 665
+      - 20
+    content:
+      text: |-
+        TWO TASKS · TWO DELIVERABLES
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 10
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      letterSpacing: 1.2
+
+  - elementId: l1
+    elementType: line
+    bounds:
+      - 48
+      - 50
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#68665F'
+      width: 0.6
+
+  - elementId: t2
+    elementType: text
+    bounds:
+      - 754
+      - 46
+      - 158
+      - 13
+    content:
+      text: |-
+        04
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: right
+
+  - elementId: t3
+    elementType: text
+    bounds:
+      - 48
+      - 76
+      - 864
+      - 64
+    content:
+      text: |-
+        任务 1 与任务 2
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 32
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t6
+    elementType: text
+    bounds:
+      - 48
+      - 152
+      - 400
+      - 24
+    content:
+      text: |-
+        考核任务两项 · 各自的交付物
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 48
+      - 186
+      - 408
+      - 250
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 48
+      - 186
+      - 408
+      - 4
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t7
+    elementType: text
+    bounds:
+      - 72
+      - 206
+      - 100
+      - 24
+    content:
+      text: |-
+        任务 1
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 72
+      - 230
+      - 360
+      - 30
+    content:
+      text: |-
+        专业知识图谱 / 学习框架
+      fontFamily: *ff
+      fontSize: 20
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 72
+      - 278
+      - 360
+      - 28
+    content:
+      text: |-
+        · 六分支三色图
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 72
+      - 310
+      - 360
+      - 28
+    content:
+      text: |-
+        · 标注已学 · 在学 · 待学
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 72
+      - 342
+      - 360
+      - 28
+    content:
+      text: |-
+        · 附权威来源
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l2
+    elementType: line
+    bounds:
+      - 72
+      - 386
+      - 360
+      - 1
+    viewBox:
+      - 360
+      - 1
+    points: 0,0 360,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 72
+      - 398
+      - 360
+      - 26
+    content:
+      text: |-
+        交付在 PPT 第 2 页
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: false
+
+  - elementId: s3
+    elementType: shape
+    bounds:
+      - 504
+      - 186
+      - 408
+      - 250
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
+
+  - elementId: s4
+    elementType: shape
+    bounds:
+      - 504
+      - 186
+      - 408
+      - 4
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 528
+      - 206
+      - 100
+      - 24
+    content:
+      text: |-
+        任务 2
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 528
+      - 230
+      - 360
+      - 30
+    content:
+      text: |-
+        选一个方向做小项目
+      fontFamily: *ff
+      fontSize: 20
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 528
+      - 278
+      - 360
+      - 28
+    content:
+      text: |-
+        · 知识框架里选方向
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 528
+      - 310
+      - 360
+      - 28
+    content:
+      text: |-
+        · 做完并能讲清楚
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 528
+      - 342
+      - 360
+      - 28
+    content:
+      text: |-
+        · 思路 · 过程 · 成果
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l3
+    elementType: line
+    bounds:
+      - 528
+      - 386
+      - 360
+      - 1
+    viewBox:
+      - 360
+      - 1
+    points: 0,0 360,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 528
+      - 398
+      - 360
+      - 26
+    content:
+      text: |-
+        交付在 PPT 第 4-6 页
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: false
+
+  - elementId: t19
+    elementType: text
+    bounds:
+      - 48
+      - 452
+      - 864
+      - 26
+    content:
+      text: |-
+        两项都已基本完成，唯一真正缺的是：任务 1 的图还没画出来。
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t4
+    elementType: text
+    bounds:
+      - 48
+      - 505
+      - 760
+      - 16
+    content:
+      text: |-
+        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t5
+    elementType: text
+    bounds:
+      - 860
+      - 504
+      - 48
+      - 18
+    content:
+      text: |-
+        04
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+

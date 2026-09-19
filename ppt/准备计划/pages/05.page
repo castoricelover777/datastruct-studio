@@ -1,0 +1,1416 @@
+pageType: content
+background:
+  type: solid
+  color: '#F0EAE0'
+notes: 9/20 为机动缓冲；白天有课时改走规划文档第 6.2 节压缩版。
+elements:
+  - elementId: g1
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g2
+    elementType: line
+    bounds:
+      - 72
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g3
+    elementType: line
+    bounds:
+      - 96
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g4
+    elementType: line
+    bounds:
+      - 120
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g5
+    elementType: line
+    bounds:
+      - 144
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g6
+    elementType: line
+    bounds:
+      - 168
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g7
+    elementType: line
+    bounds:
+      - 192
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g8
+    elementType: line
+    bounds:
+      - 216
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g9
+    elementType: line
+    bounds:
+      - 240
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g10
+    elementType: line
+    bounds:
+      - 264
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g11
+    elementType: line
+    bounds:
+      - 288
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g12
+    elementType: line
+    bounds:
+      - 312
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g13
+    elementType: line
+    bounds:
+      - 336
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g14
+    elementType: line
+    bounds:
+      - 360
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g15
+    elementType: line
+    bounds:
+      - 384
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g16
+    elementType: line
+    bounds:
+      - 408
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g17
+    elementType: line
+    bounds:
+      - 432
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g18
+    elementType: line
+    bounds:
+      - 456
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g19
+    elementType: line
+    bounds:
+      - 480
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g20
+    elementType: line
+    bounds:
+      - 504
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g21
+    elementType: line
+    bounds:
+      - 528
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g22
+    elementType: line
+    bounds:
+      - 552
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g23
+    elementType: line
+    bounds:
+      - 576
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g24
+    elementType: line
+    bounds:
+      - 600
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g25
+    elementType: line
+    bounds:
+      - 624
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g26
+    elementType: line
+    bounds:
+      - 648
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g27
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g28
+    elementType: line
+    bounds:
+      - 48
+      - 174
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g29
+    elementType: line
+    bounds:
+      - 48
+      - 198
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g30
+    elementType: line
+    bounds:
+      - 48
+      - 222
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g31
+    elementType: line
+    bounds:
+      - 48
+      - 246
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g32
+    elementType: line
+    bounds:
+      - 48
+      - 270
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g33
+    elementType: line
+    bounds:
+      - 48
+      - 294
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g34
+    elementType: line
+    bounds:
+      - 48
+      - 318
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g35
+    elementType: line
+    bounds:
+      - 48
+      - 342
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g36
+    elementType: line
+    bounds:
+      - 48
+      - 366
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g37
+    elementType: line
+    bounds:
+      - 48
+      - 390
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g38
+    elementType: line
+    bounds:
+      - 48
+      - 414
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g39
+    elementType: line
+    bounds:
+      - 48
+      - 438
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: t1
+    elementType: text
+    bounds:
+      - 48
+      - 27
+      - 665
+      - 20
+    content:
+      text: |-
+        SCHEDULE · 09-19 TO 09-23
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 10
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      letterSpacing: 1.2
+
+  - elementId: l1
+    elementType: line
+    bounds:
+      - 48
+      - 50
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#68665F'
+      width: 0.6
+
+  - elementId: t2
+    elementType: text
+    bounds:
+      - 754
+      - 46
+      - 158
+      - 13
+    content:
+      text: |-
+        05
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: right
+
+  - elementId: t3
+    elementType: text
+    bounds:
+      - 48
+      - 76
+      - 864
+      - 64
+    content:
+      text: |-
+        五天时间表
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 32
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t6
+    elementType: text
+    bounds:
+      - 48
+      - 152
+      - 500
+      - 24
+    content:
+      text: |-
+        9/19 至 9/23 · 精确到小时
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t7
+    elementType: text
+    bounds:
+      - 48
+      - 182
+      - 130
+      - 24
+    content:
+      text: |-
+        日期
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 170
+      - 182
+      - 130
+      - 24
+    content:
+      text: |-
+        时段
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 330
+      - 182
+      - 110
+      - 24
+    content:
+      text: |-
+        时长
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 450
+      - 182
+      - 462
+      - 24
+    content:
+      text: |-
+        做什么 · 完成标准
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l2
+    elementType: line
+    bounds:
+      - 48
+      - 206
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#c3bfb7'
+      width: 0.6
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 60
+      - 218
+      - 120
+      - 24
+    content:
+      text: |-
+        9/19 周五
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 170
+      - 218
+      - 160
+      - 24
+    content:
+      text: |-
+        20:00-21:15
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 330
+      - 218
+      - 110
+      - 24
+    content:
+      text: |-
+        1.25 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 450
+      - 218
+      - 462
+      - 24
+    content:
+      text: |-
+        读 verify.js 与 make-animations.js
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 48
+      - 241
+      - 864
+      - 26
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#ead7cc'
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 48
+      - 241
+      - 3
+      - 26
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#252824'
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 60
+      - 244
+      - 120
+      - 24
+    content:
+      text: |-
+        
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 170
+      - 244
+      - 160
+      - 24
+    content:
+      text: |-
+        21:25-22:25
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 330
+      - 244
+      - 110
+      - 24
+    content:
+      text: |-
+        1.0 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 450
+      - 244
+      - 462
+      - 24
+    content:
+      text: |-
+        读 build-data.js，手画出四层流水线图
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t19
+    elementType: text
+    bounds:
+      - 60
+      - 270
+      - 120
+      - 24
+    content:
+      text: |-
+        9/20 周六
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t20
+    elementType: text
+    bounds:
+      - 170
+      - 270
+      - 160
+      - 24
+    content:
+      text: |-
+        机动
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t21
+    elementType: text
+    bounds:
+      - 330
+      - 270
+      - 110
+      - 24
+    content:
+      text: |-
+        0-1 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t22
+    elementType: text
+    bounds:
+      - 450
+      - 270
+      - 462
+      - 24
+    content:
+      text: |-
+        补读；或跑一次 verify 看 10738 条全过
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t23
+    elementType: text
+    bounds:
+      - 60
+      - 296
+      - 120
+      - 24
+    content:
+      text: |-
+        9/21 周日
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t24
+    elementType: text
+    bounds:
+      - 170
+      - 296
+      - 160
+      - 24
+    content:
+      text: |-
+        19:00-20:00
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t25
+    elementType: text
+    bounds:
+      - 330
+      - 296
+      - 110
+      - 24
+    content:
+      text: |-
+        1.0 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t26
+    elementType: text
+    bounds:
+      - 450
+      - 296
+      - 462
+      - 24
+    content:
+      text: |-
+        画六分支知识图谱 + PPT 第 1-4 页
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t27
+    elementType: text
+    bounds:
+      - 60
+      - 322
+      - 120
+      - 24
+    content:
+      text: |-
+        
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t28
+    elementType: text
+    bounds:
+      - 170
+      - 322
+      - 160
+      - 24
+    content:
+      text: |-
+        20:10-21:10
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t29
+    elementType: text
+    bounds:
+      - 330
+      - 322
+      - 110
+      - 24
+    content:
+      text: |-
+        1.0 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t30
+    elementType: text
+    bounds:
+      - 450
+      - 322
+      - 462
+      - 24
+    content:
+      text: |-
+        PPT 第 5-7 页 + 写 5 个讲稿锚点
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t31
+    elementType: text
+    bounds:
+      - 60
+      - 348
+      - 120
+      - 24
+    content:
+      text: |-
+        9/22 周一
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t32
+    elementType: text
+    bounds:
+      - 170
+      - 348
+      - 160
+      - 24
+    content:
+      text: |-
+        19:30-20:30
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t33
+    elementType: text
+    bounds:
+      - 330
+      - 348
+      - 110
+      - 24
+    content:
+      text: |-
+        1.0 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t34
+    elementType: text
+    bounds:
+      - 450
+      - 348
+      - 462
+      - 24
+    content:
+      text: |-
+        掐表演练第 1 遍（目标 6 分钟）
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: s3
+    elementType: shape
+    bounds:
+      - 48
+      - 371
+      - 864
+      - 26
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#ead7cc'
+
+  - elementId: s4
+    elementType: shape
+    bounds:
+      - 48
+      - 371
+      - 3
+      - 26
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#252824'
+
+  - elementId: t35
+    elementType: text
+    bounds:
+      - 60
+      - 374
+      - 120
+      - 24
+    content:
+      text: |-
+        
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t36
+    elementType: text
+    bounds:
+      - 170
+      - 374
+      - 160
+      - 24
+    content:
+      text: |-
+        20:40-21:40
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t37
+    elementType: text
+    bounds:
+      - 330
+      - 374
+      - 110
+      - 24
+    content:
+      text: |-
+        1.0 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t38
+    elementType: text
+    bounds:
+      - 450
+      - 374
+      - 462
+      - 24
+    content:
+      text: |-
+        演练第 2 遍 + 过 22 问 + 备演示三保险
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t39
+    elementType: text
+    bounds:
+      - 60
+      - 400
+      - 120
+      - 24
+    content:
+      text: |-
+        9/23 周三
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t40
+    elementType: text
+    bounds:
+      - 170
+      - 400
+      - 160
+      - 24
+    content:
+      text: |-
+        白天 30 分钟
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t41
+    elementType: text
+    bounds:
+      - 330
+      - 400
+      - 110
+      - 24
+    content:
+      text: |-
+        0.5 h
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t42
+    elementType: text
+    bounds:
+      - 450
+      - 400
+      - 462
+      - 24
+    content:
+      text: |-
+        过锚点 + 检查 U 盘与电脑电量
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: s5
+    elementType: shape
+    bounds:
+      - 48
+      - 423
+      - 864
+      - 26
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#ead7cc'
+
+  - elementId: s6
+    elementType: shape
+    bounds:
+      - 48
+      - 423
+      - 3
+      - 26
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#252824'
+
+  - elementId: t43
+    elementType: text
+    bounds:
+      - 60
+      - 426
+      - 120
+      - 24
+    content:
+      text: |-
+        
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t44
+    elementType: text
+    bounds:
+      - 170
+      - 426
+      - 160
+      - 24
+    content:
+      text: |-
+        19:30
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t45
+    elementType: text
+    bounds:
+      - 330
+      - 426
+      - 110
+      - 24
+    content:
+      text: |-
+        —
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t46
+    elementType: text
+    bounds:
+      - 450
+      - 426
+      - 462
+      - 24
+    content:
+      text: |-
+        汇报
+      fontFamily: *ff
+      fontSize: 13
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t47
+    elementType: text
+    bounds:
+      - 48
+      - 462
+      - 864
+      - 24
+    content:
+      text: |-
+        绝对不能砍：读 verify.js 与 build-data.js · PPT 第 2 页知识图谱 · PPT 第 5 页架构图。
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: false
+
+  - elementId: t4
+    elementType: text
+    bounds:
+      - 48
+      - 505
+      - 760
+      - 16
+    content:
+      text: |-
+        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t5
+    elementType: text
+    bounds:
+      - 860
+      - 504
+      - 48
+      - 18
+    content:
+      text: |-
+        05
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+

@@ -1,0 +1,630 @@
+pageType: cover
+background:
+  type: solid
+  color: '#F0EAE0'
+notes: 封面。所有数字均为仓库实测值，非估算。
+elements:
+  - elementId: t1
+    elementType: text
+    bounds:
+      - 48
+      - 24
+      - 700
+      - 18
+    content:
+      text: |-
+        RESEARCH INSTITUTE / FIRST REVIEW
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 10
+      lineHeight: 1.25
+      color: '#68665F'
+      bold: false
+      letterSpacing: 1.2
+
+  - elementId: l1
+    elementType: line
+    bounds:
+      - 48
+      - 50
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#68665F'
+      width: 0.6
+
+  - elementId: t2
+    elementType: text
+    bounds:
+      - 48
+      - 68
+      - 864
+      - 64
+    content:
+      text: |-
+        从一个真问题，到一个完整工程
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 31
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t3
+    elementType: text
+    bounds:
+      - 48
+      - 505
+      - 760
+      - 16
+    content:
+      text: |-
+        软件工程（本科）· 深信息 · 2026-09-23
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#68665F'
+      bold: false
+
+  - elementId: t4
+    elementType: text
+    bounds:
+      - 860
+      - 504
+      - 48
+      - 18
+    content:
+      text: |-
+        01
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t5
+    elementType: text
+    bounds:
+      - 48
+      - 168
+      - 480
+      - 180
+    content:
+      text: |-
+        数据结构
+        研习社
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 64
+      lineHeight: 1.15
+      color: '#252824'
+      bold: true
+
+  - elementId: t6
+    elementType: text
+    bounds:
+      - 52
+      - 366
+      - 460
+      - 90
+    content:
+      text: |-
+        覆盖 25 节 214 个模块的学习平台。
+        让「看懂」变成「写得出」。
+      fontFamily: *ff
+      fontSize: 23
+      lineHeight: 1.3
+      color: '#68665F'
+      bold: false
+
+  - elementId: l2
+    elementType: line
+    bounds:
+      - 565
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l3
+    elementType: line
+    bounds:
+      - 614
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l4
+    elementType: line
+    bounds:
+      - 663
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l5
+    elementType: line
+    bounds:
+      - 712
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l6
+    elementType: line
+    bounds:
+      - 761
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l7
+    elementType: line
+    bounds:
+      - 810
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l8
+    elementType: line
+    bounds:
+      - 859
+      - 140
+      - 1
+      - 315
+    viewBox:
+      - 1
+      - 315
+    points: 0,0 0,315
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l9
+    elementType: line
+    bounds:
+      - 565
+      - 140
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l10
+    elementType: line
+    bounds:
+      - 565
+      - 185
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l11
+    elementType: line
+    bounds:
+      - 565
+      - 230
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l12
+    elementType: line
+    bounds:
+      - 565
+      - 275
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l13
+    elementType: line
+    bounds:
+      - 565
+      - 320
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l14
+    elementType: line
+    bounds:
+      - 565
+      - 365
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l15
+    elementType: line
+    bounds:
+      - 565
+      - 410
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: l16
+    elementType: line
+    bounds:
+      - 565
+      - 455
+      - 340
+      - 1
+    viewBox:
+      - 340
+      - 1
+    points: 0,0 340,0
+    border:
+      color: '#d8d2c8'
+      width: 0.25
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 560
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 608
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s3
+    elementType: shape
+    bounds:
+      - 656
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s4
+    elementType: shape
+    bounds:
+      - 704
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s5
+    elementType: shape
+    bounds:
+      - 752
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s6
+    elementType: shape
+    bounds:
+      - 800
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s7
+    elementType: shape
+    bounds:
+      - 848
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s8
+    elementType: shape
+    bounds:
+      - 896
+      - 148
+      - 1
+      - 298
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s9
+    elementType: shape
+    bounds:
+      - 560
+      - 148
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s10
+    elementType: shape
+    bounds:
+      - 560
+      - 196
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s11
+    elementType: shape
+    bounds:
+      - 560
+      - 244
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s12
+    elementType: shape
+    bounds:
+      - 560
+      - 292
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s13
+    elementType: shape
+    bounds:
+      - 560
+      - 340
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s14
+    elementType: shape
+    bounds:
+      - 560
+      - 388
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s15
+    elementType: shape
+    bounds:
+      - 560
+      - 436
+      - 340
+      - 1
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#b3b0a8'
+
+  - elementId: s16
+    elementType: shape
+    bounds:
+      - 654
+      - 176
+      - 228
+      - 48
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#68665F'
+      width: 0.7
+
+  - elementId: t7
+    elementType: text
+    bounds:
+      - 660
+      - 189
+      - 216
+      - 26
+    content:
+      text: |-
+        01 / 输入 · C 源文件
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+      align: center
+
+  - elementId: s17
+    elementType: shape
+    bounds:
+      - 654
+      - 258
+      - 228
+      - 48
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#68665F'
+      width: 0.7
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 660
+      - 271
+      - 216
+      - 26
+    content:
+      text: |-
+        02 / 迁移 · 构建流水线
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+      align: center
+
+  - elementId: s18
+    elementType: shape
+    bounds:
+      - 654
+      - 340
+      - 228
+      - 48
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 660
+      - 353
+      - 216
+      - 26
+    content:
+      text: |-
+        03 / 验证 · 10738 条检查
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: false
+      align: center
+

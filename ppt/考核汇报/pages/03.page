@@ -1,0 +1,1235 @@
+pageType: content
+background:
+  type: solid
+  color: '#F0EAE0'
+notes: 提交数据来自仓库 git 历史实测；无提交的两天已如实标注。
+elements:
+  - elementId: g1
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g2
+    elementType: line
+    bounds:
+      - 72
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g3
+    elementType: line
+    bounds:
+      - 96
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g4
+    elementType: line
+    bounds:
+      - 120
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g5
+    elementType: line
+    bounds:
+      - 144
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g6
+    elementType: line
+    bounds:
+      - 168
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g7
+    elementType: line
+    bounds:
+      - 192
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g8
+    elementType: line
+    bounds:
+      - 216
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g9
+    elementType: line
+    bounds:
+      - 240
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g10
+    elementType: line
+    bounds:
+      - 264
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g11
+    elementType: line
+    bounds:
+      - 288
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g12
+    elementType: line
+    bounds:
+      - 312
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g13
+    elementType: line
+    bounds:
+      - 336
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g14
+    elementType: line
+    bounds:
+      - 360
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g15
+    elementType: line
+    bounds:
+      - 384
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g16
+    elementType: line
+    bounds:
+      - 408
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g17
+    elementType: line
+    bounds:
+      - 432
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g18
+    elementType: line
+    bounds:
+      - 456
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g19
+    elementType: line
+    bounds:
+      - 480
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g20
+    elementType: line
+    bounds:
+      - 504
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g21
+    elementType: line
+    bounds:
+      - 528
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g22
+    elementType: line
+    bounds:
+      - 552
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g23
+    elementType: line
+    bounds:
+      - 576
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g24
+    elementType: line
+    bounds:
+      - 600
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g25
+    elementType: line
+    bounds:
+      - 624
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g26
+    elementType: line
+    bounds:
+      - 648
+      - 150
+      - 1
+      - 310
+    viewBox:
+      - 1
+      - 310
+    points: 0,0 0,310
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g27
+    elementType: line
+    bounds:
+      - 48
+      - 150
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g28
+    elementType: line
+    bounds:
+      - 48
+      - 174
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g29
+    elementType: line
+    bounds:
+      - 48
+      - 198
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g30
+    elementType: line
+    bounds:
+      - 48
+      - 222
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g31
+    elementType: line
+    bounds:
+      - 48
+      - 246
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g32
+    elementType: line
+    bounds:
+      - 48
+      - 270
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g33
+    elementType: line
+    bounds:
+      - 48
+      - 294
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g34
+    elementType: line
+    bounds:
+      - 48
+      - 318
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g35
+    elementType: line
+    bounds:
+      - 48
+      - 342
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g36
+    elementType: line
+    bounds:
+      - 48
+      - 366
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g37
+    elementType: line
+    bounds:
+      - 48
+      - 390
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g38
+    elementType: line
+    bounds:
+      - 48
+      - 414
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: g39
+    elementType: line
+    bounds:
+      - 48
+      - 438
+      - 617
+      - 1
+    viewBox:
+      - 617
+      - 1
+    points: 0,0 617,0
+    border:
+      width: 0.35
+      color: '#e3ddd4'
+  - elementId: t1
+    elementType: text
+    bounds:
+      - 48
+      - 27
+      - 665
+      - 20
+    content:
+      text: |-
+        LEARNING PROCESS · COMMIT HISTORY
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 10
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      letterSpacing: 1.2
+
+  - elementId: l1
+    elementType: line
+    bounds:
+      - 48
+      - 50
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#68665F'
+      width: 0.6
+
+  - elementId: t2
+    elementType: text
+    bounds:
+      - 754
+      - 46
+      - 158
+      - 13
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: right
+
+  - elementId: t3
+    elementType: text
+    bounds:
+      - 48
+      - 76
+      - 864
+      - 64
+    content:
+      text: |-
+        学习过程：7 天 56 次提交
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
+      fontSize: 32
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t6
+    elementType: text
+    bounds:
+      - 48
+      - 152
+      - 400
+      - 22
+    content:
+      text: |-
+        七日提交曲线 · 共 56 次提交 · 峰值 43 次
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 56
+      - 388
+      - 52
+      - 8
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#c9c4ba'
+
+  - elementId: t7
+    elementType: text
+    bounds:
+      - 58
+      - 354
+      - 48
+      - 28
+    content:
+      text: |-
+        1
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+      align: center
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 42
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-12
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 134
+      - 394
+      - 52
+      - 2
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#c9c4ba'
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 136
+      - 360
+      - 48
+      - 28
+    content:
+      text: |-
+        —
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+      align: center
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 120
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-13
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s3
+    elementType: shape
+    bounds:
+      - 212
+      - 360
+      - 52
+      - 36
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#c9c4ba'
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 214
+      - 326
+      - 48
+      - 28
+    content:
+      text: |-
+        8
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+      align: center
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 198
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-14
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s4
+    elementType: shape
+    bounds:
+      - 290
+      - 200
+      - 52
+      - 196
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 292
+      - 166
+      - 48
+      - 28
+    content:
+      text: |-
+        43
+      fontFamily: *ff
+      fontSize: 22
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+      align: center
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 276
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-15
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s5
+    elementType: shape
+    bounds:
+      - 368
+      - 382
+      - 52
+      - 14
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#c9c4ba'
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 370
+      - 348
+      - 48
+      - 28
+    content:
+      text: |-
+        3
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+      align: center
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 354
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-16
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s6
+    elementType: shape
+    bounds:
+      - 446
+      - 394
+      - 52
+      - 2
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#c9c4ba'
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 448
+      - 360
+      - 48
+      - 28
+    content:
+      text: |-
+        —
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+      align: center
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 432
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-17
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s7
+    elementType: shape
+    bounds:
+      - 524
+      - 388
+      - 52
+      - 8
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#c9c4ba'
+
+  - elementId: t19
+    elementType: text
+    bounds:
+      - 526
+      - 354
+      - 48
+      - 28
+    content:
+      text: |-
+        1
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+      align: center
+
+  - elementId: t20
+    elementType: text
+    bounds:
+      - 510
+      - 404
+      - 80
+      - 24
+    content:
+      text: |-
+        09-18
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: l2
+    elementType: line
+    bounds:
+      - 56
+      - 396
+      - 520
+      - 1
+    viewBox:
+      - 520
+      - 1
+    points: 0,0 520,0
+    border:
+      color: '#a9a49b'
+      width: 0.8
+
+  - elementId: t21
+    elementType: text
+    bounds:
+      - 48
+      - 434
+      - 560
+      - 22
+    content:
+      text: |-
+        09-13 与 09-17 无提交。
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l3
+    elementType: line
+    bounds:
+      - 620
+      - 152
+      - 1
+      - 300
+    viewBox:
+      - 1
+      - 300
+    points: 0,0 0,300
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t22
+    elementType: text
+    bounds:
+      - 640
+      - 152
+      - 48
+      - 44
+    content:
+      text: |-
+        01
+      fontFamily: *ff
+      fontSize: 26
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t23
+    elementType: text
+    bounds:
+      - 692
+      - 150
+      - 220
+      - 26
+    content:
+      text: |-
+        主动扩大范围
+      fontFamily: *ff
+      fontSize: 18
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t24
+    elementType: text
+    bounds:
+      - 692
+      - 180
+      - 220
+      - 70
+    content:
+      text: |-
+        9/12 立项只做链表，
+        9/14 重构为覆盖全课程的平台。
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.4
+      color: '#62625c'
+      bold: false
+
+  - elementId: l4
+    elementType: line
+    bounds:
+      - 640
+      - 246
+      - 272
+      - 1
+    viewBox:
+      - 272
+      - 1
+    points: 0,0 272,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t25
+    elementType: text
+    bounds:
+      - 640
+      - 256
+      - 48
+      - 44
+    content:
+      text: |-
+        02
+      fontFamily: *ff
+      fontSize: 26
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t26
+    elementType: text
+    bounds:
+      - 692
+      - 254
+      - 220
+      - 26
+    content:
+      text: |-
+        高强度迭代
+      fontFamily: *ff
+      fontSize: 18
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t27
+    elementType: text
+    bounds:
+      - 692
+      - 284
+      - 220
+      - 70
+    content:
+      text: |-
+        9/15 一天 43 次提交，
+        v2.1.0 到 v2.1.3，修 8 处动画缺陷。
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.4
+      color: '#62625c'
+      bold: false
+
+  - elementId: l5
+    elementType: line
+    bounds:
+      - 640
+      - 350
+      - 272
+      - 1
+    viewBox:
+      - 272
+      - 1
+    points: 0,0 272,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t28
+    elementType: text
+    bounds:
+      - 640
+      - 360
+      - 48
+      - 44
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 26
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: false
+
+  - elementId: t29
+    elementType: text
+    bounds:
+      - 692
+      - 358
+      - 220
+      - 26
+    content:
+      text: |-
+        敢加也敢删
+      fontFamily: *ff
+      fontSize: 18
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t30
+    elementType: text
+    bounds:
+      - 692
+      - 388
+      - 220
+      - 70
+    content:
+      text: |-
+        9/16 新增第 07 章，
+        判定不达标，主动回退，
+        并删除该 Release。
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.4
+      color: '#62625c'
+      bold: false
+
+  - elementId: t31
+    elementType: text
+    bounds:
+      - 640
+      - 434
+      - 272
+      - 24
+    content:
+      text: |-
+        第三条分量最重
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: false
+
+  - elementId: t4
+    elementType: text
+    bounds:
+      - 48
+      - 505
+      - 760
+      - 16
+    content:
+      text: |-
+        数据结构研习社 · DataStruct Studio · 研究所入所第一次考核
+      fontFamily: *ff
+      fontSize: 9
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t5
+    elementType: text
+    bounds:
+      - 860
+      - 504
+      - 48
+      - 18
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 11
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+

@@ -44,18 +44,42 @@ for (const [f, keys] of checks) {
 }
 
 // 2) 每一节的 data/code 里都要有 py 字段
+// 口径与 tools/check-py-coverage.js 一致：拼装视图（「完整源码」）是构建时
+// 自动拼出来的，本来就不该有独立的 Python 版，不算在分子分母里。
+// 拼装模块的识别靠"id 编号等于视图内模块个数"（模块从 01 连续编号）。
 const codeFiles = [...files.keys()].filter((k) => /data\/code\/[^/]+\.json$/.test(k));
-let totMod = 0, pyMod = 0, secs = 0;
+let totMod = 0, pyMod = 0, secs = 0, totAsm = 0;
 for (const k of codeFiles) {
   const j = JSON.parse(read(k));
-  let n = 0, p = 0;
-  const count = (mods) => { for (const id of Object.keys(mods || {})) { n++; if (mods[id].py) p++; } };
-  if (j.modules) count(j.modules);
-  if (j.views) for (const v of Object.keys(j.views)) count(j.views[v]);
-  totMod += n; pyMod += p;
+  const groups = [];
+  if (j.modules) groups.push(j.modules);
+  if (j.views) for (const v of Object.keys(j.views)) groups.push(j.views[v]);
+  const asmIds = new Set();
+  for (const g of groups) {
+    const ids = Object.keys(g);
+    const byPrefix = new Map();
+    for (const id of ids) {
+      const m = /^(.*-)(\d+)$/.exec(id);
+      if (!m) continue;
+      if (!byPrefix.has(m[1])) byPrefix.set(m[1], []);
+      byPrefix.get(m[1]).push(parseInt(m[2], 10));
+    }
+    for (const [pre, nums] of byPrefix) {
+      const asmId = pre + String(nums.length).padStart(2, '0');
+      if (g[asmId] && g[asmId].py == null) asmIds.add(asmId);
+    }
+  }
+  let n = 0, p = 0, a = 0;
+  for (const g of groups) {
+    for (const id of Object.keys(g)) {
+      if (asmIds.has(id) || g[id].isAssembly) { a++; continue; }
+      n++; if (g[id].py) p++;
+    }
+  }
+  totMod += n; pyMod += p; totAsm += a;
   if (p) secs++;
 }
-console.log(`  ${pyMod === totMod ? '✅' : '⚠'} data/code：${secs} 个小节带 Python，模块 ${pyMod}/${totMod} 个有 py 字段`);
+console.log(`  ${pyMod === totMod ? '✅' : '⚠'} data/code：${secs} 个小节带 Python；真实模块 ${pyMod}/${totMod} 有 py，拼装视图 ${totAsm} 个（本就不该有）`);
 if (pyMod !== totMod) bad++;
 
 // 3) 抽查一段 Python 代码内容是否完整（不是空串）

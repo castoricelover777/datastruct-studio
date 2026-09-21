@@ -86,7 +86,7 @@ def NextPrime(N):
         #@s 3 也是素数
         return 3
 
-#@s 从 N 本身开始（N 是偶数就先加一到奇数）
+    #@s 从 N 本身开始（N 是偶数就先加一到奇数）
     p = N if N % 2 != 0 else N + 1
 
     while p <= MAXTABLESIZE:
@@ -114,7 +114,7 @@ def NextPrime(N):
 
 #@s 建一个空表
 def CreateTable(TableSize):
-    #@s 表结构
+    #@s 分配表结构
     #@d C 要先 malloc(sizeof(struct TblNode)) 再一格一格填，Python 一句 HashTable() 就够了。
     H = HashTable()
     #@s 表长取素数
@@ -145,7 +145,7 @@ def DestroyTable(H):
     if H is None:
         return
 
-#@s 逐条链表释放
+    #@s 逐条链表释放
     for i in range(H.TableSize):
         #@s 从第一个真结点开始
         P = H.Heads[i].next
@@ -160,10 +160,10 @@ def DestroyTable(H):
             #@s 往后走
             P = tmp
 
-#@s 先放掉头数组
+    #@s 先 free 头数组
     #@d C 这里是 free(H->Heads)，再 free(H)。Python 把这两个引用清掉就行。
     H.Heads = []
-#@s 再放掉表结构
+    #@s 再 free 表结构
     #@d C 的最后一句 free(H) 在这里对应 Python 的 del，把表对象也清掉。
     del H
 #%end
@@ -262,21 +262,24 @@ def LoadFactor(H):
 #@d   拿到返回值以后判断要写 if P is None，不能写 if not P ——
 #@d   结点对象的真假值不好说，拿 is None 判断才稳。
 
-#@s 查找 Key，返回结点位置；没找到返回 None
+#@s 查找 Key，返回结点位置；没找到返回 NULL
 def Find(H, Key):
+    #@s 遍历指针
+    #@d C 要先写 Position P; 声明一个遍历指针，Python 用到的时候直接写名字。
     #@s 这个键该挂在哪条链表上
     pos = Hash(Key, H.TableSize)
 
-#@s 从虚拟头结点的下一个开始
+    #@s 从虚拟头结点的下一个开始
     P = H.Heads[pos].next
 
-#@s 顺着链表找
-#@d 两个终止条件：走到尾（没找到）、或者找到了。
+    #@s 顺着链表找
+    #@d 两个终止条件：走到尾（没找到）、或者找到了。
     while P is not None and P.data != Key:
         #@s 不匹配就往后走
         P = P.next
 
-#@s 返回 P（找到就是结点，没找到就是 None）
+    #@s 返回 P（找到就是结点，没找到就是 NULL）
+    #@d 没找到时这里返回的是 None —— 它就是 Python 版的 NULL。
     return P
 #%end
 
@@ -317,27 +320,30 @@ def Find(H, Key):
 #@s 插入 Key；已存在则什么都不做
 #@d 返回插入位置（存在时返回已有结点）
 def Insert(H, Key):
+    #@s 新结点
+    #@s 已有的结点
+    #@s 该挂在哪条链上
+    #@d C 开头要写 Position NewNode, P; 和 int pos; 三句声明，Python 用到哪写到哪。
     #@s ① 先查重
-    #@d C 要先声明 Position NewNode, P; 两个变量，Python 用到哪写到哪。
     P = Find(H, Key)
     if P is not None:
         #@s 已经存在，直接返回
         return P
 
-#@s ② 造新结点
+    #@s ② 造新结点
     #@d C 这里是 malloc + 一段 if (NewNode == NULL) { printf; exit(1); }，
     #@d Python 没有内存分配失败这回事，整块直接省掉。
     NewNode = ListNode(Key)
 
-#@s 算出该挂哪条链
+    #@s 算出该挂哪条链
     pos = Hash(Key, H.TableSize)
 
-#@s ③ 头插到那条链上
-#@d 新结点的 Next 指向原来的第一个，头结点的 Next 指向新结点。
+    #@s ③ 头插到那条链上
+    #@d 新结点的 Next 指向原来的第一个，头结点的 Next 指向新结点。
     NewNode.next = H.Heads[pos].next
     H.Heads[pos].next = NewNode
 
-#@s 返回新结点
+    #@s 返回新结点
     return NewNode
 #%end
 
@@ -372,36 +378,39 @@ def Insert(H, Key):
 #@d   C 那句 Prev = &H->Heads[pos] 是"取桶头这个结点的地址"，Python 不用取地址，
 #@d   直接写 Prev = H.Heads[pos] 拿到的就是那个桶头对象，后面改 Prev.next 一样管用。
 #@d   还有 C 最后要 free(P)，Python 不写：把 Prev.next 绕过 P 之后，P 就没人指着了，自己会被回收。
-Status_Delete_doc = None
 
 #@s 删除 Key；成功返回 OK，不存在返回 ERROR
 def Delete(H, Key):
+    #@s 前驱结点（从虚拟头开始）
+    #@s 当前结点
     #@s 该在哪条链上
+    #@d C 要先写 Position Prev, P; 和 int pos; 三句声明，Python 直接赋值就行。
+    #@s 算出链表位置
     pos = Hash(Key, H.TableSize)
 
-#@s 从虚拟头结点开始
-#@d 因为头结点有 Next 字段，删除第一个真元素时不用特判。
+    #@s 从虚拟头结点开始
+    #@d 因为头结点有 Next 字段，删除第一个真元素时不用特判。
     Prev = H.Heads[pos]
     P = Prev.next
 
-#@s 找待删结点
+    #@s 找待删结点
     while P is not None and P.data != Key:
         #@s 前驱和当前一起往后走
         Prev = P
         P = P.next
 
-#@s 走到尾都没找到
+    #@s 走到尾都没找到
     if P is None:
         return ERROR
 
-#@s 把它从链上绕过
+    #@s 把它从链上绕过
     Prev.next = P.next
 
-#@s 释放
+    #@s 释放
     #@d C 这里是 free(P)。Python 一句都不用写 —— 现在没人引用 P 了，它会被自动回收。
     #@d 所以这一步只有"剪断"这个动作，没有"还给系统内存"这个动作。
 
-#@s 成功
+    #@s 成功
     return OK
 #%end
 
@@ -439,11 +448,11 @@ def PrintTable(H):
         #@s 从第一个真结点开始
         P = H.Heads[i].next
 
-#@s 链表空着
+        #@s 链表空着
         if P is None:
             print('(空)', end='')
 
-#@s 打印链表上的元素
+        #@s 打印链表上的元素
         while P is not None:
             #@s 打元素，不带空格
             print(f'{P.data}', end='')
@@ -467,14 +476,17 @@ def PrintStats(H):
     #@s 元素总数
     total = 0
     #@s 长度分布的计数（长度 0~9）
-    #@d C 要写 int dist[10] 再手工清零；Python 一句 [0] * 10 就是 10 个格子，本来就全是 0。
+    #@s 清零
+    #@d C 要写 int dist[10] 再手工清零；Python 一句 [0] * 10 就是 10 个格子，本来就全是 0，
+    #@d 所以 C 里那个清零的 for 循环在 Python 里没有对应的一行。
     dist = [0] * 10
 
-#@s 逐条统计
+    #@s 逐条统计
     for i in range(H.TableSize):
         #@s 当前链表长度
-        #@d C 在函数开头就声明了 len，Python 每次循环重新给 len 起一个新值。
+        #@d C 在函数开头就声明了 len，Python 每次循环重新给 length 起一个新值。
         length = 0
+        #@s 遍历指针
         P = H.Heads[i].next
         while P is not None:
             length += 1
@@ -492,7 +504,7 @@ def PrintStats(H):
             #@s 长度 0~9 的记进分布表
             dist[length] += 1
 
-#@s 输出
+    #@s 输出
     #@d C 那句 printf 里的 %.2f 对应 Python 的 :.2f，两边都是保留两位小数。
     print(f'  表长 = {H.TableSize}，元素 = {total}，装填因子 = {total / H.TableSize:.2f}')
     print(f'  空链表 {empty} 条，最长链表 {maxLen} 个元素')
@@ -539,7 +551,13 @@ if __name__ == '__main__':
     n = 8
     m = 4
 
-#@s 建表
+    #@s 表
+    #@d C 要先写 HashTable H; 声明这张表，Python 直接等 CreateTable 的返回值。
+    #@s 循环用
+    #@s 查找结果
+    #@d C 要写 int i; 和 Position P; 两句声明，Python 用到哪写到哪。
+
+    #@s 建表
     H = CreateTable(11)
 
     print(f'表长 = {H.TableSize}（素数）')
@@ -547,17 +565,17 @@ if __name__ == '__main__':
     #@s 空一行
     print()
 
-#@s 插入
+    #@s 插入
     for i in range(n):
         Insert(H, keys[i])
     for i in range(m):
         Insert(H, others[i])
 
-#@s 打印
+    #@s 打印
     print('=== 表的内容 ===')
     PrintTable(H)
 
-#@s 统计
+    #@s 统计
     print()
     print('=== 统计 ===')
     PrintStats(H)
@@ -566,7 +584,7 @@ if __name__ == '__main__':
     #@s 空一行
     print()
 
-#@s 查找
+    #@s 查找
     print('=== 查找 ===')
     for i in range(3):
         P = Find(H, others[i])
@@ -576,7 +594,7 @@ if __name__ == '__main__':
     P = Find(H, 999)
     print(f'  找 999（不存在）: {"找到了" if P else "没找到"}')
 
-#@s 注意头插的顺序
+    #@s 注意头插的顺序
     print()
     print('=== 头插的后果 ===')
     #@s 行尾不换行，等数字打完了再换
@@ -586,7 +604,7 @@ if __name__ == '__main__':
         print(f'{keys[i]} ', end='')
     print()
 
-#@s 打印 0 号桶
+    #@s 打印 0 号桶
     pos = Hash(keys[0], H.TableSize)
     print(f'  [{pos}] 号桶实际顺序: ', end='')
     P = H.Heads[pos].next
@@ -596,7 +614,7 @@ if __name__ == '__main__':
     print()
     print('  （和插入顺序**相反** —— 因为用的是头插）')
 
-#@s 删除
+    #@s 删除
     print()
     print('=== 删除 ===')
     print(f'  删除 33: {"成功" if Delete(H, 33) == OK else "失败"}')
@@ -614,7 +632,7 @@ if __name__ == '__main__':
     print()
     print('  （直接从链表摘掉了 —— **不需要墓碑**）')
 
-#@s 对比
+    #@s 对比
     print()
     print('=== 和开放地址法对比 ===')
     print('  分离链接法：')
@@ -630,12 +648,15 @@ if __name__ == '__main__':
     print('  所以：元素数能预估、在意缓存性能 → 开放地址法')
     print('        元素数不确定、频繁删除       → 分离链接法')
 
-#@s 释放
+    #@s 释放
     DestroyTable(H)
     print()
     print('表已释放（逐条链表释放结点，再 free 头数组，最后 free 表结构）')
 
-#@s 结课
+    #@s 结课
     print()
     print('===== 到这里，陈越《数据结构》的六章内容全部讲完了 =====')
+
+    #@s 正常结束
+    #@d C 的 main 是 return 0;，Python 脚本正常跑完就是"正常结束"，不用写返回语句。
 #%end

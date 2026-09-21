@@ -66,7 +66,8 @@ for (const k of codeFiles) {
     }
     for (const [pre, nums] of byPrefix) {
       const asmId = pre + String(nums.length).padStart(2, '0');
-      if (g[asmId] && g[asmId].py == null) asmIds.add(asmId);
+      // 拼装视图现在也有 Python 版了，所以只认编号规律，不看有没有 py
+      if (g[asmId]) asmIds.add(asmId);
     }
   }
   let n = 0, p = 0, a = 0;

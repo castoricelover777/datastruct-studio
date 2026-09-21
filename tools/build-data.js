@@ -39,6 +39,43 @@ function findCompiler() {
   return null;
 }
 
+/** 找一个可用的 python 解释器；找不到返回 null */
+let PY_CACHE;
+function findPython() {
+  if (PY_CACHE !== undefined) return PY_CACHE;
+  for (const cand of ['python', 'python3', 'py']) {
+    try {
+      execFileSync(cand, ['--version'], { stdio: 'ignore', timeout: 8000 });
+      PY_CACHE = cand;
+      return cand;
+    } catch { /* 试下一个 */ }
+  }
+  PY_CACHE = null;
+  return null;
+}
+
+/**
+ * 用 python 跑一段完整程序，返回 stdout（失败返回 null）。
+ * 和 runProgram 一样把 \r\n 归一成 \n 再去尾，这样两边能直接比。
+ */
+function runPython(py, source, tag) {
+  fs.mkdirSync(TMP, { recursive: true });
+  const src = path.join(TMP, `${tag}.py`);
+  fs.writeFileSync(src, source, 'utf8');
+  const PIPE = ['ignore', 'pipe', 'pipe'];
+  try {
+    const out = execFileSync(py, [src], {
+      stdio: PIPE, timeout: 8000, encoding: 'utf8',
+      // 不指定的话中文在 Windows 上会按 GBK 编出去，和 C 版比就对不上了
+      env: { ...process.env, PYTHONIOENCODING: 'utf-8' },
+    });
+    return out.replace(/\r\n/g, '\n').trimEnd();
+  } catch (e) {
+    const out = e && e.stdout ? String(e.stdout) : '';
+    return out ? out.replace(/\r\n/g, '\n').trimEnd() : null;
+  }
+}
+
 /** 用 gcc 跑一段完整程序，返回 stdout（失败返回 null） */
 function runProgram(gcc, source, tag) {
   fs.mkdirSync(TMP, { recursive: true });
@@ -131,20 +168,25 @@ function matchLine(source, snippet) {
  * @param {string} prefix 模块 id 前缀，如 '01-01' 或 '02-02-singly'
  * @param {object[]} scenes 这个视图对应的动画场景（按 prefix 归属）
  * @param {string} gcc 编译器路径或 null
+ * @param {string} py python 解释器路径或 null（用来跑拼装视图，和 C 版对比）
  */
-function buildView(dir, prefix, scenes, gcc) {
+function buildView(dir, prefix, scenes, gcc, py) {
   const { modules, drivers, preamble } = loadSources(dir);
   // Python 版：同一个目录下的 modules.py（大模块的子视图也一样，各自一份），
   // 标记语法与 C 完全一样，只是注释前缀换成 #。
   // 还没写 Python 的节直接跳过，程序里就只显示 C —— 逐节铺开，不用等全部写完。
   const pyFile = path.join(dir, 'modules.py');
   let pyById = new Map();
+  let pyModules = [];        // 拼装视图要用"按 C 的顺序排好的 Python 模块"
   if (fs.existsSync(pyFile)) {
     const parsed = P.parse([{ name: 'modules.py', text: fs.readFileSync(pyFile, 'utf8') }]);
     if (parsed.modules.length === 0) {
       console.log(`  ⚠ ${prefix}: modules.py 解析出 0 个模块，可能是标记前缀或 #%end 有问题`);
     }
     pyById = new Map(parsed.modules.map((m) => [m.id, m]));
+    // 拼装视图的顺序跟 C 走：C 的模块 01..N 依次取出对应的 Python 模块。
+    // 这样两边拼出来的顺序一致，输出才能直接比。
+    pyModules = modules.map((m) => pyById.get(m.id)).filter(Boolean);
     // C 有而 Python 缺的模块报一下，别让人以为写完了
     const missing = modules.filter((m) => !pyById.has(m.id)).map((m) => m.id);
     if (missing.length && pyById.size) {
@@ -218,6 +260,26 @@ function buildView(dir, prefix, scenes, gcc) {
     short: P.assemble(modules, 'short', preamble),
     none: P.assemble(modules, 'none', preamble),
   };
+  const cExpected = gcc ? runProgram(gcc, assembled.none, `${asmId}-asm`) : null;
+
+  // Python 侧的拼装视图：Python 模块按同一顺序拼起来。
+  // 三档一样拼（P.assemblePy 会把多余的主程序块注释掉），
+  // 这样切到 Python 也能看到"整节合起来长什么样"。
+  let assembledPy = null;
+  let pyExpected = null;
+  if (pyModules.length) {
+    assembledPy = {
+      detail: P.assemblePy(pyModules, 'detail'),
+      short: P.assemblePy(pyModules, 'short'),
+      none: P.assemblePy(pyModules, 'none'),
+    };
+    pyExpected = runPython(py, assembledPy.none, `${asmId}-asm-py`);
+    // 两边都跑出来了就比一比 —— 不一致说明拼装或翻译有问题，值得当场知道
+    if (cExpected != null && pyExpected != null && cExpected !== pyExpected) {
+      console.log(`  ⚠ ${asmId}: C 与 Python 的拼装视图输出不一致（C ${cExpected.length} 字符 / Py ${pyExpected.length} 字符）`);
+    }
+  }
+
   out.push({
     id: asmId,
     key: '完整源码',
@@ -234,7 +296,13 @@ function buildView(dir, prefix, scenes, gcc) {
   codeMap[asmId] = {
     modes: assembled,
     scaffold: null,
-    expectedOutput: gcc ? runProgram(gcc, assembled.none, `${asmId}-asm`) : null,
+    expectedOutput: cExpected,
+    // 拼装视图的 Python 版：切到 Python 时显示整节拼起来的代码
+    py: assembledPy ? {
+      modes: assembledPy,
+      code: assembledPy.none,
+      codeLineCount: assembledPy.none.split('\n').filter((l) => l.trim()).length,
+    } : null,
   };
 
   return { modules: out, codeMap, animOutLocal, ranCount, animCount, sourceCount: modules.length };
@@ -244,7 +312,9 @@ function buildView(dir, prefix, scenes, gcc) {
 function main() {
   const course = JSON.parse(fs.readFileSync(path.join(ROOT, 'resources', 'course.json'), 'utf8'));
   const gcc = findCompiler();
+  const py = findPython();
   console.log(gcc ? `编译器：${gcc}` : '⚠ 没找到 gcc —— 预期输出会缺失');
+  console.log(py ? `Python：${py}（拼装视图会跑一遍，与 C 版输出对比）` : '⚠ 没找到 python —— Python 拼装视图不会有预期输出');
 
   // 动画场景（按节收集）
   const animScenes = new Map();   // sectionId -> [scene]
@@ -316,7 +386,7 @@ function main() {
           // 大模块下每个子视图有一套独立的场景文件（02-02-singly.js / 02-02-doubly.js）
           const vPrefix = `${sec.id}-${v.id}`;
           const vScenes = animScenes.get(vPrefix) || [];
-          const built = buildView(vDir, vPrefix, vScenes, gcc);
+          const built = buildView(vDir, vPrefix, vScenes, gcc, py);
           ran += built.ranCount;
           Object.assign(animOut.animations, built.animOutLocal);
           views.push({ id: v.id, title: v.title, summary: v.summary || '', type: 'view', modules: built.modules });
@@ -326,7 +396,7 @@ function main() {
         sectionEntry.views = views;
         sectionEntry.modules = [];
       } else {
-        const built = buildView(dir, sec.id, animScenes.get(sec.id) || [], gcc);
+        const built = buildView(dir, sec.id, animScenes.get(sec.id) || [], gcc, py);
         ran = built.ranCount;
         Object.assign(animOut.animations, built.animOutLocal);
         sectionModules = built.modules;

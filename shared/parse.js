@@ -228,12 +228,67 @@ function extractPreamble(text) {
   return stripComments(head.join('\n'));
 }
 
-/** 拼装视图：模块 01..N 的代码首尾相接，就是可编译的完整源码 */
+/**
+ * 拼装视图：模块 01..N 的代码首尾相接，就是可编译的完整源码
+ *
+ * C 和 Python 都用这一个。唯一的语言差异在 Python 那边：
+ * 每个含主程序的模块都会写一句 `if __name__ == '__main__':`，
+ * 直接拼起来会有好几个，程序就重复执行了 —— 所以下面的 assemblePy
+ * 会把第一个之后的都改成注释。
+ */
 function assemble(modules, mode = 'none', preamble = '') {
   const body = modules.map((m) => m.modes[mode]).join('\n\n');
   // 带上公共前缀（#include / #define）：v1.0 把它们放在"模块 01 头文件"里，
   // 新章节直接写在文件头，不带上就编不过
   return (preamble ? preamble + '\n\n' : '') + body + '\n';
+}
+
+/**
+ * Python 版的拼装视图。
+ *
+ * 和 C 版只差一件事：每个含主程序的模块结尾都写着
+ *     if __name__ == '__main__':
+ * 直接拼起来会得到好几个主程序块，跑一遍就把整节演示重复执行好几次。
+ * 所以这里只保留**第一个**，后面的整块（until 缩进回到 0 之前的所有行）
+ * 改成注释 —— 保留在视图里让人看得见"这里原本是主程序"，
+ * 而不是悄悄删掉让人以为丢了内容。
+ */
+function assemblePy(modules, mode = 'none') {
+  const out = [];
+  let seenMain = false;
+
+  for (const m of modules) {
+    // 每块先去掉首尾空行 —— 模块文件里块与块之间留了空行，
+    // 直接拼会叠出一堆空白（C 版的 assemble 有 trimTrailingBlank 处理，
+    // 这里同样要处理，否则拼出来的视图一半是空行，看着很糟）
+    const lines = m.modes[mode].replace(/^\s*\n/, '').replace(/\s+$/, '').split('\n');
+    if (out.length) out.push('');
+    let skipping = false;   // 正在注释掉"多余的主程序块"
+    for (const line of lines) {
+      const isMain = /^if __name__ == ['"]__main__['"]\s*:/.test(line);
+      const indent = line.length - line.trimStart().length;
+
+      // 多余的主程序块：从 if 那行起，到缩进回到 0（不含空行）为止
+      if (skipping && line.trim() !== '' && indent === 0 && !isMain) {
+        skipping = false;
+      }
+      if (isMain) {
+        if (seenMain) { skipping = true; out.push('# ' + line); continue; }
+        seenMain = true;
+      }
+      out.push(skipping ? (line.trim() === '' ? '' : '# ' + line) : line);
+    }
+  }
+
+  // 再把连续的多个空行压成一个 —— 拼装视图是给人读的，
+  // 和 C 版保持同样的紧凑度才好对照
+  const squeezed = [];
+  for (const line of out) {
+    if (line.trim() === '' && squeezed.length && squeezed[squeezed.length - 1].trim() === '') continue;
+    squeezed.push(line);
+  }
+  while (squeezed.length && squeezed[squeezed.length - 1].trim() === '') squeezed.pop();
+  return squeezed.join('\n') + '\n';
 }
 
 /**
@@ -378,6 +433,7 @@ function buildScaffold(modules, drivers, moduleId, options = {}) {
 module.exports = {
   parse,
   assemble,
+  assemblePy,
   renderModes,
   buildScaffold,
   buildFunctionIndex,

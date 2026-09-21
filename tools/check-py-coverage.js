@@ -32,33 +32,30 @@ for (const f of fs.readdirSync(CHP).filter((x) => x.endsWith('.json'))) {
 
 /**
  * 判断一个模块是不是"拼装视图"（完整源码）。
- * 三条依据，任意一条成立即可：
- *   1. chapters 里标了 isAssembly
- *   2. 它的 id 就在 asmIds 里
- *   3. **兜底规则**：它的 id 正好是同一视图里最大模块编号 + 1。
- *      大模块的子视图（02-02 的 singly / doubly）在 chapters 里没有单独登记，
- *      但构建时照样会追加一个拼装模块，靠这条兜底才认得出来。
+ *
+ * 编号规律：拼装视图紧跟在最后一个真实模块之后，而模块从 01 连续编号，
+ * 所以**拼装视图的编号 = 同一前缀下的模块个数**（12 个真实模块 → 拼装是 13）。
+ * 这条规律对单节视图和大模块的子视图都成立（02-02 的两个子视图就是这样，
+ * 它们在 chapters 里没单独登记，靠编号规律才认得出来）。
+ *
+ * 注意：拼装视图现在**也有** Python 版（把整节的 Python 拼起来），
+ * 所以不能再靠"有没有 py"来识别 —— 只认编号规律和 chapters 里的标记。
  */
 function markAssembly(code) {
   const groups = [];
   if (code.modules) groups.push(code.modules);
   if (code.views) for (const v of Object.keys(code.views)) groups.push(code.views[v]);
   for (const g of groups) {
-    const ids = Object.keys(g);
-    // 按"前缀 + 数字后缀"分组，同一前缀里数字最大的那个后面那个编号就是拼装视图
-    const groupsByPrefix = new Map();
-    for (const id of ids) {
+    const byPrefix = new Map();
+    for (const id of Object.keys(g)) {
       const m = /^(.*-)(\d+)$/.exec(id);
       if (!m) continue;
-      if (!groupsByPrefix.has(m[1])) groupsByPrefix.set(m[1], []);
-      groupsByPrefix.get(m[1]).push(parseInt(m[2], 10));
+      if (!byPrefix.has(m[1])) byPrefix.set(m[1], []);
+      byPrefix.get(m[1]).push(parseInt(m[2], 10));
     }
-    for (const [prefix, nums] of groupsByPrefix) {
-      // 模块从 01 连续编号，拼装视图紧跟在最后一个真实模块之后。
-      // 所以"编号个数"正好就是拼装视图的编号：12 个真实模块 → 拼装是 13。
+    for (const [prefix, nums] of byPrefix) {
       const asmId = prefix + String(nums.length).padStart(2, '0');
-      // 只在"它确实没有 Python 版"时才认定，避免把真有 Python 的模块误判
-      if (g[asmId] && g[asmId].py == null) asmIds.add(asmId);
+      if (g[asmId]) asmIds.add(asmId);
     }
   }
 }

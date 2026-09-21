@@ -1,4 +1,4 @@
-/*
+﻿/*
  * ============================================================================
  *  数据结构研习社 —— 02 线性结构 / 02-05 应用实例
  * ============================================================================
@@ -147,7 +147,7 @@ int InfixToPostfix(const char *src, char *dst)
 //@d 后缀式里没有括号的位置。
             while (top >= 0 && stack[top] != '(')
             {
-                dst[k++] = stack[--top];
+                dst[k++] = stack[top--];
             }
 //@s 把左括号也弹掉（不输出）
             if (top >= 0)
@@ -162,7 +162,7 @@ int InfixToPostfix(const char *src, char *dst)
 //@d 如果写成 >，那么 "3-4+5" 会算成 3-(4+5)，结果就错了。
         while (top >= 0 && priority(stack[top]) >= priority(c))
         {
-            dst[k++] = stack[--top];
+            dst[k++] = stack[top--];
         }
 //@s 自己再入栈
         stack[++top] = c;
@@ -171,7 +171,7 @@ int InfixToPostfix(const char *src, char *dst)
 //@s ⑤ 扫完了，把栈里剩下的全弹出来
     while (top >= 0)
     {
-        dst[k++] = stack[--top];
+        dst[k++] = stack[top--];
     }
 
 //@s 收尾：补字符串结束符

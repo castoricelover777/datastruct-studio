@@ -290,7 +290,13 @@ if __name__ == '__main__':
     N = len(kData)
 
 #@s 打印输入
-    print('输入:', ' '.join(str(x) for x in kData))
+#@d C 里是 printf("输入: ") 然后循环 printf("%d ", ...)，
+#@d 每个数字后面都跟一个空格（含最后一个），所以行尾有一个空格。
+#@d 这里照着做，两种语言的输出才能逐字节相同。
+    print('输入: ', end='')
+    for x in kData:
+        print(x, end=' ')
+    print()
     print()
 
 #@s 逐个跑，并打印各自的答案

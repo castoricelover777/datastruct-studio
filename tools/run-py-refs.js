@@ -17,11 +17,38 @@ const sec = process.argv[2];
 if (!sec) { console.error('用法: node tools/run-py-refs.js <节 id，如 02-01>'); process.exit(1); }
 
 const REF = path.join(__dirname, '..', 'resources', 'reference');
-const dir = fs.readdirSync(REF).find((d) => d.startsWith(sec));
-if (!dir) { console.error('找不到这一节: ' + sec); process.exit(1); }
+const sub = process.argv[3] || null;   // 大模块的子视图，如 singly / doubly
 
-const pyFile = path.join(REF, dir, 'modules.py');
-if (!fs.existsSync(pyFile)) { console.error('这一节还没有 modules.py'); process.exit(1); }
+// 视图目录：<节>/ 或 <节>/<视图>/
+function resolveView() {
+  const dir = fs.readdirSync(REF).find((d) => d.startsWith(sec));
+  if (!dir) return null;
+  const base = path.join(REF, dir);
+  if (sub) {
+    const sdir = path.join(base, sub);
+    return fs.existsSync(path.join(sdir, 'modules.py')) ? { label: `${dir}/${sub}`, dir: sdir } : null;
+  }
+  if (fs.existsSync(path.join(base, 'modules.py'))) return { label: dir, dir: base };
+  // 节目录下没有，看看子视图里有哪些
+  const subs = fs.readdirSync(base).filter((s) => {
+    const sdir = path.join(base, s);
+    return fs.statSync(sdir).isDirectory() && fs.existsSync(path.join(sdir, 'modules.py'));
+  });
+  if (subs.length === 1) return { label: `${dir}/${subs[0]}`, dir: path.join(base, subs[0]) };
+  if (subs.length > 1) {
+    console.error(`  这一节有多个子视图，请指定：node tools/run-py-refs.js ${sec} <${subs.join(' | ')}>`);
+    return null;
+  }
+  return null;
+}
+
+const view = resolveView();
+if (!view) {
+  console.error(`  找不到这一节的 modules.py：${sec}${sub ? '/' + sub : ''}`);
+  process.exit(1);
+}
+const { label: dir, dir: viewDir } = view;
+const pyFile = path.join(viewDir, 'modules.py');
 
 const r = P.parse([{ name: 'modules.py', text: fs.readFileSync(pyFile, 'utf8') }]);
 

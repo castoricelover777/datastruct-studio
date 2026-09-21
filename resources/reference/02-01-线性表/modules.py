@@ -258,11 +258,19 @@ class SeqList:
 #@d   这一行是 Python 的固定写法，记住就行。
 
 #@s 打印辅助函数：按顺序打印表里的每个元素
-#@d C 里要写循环加 printf，Python 直接把有效的那一段切片打印出来
+#@d C 里是循环 printf("%d ", ...)，每个数字后面都跟一个空格，包括最后一个。
+#@d 所以行尾那个空格是 C 版的真实输出，这里照着做，
+#@d 两种语言的输出才能逐字节相同，方便互相对照。
+#@d （Python 更常见的写法是 ' '.join(...)，但那样行尾会少一个空格。）
 def PrintList(tag, L):
-#@s 用切片取"有效元素"那一段，后面的空格子不打印
+#@s 先把"表名 + 长度"打出来，末尾的空格和冒号跟 C 版一致
     arr = L.data[:L.length]
-    print(f'{tag} length={L.length} :', ' '.join(str(x) for x in arr))
+    print(f'{tag} length={L.length} : ', end='')
+#@s 逐个打印元素，每个后面跟一个空格 —— 和 C 的 printf("%d ") 一样
+    for x in arr:
+        print(x, end=' ')
+#@s 最后换行
+    print()
 
 #@s 主函数：Python 用 if __name__ 的固定写法代替 C 的 main
 if __name__ == '__main__':
@@ -277,10 +285,10 @@ if __name__ == '__main__':
     L.ListInsert_Sq(3, 40)
     PrintList('追加 10 20 40 后:', L)
 
-#@s 在位序 3 处插入 30，让表变成有序的
+#@s 在下标 2（位序 3）处插入 30，让表变成有序的
 #@d 这一次要搬家 1 个元素（40 后移），刚好演示"插入要挪位置"。
     L.ListInsert_Sq(3, 30)
-    PrintList('在位序 3 处插入 30:', L)
+    PrintList('在下标 2 处插入 30:', L)
 
 #@s 查找 30 在哪
     pos = L.LocateElem_Sq(30)
@@ -290,10 +298,14 @@ if __name__ == '__main__':
     pos = L.LocateElem_Sq(99)
     print(f'查找 99 -> 位序 {pos}（0 表示没找到）')
 
-#@s 删除位序 2 上的元素（也就是 20）
-#@d 注意这里和 C 的写法差别最大：C 要传 &e 出去接，
-#@d Python 直接写两个变量接住返回值就行。
+#@s 删除位序 2 的元素，看它是不是 20
+#@d 这次要搬家 2 个元素（30、40 前移），演示"删除要往前填"。
     r, deleted = L.ListDelete_Sq(2)
-    print(f'删除位序 2 -> 返回 {r}，删掉的是 {deleted}')
+    print(f'删除位序 2 -> 拿到的元素是 {deleted}')
     PrintList('删除后:', L)
+
+#@s 越界插入应该被挡住
+    if L.ListInsert_Sq(99, 7) == ERROR:
+        print('在位序 99 插入 -> 被拒绝（越界）')
+    PrintList('越界插入后:', L)
 #%end

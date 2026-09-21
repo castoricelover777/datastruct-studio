@@ -44,23 +44,54 @@ function compileTree() {
 
 const dirs = fs.readdirSync(REF).filter((d) => fs.statSync(path.join(REF, d)).isDirectory()).sort();
 
+/**
+ * 收集"视图目录"：既包括 <节>/，也包括大模块的子视图 <节>/<视图>/。
+ * 判断依据是目录里有没有 modules.c —— 大模块的 C 是拆成 part1_*.c 等多份的，
+ * 拼起来才是一个视图，Python 版同理只写一份 modules.py。
+ */
+function collectViews() {
+  const out = [];
+  for (const d of dirs) {
+    const dir = path.join(REF, d);
+    if (fs.existsSync(path.join(dir, 'modules.c'))) { out.push({ label: d, dir }); continue; }
+    // 大模块：C 拆成多个 part*.c 放在子目录里（也可能只有 drivers.c 而无正文）
+    for (const sub of fs.readdirSync(dir)) {
+      const sdir = path.join(dir, sub);
+      if (!fs.statSync(sdir).isDirectory()) continue;
+      const hasParts = fs.readdirSync(sdir).some((f) => f.endsWith('.c') && f !== 'drivers.c');
+      if (hasParts) out.push({ label: `${d}/${sub}`, dir: sdir });
+    }
+    // 目录本身没有可识别的视图，也报一下，免得被静默漏掉
+    if (!out.some((v) => v.label.startsWith(d))) {
+      const anyC = fs.existsSync(path.join(dir, 'drivers.c'));
+      out.push({ label: d, dir, note: anyC ? '（这个目录只有 drivers.c，没有正文 .c）' : '（没有找到 .c 文件）' });
+    }
+  }
+  return out;
+}
+
+const views = collectViews();
+
 let nFiles = 0, nMods = 0, nErr = 0, nWarn = 0;
 const problems = [];
 
-for (const d of dirs) {
-  const dir = path.join(REF, d);
+for (const { label: d, dir, note } of views) {
   const pyFile = path.join(dir, 'modules.py');
-  const cFile = path.join(dir, 'modules.c');
   const hasPy = fs.existsSync(pyFile);
-  const hasC = fs.existsSync(cFile);
+  // C 侧：单文件 modules.c，或大模块拆分的多个 part*.c（都要读，拼成一个视图）
+  const cFiles = fs.readdirSync(dir).filter((f) => f.endsWith('.c') && f !== 'drivers.c').sort();
+  const hasC = cFiles.length > 0;
 
   if (only && !d.startsWith(only)) continue;
-  if (!hasPy && !hasC) continue;
+  if (!hasPy && !hasC) {
+    if (note) console.log(`  ？ ${d}  ${note}`);
+    continue;
+  }
 
   // C 版模块 id（作为"应该有哪些"的基准）
   let cIds = [];
   if (hasC) {
-    const rc = P.parse([{ name: 'modules.c', text: fs.readFileSync(cFile, 'utf8') }]);
+    const rc = P.parse(cFiles.map((f) => ({ name: f, text: fs.readFileSync(path.join(dir, f), 'utf8') })));
     cIds = rc.modules.map((m) => m.id);
   }
 

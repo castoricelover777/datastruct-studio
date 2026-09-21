@@ -134,15 +134,22 @@ function matchLine(source, snippet) {
  */
 function buildView(dir, prefix, scenes, gcc) {
   const { modules, drivers, preamble } = loadSources(dir);
-  // Python 版：同一个目录下的 modules.py，标记语法与 C 完全一样（注释前缀不同）。
+  // Python 版：同一个目录下的 modules.py（大模块的子视图也一样，各自一份），
+  // 标记语法与 C 完全一样，只是注释前缀换成 #。
   // 还没写 Python 的节直接跳过，程序里就只显示 C —— 逐节铺开，不用等全部写完。
   const pyFile = path.join(dir, 'modules.py');
   let pyById = new Map();
-  let pyOrder = [];
   if (fs.existsSync(pyFile)) {
     const parsed = P.parse([{ name: 'modules.py', text: fs.readFileSync(pyFile, 'utf8') }]);
-    pyOrder = parsed.modules;
+    if (parsed.modules.length === 0) {
+      console.log(`  ⚠ ${prefix}: modules.py 解析出 0 个模块，可能是标记前缀或 #%end 有问题`);
+    }
     pyById = new Map(parsed.modules.map((m) => [m.id, m]));
+    // C 有而 Python 缺的模块报一下，别让人以为写完了
+    const missing = modules.filter((m) => !pyById.has(m.id)).map((m) => m.id);
+    if (missing.length && pyById.size) {
+      console.log(`  ⚠ ${prefix}: Python 版还缺 ${missing.length} 个模块（${missing.slice(0, 6).join(', ')}${missing.length > 6 ? '…' : ''}）`);
+    }
   }
   const byId = new Map(modules.map((m) => [m.id, m]));
   const out = [];

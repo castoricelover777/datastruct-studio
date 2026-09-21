@@ -34,22 +34,22 @@
 
 #@s 返回最大子列和；全负时返回 0
 def MaxSubseqSum1(A, N):
-#@s 至今为止的最大值，从 0 开始（对应"空子列"）
+    #@s 至今为止的最大值，从 0 开始（对应"空子列"）
     maxSum = 0
 
-#@s 枚举左端
+    #@s 枚举左端
     for i in range(N):
-#@s 枚举右端
+        #@s 枚举右端
         for j in range(i, N):
-#@s 把 i..j 重新加一遍 —— 这一层是浪费的
+            #@s 把 i..j 重新加一遍 —— 这一层是浪费的
             thisSum = 0
             for k in range(i, j + 1):
                 thisSum += A[k]
-#@s 更大就记下来
+            #@s 更大就记下来
             if thisSum > maxSum:
                 maxSum = thisSum
 
-#@s 返回
+    #@s 返回
     return maxSum
 #%end
 
@@ -80,24 +80,24 @@ def MaxSubseqSum1(A, N):
 
 #@s 返回最大子列和
 def MaxSubseqSum2(A, N):
-#@s 最大值
+    #@s 最大值
     maxSum = 0
 
-#@s 枚举左端
+    #@s 枚举左端
     for i in range(N):
-#@s 每换一个左端，重新开始累加
+        #@s 每换一个左端，重新开始累加
         thisSum = 0
 
-#@s 右端向右推进
+        #@s 右端向右推进
         for j in range(i, N):
-#@s 只加"新进来的那个元素" —— 不再重头加
+            #@s 只加"新进来的那个元素" —— 不再重头加
             thisSum += A[j]
 
-#@s 边加边比较，所以不需要第三层循环
+            #@s 边加边比较，所以不需要第三层循环
             if thisSum > maxSum:
                 maxSum = thisSum
 
-#@s 返回
+    #@s 返回
     return maxSum
 #%end
 
@@ -146,24 +146,24 @@ def MaxSubseqSum2(A, N):
 
 #@s 从 left 到 right（闭区间）的最大子列和
 def MaxSubseqSum3(A, left, right):
-#@s 递归出口：只剩一个元素
+    #@s 递归出口：只剩一个元素
     if left == right:
-#@d 单个负数对"最大和"没有贡献（还不如空子列 0），所以返回 0。
+        #@d 单个负数对"最大和"没有贡献（还不如空子列 0），所以返回 0。
         return A[left] if A[left] > 0 else 0
 
-#@s 从中线劈开
+    #@s 从中线劈开
     mid = (left + right) // 2
 
-#@s ① 左半边的最大子列和
+    #@s ① 左半边的最大子列和
     leftSum = MaxSubseqSum3(A, left, mid)
 
-#@s ② 右半边的最大子列和
+    #@s ② 右半边的最大子列和
     rightSum = MaxSubseqSum3(A, mid + 1, right)
 
-#@s ③ 跨过中线的最大子列和：先从中线往左扫
-#@d 从中线开始**往左**累加（i 递减），一路记录最大值。
-#@d 这样得到的是"以中线结尾的最大后缀和"。
-#@d range(mid, left - 1, -1) 对应 C 的 for (i = mid; i >= left; i--)。
+    #@s ③ 跨过中线的最大子列和：先从中线往左扫
+    #@d 从中线开始**往左**累加（i 递减），一路记录最大值。
+    #@d 这样得到的是"以中线结尾的最大后缀和"。
+    #@d range(mid, left - 1, -1) 对应 C 的 for (i = mid; i >= left; i--)。
     maxLeft = 0
     s = 0
     for i in range(mid, left - 1, -1):
@@ -171,9 +171,9 @@ def MaxSubseqSum3(A, left, right):
         if s > maxLeft:
             maxLeft = s
 
-#@s 再从中线右边往右扫
-#@d 同理，得到"从中线右边开始的最大前缀和"。
-#@d 左边后缀 + 右边前缀，拼起来就是跨界的最大和 —— 而且它一定是连续的。
+    #@s 再从中线右边往右扫
+    #@d 同理，得到"从中线右边开始的最大前缀和"。
+    #@d 左边后缀 + 右边前缀，拼起来就是跨界的最大和 —— 而且它一定是连续的。
     maxRight = 0
     s = 0
     for i in range(mid + 1, right + 1):
@@ -181,17 +181,17 @@ def MaxSubseqSum3(A, left, right):
         if s > maxRight:
             maxRight = s
 
-#@s 跨界的结果
+    #@s 跨界的结果
     crossSum = maxLeft + maxRight
 
-#@s 三者取最大
-#@d C 里手写两次 if 比较，Python 直接 if 或者用内置的 max() 都行。
+    #@s 三者取最大
+    #@d C 里手写两次 if 比较，Python 直接 if 或者用内置的 max() 都行。
     if leftSum < rightSum:
         leftSum = rightSum
     if leftSum < crossSum:
         leftSum = crossSum
 
-#@s 返回
+    #@s 返回
     return leftSum
 #%end
 
@@ -238,27 +238,27 @@ def MaxSubseqSum3(A, left, right):
 
 #@s 返回最大子列和
 def MaxSubseqSum4(A, N):
-#@s 当前正在累加的这一段的和
+    #@s 当前正在累加的这一段的和
     thisSum = 0
-#@s 至今为止的最大值
+    #@s 至今为止的最大值
     maxSum = 0
 
-#@s 从头扫到尾，只扫一遍
+    #@s 从头扫到尾，只扫一遍
     for i in range(N):
-#@s 先把当前元素加进来
+        #@s 先把当前元素加进来
         thisSum += A[i]
 
-#@s 变大了就更新答案
-#@d 注意这一步在"判负"之前 —— 因为加上一个正数之后可能刚好是最大值。
+        #@s 变大了就更新答案
+        #@d 注意这一步在"判负"之前 —— 因为加上一个正数之后可能刚好是最大值。
         if thisSum > maxSum:
             maxSum = thisSum
-#@s 变成负的就没用了，扔掉重来
-#@d 用 elif 而不是再写一个 if：两者不可能同时成立（thisSum 不可能既大于 maxSum
-#@d 又小于 0，因为 maxSum 至少是 0）。写成两个 if 也不会错，但没必要。
+        #@s 变成负的就没用了，扔掉重来
+        #@d 用 elif 而不是再写一个 if：两者不可能同时成立（thisSum 不可能既大于 maxSum
+        #@d 又小于 0，因为 maxSum 至少是 0）。写成两个 if 也不会错，但没必要。
         elif thisSum < 0:
             thisSum = 0
 
-#@s 返回
+    #@s 返回
     return maxSum
 #%end
 
@@ -286,22 +286,22 @@ kData = [-2, 11, -4, 13, -5, -2]
 
 #@s 主函数：Python 用 if __name__ 的固定写法代替 C 的 main
 if __name__ == '__main__':
-#@s 元素个数
+    #@s 元素个数
     N = len(kData)
 
-#@s 打印输入
-#@d C 里是 printf("输入: ") 然后循环 printf("%d ", ...)，
-#@d 每个数字后面都跟一个空格（含最后一个），所以行尾有一个空格。
-#@d 这里照着做，两种语言的输出才能逐字节相同。
+    #@s 打印输入
+    #@d C 里是 printf("输入: ") 然后循环 printf("%d ", ...)，
+    #@d 每个数字后面都跟一个空格（含最后一个），所以行尾有一个空格。
+    #@d 这里照着做，两种语言的输出才能逐字节相同。
     print('输入: ', end='')
     for x in kData:
         print(x, end=' ')
     print()
     print()
 
-#@s 逐个跑，并打印各自的答案
-#@d 手工的算法分析看不出快慢，但把 N 放大到几万时，四个算法的耗时差别是
-#@d 天壤之别（O(N³) 要跑几分钟，O(N) 一瞬间）。这里数据小，只对比答案。
+    #@s 逐个跑，并打印各自的答案
+    #@d 手工的算法分析看不出快慢，但把 N 放大到几万时，四个算法的耗时差别是
+    #@d 天壤之别（O(N³) 要跑几分钟，O(N) 一瞬间）。这里数据小，只对比答案。
     r1 = MaxSubseqSum1(kData, N)
     print(f'算法1 三重循环 O(N^3)   -> {r1}')
 
@@ -314,15 +314,15 @@ if __name__ == '__main__':
     r4 = MaxSubseqSum4(kData, N)
     print(f'算法4 在线处理 O(N)     -> {r4}')
 
-#@s 四个答案必须一致
+    #@s 四个答案必须一致
     print()
     if r1 == r2 and r2 == r3 and r3 == r4:
         print(f'四种算法答案一致：{r1}')
     else:
         print('答案不一致 —— 有算法写错了！')
 
-#@s 边界情况：全是负数
-#@d 题目约定"空子列的和为 0"，所以全负时答案是 0 而不是最大的那个负数。
+    #@s 边界情况：全是负数
+    #@d 题目约定"空子列的和为 0"，所以全负时答案是 0 而不是最大的那个负数。
     neg = [-3, -1, -7, -2]
     n = len(neg)
     print()

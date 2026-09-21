@@ -60,12 +60,12 @@ ElemType = int
 #@d   造结点就是 LNode(10)，不用申请内存；不用了也不用管，
 #@d   没有任何变量指向它的时候 Python 自己会回收。
 class LNode:
-#@s 每个结点都要有这两个字段
+    #@s 每个结点都要有这两个字段
     def __init__(self, data=None):
-#@s 数据域，存具体元素
+        #@s 数据域，存具体元素
         self.data = data
-#@s 指针域，指向下一个结点；最后一个结点是 None
-#@d C 里叫 NULL，Python 里叫 None，含义一样
+        #@s 指针域，指向下一个结点；最后一个结点是 None
+        #@d C 里叫 NULL，Python 里叫 None，含义一样
         self.next = None
 #%end
 
@@ -87,9 +87,9 @@ class LNode:
 
 #@s 返回新结点；参数 e 是数据
 def creatNode(e):
-#@s 造一个结点，data 填 e，next 由 __init__ 置成 None
+    #@s 造一个结点，data 填 e，next 由 __init__ 置成 None
     p = LNode(e)
-#@s 把新结点交出去
+    #@s 把新结点交出去
     return p
 #%end
 
@@ -121,11 +121,11 @@ def creatNode(e):
 
 #@s 返回新建的头结点
 def InitList():
-#@s 只申请头结点，不存数据（data 留空）
+    #@s 只申请头结点，不存数据（data 留空）
     head = LNode()
-#@s 空表的标志：头结点的 next 为 None
+    #@s 空表的标志：头结点的 next 为 None
     head.next = None
-#@s 把头结点交出去
+    #@s 把头结点交出去
     return head
 #%end
 
@@ -156,26 +156,26 @@ def InitList():
 #@s 参数 head 是头结点；返回值表示成功与否
 #@d 注意这里没改 head 本身，改的是 head 后面那串，所以不需要"盒子"
 def applist(head, e):
-#@s p 是"游标"，从头结点开始；它最终会停在尾结点上
+    #@s p 是"游标"，从头结点开始；它最终会停在尾结点上
     p = head
-#@s 防御：head 为空说明没初始化过，直接报错
+    #@s 防御：head 为空说明没初始化过，直接报错
     if head is None:
         return ERROR
 
-#@s 一路向后走，直到 p 后面没有结点了
-#@d 循环条件是 p.next != None，看的永远是"下一个"，所以停下时 p 正是尾结点
+    #@s 一路向后走，直到 p 后面没有结点了
+    #@d 循环条件是 p.next != None，看的永远是"下一个"，所以停下时 p 正是尾结点
     while p.next is not None:
-#@s 指针后移一格
+        #@s 指针后移一格
         p = p.next
 
-#@s 造新结点
+    #@s 造新结点
     s = creatNode(e)
 
-#@s 把新结点接到尾结点后面，链表就延长了一节
-#@d 只需要改一处指针；原来的尾结点 next 从 None 变成指向 s
+    #@s 把新结点接到尾结点后面，链表就延长了一节
+    #@d 只需要改一处指针；原来的尾结点 next 从 None 变成指向 s
     p.next = s
 
-#@s 返回 OK 表示追加成功
+    #@s 返回 OK 表示追加成功
     return OK
 #%end
 
@@ -221,20 +221,20 @@ def applist(head, e):
 
 #@s 参数 head 是头结点；位置固定第 1 位，所以不需要 i
 def HeadInsert(head, e):
-#@s 防御：head 为空说明没初始化过，直接报错
+    #@s 防御：head 为空说明没初始化过，直接报错
     if head is None:
         return ERROR
 
-#@s 造新结点
+    #@s 造新结点
     s = creatNode(e)
 
-#@s 第一步：新结点先接住原来头结点后面的那一串
-#@d 做完这一步，链表本身还是完整的，只是多了一个"悬挂"在外面的 s
+    #@s 第一步：新结点先接住原来头结点后面的那一串
+    #@d 做完这一步，链表本身还是完整的，只是多了一个"悬挂"在外面的 s
     s.next = head.next
-#@s 第二步：头结点再指向新结点，s 正式成为第 1 个结点
+    #@s 第二步：头结点再指向新结点，s 正式成为第 1 个结点
     head.next = s
 
-#@s 插入成功
+    #@s 插入成功
     return OK
 #%end
 
@@ -262,25 +262,25 @@ def HeadInsert(head, e):
 
 #@s 返回 (状态, 第 i 个元素的值)；失败时值是 None
 def GetElem_L(head, i):
-#@s 从第 1 个"带数据的结点"开始，所以是 head.next 而不是 head
-#@d 头结点不存数据，跳过它 —— 这是带头结点链表里最常见的起点写法
+    #@s 从第 1 个"带数据的结点"开始，所以是 head.next 而不是 head
+    #@d 头结点不存数据，跳过它 —— 这是带头结点链表里最常见的起点写法
     p = head.next
-#@s 计数器 j 与 p 同步，表示"p 现在指的是第几个结点"
+    #@s 计数器 j 与 p 同步，表示"p 现在指的是第几个结点"
     j = 1
 
-#@s 边走边数，直到数到 i 或者走到表尾
-#@d p is not None 写在前面，靠短路求值保证不会对 None 取 .next
+    #@s 边走边数，直到数到 i 或者走到表尾
+    #@d p is not None 写在前面，靠短路求值保证不会对 None 取 .next
     while p is not None and j < i:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步加一
+        #@s 计数器同步加一
         j += 1
 
-#@s 越界检查：p 为空说明 i 超过表长；j > i 说明 i 小于 1
+    #@s 越界检查：p 为空说明 i 超过表长；j > i 说明 i 小于 1
     if p is None or j > i:
         return ERROR, None
 
-#@s 查找成功，把值一起交出去
+    #@s 查找成功，把值一起交出去
     return OK, p.data
 #%end
 
@@ -298,16 +298,16 @@ def GetElem_L(head, i):
 
 #@s 返回结点本身，找不到就是 None
 def LocateElem(head, e):
-#@s 同样从第一个带数据的结点开始
+    #@s 同样从第一个带数据的结点开始
     p = head.next
 
-#@s 两个条件：还没走到尾，且当前值不等于目标
-#@d 一旦 p.data == e，循环立刻停下，p 就停在第一个匹配的结点上
+    #@s 两个条件：还没走到尾，且当前值不等于目标
+    #@d 一旦 p.data == e，循环立刻停下，p 就停在第一个匹配的结点上
     while p is not None and p.data != e:
-#@s 不匹配就继续往后
+        #@s 不匹配就继续往后
         p = p.next
 
-#@s 找到返回结点，没找到时 p 已经是 None，直接返回即可
+    #@s 找到返回结点，没找到时 p 已经是 None，直接返回即可
     return p
 #%end
 
@@ -336,34 +336,34 @@ def LocateElem(head, e):
 
 #@s 参数 head 是头结点；i 是位置（从 1 开始），e 是数据
 def ListInsert(head, i, e):
-#@s p 要从头结点开始：因为插到第 1 位时，前驱就是头结点
-#@d 这正是头结点的价值 —— 第 1 位和后面位置走同一段逻辑
+    #@s p 要从头结点开始：因为插到第 1 位时，前驱就是头结点
+    #@d 这正是头结点的价值 —— 第 1 位和后面位置走同一段逻辑
     p = head
-#@s j 表示 p 当前指向第几个结点；头结点算第 0 个
+    #@s j 表示 p 当前指向第几个结点；头结点算第 0 个
     j = 0
 
-#@s 走 i-1 步，让 p 停在"第 i 个结点的前驱"上
-#@d 循环条件 j < i - 1：i = 1 时一次也不进循环，p 直接就是头结点
+    #@s 走 i-1 步，让 p 停在"第 i 个结点的前驱"上
+    #@d 循环条件 j < i - 1：i = 1 时一次也不进循环，p 直接就是头结点
     while p is not None and j < i - 1:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步
+        #@s 计数器同步
         j += 1
 
-#@s 合法性检查：p 为空说明 i-1 已经超过表长；j > i-1 说明 i < 1
-#@d 注意这里是先检查后造结点，避免产生孤儿结点
+    #@s 合法性检查：p 为空说明 i-1 已经超过表长；j > i-1 说明 i < 1
+    #@d 注意这里是先检查后造结点，避免产生孤儿结点
     if p is None or j > i - 1:
         return ERROR
 
-#@s 造新结点
+    #@s 造新结点
     s = creatNode(e)
 
-#@s 第一步：新结点先接住后面的那一串（顺序不能反！）
+    #@s 第一步：新结点先接住后面的那一串（顺序不能反！）
     s.next = p.next
-#@s 第二步：前驱再指向新结点，链表正式接上
+    #@s 第二步：前驱再指向新结点，链表正式接上
     p.next = s
 
-#@s 返回 OK 表示插入成功
+    #@s 返回 OK 表示插入成功
     return OK
 #%end
 
@@ -395,32 +395,32 @@ def ListInsert(head, i, e):
 
 #@s 返回 (状态, 被删掉的元素)；失败时值是 None
 def ListDelete(head, i):
-#@s p 从头结点起步，最终停在第 i-1 个结点
+    #@s p 从头结点起步，最终停在第 i-1 个结点
     p = head
-#@s j 记录 p 的位置，头结点记为 0
+    #@s j 记录 p 的位置，头结点记为 0
     j = 0
 
-#@s 走 i-1 步定位前驱
-#@d 这里用 p.next != None 作为条件：确保 p 后面确实有一个结点可以摘
+    #@s 走 i-1 步定位前驱
+    #@d 这里用 p.next != None 作为条件：确保 p 后面确实有一个结点可以摘
     while p.next is not None and j < i - 1:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步
+        #@s 计数器同步
         j += 1
 
-#@s 越界检查：p.next 为空说明第 i 个结点不存在
+    #@s 越界检查：p.next 为空说明第 i 个结点不存在
     if p.next is None or j > i - 1:
         return ERROR, None
 
-#@s 用 q 记住待删结点
+    #@s 用 q 记住待删结点
     q = p.next
-#@s 先把数据取出来交给调用者（顺序上和 C 版一致）
+    #@s 先把数据取出来交给调用者（顺序上和 C 版一致）
     e = q.data
-#@s 摘链：前驱直接跨过 q，指向 q 的后继
+    #@s 摘链：前驱直接跨过 q，指向 q 的后继
     p.next = q.next
 #@d 这里原本是 free(q)。Python 不用写 —— q 没人引用后就自动回收了。
 
-#@s 删除成功，把被删的值一起交出去
+    #@s 删除成功，把被删的值一起交出去
     return OK, e
 #%end
 
@@ -447,25 +447,25 @@ def ListDelete(head, i):
 
 #@s 只读操作，不需要修改链表
 def printList(head):
-#@s 从第一个真实结点开始
+    #@s 从第一个真实结点开始
     p = head.next
 
-#@s 空表单独处理，提示比"什么都不打印"清楚得多
+    #@s 空表单独处理，提示比"什么都不打印"清楚得多
     if p is None:
-#@s 空表提示
+        #@s 空表提示
         print('(空表)')
-#@s 直接返回，不再进入循环
+        #@s 直接返回，不再进入循环
         return
 
-#@s 标准遍历：先收集所有元素
+    #@s 标准遍历：先收集所有元素
     parts = []
     while p is not None:
-#@s 把当前数据装进列表
+        #@s 把当前数据装进列表
         parts.append(str(p.data))
-#@s 推进到下一个结点
+        #@s 推进到下一个结点
         p = p.next
 
-#@s 用 " -> " 连接，最后补一个 NULL 标明链表末端
+    #@s 用 " -> " 连接，最后补一个 NULL 标明链表末端
     print(' -> '.join(parts) + ' -> NULL')
 #%end
 
@@ -506,23 +506,23 @@ def printList(head):
 
 #@s 参数 box 是 [head] 这样的单元素列表，用来把 L 本身置空
 def freeList(box):
-#@s 从第一个真实结点开始清理
+    #@s 从第一个真实结点开始清理
     p = box[0].next
 
-#@s 逐个结点断开
+    #@s 逐个结点断开
     while p is not None:
-#@s 先记住下一个
-#@d C 这里是 q = p; p = p->next; free(q)，Python 只需要前两步
+        #@s 先记住下一个
+        #@d C 这里是 q = p; p = p->next; free(q)，Python 只需要前两步
         nxt = p.next
-#@s 把当前结点的 next 断掉，它就不再引用后面的结点了
+        #@s 把当前结点的 next 断掉，它就不再引用后面的结点了
         p.next = None
-#@s p 走到下一个
+        #@s p 走到下一个
         p = nxt
 
-#@s 数据结点都清完了，头结点也断开
+    #@s 数据结点都清完了，头结点也断开
     box[0].next = None
-#@s 把盒子里的 L 置成 None，调用者那边看到的也是 None
-#@d 这一步对应 C 的 *L = NULL
+    #@s 把盒子里的 L 置成 None，调用者那边看到的也是 None
+    #@d 这一步对应 C 的 *L = NULL
     box[0] = None
 #%end
 
@@ -551,115 +551,115 @@ def freeList(box):
 
 #@s 主函数：Python 用 if __name__ 的固定写法代替 C 的 main
 if __name__ == '__main__':
-#@s L 是头结点，由 InitList 创建
+    #@s L 是头结点，由 InitList 创建
     L = None
 
-#@s ========== 第 1 步：初始化 ==========
+    #@s ========== 第 1 步：初始化 ==========
     print('========== 1. 初始化 ==========')
-#@s 初始化；Python 版不会失败，但保留判断是为了和 C 版结构一致
+    #@s 初始化；Python 版不会失败，但保留判断是为了和 C 版结构一致
     L = InitList()
     if L is None:
-#@s 失败提示
+        #@s 失败提示
         print('初始化失败！')
-#@s 直接结束
+        #@s 直接结束
         raise SystemExit(ERROR)
-#@s 打印验证：此时应该是空表
+    #@s 打印验证：此时应该是空表
     print('初始化完成，当前链表：', end='')
     printList(L)
 
-#@s ========== 第 2 步：尾部追加 ==========
+    #@s ========== 第 2 步：尾部追加 ==========
     print()
     print('========== 2. 尾部追加 10 20 30 ==========')
-#@s 依次追加三个数
+    #@s 依次追加三个数
     applist(L, 10)
     applist(L, 20)
     applist(L, 30)
-#@s 期望输出：10 -> 20 -> 30 -> NULL
+    #@s 期望输出：10 -> 20 -> 30 -> NULL
     print('追加后：', end='')
     printList(L)
 
-#@s ========== 第 3 步：头插法 ==========
+    #@s ========== 第 3 步：头插法 ==========
     print()
     print('========== 3. 头插法插入 ==========')
-#@s 头插 5：不遍历，直接变成第 1 个结点
+    #@s 头插 5：不遍历，直接变成第 1 个结点
     HeadInsert(L, 5)
-#@s 期望输出：5 -> 10 -> 20 -> 30 -> NULL
+    #@s 期望输出：5 -> 10 -> 20 -> 30 -> NULL
     print('头插后：', end='')
     printList(L)
 
-#@s 再头插 3，亲眼看一次"头插会颠倒顺序"
+    #@s 再头插 3，亲眼看一次"头插会颠倒顺序"
     HeadInsert(L, 3)
-#@s 期望输出：3 -> 5 -> 10 -> 20 -> 30 -> NULL
-#@d 头插法建出来的表天生是逆序的，所以"头插法建表"常被拿来倒序一个数组
+    #@s 期望输出：3 -> 5 -> 10 -> 20 -> 30 -> NULL
+    #@d 头插法建出来的表天生是逆序的，所以"头插法建表"常被拿来倒序一个数组
     print('再头插 3 后：', end='')
     printList(L)
 
-#@s ========== 第 4 步：按位插入 ==========
+    #@s ========== 第 4 步：按位插入 ==========
     print()
     print('========== 4. 在第 2 位插入 15 ==========')
-#@s 插到第 2 个位置，即 3 和 5 之间
+    #@s 插到第 2 个位置，即 3 和 5 之间
     ListInsert(L, 2, 15)
-#@s 期望输出：3 -> 15 -> 5 -> 10 -> 20 -> 30 -> NULL
+    #@s 期望输出：3 -> 15 -> 5 -> 10 -> 20 -> 30 -> NULL
     print('插入后：', end='')
     printList(L)
 
-#@s 越界测试：在第 99 位插入必须失败
-#@d 注意这里写成一条 f-string，没有写成 print(a, b)。
-#@d 因为 Python 的 print 传多个参数时会用一个空格隔开，
-#@d 而 C 的 printf 是精确拼接、不加多余空格 —— 对照输出时就会差一格。
+    #@s 越界测试：在第 99 位插入必须失败
+    #@d 注意这里写成一条 f-string，没有写成 print(a, b)。
+    #@d 因为 Python 的 print 传多个参数时会用一个空格隔开，
+    #@d 而 C 的 printf 是精确拼接、不加多余空格 —— 对照输出时就会差一格。
     print(f'在第 99 位插入 5 ：{"成功" if ListInsert(L, 99, 5) == OK else "失败（越界，符合预期）"}')
 
-#@s ========== 第 5 步：按位查找 ==========
+    #@s ========== 第 5 步：按位查找 ==========
     print()
     print('========== 5. 按位查找 ==========')
-#@s 查第 3 个元素
-#@d 此时链表是 3 -> 15 -> 5 -> 10 -> 20 -> 30，第 3 个是 5
+    #@s 查第 3 个元素
+    #@d 此时链表是 3 -> 15 -> 5 -> 10 -> 20 -> 30，第 3 个是 5
     r, e = GetElem_L(L, 3)
     if r == OK:
-#@s 期望输出：5
+        #@s 期望输出：5
         print(f'第 3 个元素的值是 {e}')
-#@s 越界查找测试
+    #@s 越界查找测试
     r, e = GetElem_L(L, 100)
     if r == ERROR:
-#@s 期望走到这里
+        #@s 期望走到这里
         print('查第 100 个元素失败（越界，符合预期）')
 
-#@s ========== 第 6 步：按值查找 ==========
+    #@s ========== 第 6 步：按值查找 ==========
     print()
     print('========== 6. 按值查找 ==========')
-#@s 找值为 20 的结点
+    #@s 找值为 20 的结点
     p = LocateElem(L, 20)
-#@s 找到就打印它的后继信息
+    #@s 找到就打印它的后继信息
     if p is not None:
-#@s p.next 非空则说明 20 不是尾结点
+        #@s p.next 非空则说明 20 不是尾结点
         print(f'找到值为 20 的结点，它的后继是 {"一个有效结点" if p.next is not None else "NULL"}')
-#@s 找不存在的值应当返回 None
+    #@s 找不存在的值应当返回 None
     if LocateElem(L, 99) is None:
-#@s 期望走到这里
+        #@s 期望走到这里
         print('查找值 99 返回 NULL（符合预期）')
 
-#@s ========== 第 7 步：按位删除 ==========
+    #@s ========== 第 7 步：按位删除 ==========
     print()
     print('========== 7. 删除第 1 个结点 ==========')
-#@s 删除第 1 个结点，被删的值一起返回
+    #@s 删除第 1 个结点，被删的值一起返回
     r, e = ListDelete(L, 1)
     if r == OK:
-#@s 期望输出：被删除的是 3
+        #@s 期望输出：被删除的是 3
         print(f'已删除第 1 个结点，它的值是 {e}')
-#@s 期望输出：15 -> 5 -> 10 -> 20 -> 30 -> NULL
+    #@s 期望输出：15 -> 5 -> 10 -> 20 -> 30 -> NULL
     print('删除后：', end='')
     printList(L)
 
-#@s 越界删除测试
+    #@s 越界删除测试
     r, _ = ListDelete(L, 10)
     print(f'删除第 10 个结点：{"成功" if r == OK else "失败（越界，符合预期）"}')
 
-#@s ========== 第 8 步：释放整表 ==========
+    #@s ========== 第 8 步：释放整表 ==========
     print()
     print('========== 8. 释放内存 ==========')
-#@s 释放所有结点。Python 版要传"盒子"，因为它把盒子里的 L 置成 None
+    #@s 释放所有结点。Python 版要传"盒子"，因为它把盒子里的 L 置成 None
     box = [L]
     freeList(box)
-#@s 期望输出：NULL，证明 L 已被正确置空
+    #@s 期望输出：NULL，证明 L 已被正确置空
     print('释放完成，L =', 'NULL' if box[0] is None else '非 NULL')
 #%end

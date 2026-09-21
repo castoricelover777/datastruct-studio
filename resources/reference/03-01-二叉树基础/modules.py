@@ -37,13 +37,13 @@ ElemType = str
 
 #@s 二叉树结点
 class TNode:
-#@s 造结点时把数据、左孩子、右孩子三个字段一次填好
+    #@s 造结点时把数据、左孩子、右孩子三个字段一次填好
     def __init__(self, data):
-#@s 数据域
+        #@s 数据域
         self.data = data
-#@s 左孩子
+        #@s 左孩子
         self.left = None
-#@s 右孩子
+        #@s 右孩子
         self.right = None
 
 #@s 状态码（沿用前面的约定）
@@ -74,12 +74,12 @@ Status = int
 
 #@s 造一个值为 e 的孤立结点
 def NewNode(e):
-#@s 申请一块 TNode 大小的内存
-#@s 满内存要挡住
-#@s 填数据
-#@s 两个孩子都置空 —— 树里 NULL 表示"没有孩子"
+    #@s 申请一块 TNode 大小的内存
+    #@s 满内存要挡住
+    #@s 填数据
+    #@s 两个孩子都置空 —— 树里 NULL 表示"没有孩子"
     t = TNode(e)
-#@s 返回
+    #@s 返回
     return t
 #%end
 
@@ -123,28 +123,28 @@ def NewNode(e):
 #@d 如果按值传 i，每个递归层都有自己的 i，整串就被重复读了。
 #@d （Python 这边传的是列表 [0]，每一层拿到的都是同一个列表，所以进度是共享的。）
 def CreateTree(s, i):
-#@s 取出当前字符并把游标往后挪
-#@d C 写的是 s[(*i)++]：读一位、游标加一，一句话干两件事，Python 拆成两行写。
-#@d 最后那个 i[0] < len(s) 是挡越界用的，字符串读完了就给个空字符，对应 C 的 '\0'。
+    #@s 取出当前字符并把游标往后挪
+    #@d C 写的是 s[(*i)++]：读一位、游标加一，一句话干两件事，Python 拆成两行写。
+    #@d 最后那个 i[0] < len(s) 是挡越界用的，字符串读完了就给个空字符，对应 C 的 '\0'。
     c = s[i[0]] if i[0] < len(s) else ''
     i[0] += 1
 
-#@s '#' 表示这里没有结点（空孩子），直接返回 NULL
+    #@s '#' 表示这里没有结点（空孩子），直接返回 NULL
     if c == '#' or c == '':
         return None
 
-#@s 建根结点
+    #@s 建根结点
     t = NewNode(c)
 
-#@s 递归建左子树 —— 紧接着的那些字符就是左子树的先序序列
+    #@s 递归建左子树 —— 紧接着的那些字符就是左子树的先序序列
     t.left = CreateTree(s, i)
 
-#@s 再递归建右子树
-#@d 这一步看起来"什么都没做"，其实全靠 (*i) 在递归过程中被一路推进 ——
-#@d 左子树消费掉多少个字符，右子树就从下一个位置接着读。
+    #@s 再递归建右子树
+    #@d 这一步看起来"什么都没做"，其实全靠 (*i) 在递归过程中被一路推进 ——
+    #@d 左子树消费掉多少个字符，右子树就从下一个位置接着读。
     t.right = CreateTree(s, i)
 
-#@s 返回这棵子树
+    #@s 返回这棵子树
     return t
 #%end
 
@@ -183,18 +183,18 @@ def CreateTree(s, i):
 
 #@s 先序遍历并打印
 def PreOrder(T):
-#@s 空树是递归的出口
-#@d 树的每个操作几乎都以这一句开头。漏了它，遇到空结点解引用就会崩。
+    #@s 空树是递归的出口
+    #@d 树的每个操作几乎都以这一句开头。漏了它，遇到空结点解引用就会崩。
     if T is None:
         return
 
-#@s 先处理根（先序的关键就在这一句的位置）
+    #@s 先处理根（先序的关键就在这一句的位置）
     print(T.data, end=' ')
 
-#@s 再递归左子树
+    #@s 再递归左子树
     PreOrder(T.left)
 
-#@s 最后递归右子树
+    #@s 最后递归右子树
     PreOrder(T.right)
 #%end
 
@@ -234,17 +234,17 @@ def PreOrder(T):
 
 #@s 中序遍历并打印
 def InOrder(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
 
-#@s 先递归左子树 —— 先把左边走到底
+    #@s 先递归左子树 —— 先把左边走到底
     InOrder(T.left)
 
-#@s 再打印自己（中序的关键位置）
+    #@s 再打印自己（中序的关键位置）
     print(T.data, end=' ')
 
-#@s 最后递归右子树
+    #@s 最后递归右子树
     InOrder(T.right)
 #%end
 
@@ -274,17 +274,17 @@ def InOrder(T):
 
 #@s 后序遍历并打印
 def PostOrder(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
 
-#@s 先递归左子树
+    #@s 先递归左子树
     PostOrder(T.left)
 
-#@s 再递归右子树
+    #@s 再递归右子树
     PostOrder(T.right)
 
-#@s 最后才打印自己（后序的关键位置）
+    #@s 最后才打印自己（后序的关键位置）
     print(T.data, end=' ')
 #%end
 
@@ -322,34 +322,34 @@ def PostOrder(T):
 
 #@s 层序遍历并打印
 def LevelOrder(T):
-#@s 自己搭一个简单队列：定长数组 + 头尾下标
-#@d 树最多几十个结点，开 64 个位置绰绰有余。
+    #@s 自己搭一个简单队列：定长数组 + 头尾下标
+    #@d 树最多几十个结点，开 64 个位置绰绰有余。
     q = [None] * 64
-#@s 队头下标（出队处）
+    #@s 队头下标（出队处）
     front = 0
-#@s 队尾下标（入队处）
+    #@s 队尾下标（入队处）
     rear = 0
 
-#@s 空树直接返回
+    #@s 空树直接返回
     if T is None:
         return
 
-#@s ① 根入队
+    #@s ① 根入队
     q[rear] = T
     rear += 1
 
-#@s ② 队列不空就一直转
+    #@s ② 队列不空就一直转
     while front < rear:
-#@s 出队一个并打印
+        #@s 出队一个并打印
         cur = q[front]
         front += 1
         print(cur.data, end=' ')
 
-#@s ③ 左孩子入队 —— 必须先左后右，否则同一层的顺序会颠倒
+        #@s ③ 左孩子入队 —— 必须先左后右，否则同一层的顺序会颠倒
         if cur.left is not None:
             q[rear] = cur.left
             rear += 1
-#@s 右孩子入队
+        #@s 右孩子入队
         if cur.right is not None:
             q[rear] = cur.right
             rear += 1
@@ -377,14 +377,14 @@ def LevelOrder(T):
 
 #@d 先释放根就找不到孩子了，所以一定是"先孩子、后自己"。
 def FreeTree(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
-#@s 先把左子树整个释放掉
+    #@s 先把左子树整个释放掉
     FreeTree(T.left)
-#@s 再释放右子树
+    #@s 再释放右子树
     FreeTree(T.right)
-#@s 最后才释放自己
+    #@s 最后才释放自己
     T.left = None
     T.right = None
 #%end
@@ -417,23 +417,23 @@ def FreeTree(T):
 
 #@s 主函数
 if __name__ == '__main__':
-#@s 先序序列：# 表示空孩子
+    #@s 先序序列：# 表示空孩子
     s = "ABD##E##C#F##"
-#@s 读序列用的游标
-#@d 模块 03 讲过：C 的 int i 传进去要写 &i，Python 这边传的是列表 [0]。
+    #@s 读序列用的游标
+    #@d 模块 03 讲过：C 的 int i 传进去要写 &i，Python 这边传的是列表 [0]。
     i = [0]
 
-#@s 打印建树用的序列，方便对照
+    #@s 打印建树用的序列，方便对照
     print(f'建树序列(先序, #=空): {s}\n')
 
-#@s 树根
-#@s 建树
-#@d C 要先写一句 BinTree root; 声明变量，再在下面赋值；Python 不用声明，
-#@d 所以这两句注释挨在一起，都说的下面这一行。
+    #@s 树根
+    #@s 建树
+    #@d C 要先写一句 BinTree root; 声明变量，再在下面赋值；Python 不用声明，
+    #@d 所以这两句注释挨在一起，都说的下面这一行。
     root = CreateTree(s, i)
     print(f'建树完成，共读取 {i[0]} 个字符\n')
 
-#@s 四种遍历各来一遍
+    #@s 四种遍历各来一遍
     print('先序 (根 左 右): ', end='')
     PreOrder(root)
     print()
@@ -450,8 +450,8 @@ if __name__ == '__main__':
     LevelOrder(root)
     print()
 
-#@s 释放
-#@d 每个 malloc 都要有对应的 free —— 树也一样，只是顺序必须是后序。
+    #@s 释放
+    #@d 每个 malloc 都要有对应的 free —— 树也一样，只是顺序必须是后序。
     FreeTree(root)
     print('\n整棵树已释放（后序：先孩子后自己）')
 

@@ -40,11 +40,11 @@ ERROR = 0
 
 #@s 顺序表 = 一个列表 + 当前长度
 class SeqList:
-#@s 只在这里初始化两个字段，和数据无关的东西一概不放
+    #@s 只在这里初始化两个字段，和数据无关的东西一概不放
     def __init__(self):
-#@s 连续内存，元素一个挨一个
+        #@s 连续内存，元素一个挨一个
         self.data = [None] * MAXSIZE
-#@s 当前实际元素个数
+        #@s 当前实际元素个数
         self.length = 0
 #%end
 
@@ -263,48 +263,48 @@ class SeqList:
 #@d 两种语言的输出才能逐字节相同，方便互相对照。
 #@d （Python 更常见的写法是 ' '.join(...)，但那样行尾会少一个空格。）
 def PrintList(tag, L):
-#@s 先把"表名 + 长度"打出来，末尾的空格和冒号跟 C 版一致
+    #@s 先把"表名 + 长度"打出来，末尾的空格和冒号跟 C 版一致
     arr = L.data[:L.length]
     print(f'{tag} length={L.length} : ', end='')
-#@s 逐个打印元素，每个后面跟一个空格 —— 和 C 的 printf("%d ") 一样
+    #@s 逐个打印元素，每个后面跟一个空格 —— 和 C 的 printf("%d ") 一样
     for x in arr:
         print(x, end=' ')
-#@s 最后换行
+    #@s 最后换行
     print()
 
 #@s 主函数：Python 用 if __name__ 的固定写法代替 C 的 main
 if __name__ == '__main__':
-#@s 定义一张表，并先初始化 —— 别忘了，否则 length 是上一次留下的
+    #@s 定义一张表，并先初始化 —— 别忘了，否则 length 是上一次留下的
     L = SeqList()
     L.InitList_Sq()
 
-#@s 依次在表尾追加 10、20、40
-#@d 插到 length+1 的位置就是"追加到末尾"，每次只搬家 0 次，是最省的情形。
+    #@s 依次在表尾追加 10、20、40
+    #@d 插到 length+1 的位置就是"追加到末尾"，每次只搬家 0 次，是最省的情形。
     L.ListInsert_Sq(1, 10)
     L.ListInsert_Sq(2, 20)
     L.ListInsert_Sq(3, 40)
     PrintList('追加 10 20 40 后:', L)
 
-#@s 在下标 2（位序 3）处插入 30，让表变成有序的
-#@d 这一次要搬家 1 个元素（40 后移），刚好演示"插入要挪位置"。
+    #@s 在下标 2（位序 3）处插入 30，让表变成有序的
+    #@d 这一次要搬家 1 个元素（40 后移），刚好演示"插入要挪位置"。
     L.ListInsert_Sq(3, 30)
     PrintList('在下标 2 处插入 30:', L)
 
-#@s 查找 30 在哪
+    #@s 查找 30 在哪
     pos = L.LocateElem_Sq(30)
     print(f'查找 30 -> 位序 {pos}（下标 {pos - 1}）')
 
-#@s 查找一个不存在的值
+    #@s 查找一个不存在的值
     pos = L.LocateElem_Sq(99)
     print(f'查找 99 -> 位序 {pos}（0 表示没找到）')
 
-#@s 删除位序 2 的元素，看它是不是 20
-#@d 这次要搬家 2 个元素（30、40 前移），演示"删除要往前填"。
+    #@s 删除位序 2 的元素，看它是不是 20
+    #@d 这次要搬家 2 个元素（30、40 前移），演示"删除要往前填"。
     r, deleted = L.ListDelete_Sq(2)
     print(f'删除位序 2 -> 拿到的元素是 {deleted}')
     PrintList('删除后:', L)
 
-#@s 越界插入应该被挡住
+    #@s 越界插入应该被挡住
     if L.ListInsert_Sq(99, 7) == ERROR:
         print('在位序 99 插入 -> 被拒绝（越界）')
     PrintList('越界插入后:', L)

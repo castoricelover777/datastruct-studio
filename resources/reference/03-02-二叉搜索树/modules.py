@@ -52,13 +52,13 @@ ElemType = int
 #@d 差异不在结构上，而在"怎么用它" —— 这是数据结构里很常见的情况：
 #@d 同一种结构，加不同的约束，就是不同的数据结构。
 class TNode:
-#@s 造结点时把数据、左子树、右子树三个字段一次填好（C 那边得 malloc 完再一个个填）
+    #@s 造结点时把数据、左子树、右子树三个字段一次填好（C 那边得 malloc 完再一个个填）
     def __init__(self, data):
-#@s 数据域
+        #@s 数据域
         self.data = data
-#@s 左子树（都比它小）
+        #@s 左子树（都比它小）
         self.left = None
-#@s 右子树（都比它大）
+        #@s 右子树（都比它大）
         self.right = None
 
 #@s 状态码
@@ -85,12 +85,12 @@ Status = int
 
 #@s 造一个值为 x 的孤立结点
 def NewNode(x):
-#@s 申请内存
-#@s 挡住分配失败
-#@s 填值
-#@s 两个孩子置空 —— 新结点一定是叶子
+    #@s 申请内存
+    #@s 挡住分配失败
+    #@s 填值
+    #@s 两个孩子置空 —— 新结点一定是叶子
     t = TNode(x)
-#@s 返回
+    #@s 返回
     return t
 #%end
 
@@ -126,30 +126,30 @@ def NewNode(x):
 
 #@s 递归版：返回找到的结点，找不到返回 NULL
 def BSTFind(T, x):
-#@s 走到空说明整棵树都找遍了，没有
+    #@s 走到空说明整棵树都找遍了，没有
     if T is None:
         return None
 
-#@s 目标更小 → 只可能在左子树
+    #@s 目标更小 → 只可能在左子树
     if x < T.data:
         return BSTFind(T.left, x)
-#@s 目标更大 → 只可能在右子树
+    #@s 目标更大 → 只可能在右子树
     if x > T.data:
         return BSTFind(T.right, x)
 
-#@s 相等 —— 命中，返回这个结点
-#@d 返回结点地址而不是 1/0，是因为调用者往往还要用到它（比如接着删除、
-#@d 或者读它的其他字段）。
+    #@s 相等 —— 命中，返回这个结点
+    #@d 返回结点地址而不是 1/0，是因为调用者往往还要用到它（比如接着删除、
+    #@d 或者读它的其他字段）。
     return T
 
 #@s 循环版：功能相同，但不占调用栈
 #@d 尾递归可以直接改写成循环 —— 这是在工程代码里更常见的写法。
 def BSTFindIter(T, x):
-#@s 一路往下走，直到走到空或者命中
+    #@s 一路往下走，直到走到空或者命中
     while T is not None and T.data != x:
-#@s 比当前小就往左，否则往右 —— 一次比较决定一半的去留
+        #@s 比当前小就往左，否则往右 —— 一次比较决定一半的去留
         T = T.left if x < T.data else T.right
-#@s 循环结束时 T 要么是要找的结点，要么是 NULL
+    #@s 循环结束时 T 要么是要找的结点，要么是 NULL
     return T
 #%end
 
@@ -196,21 +196,21 @@ def BSTFindIter(T, x):
 #@d 为什么返回树根？因为空树插入时根本身会变，调用者必须接收返回值：
 #@d     T = BSTInsert(T, x);
 def BSTInsert(T, x):
-#@s 走到空位置 → 这就是新结点该待的地方
+    #@s 走到空位置 → 这就是新结点该待的地方
     if T is None:
         return NewNode(x)
 
-#@s 比当前小 → 递归插到左子树，并把结果接回左指针
+    #@s 比当前小 → 递归插到左子树，并把结果接回左指针
     if x < T.data:
         T.left = BSTInsert(T.left, x)
-#@s 比当前大 → 插到右子树
+    #@s 比当前大 → 插到右子树
     elif x > T.data:
         T.right = BSTInsert(T.right, x)
-#@s 相等 → 已经存在，什么也不做（也可以改成计数）
-#@d 注意这里没有 else 分支也不返回，直接落到最后的 return T。
-#@d 千万别写成"相等就插到右边" —— 那样重复值会越堆越多，中序也不再严格有序。
+    #@s 相等 → 已经存在，什么也不做（也可以改成计数）
+    #@d 注意这里没有 else 分支也不返回，直接落到最后的 return T。
+    #@d 千万别写成"相等就插到右边" —— 那样重复值会越堆越多，中序也不再严格有序。
 
-#@s 返回（可能被修改过的）根
+    #@s 返回（可能被修改过的）根
     return T
 #%end
 
@@ -251,25 +251,25 @@ def BSTInsert(T, x):
 
 #@s 返回最小结点；空树返回 NULL
 def FindMin(T):
-#@s 空树直接返回
+    #@s 空树直接返回
     if T is None:
         return None
-#@s 一路往左，直到没有左孩子
-#@d 用循环而不是递归：这里没有"回退"的需求，循环更直白也更快。
+    #@s 一路往左，直到没有左孩子
+    #@d 用循环而不是递归：这里没有"回退"的需求，循环更直白也更快。
     while T.left is not None:
         T = T.left
-#@s 停下来时 T 就是最小结点
+    #@s 停下来时 T 就是最小结点
     return T
 
 #@s 返回最大结点；空树返回 NULL
 def FindMax(T):
-#@s 空树
+    #@s 空树
     if T is None:
         return None
-#@s 一路往右
+    #@s 一路往右
     while T.right is not None:
         T = T.right
-#@s 停下来的就是最大
+    #@s 停下来的就是最大
     return T
 #%end
 
@@ -329,50 +329,50 @@ def FindMax(T):
 #@s 删除值为 x 的结点，返回新的树根
 #@d 同样要接收返回值：T = BSTDelete(T, x);
 def BSTDelete(T, x):
-#@s 被删结点
-#@d C 写的是 BinTree tmp; —— 声明一个还没赋值的临时变量；Python 不用声明，
-#@d 这里写 tmp = None 只是给这个变量安个家，下面两个分支各给它赋一次真值。
+    #@s 被删结点
+    #@d C 写的是 BinTree tmp; —— 声明一个还没赋值的临时变量；Python 不用声明，
+    #@d 这里写 tmp = None 只是给这个变量安个家，下面两个分支各给它赋一次真值。
     tmp = None
 
-#@s 走到空也没找到 —— 什么也不做
+    #@s 走到空也没找到 —— 什么也不做
     if T is None:
         return None
 
-#@s 还没找到：继续往左
+    #@s 还没找到：继续往左
     if x < T.data:
-#@d 这一句的赋值千万不能省。删完之后左子树的根可能变了，必须接回来。
+        #@d 这一句的赋值千万不能省。删完之后左子树的根可能变了，必须接回来。
         T.left = BSTDelete(T.left, x)
-#@s 继续往右
+    #@s 继续往右
     elif x > T.data:
         T.right = BSTDelete(T.right, x)
-#@s 找到了，就是当前这个结点
+    #@s 找到了，就是当前这个结点
     else:
-#@s 情况三：两个孩子都在
+        #@s 情况三：两个孩子都在
         if T.left is not None and T.right is not None:
-#@s 找右子树里的最小值当替身
+            #@s 找右子树里的最小值当替身
             tmp = FindMin(T.right)
-#@s 用替身的值覆盖自己
-#@d 只改值不改结构 —— 这是最省事的做法（如果结点里还有别的数据，
-#@d 别忘了也一起搬过来）。
+            #@s 用替身的值覆盖自己
+            #@d 只改值不改结构 —— 这是最省事的做法（如果结点里还有别的数据，
+            #@d 别忘了也一起搬过来）。
             T.data = tmp.data
-#@s 再去右子树里把那个替身结点删掉
-#@d 它能走到这里，说明它一定没有左孩子（一路向左走到底的），
-#@d 所以下一轮递归最多只有一个孩子，问题规模缩小了。
+            #@s 再去右子树里把那个替身结点删掉
+            #@d 它能走到这里，说明它一定没有左孩子（一路向左走到底的），
+            #@d 所以下一轮递归最多只有一个孩子，问题规模缩小了。
             T.right = BSTDelete(T.right, tmp.data)
-#@s 情况一 / 二：至多一个孩子
+        #@s 情况一 / 二：至多一个孩子
         else:
-#@s 先记住要被 free 的结点
+            #@s 先记住要被 free 的结点
             tmp = T
-#@s 让唯一的孩子（或者 NULL）顶替上来
-#@d 左孩子存在就用左孩子，否则用右孩子。两个都没有时
-#@d 表达式的结果正好是 NULL —— 一个式子覆盖了两种情况。
+            #@s 让唯一的孩子（或者 NULL）顶替上来
+            #@d 左孩子存在就用左孩子，否则用右孩子。两个都没有时
+            #@d 表达式的结果正好是 NULL —— 一个式子覆盖了两种情况。
             T = T.left if T.left is not None else T.right
-#@s 释放被删结点
-#@d C 这里写的是 free(tmp)，把这块内存还给系统；Python 没有 free，
-#@d 把 tmp 指向 None，剪断最后一根引用，这个结点就被 Python 收走了。
+            #@s 释放被删结点
+            #@d C 这里写的是 free(tmp)，把这块内存还给系统；Python 没有 free，
+            #@d 把 tmp 指向 None，剪断最后一根引用，这个结点就被 Python 收走了。
             tmp = None
 
-#@s 返回（可能已经换人的）根
+    #@s 返回（可能已经换人的）根
     return T
 #%end
 
@@ -400,14 +400,14 @@ def BSTDelete(T, x):
 
 #@s 中序遍历（把 BST 打成有序序列）
 def InOrder(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
-#@s 左
+    #@s 左
     InOrder(T.left)
-#@s 根
+    #@s 根
     print(T.data, end=' ')
-#@s 右
+    #@s 右
     InOrder(T.right)
 #%end
 
@@ -429,13 +429,13 @@ def InOrder(T):
 
 #@s 后序释放整棵树
 def FreeTree(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
-#@s 先孩子
+    #@s 先孩子
     FreeTree(T.left)
     FreeTree(T.right)
-#@s 后自己
+    #@s 后自己
     T.left = None
     T.right = None
 #%end
@@ -461,69 +461,69 @@ def FreeTree(T):
 
 #@s 主函数
 if __name__ == '__main__':
-#@s 树根，空树从 NULL 开始
+    #@s 树根，空树从 NULL 开始
     T = None
-#@s 插入序列
-#@d 故意选一个"顺序有点乱"的序列，这样建出来的树两边都长，不会退化成链。
+    #@s 插入序列
+    #@d 故意选一个"顺序有点乱"的序列，这样建出来的树两边都长，不会退化成链。
     ins = [8, 3, 10, 1, 6, 14, 4, 7, 13]
-#@s 计数
-#@s 查找结果
-#@d C 在这里写了 int i; 和 BinTree found; 两句声明；Python 不用声明，
-#@d i 交给下面的 for 直接给，found 在第一次赋值的时候出生，所以这两句注释挨在一起。
+    #@s 计数
+    #@s 查找结果
+    #@d C 在这里写了 int i; 和 BinTree found; 两句声明；Python 不用声明，
+    #@d i 交给下面的 for 直接给，found 在第一次赋值的时候出生，所以这两句注释挨在一起。
 
-#@s 逐个插入
+    #@s 逐个插入
     for i in range(len(ins)):
         T = BSTInsert(T, ins[i])
 
-#@s 用中序验证：必须递增
+    #@s 用中序验证：必须递增
     print(f'插入 {len(ins)} 个值后，中序遍历: ', end='')
     InOrder(T)
     print('\n（BST 的中序一定递增 —— 只要有序就说明结构是对的）\n')
 
-#@s 查找命中
+    #@s 查找命中
     found = BSTFind(T, 7)
     print(f'查 7  → {"找到" if found else "没找到"}')
-#@s 查找未命中
+    #@s 查找未命中
     found = BSTFind(T, 99)
     print(f'查 99 → {"找到" if found else "没找到（BST 里没有）"}')
 
-#@s 找最值
+    #@s 找最值
     print(f'最小值 = {FindMin(T).data}，最大值 = {FindMax(T).data}\n')
 
-#@s 情况一：删叶子
+    #@s 情况一：删叶子
     T = BSTDelete(T, 7)
     print('删 7 （叶子）     : ', end='')
     InOrder(T)
     print()
 
-#@s 情况二：删只有一个孩子的结点（13 只有左孩子 11？这里删 1 是叶子）
-#@d 为了演示情况二，15 是挂在 14 右边的单孩子结点。
+    #@s 情况二：删只有一个孩子的结点（13 只有左孩子 11？这里删 1 是叶子）
+    #@d 为了演示情况二，15 是挂在 14 右边的单孩子结点。
     T = BSTInsert(T, 15)
     T = BSTDelete(T, 14)
     print('删 14（一个孩子） : ', end='')
     InOrder(T)
     print()
 
-#@s 情况三：删有两个孩子的结点
+    #@s 情况三：删有两个孩子的结点
     T = BSTDelete(T, 3)
     print('删 3 （两个孩子） : ', end='')
     InOrder(T)
     print()
 
-#@s 删根
+    #@s 删根
     T = BSTDelete(T, 8)
     print('删 8 （树根）     : ', end='')
     InOrder(T)
     print()
 
-#@s 删一个不存在的值：应该什么都不做
+    #@s 删一个不存在的值：应该什么都不做
     T = BSTDelete(T, 999)
     print('删 999（不存在）  : ', end='')
     InOrder(T)
     print('\n（什么都没变 —— 删除不存在的值不应该破坏结构）')
 
-#@s 释放
+    #@s 释放
     FreeTree(T)
-#@s 正常结束
-#@d C 的 main 最后要写 return 0;，Python 的脚本跑完就算正常结束，不用写。
+    #@s 正常结束
+    #@d C 的 main 最后要写 return 0;，Python 的脚本跑完就算正常结束，不用写。
 #%end

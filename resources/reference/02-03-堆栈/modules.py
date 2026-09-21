@@ -47,10 +47,10 @@ ERROR = 0
 
 #@s 顺序栈 = 定长数组 + 栈顶下标
 class Stack:
-#@s 连续内存，和顺序表一样
+    #@s 连续内存，和顺序表一样
     def __init__(self):
         self.data = [None] * MAXSIZE
-#@s 栈顶元素的下标；-1 表示空栈
+        #@s 栈顶元素的下标；-1 表示空栈
         self.top = -1
 #%end
 
@@ -213,41 +213,41 @@ class Stack:
 
 #@s 打印当前栈里的内容（从栈底到栈顶）
 def PrintStack(tag, S):
-#@s 先打印标签和 top 的下标
-#@d C 要写 printf("%s top=%d : ", tag, S.top)，Python 用 f-string 直接把变量塞进
-#@d 字符串里，短一些；而且 %d 和参数对不上时 C 会打印出乱七八糟的值，
-#@d f-string 不会，写错了当场报错。
+    #@s 先打印标签和 top 的下标
+    #@d C 要写 printf("%s top=%d : ", tag, S.top)，Python 用 f-string 直接把变量塞进
+    #@d 字符串里，短一些；而且 %d 和参数对不上时 C 会打印出乱七八糟的值，
+    #@d f-string 不会，写错了当场报错。
     print(f'{tag} top={S.top} : ', end='')
-#@s 从栈底到栈顶，一个一个打印出来
-#@d 对应 C 的 for (i = 0; i <= S.top; i++)，写成 Python 就是 range(S.top + 1)：
-#@d 因为 range 不包含右端点，所以要 +1 才能把栈顶那个元素也带上。
+    #@s 从栈底到栈顶，一个一个打印出来
+    #@d 对应 C 的 for (i = 0; i <= S.top; i++)，写成 Python 就是 range(S.top + 1)：
+    #@d 因为 range 不包含右端点，所以要 +1 才能把栈顶那个元素也带上。
     for i in range(S.top + 1):
         print(f'{S.data[i]} ', end='')
-#@s 这里补一个换行 —— 前面都被 end=' ' 顶住了
+    #@s 这里补一个换行 —— 前面都被 end=' ' 顶住了
     print()
 
 #@s 主函数
 if __name__ == '__main__':
-#@s 定义一张栈
+    #@s 定义一张栈
     S = Stack()
 
-#@s 先初始化
+    #@s 先初始化
     S.InitStack()
     PrintStack('初始化后:', S)
 
-#@s 依次压入 10、20、30
+    #@s 依次压入 10、20、30
     S.Push(10)
     S.Push(20)
     S.Push(30)
     PrintStack('压入 10 20 30 后:', S)
 
-#@s 弹一个出来 —— 应该是最后进去的 30
+    #@s 弹一个出来 —— 应该是最后进去的 30
     r, e = S.Pop()
     if r == OK:
         print(f'弹出一个 -> {e}（最后进去的最先出来）')
     PrintStack('弹出后:', S)
 
-#@s 把剩下的都弹光，看顺序
+    #@s 把剩下的都弹光，看顺序
     print('继续弹出: ', end='')
     while True:
         r, e = S.Pop()
@@ -257,15 +257,15 @@ if __name__ == '__main__':
     print()
     PrintStack('弹空后:', S)
 
-#@s 空栈再弹应该被挡住
+    #@s 空栈再弹应该被挡住
     r, e = S.Pop()
     if r == ERROR:
         print('空栈弹出 -> 被拒绝（top == -1）')
 
-#@s 压满再压一个，也应该被挡住
-#@d 这一次循环压 MAXSIZE 个，正好压满（top 到 MAXSIZE-1）
-#@d C 里这段还套了一对大括号 { }，那是为了让 int i 的作用范围小一点；
-#@d Python 没有这种块作用域，也不用大括号，直接写 for 就行。
+    #@s 压满再压一个，也应该被挡住
+    #@d 这一次循环压 MAXSIZE 个，正好压满（top 到 MAXSIZE-1）
+    #@d C 里这段还套了一对大括号 { }，那是为了让 int i 的作用范围小一点；
+    #@d Python 没有这种块作用域，也不用大括号，直接写 for 就行。
     for i in range(MAXSIZE):
         S.Push(i)
     print(f'压满后 top = {S.top}（MAXSIZE-1 = {MAXSIZE - 1}）')

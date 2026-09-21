@@ -61,13 +61,13 @@ ElemType = int
 #@d Python 里写成 p.next.prior == p，判断空的那一侧要写成
 #@d p.next is not None 再去访问 .prior，否则会抛 AttributeError。
 class DuLNode:
-#@s 造结点时把数据、前驱、后继三个字段一次填好
+    #@s 造结点时把数据、前驱、后继三个字段一次填好
     def __init__(self, data=None):
-#@s 数据域，存具体元素
+        #@s 数据域，存具体元素
         self.data = data
-#@s 前驱指针：指向上一个结点（这是单链表没有的）
+        #@s 前驱指针：指向上一个结点（这是单链表没有的）
         self.prior = None
-#@s 后继指针：指向下一个结点，尾结点为 None
+        #@s 后继指针：指向下一个结点，尾结点为 None
         self.next = None
 #%end
 
@@ -90,9 +90,9 @@ class DuLNode:
 
 #@s 返回新结点；参数 e 是数据
 def creatNode(e):
-#@s 造一个孤立结点：data 填 e，两个指针都是 None
+    #@s 造一个孤立结点：data 填 e，两个指针都是 None
     p = DuLNode(e)
-#@s 把新结点交出去
+    #@s 把新结点交出去
     return p
 #%end
 
@@ -123,13 +123,13 @@ def creatNode(e):
 
 #@s 返回新建的头结点
 def InitList():
-#@s 只申请头结点，不存数据
+    #@s 只申请头结点，不存数据
     head = DuLNode()
-#@s 头结点的 prior 恒为 None，写出来是为了明确这条不变式
+    #@s 头结点的 prior 恒为 None，写出来是为了明确这条不变式
     head.prior = None
-#@s 空表的标志：头结点的 next 为 None
+    #@s 空表的标志：头结点的 next 为 None
     head.next = None
-#@s 把头结点交出去
+    #@s 把头结点交出去
     return head
 #%end
 
@@ -159,30 +159,30 @@ def InitList():
 
 #@s 参数 head 是头结点；这个函数不改 head 本身，所以不需要"盒子"
 def applist(head, e):
-#@s p 是"游标"，从头结点开始；它最终会停在尾结点上
+    #@s p 是"游标"，从头结点开始；它最终会停在尾结点上
     p = head
 
-#@s 防御：head 为空说明没初始化过，直接报错
+    #@s 防御：head 为空说明没初始化过，直接报错
     if head is None:
         return ERROR
 
-#@s 一路向后走，直到 p 后面没有结点了
-#@d 循环条件是 p.next != None，看的永远是"下一个"，所以停下时 p 正是尾结点
+    #@s 一路向后走，直到 p 后面没有结点了
+    #@d 循环条件是 p.next != None，看的永远是"下一个"，所以停下时 p 正是尾结点
     while p.next is not None:
-#@s 指针后移一格
+        #@s 指针后移一格
         p = p.next
 
-#@s 造新结点（此时它的 prior 和 next 都是 None）
+    #@s 造新结点（此时它的 prior 和 next 都是 None）
     s = creatNode(e)
 
-#@s 第一步：新结点的 prior 回指旧的尾结点
-#@d 这一句是双向链表特有的，单链表尾插没有
+    #@s 第一步：新结点的 prior 回指旧的尾结点
+    #@d 这一句是双向链表特有的，单链表尾插没有
     s.prior = p
-#@s 第二步：旧尾结点的 next 指向新结点
-#@d 两句都做完，[p] ⇄ [s] 这条双向关系才成立
+    #@s 第二步：旧尾结点的 next 指向新结点
+    #@d 两句都做完，[p] ⇄ [s] 这条双向关系才成立
     p.next = s
 
-#@s 返回 OK 表示追加成功
+    #@s 返回 OK 表示追加成功
     return OK
 #%end
 
@@ -229,26 +229,26 @@ def applist(head, e):
 
 #@s 参数 head 是头结点；位置固定在第 1 位，所以不需要 i
 def HeadInsert(head, e):
-#@s 防御：head 为空说明没初始化过
+    #@s 防御：head 为空说明没初始化过
     if head is None:
         return ERROR
 
-#@s 造新结点
+    #@s 造新结点
     s = creatNode(e)
 
-#@s 第一步：新结点的 next 接住原来头结点后面的那一串
+    #@s 第一步：新结点的 next 接住原来头结点后面的那一串
     s.next = head.next
-#@s 第二步：如果后面确实有结点，让它的 prior 改指新结点
-#@d 这一步必须判空：空表时 head.next 是 None，s.next.prior 会抛 AttributeError
+    #@s 第二步：如果后面确实有结点，让它的 prior 改指新结点
+    #@d 这一步必须判空：空表时 head.next 是 None，s.next.prior 会抛 AttributeError
     if s.next is not None:
         s.next.prior = s
-#@s 第三步：新结点的 prior 指向头结点
-#@d 头结点一定存在，所以这一句不需要判空
+    #@s 第三步：新结点的 prior 指向头结点
+    #@d 头结点一定存在，所以这一句不需要判空
     s.prior = head
-#@s 第四步：头结点指向新结点，s 正式成为第 1 个结点
+    #@s 第四步：头结点指向新结点，s 正式成为第 1 个结点
     head.next = s
 
-#@s 插入成功
+    #@s 插入成功
     return OK
 #%end
 
@@ -276,24 +276,24 @@ def HeadInsert(head, e):
 
 #@s 返回 (状态, 第 i 个元素的值)；失败时值是 None
 def GetElem_L(head, i):
-#@s 从第 1 个"带数据的结点"开始，所以是 head.next 而不是 head
+    #@s 从第 1 个"带数据的结点"开始，所以是 head.next 而不是 head
     p = head.next
-#@s 计数器 j 与 p 同步，表示"p 现在指的是第几个结点"
+    #@s 计数器 j 与 p 同步，表示"p 现在指的是第几个结点"
     j = 1
 
-#@s 边走边数，直到数到 i 或者走到表尾
-#@d p is not None 写在前面，靠短路求值保证不会对 None 取 .next
+    #@s 边走边数，直到数到 i 或者走到表尾
+    #@d p is not None 写在前面，靠短路求值保证不会对 None 取 .next
     while p is not None and j < i:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步加一
+        #@s 计数器同步加一
         j += 1
 
-#@s 越界检查：p 为空说明 i 超过表长；j > i 说明 i 小于 1
+    #@s 越界检查：p 为空说明 i 超过表长；j > i 说明 i 小于 1
     if p is None or j > i:
         return ERROR, None
 
-#@s 查找成功，把值一起交出去
+    #@s 查找成功，把值一起交出去
     return OK, p.data
 #%end
 
@@ -312,16 +312,16 @@ def GetElem_L(head, i):
 
 #@s 返回结点本身，找不到就是 None
 def LocateElem(head, e):
-#@s 同样从第一个带数据的结点开始
+    #@s 同样从第一个带数据的结点开始
     p = head.next
 
-#@s 两个条件：还没走到尾，且当前值不等于目标
-#@d 一旦 p.data == e，循环立刻停下，p 就停在第一个匹配的结点上
+    #@s 两个条件：还没走到尾，且当前值不等于目标
+    #@d 一旦 p.data == e，循环立刻停下，p 就停在第一个匹配的结点上
     while p is not None and p.data != e:
-#@s 不匹配就继续往后
+        #@s 不匹配就继续往后
         p = p.next
 
-#@s 找到返回结点，没找到时 p 已经是 None，直接返回即可
+    #@s 找到返回结点，没找到时 p 已经是 None，直接返回即可
     return p
 #%end
 
@@ -347,26 +347,26 @@ def LocateElem(head, e):
 
 #@s 要改的目标值通过 e 传进来（按值传递就够了）
 def ModifyElem(head, i, e):
-#@s 从第 1 个"带数据的结点"开始
+    #@s 从第 1 个"带数据的结点"开始
     p = head.next
-#@s 计数器 j 与 p 同步
+    #@s 计数器 j 与 p 同步
     j = 1
 
-#@s 定位到第 i 个结点（与 GetElem_L 的循环完全相同）
+    #@s 定位到第 i 个结点（与 GetElem_L 的循环完全相同）
     while p is not None and j < i:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步
+        #@s 计数器同步
         j += 1
 
-#@s 越界检查：第 i 个结点不存在就报错
+    #@s 越界检查：第 i 个结点不存在就报错
     if p is None or j > i:
         return ERROR
 
-#@s 把新值写进数据域 —— 只改数据，不碰任何指针
+    #@s 把新值写进数据域 —— 只改数据，不碰任何指针
     p.data = e
 
-#@s 修改成功
+    #@s 修改成功
     return OK
 #%end
 
@@ -419,39 +419,39 @@ def ModifyElem(head, i, e):
 
 #@s 参数 head 是头结点；i 是位置（从 1 开始），e 是数据
 def ListInsert(head, i, e):
-#@s p 要从头结点开始：因为插到第 1 位时，前驱就是头结点
+    #@s p 要从头结点开始：因为插到第 1 位时，前驱就是头结点
     p = head
-#@s j 表示 p 当前指向第几个结点；头结点算第 0 个
+    #@s j 表示 p 当前指向第几个结点；头结点算第 0 个
     j = 0
 
-#@s 走 i-1 步，让 p 停在"第 i 个结点的前驱"上
-#@d 循环条件 j < i - 1：i = 1 时一次也不进循环，p 直接就是头结点
+    #@s 走 i-1 步，让 p 停在"第 i 个结点的前驱"上
+    #@d 循环条件 j < i - 1：i = 1 时一次也不进循环，p 直接就是头结点
     while p is not None and j < i - 1:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步
+        #@s 计数器同步
         j += 1
 
-#@s 合法性检查：p 为空说明 i-1 已经超过表长；j > i-1 说明 i < 1
-#@d 先检查后造结点，避免产生孤儿结点
+    #@s 合法性检查：p 为空说明 i-1 已经超过表长；j > i-1 说明 i < 1
+    #@d 先检查后造结点，避免产生孤儿结点
     if p is None or j > i - 1:
         return ERROR
 
-#@s 造新结点
+    #@s 造新结点
     s = creatNode(e)
 
-#@s ① 新结点的 next 接住后面的那一串
+    #@s ① 新结点的 next 接住后面的那一串
     s.next = p.next
-#@s ② 后面那个结点的 prior 改指新结点（表尾时 p.next 为空，必须判空）
+    #@s ② 后面那个结点的 prior 改指新结点（表尾时 p.next 为空，必须判空）
     if p.next is not None:
         p.next.prior = s
-#@s ③ 新结点的 prior 指向前驱（前驱一定存在，不用判空）
-#@d 前驱要么是头结点，要么是真实结点，绝不会是 None —— 这正是头结点的价值
+    #@s ③ 新结点的 prior 指向前驱（前驱一定存在，不用判空）
+    #@d 前驱要么是头结点，要么是真实结点，绝不会是 None —— 这正是头结点的价值
     s.prior = p
-#@s ④ 前驱的 next 指向新结点，链表正式接上
+    #@s ④ 前驱的 next 指向新结点，链表正式接上
     p.next = s
 
-#@s 返回 OK 表示插入成功
+    #@s 返回 OK 表示插入成功
     return OK
 #%end
 
@@ -501,35 +501,35 @@ def ListInsert(head, i, e):
 
 #@s 返回 (状态, 被删掉的元素)；失败时值是 None
 def ListDelete(head, i):
-#@s 注意：直接从第 1 个数据结点起步，目标是"第 i 个结点自己"
-#@d 单链表这里必须从头结点起步去找前驱，双向链表不需要
+    #@s 注意：直接从第 1 个数据结点起步，目标是"第 i 个结点自己"
+    #@d 单链表这里必须从头结点起步去找前驱，双向链表不需要
     p = head.next
-#@s j 与 p 同步，表示 p 是第几个结点
+    #@s j 与 p 同步，表示 p 是第几个结点
     j = 1
 
-#@s 走 i 步，让 p 停在待删结点上
+    #@s 走 i 步，让 p 停在待删结点上
     while p is not None and j < i:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
-#@s 计数器同步
+        #@s 计数器同步
         j += 1
 
-#@s 越界检查：p 为空说明第 i 个结点不存在
+    #@s 越界检查：p 为空说明第 i 个结点不存在
     if p is None or j > i:
         return ERROR, None
 
-#@s 先把数据取出来交给调用者（顺序上和 C 版一致）
+    #@s 先把数据取出来交给调用者（顺序上和 C 版一致）
     e = p.data
 
-#@s ① 前驱的后继越过 p
-#@d p.prior 一定非空：它至少是头结点
+    #@s ① 前驱的后继越过 p
+    #@d p.prior 一定非空：它至少是头结点
     p.prior.next = p.next
-#@s ② 后继的前驱越过 p（删的是尾结点时 p.next 为空，必须判空）
+    #@s ② 后继的前驱越过 p（删的是尾结点时 p.next 为空，必须判空）
     if p.next is not None:
         p.next.prior = p.prior
 #@d 这里原本是 free(p)。Python 不用写 —— p 没人引用后就自动回收了。
 
-#@s 删除成功，把被删的值一起交出去
+    #@s 删除成功，把被删的值一起交出去
     return OK, e
 #%end
 
@@ -555,24 +555,24 @@ def ListDelete(head, i):
 
 #@s 只读操作，不需要修改链表
 def printList(head):
-#@s 从第一个真实结点开始
+    #@s 从第一个真实结点开始
     p = head.next
 
-#@s 空表单独处理，提示比"什么都不打印"清楚得多
+    #@s 空表单独处理，提示比"什么都不打印"清楚得多
     if p is None:
-#@s 空表提示
+        #@s 空表提示
         print('(空表)')
-#@s 直接返回，不再进入循环
+        #@s 直接返回，不再进入循环
         return
 
-#@s 标准遍历
+    #@s 标准遍历
     while p is not None:
-#@s 打印当前数据，`⇄` 表示这里是双向连接
+        #@s 打印当前数据，`⇄` 表示这里是双向连接
         print(f'{p.data} ⇄ ', end='')
-#@s 推进到下一个结点
+        #@s 推进到下一个结点
         p = p.next
 
-#@s 收尾打印 NULL，标明链表末端
+    #@s 收尾打印 NULL，标明链表末端
     print('NULL')
 #%end
 
@@ -611,31 +611,31 @@ def printList(head):
 
 #@s 只读操作，不需要修改链表
 def printListReverse(head):
-#@s 从头结点后面开始
+    #@s 从头结点后面开始
     p = head.next
 
-#@s 空表同样单独处理
+    #@s 空表同样单独处理
     if p is None:
-#@s 空表提示
+        #@s 空表提示
         print('(空表)')
-#@s 直接返回
+        #@s 直接返回
         return
 
-#@s 第一步：顺着 next 走到尾结点
-#@d 条件写 p.next != None，所以停下时 p 正好是最后一个结点
+    #@s 第一步：顺着 next 走到尾结点
+    #@d 条件写 p.next != None，所以停下时 p 正好是最后一个结点
     while p.next is not None:
-#@s 指针后移
+        #@s 指针后移
         p = p.next
 
-#@s 第二步：顺着 prior 往回走，撞到头结点就停
-#@d 这里必须写 p != head，不能写 p != None —— 头结点不能被当成数据打印
+    #@s 第二步：顺着 prior 往回走，撞到头结点就停
+    #@d 这里必须写 p != head，不能写 p != None —— 头结点不能被当成数据打印
     while p is not head:
-#@s 打印当前数据
+        #@s 打印当前数据
         print(f'{p.data} ⇄ ', end='')
-#@s 顺着 prior 往回走一格（单链表没有这一步可走）
+        #@s 顺着 prior 往回走一格（单链表没有这一步可走）
         p = p.prior
 
-#@s 收尾
+    #@s 收尾
     print('NULL')
 #%end
 
@@ -673,25 +673,25 @@ def printListReverse(head):
 
 #@s 参数 box 是 [head] 这样的单元素列表，用来把 L 本身置空
 def freeList(box):
-#@s 从第一个真实结点开始清理
+    #@s 从第一个真实结点开始清理
     p = box[0].next
 
-#@s 逐个结点断开
+    #@s 逐个结点断开
     while p is not None:
-#@s 先记住下一个
-#@d C 这里是 q = p; p = p->next; free(q)，Python 只需要前两步
+        #@s 先记住下一个
+        #@d C 这里是 q = p; p = p->next; free(q)，Python 只需要前两步
         nxt = p.next
-#@s 把当前结点两个方向都断掉
+        #@s 把当前结点两个方向都断掉
         p.prior = None
         p.next = None
-#@s p 走到下一个
+        #@s p 走到下一个
         p = nxt
 
-#@s 数据结点都清完了，头结点也断开
+    #@s 数据结点都清完了，头结点也断开
     box[0].next = None
     box[0].prior = None
-#@s 把盒子里的 L 置成 None，调用者那边看到的也是 None
-#@d 这一步对应 C 的 *L = NULL
+    #@s 把盒子里的 L 置成 None，调用者那边看到的也是 None
+    #@d 这一步对应 C 的 *L = NULL
     box[0] = None
 #%end
 
@@ -718,148 +718,148 @@ def freeList(box):
 
 #@s 主函数：Python 用 if __name__ 的固定写法代替 C 的 main
 if __name__ == '__main__':
-#@s L 是头结点，由 InitList 创建
+    #@s L 是头结点，由 InitList 创建
     L = InitList()
 
-#@s ========== 第 1 步：初始化 ==========
+    #@s ========== 第 1 步：初始化 ==========
     print('========== 1. 初始化 ==========')
-#@s 打印验证：此时应该是空表
+    #@s 打印验证：此时应该是空表
     print('初始化完成，当前链表：', end='')
     printList(L)
 
-#@s ========== 第 2 步：尾部追加 ==========
+    #@s ========== 第 2 步：尾部追加 ==========
     print()
     print('========== 2. 尾部追加 10 20 30 ==========')
-#@s 依次追加三个数
+    #@s 依次追加三个数
     applist(L, 10)
     applist(L, 20)
     applist(L, 30)
-#@s 期望正向：10 ⇄ 20 ⇄ 30 ⇄ NULL
+    #@s 期望正向：10 ⇄ 20 ⇄ 30 ⇄ NULL
     print('追加后（正向）：', end='')
     printList(L)
-#@s 期望反向：30 ⇄ 20 ⇄ 10 ⇄ NULL
-#@d 反向能打对，说明尾插时 s->prior = p 那一句没漏
+    #@s 期望反向：30 ⇄ 20 ⇄ 10 ⇄ NULL
+    #@d 反向能打对，说明尾插时 s->prior = p 那一句没漏
     print('追加后（反向）：', end='')
     printListReverse(L)
 
-#@s ========== 第 3 步：头插法 ==========
+    #@s ========== 第 3 步：头插法 ==========
     print()
     print('========== 3. 头插法插入 5 ==========')
-#@s 头插 5：不遍历，直接变成第 1 个结点
+    #@s 头插 5：不遍历，直接变成第 1 个结点
     HeadInsert(L, 5)
-#@s 期望正向：5 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
+    #@s 期望正向：5 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
     print('头插 5 后（正向）：', end='')
     printList(L)
-#@s 反向也要对：30 ⇄ 20 ⇄ 10 ⇄ 5 ⇄ NULL
+    #@s 反向也要对：30 ⇄ 20 ⇄ 10 ⇄ 5 ⇄ NULL
     print('头插 5 后（反向）：', end='')
     printListReverse(L)
 
-#@s ========== 第 4 步：按位插入 ==========
+    #@s ========== 第 4 步：按位插入 ==========
     print()
     print('========== 4. 在第 2 位插入 15 ==========')
-#@s 插到第 2 个位置，即 5 和 10 之间
+    #@s 插到第 2 个位置，即 5 和 10 之间
     ListInsert(L, 2, 15)
-#@s 期望正向：5 ⇄ 15 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
+    #@s 期望正向：5 ⇄ 15 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
     print('插入后（正向）：', end='')
     printList(L)
-#@s 反向核对：30 ⇄ 20 ⇄ 10 ⇄ 15 ⇄ 5 ⇄ NULL
+    #@s 反向核对：30 ⇄ 20 ⇄ 10 ⇄ 15 ⇄ 5 ⇄ NULL
     print('插入后（反向）：', end='')
     printListReverse(L)
 
-#@s 越界测试：在第 99 位插入必须失败
-#@d 写成一条 f-string：print 传多个参数会用空格分隔，printf 不会
+    #@s 越界测试：在第 99 位插入必须失败
+    #@d 写成一条 f-string：print 传多个参数会用空格分隔，printf 不会
     print(f'在第 99 位插入 5 ：{"成功" if ListInsert(L, 99, 5) == OK else "失败（越界，符合预期）"}')
 
-#@s ========== 第 5 步：按位查找 ==========
+    #@s ========== 第 5 步：按位查找 ==========
     print()
     print('========== 5. 按位查找 ==========')
-#@s 查第 3 个元素
-#@d 此时链表是 5 ⇄ 15 ⇄ 10 ⇄ 20 ⇄ 30，第 3 个是 10
+    #@s 查第 3 个元素
+    #@d 此时链表是 5 ⇄ 15 ⇄ 10 ⇄ 20 ⇄ 30，第 3 个是 10
     r, e = GetElem_L(L, 3)
     if r == OK:
-#@s 期望输出：10
+        #@s 期望输出：10
         print(f'第 3 个元素的值是 {e}')
-#@s 越界查找测试
+    #@s 越界查找测试
     r, e = GetElem_L(L, 100)
     if r == ERROR:
-#@s 期望走到这里
+        #@s 期望走到这里
         print('查第 100 个元素失败（越界，符合预期）')
 
-#@s ========== 第 6 步：按值查找 ==========
+    #@s ========== 第 6 步：按值查找 ==========
     print()
     print('========== 6. 按值查找 ==========')
-#@s 找值为 20 的结点
+    #@s 找值为 20 的结点
     p = LocateElem(L, 20)
-#@s 找到就同时验证前后两个方向
+    #@s 找到就同时验证前后两个方向
     if p is not None:
-#@s 双向链表的好处：拿到结点就能同时说出它的前驱和后继
+        #@s 双向链表的好处：拿到结点就能同时说出它的前驱和后继
         print(f'找到 20：它的前驱是 {p.prior.data}，后继是 {"一个有效结点" if p.next is not None else "NULL"}')
-#@s 找不存在的值应当返回 None
+    #@s 找不存在的值应当返回 None
     if LocateElem(L, 99) is None:
-#@s 期望走到这里
+        #@s 期望走到这里
         print('查找值 99 返回 NULL（符合预期）')
 
-#@s ========== 第 7 步：按位修改 ==========
+    #@s ========== 第 7 步：按位修改 ==========
     print()
     print('========== 7. 按位修改 ==========')
-#@s 把第 1 个元素改成 99
+    #@s 把第 1 个元素改成 99
     if ModifyElem(L, 1, 99) == OK:
-#@s 期望正向：99 ⇄ 15 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
+        #@s 期望正向：99 ⇄ 15 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
         print('把第 1 个元素改成 99 后：', end='')
         printList(L)
-#@s 越界修改测试
+    #@s 越界修改测试
     print(f'改第 100 个元素：{"成功" if ModifyElem(L, 100, 1) == OK else "失败（越界，符合预期）"}')
 
-#@s ========== 第 8 步：正反向遍历对照 ==========
+    #@s ========== 第 8 步：正反向遍历对照 ==========
     print()
     print('========== 8. 正反向遍历对照 ==========')
-#@s 同一份链表，两个方向必须互为倒序
+    #@s 同一份链表，两个方向必须互为倒序
     print('正向：', end='')
     printList(L)
     print('反向：', end='')
     printListReverse(L)
 
-#@s ========== 第 9 步：按位删除 ==========
+    #@s ========== 第 9 步：按位删除 ==========
     print()
     print('========== 9. 删除第 2 个结点 ==========')
-#@s 删除第 2 个结点（值为 15），被删的值一起返回
+    #@s 删除第 2 个结点（值为 15），被删的值一起返回
     r, e = ListDelete(L, 2)
     if r == OK:
-#@s 期望输出：被删除的是 15
+        #@s 期望输出：被删除的是 15
         print(f'已删除第 2 个结点，它的值是 {e}')
-#@s 期望正向：99 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
+    #@s 期望正向：99 ⇄ 10 ⇄ 20 ⇄ 30 ⇄ NULL
     print('删除后（正向）：', end='')
     printList(L)
-#@s 反向核对：30 ⇄ 20 ⇄ 10 ⇄ 99 ⇄ NULL
+    #@s 反向核对：30 ⇄ 20 ⇄ 10 ⇄ 99 ⇄ NULL
     print('删除后（反向）：', end='')
     printListReverse(L)
 
-#@s 越界删除测试
+    #@s 越界删除测试
     r, _ = ListDelete(L, 10)
     print(f'删除第 10 个结点：{"成功" if r == OK else "失败（越界，符合预期）"}')
 
-#@s ========== 第 10 步：删尾结点（专测判空分支）==========
+    #@s ========== 第 10 步：删尾结点（专测判空分支）==========
     print()
     print('========== 10. 删除尾结点 ==========')
-#@s 此时链表是 99 ⇄ 10 ⇄ 20 ⇄ 30，共 4 个结点
-#@d 删尾结点会走到 p->next == NULL 那条分支 —— 也就是不执行"后继的 prior 改指"。
-#@d 这条分支不测，删尾结点时的崩溃就永远不会被发现。
+    #@s 此时链表是 99 ⇄ 10 ⇄ 20 ⇄ 30，共 4 个结点
+    #@d 删尾结点会走到 p->next == NULL 那条分支 —— 也就是不执行"后继的 prior 改指"。
+    #@d 这条分支不测，删尾结点时的崩溃就永远不会被发现。
     r, e = ListDelete(L, 4)
     if r == OK:
         print(f'已删除尾结点，它的值是 {e}')
-#@s 期望正向：99 ⇄ 10 ⇄ 20 ⇄ NULL
+    #@s 期望正向：99 ⇄ 10 ⇄ 20 ⇄ NULL
     print('删除尾结点后（正向）：', end='')
     printList(L)
-#@s 反向核对：20 ⇄ 10 ⇄ 99 ⇄ NULL
+    #@s 反向核对：20 ⇄ 10 ⇄ 99 ⇄ NULL
     print('删除尾结点后（反向）：', end='')
     printListReverse(L)
 
-#@s ========== 第 11 步：释放整表 ==========
+    #@s ========== 第 11 步：释放整表 ==========
     print()
     print('========== 11. 释放内存 ==========')
-#@s 释放所有结点。Python 版要传"盒子"，因为它把盒子里的 L 置成 None
+    #@s 释放所有结点。Python 版要传"盒子"，因为它把盒子里的 L 置成 None
     box = [L]
     freeList(box)
-#@s 期望输出：NULL，证明 L 已被正确置空
+    #@s 期望输出：NULL，证明 L 已被正确置空
     print(f'释放完成，L = {"NULL" if box[0] is None else "非 NULL"}')
 #%end

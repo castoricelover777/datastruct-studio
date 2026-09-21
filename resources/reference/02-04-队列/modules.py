@@ -97,7 +97,7 @@ class Queue:
 #@d   C 里 Q->front 那个箭头，在 Python 里就是 self.front 这个点。
 #@d   换个写法而已，意思一模一样，也别再想"忘了写 & 怎么办"这种事了。
 
-#@s 传指针：两个指针都要改
+    #@s 传指针：两个指针都要改
     def InitQueue(self):
         #@s 队头归零
         self.front = 0
@@ -146,7 +146,7 @@ class Queue:
 #@d   C 里 e 是 ElemType（其实就是 int），Python 不写类型，
 #@d   直接 self.data[self.rear] = e 就完事了。
 
-#@s 入队
+    #@s 入队
     def EnQueue(self, e):
         #@s 先判满 —— 注意是"下一格是否会撞上 front"
         if (self.rear + 1) % MAXSIZE == self.front:
@@ -199,7 +199,7 @@ class Queue:
 #@d
 #@d   判空那句 front == rear 一模一样，出队前别忘了判。
 
-#@s 出队，元素由 e 带回
+    #@s 出队，元素由 e 带回
     def DeQueue(self):
         #@s 先判空
         if self.front == self.rear:

@@ -53,7 +53,6 @@ long countConst(int n)
 //@d
 //@d "成正比"就是这个意思。写成 O(n)。
 
-//@s 计数器
 long countLinear(int n)
 {
 //@s 计数器
@@ -96,7 +95,6 @@ long countLinear(int n)
 //@d
 //@d 记住一条：**嵌套循环相乘，并列循环相加**。
 
-//@s 计数器
 long countQuadratic(int n)
 {
 //@s 计数器

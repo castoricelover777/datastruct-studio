@@ -24,6 +24,14 @@ const pyFile = path.join(REF, dir, 'modules.py');
 if (!fs.existsSync(pyFile)) { console.error('这一节还没有 modules.py'); process.exit(1); }
 
 const r = P.parse([{ name: 'modules.py', text: fs.readFileSync(pyFile, 'utf8') }]);
+
+// 一个模块都没解析出来，多半是格式问题（标记前缀判错、缺 #%end），
+// 而不是"这一节本来就是空的" —— 直接报错，别拼个空程序还打 ✅
+if (r.modules.length === 0) {
+  console.error(`  ❌ ${dir}: 解析出 0 个模块 —— 文件格式有问题，先跑 tools/check-py-refs.js 看原因`);
+  process.exit(1);
+}
+
 // 模块 01 里的常量与 class 是后面所有方法的前提，必须在前；
 // 这里按模块顺序拼，靠 `if __name__` 判断是不是驱动器。
 const parts = [];

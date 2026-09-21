@@ -112,7 +112,7 @@ class Stack:
 #@d   但判满照样得写 —— 顺序栈的容量本来就是固定的，教材怎么写就怎么写。
 #@d
 #@d   两个小语法差别：C 的 S->top++ 在 Python 里要写成 self.top += 1
-#@d   （Python 没有 ++ 运算符），C 的 if (…) { } 在 Python 里靠缩进和冒号
+#@d   （Python 没有 ++ 运算符），C 的 if (...) { } 在 Python 里靠缩进和冒号
 #@d   划范围，少写那个冒号就会报 SyntaxError。
 
     #@s 压入一个元素 e
@@ -214,6 +214,9 @@ class Stack:
 #@s 打印当前栈里的内容（从栈底到栈顶）
 def PrintStack(tag, S):
 #@s 先打印标签和 top 的下标
+#@d C 要写 printf("%s top=%d : ", tag, S.top)，Python 用 f-string 直接把变量塞进
+#@d 字符串里，短一些；而且 %d 和参数对不上时 C 会打印出乱七八糟的值，
+#@d f-string 不会，写错了当场报错。
     print(f'{tag} top={S.top} : ', end='')
 #@s 从栈底到栈顶，一个一个打印出来
 #@d 对应 C 的 for (i = 0; i <= S.top; i++)，写成 Python 就是 range(S.top + 1)：

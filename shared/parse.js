@@ -27,12 +27,24 @@ const MODULE_RE = /^\/\/%module\s*\|\s*([^|]*)\|\s*([^|]*)\|\s*([^|]*)\|\s*([^|]
 const SUMMARY_RE = /^\/\/%summary\s*\|\s*(.*)$/;
 const DRIVER_RE = /^\/\/%driver\s*\|\s*(.*)$/;
 
-/** 注释前缀：C 用 //，Python 用 #。以 # 开头的标记行更少，放前面先判 */
-function prefixOf(raw) {
-  const t = raw.trim();
-  if (t.startsWith('//%') || t.startsWith('//@')) return '//';
-  if (t.startsWith('#%') || t.startsWith('#@')) return '#';
-  return '//';
+/**
+ * 判断这份文件是 C 还是 Python。
+ *
+ * 不能只看第一行：Python 版 modules.py 顶上完全可能先有一段普通 `# 注释`
+ * （文件干嘛的、注意什么），只看首行就会把它误判成 C，结果一个模块都解析
+ * 不出来 —— 而且上层只会看到"缺全部模块"，很误导。
+ *
+ * 改成扫描全文，找第一个标记出现的位置：
+ * 先出现 `#%`/`#@` 就是 Python，先出现 `//%`/`//@` 就是 C。
+ */
+function prefixOf(text) {
+  const src = String(text || '');
+  const py = src.search(/^[ \t]*#[%@]/m);
+  const c = src.search(/^[ \t]*\/\/[%@]/m);
+  if (py === -1 && c === -1) return '//';   // 没有标记，按 C 处理（老文件兼容）
+  if (c === -1) return '#';
+  if (py === -1) return '//';
+  return py < c ? '#' : '//';
 }
 
 /** 标记与渲染全部按前缀参数化，C 和 Python 走同一套逻辑 */

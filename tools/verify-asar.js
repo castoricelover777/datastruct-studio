@@ -48,7 +48,7 @@ for (const [f, keys] of checks) {
 // 自动拼出来的，本来就不该有独立的 Python 版，不算在分子分母里。
 // 拼装模块的识别靠"id 编号等于视图内模块个数"（模块从 01 连续编号）。
 const codeFiles = [...files.keys()].filter((k) => /data\/code\/[^/]+\.json$/.test(k));
-let totMod = 0, pyMod = 0, secs = 0, totAsm = 0;
+let totMod = 0, pyMod = 0, secs = 0, totAsm = 0, totAsmPy = 0;
 for (const k of codeFiles) {
   const j = JSON.parse(read(k));
   const groups = [];
@@ -70,24 +70,35 @@ for (const k of codeFiles) {
       if (g[asmId]) asmIds.add(asmId);
     }
   }
-  let n = 0, p = 0, a = 0;
+  let n = 0, p = 0, a = 0, ap = 0;
   for (const g of groups) {
     for (const id of Object.keys(g)) {
-      if (asmIds.has(id) || g[id].isAssembly) { a++; continue; }
+      if (asmIds.has(id) || g[id].isAssembly) { a++; if (g[id].py) ap++; continue; }
       n++; if (g[id].py) p++;
     }
   }
-  totMod += n; pyMod += p; totAsm += a;
+  totMod += n; pyMod += p; totAsm += a; totAsmPy += ap;
   if (p) secs++;
 }
-console.log(`  ${pyMod === totMod ? '✅' : '⚠'} data/code：${secs} 个小节带 Python；真实模块 ${pyMod}/${totMod} 有 py，拼装视图 ${totAsm} 个（本就不该有）`);
+const asmOk = totAsmPy === totAsm;
+console.log(`  ${pyMod === totMod ? '✅' : '⚠'} data/code：${secs} 个小节带 Python；真实模块 ${pyMod}/${totMod} 有 py`);
+console.log(`  ${asmOk ? '✅' : '⚠'} 拼装视图「完整源码」：${totAsmPy}/${totAsm} 个有 Python 版（把整节的 Python 拼起来）`);
 if (pyMod !== totMod) bad++;
+if (!asmOk) bad++;
 
 // 3) 抽查一段 Python 代码内容是否完整（不是空串）
 const sample = JSON.parse(read([...files.keys()].find((k) => k.endsWith('data/code/03-03.json'))));
 const ids = Object.keys(sample.modules).filter((i) => sample.modules[i].py);
 const one = sample.modules[ids[0]].py;
 console.log(`  ${one && one.modes.detail.length > 500 ? '✅' : '⚠'} 03-03 的 Python 详细档 ${one ? one.modes.detail.length : 0} 字符，代码 ${one ? one.codeLineCount : 0} 行`);
+
+// 4) 抽查一个拼装视图的 Python 版：要有内容，且只能有 1 个活跃的 __main__ 块
+const asmSample = JSON.parse(read([...files.keys()].find((k) => k.endsWith('data/code/02-01.json')))).modules['02-01-07'];
+const asmPy = asmSample && asmSample.py && asmSample.py.modes ? asmSample.py.modes.none : '';
+const mainCount = (asmPy.match(/^if __name__ == ['"]__main__['"]\s*:/gm) || []).length;
+const asmSampleOk = asmPy.length > 200 && mainCount === 1;
+console.log(`  ${asmSampleOk ? '✅' : '⚠'} 抽查 02-01-07 拼装视图：Python ${asmPy.split('\n').length} 行，活跃 __main__ 块 ${mainCount} 个（应为 1）`);
+if (!asmSampleOk) bad++;
 
 console.log('');
 console.log(bad ? `  ⚠ ${bad} 项没通过` : '  ✅ 打包结果包含全部 Python 相关改动');

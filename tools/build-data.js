@@ -134,6 +134,16 @@ function matchLine(source, snippet) {
  */
 function buildView(dir, prefix, scenes, gcc) {
   const { modules, drivers, preamble } = loadSources(dir);
+  // Python 版：同一个目录下的 modules.py，标记语法与 C 完全一样（注释前缀不同）。
+  // 还没写 Python 的节直接跳过，程序里就只显示 C —— 逐节铺开，不用等全部写完。
+  const pyFile = path.join(dir, 'modules.py');
+  let pyById = new Map();
+  let pyOrder = [];
+  if (fs.existsSync(pyFile)) {
+    const parsed = P.parse([{ name: 'modules.py', text: fs.readFileSync(pyFile, 'utf8') }]);
+    pyOrder = parsed.modules;
+    pyById = new Map(parsed.modules.map((m) => [m.id, m]));
+  }
   const byId = new Map(modules.map((m) => [m.id, m]));
   const out = [];
   const codeMap = {};
@@ -184,10 +194,13 @@ function buildView(dir, prefix, scenes, gcc) {
 
     if (anim) animOutLocal[id] = anim;
 
+    const py = pyById.get(m.id) || null;
     codeMap[id] = {
       modes: m.modes,
       scaffold: P.buildScaffold(modules, drivers, m.id, { preamble }),
       expectedOutput: expected,
+      // 有 Python 版就把三档代码一起带上；界面上的 C/Python 按钮据此启用
+      py: py ? { modes: py.modes, code: py.code, codeLineCount: py.codeLineCount } : null,
     };
   }
 

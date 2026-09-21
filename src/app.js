@@ -23,7 +23,7 @@
     mhBreadcrumb: $('mhBreadcrumb'), mhId: $('mhId'), mhName: $('mhName'), mhSummary: $('mhSummary'),
     mhDiff: $('mhDiff'), mhDeps: $('mhDeps'), mhLines: $('mhLines'), mhStatus: $('mhStatus'),
 
-    commentModes: $('commentModes'), viewModes: $('viewModes'), kbdHint: $('kbdHint'),
+    commentModes: $('commentModes'), viewModes: $('viewModes'), langModes: $('langModes'), kbdHint: $('kbdHint'),
     btnPrev: $('btnPrev'), btnNext: $('btnNext'), bigTabs: $('bigTabs'), btnTheme: $('btnTheme'),
 
     paneRead: $('paneRead'), readCardTitle: $('readCardTitle'), codeView: $('codeView'), btnCopyCode: $('btnCopyCode'),
@@ -66,6 +66,7 @@
     mode: 'detail',
     view: 'read',
     theme: 'light',   // 真正的取值在 init() 里由 applyTheme() 从设置读出来
+    lang: 'c',        // 当前看的是 C 还是 Python（'c' / 'py'）
 
     drafts: {},
     results: {},
@@ -91,7 +92,7 @@
 
   const currentModule = () => (state.moduleId ? (state.moduleIndex.get(state.moduleId) || {}).module : null);
 
-  /** 取某个模块的载荷（三档代码 / 脚手架 / 预期输出） */
+  /** 取某个模块的载荷（三档代码 / 脚手架 / 预期输出 / Python 版） */
   function codeOf(moduleId) {
     const secId = sectionIdOf(moduleId);
     const code = state.sections[secId] && state.sections[secId].code;
@@ -102,6 +103,28 @@
       return v && code.views[v] ? code.views[v][moduleId] : null;
     }
     return code.modules ? code.modules[moduleId] : null;
+  }
+
+  /** 这个模块有没有 Python 版（还没写 Python 的节会返回 false） */
+  function hasPy(moduleId) {
+    const p = moduleId ? codeOf(moduleId) : null;
+    return !!(p && p.py && p.py.modes);
+  }
+
+  /**
+   * 当前该显示哪一份代码。
+   * 第一个参数可以传模块 id，也可以直接传已经取好的 payload（练习模式那边手里就是 payload）。
+   * 选了 Python 但这个模块还没写 Python 时自动退回 C —— 逐节铺开，
+   * 界面上不会出现一片空白。
+   */
+  function currentModes(target, lang, mode) {
+    const p = (target && typeof target === 'object')
+      ? target
+      : codeOf(target || state.moduleId);
+    if (!p || !p.modes) return '';
+    const wantPy = (lang || state.lang) === 'py';
+    if (wantPy && p.py && p.py.modes) return p.py.modes[mode || state.mode];
+    return p.modes[mode || state.mode];
   }
 
   function sectionMeta(secId) {
@@ -124,7 +147,7 @@
   }
   function saveSettings() {
     const s = {
-      theme: state.theme, mode: state.mode, view: state.view,
+      theme: state.theme, mode: state.mode, lang: state.lang, view: state.view,
       moduleId: state.moduleId, viewId: state.viewId, expanded: state.expanded,
       refCollapsed: state.refCollapsed, sidebarCollapsed: state.sidebarCollapsed,
       animWidth: state.animWidth, animHeight: state.animHeight,
@@ -365,6 +388,24 @@
       b.classList.toggle('is-active', b.dataset.mode === state.mode));
     el.viewModes.querySelectorAll('button[data-view]').forEach((b) =>
       b.classList.toggle('is-active', b.dataset.view === state.view));
+    // 语言按钮：这个模块还没写 Python 时把 Python 灰掉，并说明原因，
+    // 而不是让人点了发现没反应
+    if (el.langModes) {
+      const py = hasPy(m && m.id);
+      el.langModes.querySelectorAll('button[data-lang]').forEach((b) => {
+        b.classList.toggle('is-active', b.dataset.lang === state.lang);
+        if (b.dataset.lang === 'py') {
+          b.disabled = !py;
+          b.title = py ? '看这个模块的 Python 版' : '这个模块还没写 Python 版';
+        }
+      });
+      // 选了 Python 但当前模块没有，就自动切回 C，避免显示成空
+      if (!py && state.lang === 'py') {
+        state.lang = 'c';
+        el.langModes.querySelectorAll('button[data-lang]').forEach((b) =>
+          b.classList.toggle('is-active', b.dataset.lang === 'c'));
+      }
+    }
     const pb = el.viewModes.querySelector('[data-view="practice"]');
     if (pb) {
       pb.disabled = noPractice;
@@ -458,8 +499,8 @@
     el.compareTitle.textContent = '对比：' + pair.label;
     el.compareLeftHead.textContent = '单链表 · ' + pair.singly;
     el.compareRightHead.textContent = '双链表 · ' + pair.doubly;
-    el.compareLeft.innerHTML = HL.codeViewHtml(left.modes[state.mode]);
-    el.compareRight.innerHTML = HL.codeViewHtml(right.modes[state.mode]);
+    el.compareLeft.innerHTML = HL.codeViewHtml(currentModes(pair.singly, state.lang, state.mode));
+    el.compareRight.innerHTML = HL.codeViewHtml(currentModes(pair.doubly, state.lang, state.mode));
     // 把双链表里"多出来的 prior 相关行"标出来（PRD 3.2 的对比视图灵魂）
     el.compareRight.querySelectorAll('.code-line').forEach((n) => {
       const t = n.textContent || '';
@@ -474,7 +515,7 @@
     if (!m) return;
     const payload = codeOf(m.id);
     if (!payload) { el.codeView.innerHTML = '<div class="out-line is-message">代码加载中…</div>'; return; }
-    el.codeView.innerHTML = HL.codeViewHtml(payload.modes[state.mode]);
+    el.codeView.innerHTML = HL.codeViewHtml(currentModes(m.id, state.lang, state.mode));
     renderPlayer();
     setPane('read');
   }
@@ -643,7 +684,7 @@
     const payload = m ? codeOf(m.id) : null;
     if (!payload) return;
     if (state.compareMode) {
-      const r = DF.render(extractAnswer(editor.getValue()), payload.modes[state.mode]);
+      const r = DF.render(extractAnswer(editor.getValue()), currentModes(payload, state.lang, state.mode));
       el.refView.innerHTML = r.html;
       el.refCardTitle.textContent = '对比结果（- 漏写 / + 多写 / ~ 写法不同）';
       const s = r.stats;
@@ -652,7 +693,7 @@
       renderTree();
       renderHeader();
     } else {
-      el.refView.innerHTML = HL.codeViewHtml(payload.modes[state.mode]);
+      el.refView.innerHTML = HL.codeViewHtml(currentModes(m.id, state.lang, state.mode));
       el.refCardTitle.textContent = '官方实现 · ' + label(state.mode);
       el.outputStatus.textContent = '';
     }
@@ -799,6 +840,17 @@
     saveSettings();
   }
 
+  /** 切 C / Python。没写 Python 的模块由 syncViewButtons 兜住 */
+  function setLang(lang) {
+    if (['c', 'py'].indexOf(lang) < 0) return;
+    state.lang = lang;
+    syncViewButtons();
+    if (state.viewId === 'compare') renderCompareView();
+    else if (state.view === 'practice' && currentModule() && currentModule().hasPractice) renderReference();
+    else renderRead();
+    saveSettings();
+  }
+
   // ============================================================ 事件
   function bind() {
     el.tree.addEventListener('click', async function (e) {
@@ -847,6 +899,10 @@
       const b = e.target.closest('button[data-mode]');
       if (b) setCommentMode(b.dataset.mode);
     });
+    if (el.langModes) el.langModes.addEventListener('click', function (e) {
+      const b = e.target.closest('button[data-lang]');
+      if (b && !b.disabled) setLang(b.dataset.lang);
+    });
     el.viewModes.addEventListener('click', function (e) {
       const b = e.target.closest('button[data-view]');
       if (b && !b.disabled) switchView(b.dataset.view);
@@ -868,7 +924,7 @@
       const m = currentModule();
       const payload = m ? codeOf(m.id) : null;
       if (!payload) return;
-      await window.studio.copy(payload.modes[state.mode]);
+      await window.studio.copy(currentModes(m.id, state.lang, state.mode));
       const old = el.btnCopyCode.textContent;
       el.btnCopyCode.textContent = '已复制';
       setTimeout(function () { el.btnCopyCode.textContent = old; }, 1200);
@@ -1120,6 +1176,7 @@
     const persisted = restore('settings', {});
     applyTheme(persisted.theme);
     state.mode = ['detail', 'short', 'none'].indexOf(persisted.mode) >= 0 ? persisted.mode : 'detail';
+    state.lang = persisted.lang === 'py' ? 'py' : 'c';
     state.view = ['read', 'practice'].indexOf(persisted.view) >= 0 ? persisted.view : 'read';
     state.expanded = persisted.expanded || {};
     state.refCollapsed = !!persisted.refCollapsed;

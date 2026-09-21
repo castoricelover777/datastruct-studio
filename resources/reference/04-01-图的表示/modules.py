@@ -46,13 +46,10 @@
 #@d
 #@d ============ 这段 Python 和 C 有什么不一样 ============
 #@d
-#@d   C 的 struct 只是把几个字段摆在一起，真正那块地是靠 MGraph G; 在栈上占出来的；
-#@d   Python 写个 class，MGraph() 一调用，矩阵格子就在 __init__ 里铺好了，没有 malloc。
-#@d   最要小心的是矩阵那一行：[[0] * MAXV for _ in range(MAXV)] 才是 MAXV 条各管各的列表；
-#@d   写成 [[0] * MAXV] * MAXV 就等于把同一条列表抄了 MAXV 遍，改 g[0][1] 会连
-#@d   g[1][1]、g[2][1]……一起改掉，整个图就全乱了 —— 这是 Python 里很有名的一个坑。
-#@d   还有 C 的 struct AdjNode *next 存的是地址（没有下一个就是 NULL），
-#@d   Python 的 next 存的就是"另一个 AdjNode"，没有下一个就是 None。
+#@d   C 的 struct 只是把字段摆好，那块地是靠 MGraph G; 在栈上占出来的；Python 写个 class，
+#@d   MGraph() 一调用，矩阵格子就在 __init__ 里铺好了，没有 malloc 也没有 free。
+#@d   矩阵那行要用 [[0] * MAXV for _ in range(MAXV)]，这样才是 MAXV 条各管各的列表；
+#@d   写成 [[0] * MAXV] * MAXV 就是把同一条列表抄了 MAXV 遍，改一个格子会连着一列一起变。
 
 #@s 最多多少个顶点
 #@d Python 没有 #define，宏就是一个普通常量，值照抄 C 的 100。
@@ -65,17 +62,17 @@ INF = 65535
 
 #@s 邻接矩阵存图
 class MGraph:
-#@d C 的 struct 里直接就有 int g[MAXV][MAXV]，Python 的 class 只摆字段名，
-#@d 具体那一大块矩阵是 __init__ 里现造的。
+    #@d C 的 struct 里直接就有 int g[MAXV][MAXV]，Python 的 class 只摆字段名，
+    #@d 具体那一大块矩阵是 __init__ 里现造的。
     def __init__(self):
-#@s 顶点数
+        #@s 顶点数
         self.nv = 0
-#@s 边数
+        #@s 边数
         self.ne = 0
-#@s 矩阵：g[i][j] 为 0 表示无边，非 0 表示有边（或权值）
-#@d 一定是 [[0] * MAXV for _ in range(MAXV)]：for 每转一圈造一条新列表。
-#@d 千万别图省事写 [[0] * MAXV] * MAXV —— 那是同一条列表被引用 MAXV 次，
-#@d 图改一行，所有行跟着一起变。
+        #@s 矩阵：g[i][j] 为 0 表示无边，非 0 表示有边（或权值）
+        #@d 一定是 [[0] * MAXV for _ in range(MAXV)]：for 每转一圈造一条新列表。
+        #@d 千万别图省事写 [[0] * MAXV] * MAXV —— 那是同一条列表被引用 MAXV 次，
+        #@d 图改一行，所有行跟着一起变。
         self.g = [[0] * MAXV for _ in range(MAXV)]
 
 #@s 邻接表的边结点
@@ -83,25 +80,25 @@ class MGraph:
 #@d Python 直接 AdjNode(3, 1) 就造好了，也没有 free 这一说。
 class AdjNode:
     def __init__(self, adjv=0, weight=0):
-#@s 这个邻居的顶点编号
+        #@s 这个邻居的顶点编号
         self.adjv = adjv
-#@s 边的权值（无权图可以忽略）
+        #@s 边的权值（无权图可以忽略）
         self.weight = weight
-#@s 下一个邻居
-#@d C 那句 struct AdjNode *next; 存的是下一个结点的地址，Python 存的是结点本身，
-#@d 没有下一个就存 None（对应 C 的 NULL）。
+        #@s 下一个邻居
+        #@d C 那句 struct AdjNode *next; 存的是下一个结点的地址，Python 存的是结点本身，
+        #@d 没有下一个就存 None（对应 C 的 NULL）。
         self.next = None
 
 #@s 邻接表存图
 class LGraph:
     def __init__(self):
-#@s 每个顶点一条链表，head[i] 是顶点 i 的邻居链表头
-#@d C 的 AdjList head[MAXV] 是 MAXV 个指针，类型别名 AdjList 在这里用不上了：
-#@d Python 的 head 就是 MAXV 个格子，格子里要么是 AdjNode，要么是 None。
+        #@s 每个顶点一条链表，head[i] 是顶点 i 的邻居链表头
+        #@d C 的 AdjList head[MAXV] 是 MAXV 个指针，类型别名 AdjList 在这里用不上了：
+        #@d Python 的 head 就是 MAXV 个格子，格子里要么是 AdjNode，要么是 None。
         self.head = [None] * MAXV
-#@s 顶点数
+        #@s 顶点数
         self.nv = 0
-#@s 边数
+        #@s 边数
         self.ne = 0
 
 #@s 状态码
@@ -140,27 +137,28 @@ Status = int
 #@s 用边表建一个邻接矩阵存的无向图
 #@d edges 每条边两个端点，edgeCount 是边数
 def CreateMatrix(G, nv, edges, edgeCount):
-#@s 记下顶点数
+    #@s 记下顶点数
     G.nv = nv
-#@s 记下边数
+    #@s 记下边数
     G.ne = edgeCount
 
-#@s 循环用
-#@d C 在函数开头有一行 int i, j; 提前把循环变量声明出来；Python 不用声明，
-#@d 下面的 for 自己就把 i、j 造好了，这句注释就跟着第一个 for 走。
-#@s ① 矩阵清零
+    #@s 循环用
+    #@d C 在函数开头有一行 int i, j; 提前把循环变量声明出来；Python 不用声明，
+    #@d 下面的 for 自己就把 i、j 造好了，这句注释就跟着第一个 for 走。
+    #@s ① 矩阵清零
     for i in range(nv):
         for j in range(nv):
             G.g[i][j] = 0
 
-#@s ② 逐条边填格子
+    #@s ② 逐条边填格子
     for i in range(edgeCount):
-#@s 取出两个端点
+        #@s 取出两个端点
         u = edges[i][0]
         v = edges[i][1]
 
-#@s 无向图：两个方向都要填
-#@d 有向图这里只写 G.g[u][v] = 1 就够了。
+        #@s 无向图：两个方向都要填
+        #@d 有向图这里只写 G->g[u][v] = 1 就够了。
+        #@d （这句是照 C 版原话抄的；Python 里没有箭头，这一行要写成 G.g[u][v] = 1。）
         G.g[u][v] = 1
         G.g[v][u] = 1
 
@@ -169,7 +167,7 @@ def CreateMatrix(G, nv, edges, edgeCount):
 #@d C 返回的是 int，不是 0 就是 1；Python 的 != 直接给 True / False，
 #@d 拿去 if 判断完全一样，只是别指望打印出来是 0 和 1。
 def HasEdge(G, i, j):
-#@s 直接查表
+    #@s 直接查表
     return G.g[i][j] != 0
 #%end
 
@@ -210,48 +208,47 @@ def HasEdge(G, i, j):
 #@d
 #@d   边结点不用 malloc 了，AdjNode(v, w) 一调用结点就有实体了，
 #@d   所以 C 里 malloc 加"分配失败就退出"那一段整块不见了，也没有 free 要还。
-#@d   C 的 AdjNode *p 是"指向结点的指针"，Python 里就是一个普通变量 p，
-#@d   要么指着某个结点，要么是 None；取字段一律用点，没有 -> 也没有 NULL。
-#@d   注意 Python 的变量本来存的就是对象的引用，所以"指针"和"对象"在这里是一回事。
+#@d   C 的 AdjNode *p 是"指向结点的指针"，Python 里就是一个普通变量 p，要么指着某个结点，
+#@d   要么是 None；取字段一律用点，没有 -> 也没有 NULL。
 
 #@s 在顶点 u 的链表头部插一个邻居 v
 #@d 单独抽出来是因为要调用两次（u 那边一次、v 那边一次）。
 def AddEdgeNode(G, u, v, w):
-#@s 造一个边结点
-#@s 分配失败要挡住
-#@s 填内容
-#@d C 的三件事 —— malloc 一块内存、挡住 NULL、逐个字段赋值 ——
-#@d Python 一句 AdjNode(v, w) 全包了：adjv 和 weight 由构造函数填好，
-#@d next 也是在那里置成 None 的。"分配失败"这条分支不用写，
-#@d Python 真分不出来会自己抛异常。
+    #@s 造一个边结点
+    #@s 分配失败要挡住
+    #@s 填内容
+    #@d C 的三件事 —— malloc 一块内存、挡住 NULL、逐个字段赋值 ——
+    #@d Python 一句 AdjNode(v, w) 全包了：adjv 和 weight 由构造函数填好，
+    #@d next 也是在那里置成 None 的。"分配失败"这条分支不用写，
+    #@d Python 真分不出来会自己抛异常。
     node = AdjNode(v, w)
 
-#@s 头插：新结点指向原来的第一个
+    #@s 头插：新结点指向原来的第一个
     node.next = G.head[u]
 
-#@s 链表头改成新结点
+    #@s 链表头改成新结点
     G.head[u] = node
 
 #@s 用边表建一个邻接表存的无向图
 def CreateList(G, nv, edges, edgeCount):
-#@s 记下规模
+    #@s 记下规模
     G.nv = nv
     G.ne = edgeCount
 
-#@s 循环用
-#@d C 在函数开头有一行 int i; 提前声明循环变量；Python 的 for 自己造，不用写。
-#@s ① 所有链表头置空
+    #@s 循环用
+    #@d C 在函数开头有一行 int i; 提前声明循环变量；Python 的 for 自己造，不用写。
+    #@s ① 所有链表头置空
     for i in range(nv):
         G.head[i] = None
 
-#@s ② 逐条边插两个结点
+    #@s ② 逐条边插两个结点
     for i in range(edgeCount):
         u = edges[i][0]
         v = edges[i][1]
 
-#@s u 的邻居里加上 v
+        #@s u 的邻居里加上 v
         AddEdgeNode(G, u, v, 1)
-#@s v 的邻居里加上 u —— 别漏
+        #@s v 的邻居里加上 u —— 别漏
         AddEdgeNode(G, v, u, 1)
 
 #@s 判断 i 和 j 之间有没有边
@@ -259,22 +256,22 @@ def CreateList(G, nv, edges, edgeCount):
 #@d C 找到返回 1、没找到返回 0；Python 直接返回 True / False，
 #@d 意思一样，拿去做条件判断也一样。
 def HasEdgeList(G, i, j):
-#@s 顺着 i 的链表找
+    #@s 顺着 i 的链表找
     p = G.head[i]
 
     while p is not None:
-#@s 找到了
+        #@s 找到了
         if p.adjv == j:
             return True
-#@s 下一个
+        #@s 下一个
         p = p.next
 
-#@s 找完了也没有
+    #@s 找完了也没有
     return False
 
 #@s 数一数顶点 i 有几个邻居（也就是它的度）
 def DegreeOf(G, i):
-#@s 遍历计数
+    #@s 遍历计数
     p = G.head[i]
     count = 0
 
@@ -298,32 +295,32 @@ def DegreeOf(G, i):
 #@d   还有那个三元表达式：C 写 cond ? A : B，Python 写成 A if cond else B，条件跑中间去了。
 
 def PrintMatrix(G):
-#@s 循环用
-#@d C 在这里有一行 int i, j; 提前声明两个循环变量；Python 的 for 自己造，不用写。
-#@s 对称性检查
+    #@s 循环用
+    #@d C 在这里有一行 int i, j; 提前声明两个循环变量；Python 的 for 自己造，不用写。
+    #@s 对称性检查
     symmetric = 1
 
-#@s 打印列号
-#@d C 是 printf("     ")，只打五个空格不换行；Python 的 print 默认会换行，
-#@d 必须补一句 end='' 才是同样的效果。
+    #@s 打印列号
+    #@d C 是 printf("     ")，只打五个空格不换行；Python 的 print 默认会换行，
+    #@d 必须补一句 end='' 才是同样的效果。
     print('     ', end='')
     for j in range(G.nv):
         print(f'{j:3d}', end='')
     print()
 
-#@s 逐行打印
+    #@s 逐行打印
     for i in range(G.nv):
         print(f'{i:3d} [', end='')
 
         for j in range(G.nv):
             print(f'{G.g[i][j]:3d}', end='')
 
-#@s 顺便检查对称
+            #@s 顺便检查对称
             if G.g[i][j] != G.g[j][i]:
                 symmetric = 0
         print(' ]')
 
-#@s 报告对称性
+    #@s 报告对称性
     print(f'\n无向图的邻接矩阵一定对称: {"是（检查通过）" if symmetric else "不是（有问题）"}')
 #%end
 
@@ -341,10 +338,10 @@ def PrintMatrix(G):
 
 #@s 打印邻接表
 def PrintList(G):
-#@s 循环用
-#@s 遍历指针
-#@d C 在这里有 int i; 和 AdjNode *p; 两行声明；Python 都不用提前声明，
-#@d i 由 for 造出来，p 到用的时候直接赋值。
+    #@s 循环用
+    #@s 遍历指针
+    #@d C 在这里有 int i; 和 AdjNode *p; 两行声明；Python 都不用提前声明，
+    #@d i 由 for 造出来，p 到用的时候直接赋值。
     for i in range(G.nv):
         print(f'{i:2d} → ', end='')
         p = G.head[i]
@@ -368,25 +365,25 @@ def PrintList(G):
 #@d   其实这个函数一行不写也不会漏内存，留着就是为了和 C 版对着看。
 
 def FreeList(G):
-#@s 循环用
-#@s 当前结点和下一个
-#@d C 在这里有 int i; 和 AdjNode *p, *q; 两行声明；Python 不用提前声明，
-#@d i 由 for 造出来，p、q 到用的时候直接赋值。
+    #@s 循环用
+    #@s 当前结点和下一个
+    #@d C 在这里有 int i; 和 AdjNode *p, *q; 两行声明；Python 不用提前声明，
+    #@d i 由 for 造出来，p、q 到用的时候直接赋值。
     for i in range(G.nv):
         p = G.head[i]
 
         while p is not None:
-#@s 先记住下一个
+            #@s 先记住下一个
             q = p.next
-#@s 再释放当前
-#@d C 这里写的是 free(p)。Python 没有 free，改成把 p.next 剪断；
-#@d q 已经把下一个结点记住了，所以剪断之后还走得下去。
+            #@s 再释放当前
+            #@d C 这里写的是 free(p)。Python 没有 free，改成把 p.next 剪断；
+            #@d q 已经把下一个结点记住了，所以剪断之后还走得下去。
             p.next = None
-#@s 往后走
+            #@s 往后走
             p = q
 
-#@s 链表头置空，防止变成野指针
-#@d C 的 NULL 到 Python 就是 None；这里不会有野指针，只是"这条链表我不管了"。
+        #@s 链表头置空，防止变成野指针
+        #@d C 的 NULL 到 Python 就是 None；这里不会有野指针，只是"这条链表我不管了"。
         G.head[i] = None
 #%end
 
@@ -402,52 +399,50 @@ def FreeList(G):
 #@d
 #@d ============ 这段 Python 和 C 有什么不一样 ============
 #@d
-#@d   C 的 int main(void) 由系统自动调用；Python 要自己写一句：
-#@d       if __name__ == '__main__':
+#@d   C 的 int main(void) 由系统自动调用；Python 要自己写一句 if __name__ == '__main__'，
 #@d   意思是"只有直接运行这个文件才走这里，被别的文件 import 时不走"。
 #@d   printf 全换成 print；C 里靠三元表达式挑"有 / 无"的地方，Python 写成
 #@d   "有" if HasEdge(G, 0, 2) else "无" —— 条件和结果的位置是反的。
-#@d   C 最后要 return 0;，Python 的脚本跑完就算正常结束，不用写。
 
 #@s 主函数
 if __name__ == '__main__':
-#@s 图：0-1，1-2，2-3，3-0（一个正方形）
-#@d 四条边、四个顶点，刚好是个环。
-#@d C 的 static const int edges[][2] 到 Python 就是 [(0, 1), (1, 2), (2, 3), (3, 0)]，
-#@d 后面照样写 edges[i][0]、edges[i][1]，取法没变。
+    #@s 图：0-1，1-2，2-3，3-0（一个正方形）
+    #@d 四条边、四个顶点，刚好是个环。
+    #@d C 的 static const int edges[][2] 到 Python 就是 [(0, 1), (1, 2), (2, 3), (3, 0)]，
+    #@d 后面照样写 edges[i][0]、edges[i][1]，取法没变。
     edges = [(0, 1), (1, 2), (2, 3), (3, 0)]
-#@s 顶点数
+    #@s 顶点数
     nv = 4
-#@s 边数
+    #@s 边数
     ne = 4
-#@s 邻接矩阵
-#@s 邻接表
-#@d C 这两行只是在栈上声明两个变量，里面的矩阵还是脏的；
-#@d Python 的 MGraph() / LGraph() 一调用，100×100 的矩阵和 100 个空链表头就都备好了，
-#@d 所以这两句 C 代码合成下面两行。
+    #@s 邻接矩阵
+    #@s 邻接表
+    #@d C 这两行只是在栈上声明两个变量，里面的矩阵还是脏的；
+    #@d Python 的 MGraph() / LGraph() 一调用，100×100 的矩阵和 100 个空链表头就都备好了，
+    #@d 所以这两句 C 代码合成下面两行。
     G = MGraph()
     L = LGraph()
 
-#@s 打印图的样子
-#@d C 的 printf("...\n") 换成 print('...')；最后那句原本有两个 \n，Python 这边
-#@d 写成 print('        3 ── 2\n') 才对得上，多一个空行都不能少。
+    #@s 打印图的样子
+    #@d C 的 printf("...\n") 换成 print('...')；最后那句原本有两个 \n，Python 这边
+    #@d 写成 print('        3 ── 2\n') 才对得上，多一个空行都不能少。
     print('图：0-1，1-2，2-3，3-0')
     print('        0 ── 1')
     print('        │    │')
     print('        3 ── 2\n')
 
-#@s 建矩阵存法
-#@d C 传的是 &G（结构体的地址），Python 直接传 G 这个对象，函数里改的是同一个图。
+    #@s 建矩阵存法
+    #@d C 传的是 &G（结构体的地址），Python 直接传 G 这个对象，函数里改的是同一个图。
     CreateMatrix(G, nv, edges, ne)
     print('=== 邻接矩阵 ===')
     PrintMatrix(G)
 
-#@s 建表存法
+    #@s 建表存法
     CreateList(L, nv, edges, ne)
     print('\n=== 邻接表 ===')
     PrintList(L)
 
-#@s 对比两种查边的速度
+    #@s 对比两种查边的速度
     print('\n=== 查边对比 ===')
     print('查 0 和 2 有没有边：')
     print(f'  邻接矩阵 {"有" if HasEdge(G, 0, 2) else "无"}（一次数组访问）')
@@ -456,26 +451,26 @@ if __name__ == '__main__':
     print(f'  邻接矩阵 {"有" if HasEdge(G, 0, 1) else "无"}')
     print(f'  邻接表   {"有" if HasEdgeList(L, 0, 1) else "无"}')
 
-#@s 数度数
+    #@s 数度数
     print('\n=== 每个顶点的度 ===')
-#@s 循环用
-#@d C 在函数开头有一行 int i; 提前声明循环变量；Python 的 for 自己造，不用写，
-#@d 这句注释就跟着下面这个 for 走。
+    #@s 循环用
+    #@d C 在函数开头有一行 int i; 提前声明循环变量；Python 的 for 自己造，不用写，
+    #@d 这句注释就跟着下面这个 for 走。
     for i in range(nv):
         print(f'  顶点 {i} 的度 = {DegreeOf(L, i)}')
     print('（无向图里每个点的度就是它邻居的个数，也就是它在链表里的结点数）')
 
-#@s 空间对比
+    #@s 空间对比
     print('\n=== 空间对比 ===')
     print(f'  邻接矩阵：{nv} × {nv} = {nv * nv} 个 int')
     print(f'  邻接表  ：{nv} 个链表头 + {2 * ne} 个边结点')
     print('（顶点多了差距会非常明显：1000 个点时是 100 万 对 5000）')
 
-#@s 释放邻接表
-#@d 矩阵不用释放（它是结构体里的固定数组），表必须释放。
+    #@s 释放邻接表
+    #@d 矩阵不用释放（它是结构体里的固定数组），表必须释放。
     FreeList(L)
     print('\n邻接表已释放（矩阵不用释放，它是固定数组）')
 
-#@s 正常结束
-#@d C 的 main 最后要写 return 0;，Python 的脚本跑完就算正常结束，不用写。
+    #@s 正常结束
+    #@d C 的 main 最后要写 return 0;，Python 的脚本跑完就算正常结束，不用写。
 #%end

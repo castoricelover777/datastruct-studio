@@ -23,26 +23,25 @@
 #@d
 #@d   C 的 typedef struct AVLNode {...} 只是画了张"格子图"，真结点得 malloc 出来才能用；
 #@d   Python 写个 class，AVLNode(5) 一调用结点就造好了，没有 malloc 也没有 free。
-#@d   C 的 *left / *right 存的是地址，AVLTree 还是个"指向结点的指针"类型；
-#@d   Python 里 left / right 直接存"另一个 AVLNode"，没孩子就存 None，
-#@d   AVLTree 这个名字也不用再定义 —— 变量里装的就是结点本身。
+#@d   C 的 *left / *right 存的是地址，AVLTree 是指向结点的指针类型；Python 里
+#@d   left / right 直接存"另一个 AVLNode"，没孩子就存 None，AVLTree 这个名字不用再定义。
 
 #@s 数据元素类型
 ElemType = int
 
 #@s AVL 结点：比普通二叉树多一个 height
 class AVLNode:
-#@s 造结点时把数据、左子树、右子树、高度四个字段一次填好（C 那边得 malloc 完再一个个填）
+    #@s 造结点时把数据、左子树、右子树、高度四个字段一次填好（C 那边得 malloc 完再一个个填）
     def __init__(self, data):
-#@s 数据域
+        #@s 数据域
         self.data = data
-#@s 左子树
+        #@s 左子树
         self.left = None
-#@s 右子树
+        #@s 右子树
         self.right = None
-#@d 新结点是叶子，高度先记成 1 —— C 里这一步写在 AVLInsert 的 malloc 后面
-#@d （node->height = 1），Python 挪到构造里，省得每造一个结点都补一句。
-#@s 以自己为根的子树高度（空树记 0）
+        #@d 新结点是叶子，高度先记成 1 —— C 里这一步写在 AVLInsert 的 malloc 后面
+        #@d （node->height = 1），Python 挪到构造里，省得每造一个结点都补一句。
+        #@s 以自己为根的子树高度（空树记 0）
         self.height = 1
 
 #@s 状态码
@@ -79,10 +78,10 @@ Status = int
 
 #@s 取高度：空树是 0
 def GetHeight(T):
-#@s 空树高度 0
+    #@s 空树高度 0
     if T is None:
         return 0
-#@s 否则就是存着的那个值
+    #@s 否则就是存着的那个值
     return T.height
 
 #@s 取两个数的较大者
@@ -92,19 +91,19 @@ def MaxInt(a, b):
 #@s 重新计算 T 的高度并写回
 #@d 前提：T 的左右孩子高度都已经是对的
 def UpdateHeight(T):
-#@s 空树不用管
+    #@s 空树不用管
     if T is None:
         return
-#@s 高度 = 两个孩子里高的那个 + 1
+    #@s 高度 = 两个孩子里高的那个 + 1
     T.height = MaxInt(GetHeight(T.left), GetHeight(T.right)) + 1
 
 #@s 平衡因子 = 左高 - 右高
 #@d AVL 要求它只能是 -1、0、1。绝对值到 2 就必须旋转了。
 def BalanceFactor(T):
-#@s 空树认为平衡
+    #@s 空树认为平衡
     if T is None:
         return 0
-#@s 左减右
+    #@s 左减右
     return GetHeight(T.left) - GetHeight(T.right)
 #%end
 
@@ -154,22 +153,22 @@ def BalanceFactor(T):
 
 #@s 右单旋（处理 LL 情况），返回新的子树根
 def RotateLL(T):
-#@s ① 新根就是左孩子
+    #@s ① 新根就是左孩子
     newRoot = T.left
 
-#@s ② 把新根的右子树挂到旧根的左边
-#@d 这一步最容易忘。忘了就直接丢一棵子树。
+    #@s ② 把新根的右子树挂到旧根的左边
+    #@d 这一步最容易忘。忘了就直接丢一棵子树。
     T.left = newRoot.right
 
-#@s ③ 旧根成为新根的右孩子
+    #@s ③ 旧根成为新根的右孩子
     newRoot.right = T
 
-#@s ④ 更新高度 —— 必须先更新旧根（它现在是孩子了）
-#@d 顺序不能反：更新自己要用到孩子的高度，所以孩子得先算好。
+    #@s ④ 更新高度 —— 必须先更新旧根（它现在是孩子了）
+    #@d 顺序不能反：更新自己要用到孩子的高度，所以孩子得先算好。
     UpdateHeight(T)
     UpdateHeight(newRoot)
 
-#@s 返回新根
+    #@s 返回新根
     return newRoot
 #%end
 
@@ -212,20 +211,20 @@ def RotateLL(T):
 
 #@s 左单旋（处理 RR 情况），返回新的子树根
 def RotateRR(T):
-#@s ① 新根是右孩子
+    #@s ① 新根是右孩子
     newRoot = T.right
 
-#@s ② 新根的左子树改挂到旧根的右边
+    #@s ② 新根的左子树改挂到旧根的右边
     T.right = newRoot.left
 
-#@s ③ 旧根成为新根的左孩子
+    #@s ③ 旧根成为新根的左孩子
     newRoot.left = T
 
-#@s ④ 先更新旧根，再更新新根
+    #@s ④ 先更新旧根，再更新新根
     UpdateHeight(T)
     UpdateHeight(newRoot)
 
-#@s 返回新根
+    #@s 返回新根
     return newRoot
 #%end
 
@@ -277,10 +276,10 @@ def RotateRR(T):
 
 #@s 左右双旋（处理 LR），返回新的子树根
 def RotateLR(T):
-#@s 第一步：先对左孩子做左单旋，把 LR 掰成 LL
+    #@s 第一步：先对左孩子做左单旋，把 LR 掰成 LL
     T.left = RotateRR(T.left)
 
-#@s 第二步：再对自己做右单旋（这一步就是 LL 的处理方式）
+    #@s 第二步：再对自己做右单旋（这一步就是 LL 的处理方式）
     return RotateLL(T)
 #%end
 
@@ -327,10 +326,10 @@ def RotateLR(T):
 
 #@s 右左双旋（处理 RL），返回新的子树根
 def RotateRL(T):
-#@s 第一步：先对右孩子做右单旋，把 RL 掰成 RR
+    #@s 第一步：先对右孩子做右单旋，把 RL 掰成 RR
     T.right = RotateLL(T.right)
 
-#@s 第二步：再对自己做左单旋
+    #@s 第二步：再对自己做左单旋
     return RotateRR(T)
 #%end
 
@@ -371,56 +370,55 @@ def RotateRL(T):
 #@d ============ 这段 Python 和 C 有什么不一样 ============
 #@d
 #@d   C 在空位置那一段要 malloc、挡"内存分配失败"、再填四个字段，Python 一句
-#@d   AVLNode(x) 就全干完了 —— 所以"内存分配失败\n"这行提示在 Python 版里没有，
-#@d   造结点也不会失败，不用 exit(1)。（AVLNode 的高度默认就是 1，正好是新叶子的高度。）
-#@d   C 用一对花括号 { int bf = ...; } 把第 ③ 步圈起来，Python 靠缩进分段，大括号不用写。
-#@d   返回新根这件事两边一样：旋转换了根，所以 T = AVLInsert(T, x) 这句必须写。
+#@d   AVLNode(x) 就全干完了 —— 造结点不会失败，"内存分配失败"那行提示和 exit(1) 都省了。
+#@d   （AVLNode 的高度默认就是 1，正好是新叶子的高度。）C 用花括号 { int bf = ...; }
+#@d   把第 ③ 步圈起来，Python 靠缩进分段。返回新根两边一样：旋转换了根，所以要接住返回值。
 
 #@s 插入 x，返回新的子树根
 def AVLInsert(T, x):
-#@s ① 走到空位置，造结点（新结点高度是 1）
+    #@s ① 走到空位置，造结点（新结点高度是 1）
     if T is None:
-#@s 造结点：数据填 x，左右是 None，高度 1（C 那边要 malloc 完再一个个填）
+        #@s 造结点：数据填 x，左右是 None，高度 1（C 那边要 malloc 完再一个个填）
         return AVLNode(x)
 
-#@s 比当前小 → 插到左子树
+    #@s 比当前小 → 插到左子树
     if x < T.data:
         T.left = AVLInsert(T.left, x)
-#@s 比当前大 → 插到右子树
+    #@s 比当前大 → 插到右子树
     elif x > T.data:
         T.right = AVLInsert(T.right, x)
-#@s 相等 → 不插（和 BST 一致）
+    #@s 相等 → 不插（和 BST 一致）
     else:
         return T
 
-#@s ② 回溯到这一步时孩子已经处理好了，更新自己的高度
+    #@s ② 回溯到这一步时孩子已经处理好了，更新自己的高度
     UpdateHeight(T)
 
-#@s ③ 算平衡因子，看有没有失衡
-#@s 平衡因子
+    #@s ③ 算平衡因子，看有没有失衡
+    #@s 平衡因子
     bf = BalanceFactor(T)
 
-#@s 左边太高
+    #@s 左边太高
     if bf > 1:
-#@s 再看左孩子：左边高是 LL，右边高是 LR
-#@d 用 >= 0 而不是 > 0，是为了把"左孩子平衡"也归到 LL ——
-#@d 那种情况下单旋就够了。
+        #@s 再看左孩子：左边高是 LL，右边高是 LR
+        #@d 用 >= 0 而不是 > 0，是为了把"左孩子平衡"也归到 LL ——
+        #@d 那种情况下单旋就够了。
         if BalanceFactor(T.left) >= 0:
-#@s LL：右单旋
+            #@s LL：右单旋
             return RotateLL(T)
-#@s LR：先左后右的双旋
+        #@s LR：先左后右的双旋
         return RotateLR(T)
 
-#@s 右边太高（镜像处理）
+    #@s 右边太高（镜像处理）
     if bf < -1:
-#@s 右孩子右边高是 RR，左边高是 RL
+        #@s 右孩子右边高是 RR，左边高是 RL
         if BalanceFactor(T.right) <= 0:
-#@s RR：左单旋
+            #@s RR：左单旋
             return RotateRR(T)
-#@s RL：先右后左的双旋
+        #@s RL：先右后左的双旋
         return RotateRL(T)
 
-#@s ④ 没失衡，原样返回
+    #@s ④ 没失衡，原样返回
     return T
 #%end
 
@@ -457,14 +455,14 @@ def AVLInsert(T, x):
 
 #@s 中序遍历，顺便看是不是有序
 def InOrder(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
-#@s 左
+    #@s 左
     InOrder(T.left)
-#@s 根
+    #@s 根
     print(T.data, end=' ')
-#@s 右
+    #@s 右
     InOrder(T.right)
 #%end
 
@@ -480,13 +478,13 @@ def InOrder(T):
 
 #@s 后序释放
 def FreeTree(T):
-#@s 空树返回
+    #@s 空树返回
     if T is None:
         return
-#@s 先孩子
+    #@s 先孩子
     FreeTree(T.left)
     FreeTree(T.right)
-#@s 后自己
+    #@s 后自己
     T.left = None
     T.right = None
 #%end
@@ -516,15 +514,15 @@ def FreeTree(T):
 #@s 检查每个结点的平衡因子是否都在 -1..1
 #@d 返回 1 表示全部合法
 def CheckBalance(T):
-#@s 空树算合法
+    #@s 空树算合法
     if T is None:
         return 1
-#@s 自己失衡就直接返回 0
-#@d 平衡因子的绝对值超过 1 就是不合格的 AVL。
+    #@s 自己失衡就直接返回 0
+    #@d 平衡因子的绝对值超过 1 就是不合格的 AVL。
     if BalanceFactor(T) > 1 or BalanceFactor(T) < -1:
         print(f'  结点 {T.data} 失衡，平衡因子 = {BalanceFactor(T)}')
         return 0
-#@s 两个孩子也都要合法
+    #@s 两个孩子也都要合法
     return CheckBalance(T.left) and CheckBalance(T.right)
 #%end
 
@@ -546,48 +544,46 @@ def CheckBalance(T):
 #@d
 #@d ============ 这段 Python 和 C 有什么不一样 ============
 #@d
-#@d   C 的 int main(void) 是运行时自动调用的；Python 自己写一句
-#@d       if __name__ == '__main__':
+#@d   C 的 int main(void) 是运行时自动调用的；Python 自己写一句 if __name__ == '__main__':
 #@d   意思是"只有直接运行这个文件时才执行，被别人 import 时不执行"。
 #@d   C 的 static const int ins[] = {...}; 到 Python 就是一个列表 ins = [...]，
-#@d   for (i = 0; i < 7; i++) 换成 for i in range(7)，printf 全换成 print，
-#@d   几个 \n 还是几个 \n，空格和全角冒号都照抄，输出才能和 C 版一个字节都不差。
+#@d   for (i = 0; i < 7; i++) 换成 for i in range(7)，printf 全换成 print，\n 和空格照抄。
 
 #@s 主函数
 if __name__ == '__main__':
-#@s 故意用有序序列 —— 这正是普通 BST 会退化的情况
+    #@s 故意用有序序列 —— 这正是普通 BST 会退化的情况
     ins = [1, 2, 3, 4, 5, 6, 7]
-#@s 计数
-#@s 树根
-#@d C 在这儿写了 int i; 和 AVLTree T = NULL; 两句声明；Python 不用声明，
-#@d i 交给下面的 range(7) 直接给，T 从 None 开始，所以两句注释挨在一起。
+    #@s 计数
+    #@s 树根
+    #@d C 在这儿写了 int i; 和 AVLTree T = NULL; 两句声明；Python 不用声明，
+    #@d i 交给下面的 range(7) 直接给，T 从 None 开始，所以两句注释挨在一起。
     T = None
 
-#@s 打印说明
+    #@s 打印说明
     print('插入序列：1 2 3 4 5 6 7（普通 BST 会退化成一条链）\n')
 
-#@s 逐个插入并观察
+    #@s 逐个插入并观察
     for i in range(7):
         T = AVLInsert(T, ins[i])
         print(f'插入 {ins[i]} 后：根 = {T.data}，树高 = {T.height}，中序: ', end='')
         InOrder(T)
         print()
 
-#@s 验证 ①：中序必须递增
+    #@s 验证 ①：中序必须递增
     print('\n① 中序结果：', end='')
     InOrder(T)
     print('\n   （必须递增 —— 说明旋转没有破坏 BST 性质）')
 
-#@s 验证 ②：树高应该是 3
+    #@s 验证 ②：树高应该是 3
     print(f'\n② 树高 = {T.height}（7 个结点的平衡树应该是 3）')
     print('   普通 BST 按这个顺序插会变成高度 7 的链')
 
-#@s 验证 ③：每个结点都平衡
+    #@s 验证 ③：每个结点都平衡
     print('\n③ 逐结点检查平衡因子：', end='')
     if CheckBalance(T):
         print('全部在 -1..1 之间，合格')
 
-#@s 释放
+    #@s 释放
     FreeTree(T)
 #@s 正常结束
 #@d C 的 main 最后要写 return 0;，Python 的脚本跑完就算正常结束，不用写。

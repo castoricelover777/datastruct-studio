@@ -366,7 +366,6 @@ void RadixSort(ElementType A[], int N)
 //%end
 
 //%module | 06 | PrintArray | PrintArray —— 打印与检查 | 1 | 01 |
-//@summary | 打印数组、检查是否有序。
 //@d 表排序有个特殊的输出方式：既打印元素本身，也打印 table 指出的顺序。
 //@d 因为"表排序之后数组是乱的，但按 table 读是有序的" —— 这一点必须看清楚。
 

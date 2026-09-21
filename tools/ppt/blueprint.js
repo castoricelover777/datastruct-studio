@@ -59,10 +59,10 @@ function contentPage(pageNo, kicker, title, body, notes) {
   reset();
   const els = [];
   els.push(...grid());                                   // 网格最先绘制，避免遮挡正文
-  // kicker 为空就不画（真人做 PPT 不会每页都顶一行英文小标题）
-  if (kicker) els.push(txt(ML, 27, 665, 20, kicker, { size: 10, color: C.mut, ls: 1.2 }));
+  // kicker 为空就不画（真人做 PPT 不会每页都顶一行小字）
+  if (kicker) els.push(txt(ML, 27, 665, 20, kicker, { size: 10, color: C.mut, ls: 1.2, first: true }));
   els.push(hline(ML, 50, 864, { color: '#68665F' }));
-  els.push(txt(754, 46, 158, 13, String(pageNo).padStart(2, '0'), { size: 9, color: C.mut, align: 'right', first: true }));
+  els.push(txt(754, 46, 158, 13, String(pageNo).padStart(2, '0'), { size: 9, color: C.mut, align: 'right', first: !kicker }));
   els.push(txt(ML, 76, 864, 64, title, { size: 32, bold: true }));
   els.push(...body);
   els.push(txt(ML, 505, 760, 16, '数据结构研习社 · 研究所入所第一次考核', { size: 9, color: C.mut }));

@@ -860,7 +860,7 @@ elements:
       - 28
     content:
       text: |-
-        每块写一句：在学 / 跟着做过 / 还没上到。写不出"会"就不写。
+        每块写一句：写过题 / 跟做过 / 还没上到。写不出"会"就不写。
       fontFamily: *ff
       fontSize: 13
       lineHeight: 1.25

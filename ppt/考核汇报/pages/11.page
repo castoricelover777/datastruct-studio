@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 完整 22 问与应答骨架见规划文档第 5 节。
+notes: 第二部分的过渡页，明确说明项目只作为「写过题」这一条的证据，并再次交代代码为 AI 所写。
 elements:
   - elementId: g1
     elementType: line
@@ -550,27 +550,6 @@ elements:
     border:
       width: 0.35
       color: '#e3ddd4'
-  - elementId: t1
-    elementType: text
-    bounds:
-      - 48
-      - 27
-      - 665
-      - 20
-    content:
-      text: |-
-        MUST-PREPARE ANSWERS
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
-      fontSize: 10
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      letterSpacing: 1.2
-
   - elementId: l1
     elementType: line
     bounds:
@@ -586,7 +565,7 @@ elements:
       color: '#68665F'
       width: 0.6
 
-  - elementId: t2
+  - elementId: t1
     elementType: text
     bounds:
       - 754
@@ -595,15 +574,19 @@ elements:
       - 13
     content:
       text: |-
-        07
-      fontFamily: *ff
+        11
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
       align: right
 
-  - elementId: t3
+  - elementId: t2
     elementType: text
     bounds:
       - 48
@@ -612,73 +595,69 @@ elements:
       - 64
     content:
       text: |-
-        上台前必背
+        第二部分：拿第一块练手
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t6
-    elementType: text
+  - elementId: s1
+    elementType: shape
     bounds:
       - 48
-      - 152
-      - 500
-      - 24
-    content:
-      text: |-
-        22 问里优先背这 6 道
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      - 236
+      - 6
+      - 100
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
 
-  - elementId: t7
+  - elementId: t5
     elementType: text
     bounds:
-      - 48
-      - 182
-      - 50
-      - 28
+      - 76
+      - 232
+      - 700
+      - 40
     content:
       text: |-
-        Q1
+        第二部分
       fontFamily: *ff
       fontSize: 15
       lineHeight: 1.25
-      color: '#B5392A'
+      color: '#62625c'
       bold: true
 
-  - elementId: t8
+  - elementId: t6
     elementType: text
     bounds:
-      - 110
-      - 182
-      - 300
-      - 28
+      - 76
+      - 262
+      - 800
+      - 50
     content:
       text: |-
-        你大几？学过什么？
+        拿第一块练手：我做的一个数据结构练习工具
       fontFamily: *ff
-      fontSize: 17
+      fontSize: 30
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t9
+  - elementId: t7
     elementType: text
     bounds:
-      - 430
-      - 185
-      - 482
-      - 26
+      - 76
+      - 330
+      - 800
+      - 30
     content:
       text: |-
-        大一开学第二周；C 暑假自学，数据结构提前在学
+        为什么放它：它是"写过题"那一条里唯一像样的产出，代码不是我写的。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -687,385 +666,7 @@ elements:
     elementType: line
     bounds:
       - 48
-      - 214
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 48
-      - 222
-      - 50
-      - 28
-    content:
-      text: |-
-        Q5
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 110
-      - 222
-      - 300
-      - 28
-    content:
-      text: |-
-        数据怎么流动
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 430
-      - 225
-      - 482
-      - 26
-    content:
-      text: |-
-        真源 → 数据 → 动画 → 交付，四层 + 一条检查
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l3
-    elementType: line
-    bounds:
-      - 48
-      - 254
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 48
-      - 262
-      - 50
-      - 28
-    content:
-      text: |-
-        Q7
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 110
-      - 262
-      - 300
-      - 28
-    content:
-      text: |-
-        动画怎么生成
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 430
-      - 265
-      - 482
-      - 26
-    content:
-      text: |-
-        数据写每帧状态，算坐标，生成 SVG 动画标签
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l4
-    elementType: line
-    bounds:
-      - 48
-      - 294
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 48
-      - 302
-      - 50
-      - 28
-    content:
-      text: |-
-        Q10
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 110
-      - 302
-      - 300
-      - 28
-    content:
-      text: |-
-        举个修过的 bug
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 430
-      - 305
-      - 482
-      - 26
-    content:
-      text: |-
-        keyTimes 末项必须正好为 1，否则动画被静默丢弃
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l5
-    elementType: line
-    bounds:
-      - 48
-      - 334
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t19
-    elementType: text
-    bounds:
-      - 48
-      - 342
-      - 50
-      - 28
-    content:
-      text: |-
-        Q14
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t20
-    elementType: text
-    bounds:
-      - 110
-      - 342
-      - 300
-      - 28
-    content:
-      text: |-
-        Agent 与普通程序的区别
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t21
-    elementType: text
-    bounds:
-      - 430
-      - 345
-      - 482
-      - 26
-    content:
-      text: |-
-        路线定死 对 自己在循环里决定下一步
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l6
-    elementType: line
-    bounds:
-      - 48
-      - 374
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t22
-    elementType: text
-    bounds:
-      - 48
-      - 382
-      - 50
-      - 28
-    content:
-      text: |-
-        Q16
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t23
-    elementType: text
-    bounds:
-      - 110
-      - 382
-      - 300
-      - 28
-    content:
-      text: |-
-        RAG 是什么
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t24
-    elementType: text
-    bounds:
-      - 430
-      - 385
-      - 482
-      - 26
-    content:
-      text: |-
-        先在自己知识库里搜片段，再让模型照片段答
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l7
-    elementType: line
-    bounds:
-      - 48
-      - 414
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t25
-    elementType: text
-    bounds:
-      - 48
-      - 422
-      - 50
-      - 28
-    content:
-      text: |-
-        Q22
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t26
-    elementType: text
-    bounds:
-      - 110
-      - 422
-      - 300
-      - 28
-    content:
-      text: |-
-        如果给你更多时间
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t27
-    elementType: text
-    bounds:
-      - 430
-      - 425
-      - 482
-      - 26
-    content:
-      text: |-
-        接好生成层 · 检查上 GitHub · 补可访问性
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l8
-    elementType: line
-    bounds:
-      - 48
-      - 430
+      - 392
       - 864
       - 1
     viewBox:
@@ -1076,39 +677,23 @@ elements:
       color: '#a9a49b'
       width: 0.8
 
-  - elementId: t28
+  - elementId: t8
     elementType: text
     bounds:
       - 48
-      - 442
+      - 404
       - 864
       - 26
     content:
       text: |-
-        Q9 那段 keyTimes 的故事要练到能一口气讲完——它是你最能打的一张牌。
+        顺着说三件事：我是怎么做起来的 / 这东西做出来什么样 / 我意识到自己缺什么。
       fontFamily: *ff
       fontSize: 13
       lineHeight: 1.25
-      color: '#B5392A'
+      color: '#252824'
       bold: false
 
-  - elementId: t29
-    elementType: text
-    bounds:
-      - 48
-      - 470
-      - 864
-      - 24
-    content:
-      text: |-
-        代码不是我写的——这件事第一句就主动说清，别等人问。被问出来 = 一票否决。
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
-
-  - elementId: t4
+  - elementId: t3
     elementType: text
     bounds:
       - 48
@@ -1124,7 +709,7 @@ elements:
       color: '#62625c'
       bold: false
 
-  - elementId: t5
+  - elementId: t4
     elementType: text
     bounds:
       - 860
@@ -1133,7 +718,7 @@ elements:
       - 18
     content:
       text: |-
-        07
+        11
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25

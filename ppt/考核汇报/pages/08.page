@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 标题与措辞避开架构术语。右侧如实写明：学生只提出「只改一份、其余自动跟进」这个要求，实现由 AI 完成。
+notes: 按三级标准列出真实产出：牛客 50 题、链表刷题、练习工具 186 模块；并主动标注工具代码为 AI 所写。
 elements:
   - elementId: g1
     elementType: line
@@ -595,53 +595,41 @@ elements:
       - 64
     content:
       text: |-
-        改一次东西，要跑几个地方
+        我现在拿得出手的东西
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: s1
-    elementType: shape
-    bounds:
-      - 48
-      - 156
-      - 52
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
-
   - elementId: t5
     elementType: text
     bounds:
-      - 56
-      - 169
-      - 44
-      - 28
+      - 48
+      - 152
+      - 700
+      - 24
     content:
       text: |-
-        01
+        按上面那套标准，我能拿出来的是这些。
       fontFamily: *ff
-      fontSize: 17
+      fontSize: 16
       lineHeight: 1.25
-      color: '#F0EAE0'
+      color: '#252824'
       bold: true
 
   - elementId: t6
     elementType: text
     bounds:
-      - 116
-      - 158
-      - 160
-      - 28
+      - 60
+      - 196
+      - 280
+      - 32
     content:
       text: |-
-        内容
+        牛客 C 语言基础题
       fontFamily: *ff
-      fontSize: 18
+      fontSize: 17
       lineHeight: 1.25
       color: '#252824'
       bold: true
@@ -649,91 +637,79 @@ elements:
   - elementId: t7
     elementType: text
     bounds:
-      - 116
-      - 186
-      - 190
-      - 24
+      - 360
+      - 194
+      - 160
+      - 34
     content:
       text: |-
-        resources
+        50 题
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 21
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#B5392A'
+      bold: true
 
   - elementId: t8
     elementType: text
     bounds:
-      - 320
-      - 170
-      - 350
+      - 540
+      - 199
+      - 372
       - 28
     content:
       text: |-
-        C 代码和注释放这儿，只改这一份
+        写了提交、有对有错，不是只看
       fontFamily: *ff
       fontSize: 13
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 48
-      - 226
-      - 52
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
-
   - elementId: t9
     elementType: text
     bounds:
-      - 56
-      - 239
-      - 44
-      - 28
+      - 60
+      - 248
+      - 280
+      - 32
     content:
       text: |-
-        02
+        链表增删查改
       fontFamily: *ff
       fontSize: 17
       lineHeight: 1.25
-      color: '#F0EAE0'
+      color: '#252824'
       bold: true
 
   - elementId: t10
     elementType: text
     bounds:
-      - 116
-      - 228
+      - 360
+      - 246
       - 160
-      - 28
+      - 34
     content:
       text: |-
-        整理成数据
+        刷过题
       fontFamily: *ff
-      fontSize: 18
+      fontSize: 21
       lineHeight: 1.25
-      color: '#252824'
+      color: '#B5392A'
       bold: true
 
   - elementId: t11
     elementType: text
     bounds:
-      - 116
-      - 256
-      - 190
-      - 24
+      - 540
+      - 251
+      - 372
+      - 28
     content:
       text: |-
-        data
+        数据结构里最先练的一块
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 13
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -741,165 +717,117 @@ elements:
   - elementId: t12
     elementType: text
     bounds:
-      - 320
-      - 240
-      - 350
-      - 28
+      - 60
+      - 300
+      - 280
+      - 32
     content:
       text: |-
-        跑一条命令，把代码拆成模块和三档注释
+        自己做的一个练习工具
       fontFamily: *ff
-      fontSize: 13
+      fontSize: 17
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s3
-    elementType: shape
-    bounds:
-      - 48
-      - 296
-      - 52
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
+      color: '#252824'
+      bold: true
 
   - elementId: t13
     elementType: text
     bounds:
-      - 56
-      - 309
-      - 44
-      - 28
+      - 360
+      - 298
+      - 160
+      - 34
     content:
       text: |-
-        03
+        186 个模块
       fontFamily: *ff
-      fontSize: 17
+      fontSize: 21
       lineHeight: 1.25
-      color: '#F0EAE0'
+      color: '#B5392A'
       bold: true
 
   - elementId: t14
     elementType: text
     bounds:
-      - 116
-      - 298
-      - 160
+      - 540
+      - 303
+      - 372
       - 28
     content:
       text: |-
-        生成动画
-      fontFamily: *ff
-      fontSize: 18
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 116
-      - 326
-      - 190
-      - 24
-    content:
-      text: |-
-        docs/animations
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 320
-      - 310
-      - 350
-      - 28
-    content:
-      text: |-
-        再跑一条，出来 188 段动画
+        学数据结构的时候顺手做的
       fontFamily: *ff
       fontSize: 13
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
-  - elementId: s4
+  - elementId: s1
     elementType: shape
     bounds:
       - 48
-      - 366
-      - 52
-      - 50
+      - 344
+      - 864
+      - 48
     shapeName: rect
     fill:
       type: solid
-      color: '#B5392A'
+      color: '#ead7cc'
 
-  - elementId: t17
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 48
+      - 344
+      - 3
+      - 48
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#252824'
+
+  - elementId: t15
     elementType: text
     bounds:
-      - 56
-      - 379
-      - 44
-      - 28
+      - 60
+      - 352
+      - 280
+      - 32
     content:
       text: |-
-        04
+        那个工具的代码
       fontFamily: *ff
       fontSize: 17
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: true
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 116
-      - 368
-      - 160
-      - 28
-    content:
-      text: |-
-        变成能用的东西
-      fontFamily: *ff
-      fontSize: 18
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t19
+  - elementId: t16
     elementType: text
     bounds:
-      - 116
-      - 396
-      - 190
-      - 24
+      - 360
+      - 350
+      - 160
+      - 34
     content:
       text: |-
-        exe 和网页
+        全部 AI 写的
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 21
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#252824'
+      bold: true
 
-  - elementId: t20
+  - elementId: t17
     elementType: text
     bounds:
-      - 320
-      - 380
-      - 350
+      - 540
+      - 355
+      - 372
       - 28
     content:
       text: |-
-        最后跑一条，打包成便携版和在线版
+        我不会写代码，这点先说明
       fontFamily: *ff
       fontSize: 13
       lineHeight: 1.25
@@ -910,131 +838,47 @@ elements:
     elementType: line
     bounds:
       - 48
-      - 436
-      - 620
+      - 420
+      - 864
       - 1
     viewBox:
-      - 620
+      - 864
       - 1
-    points: 0,0 620,0
+    points: 0,0 864,0
     border:
       color: '#a9a49b'
       width: 0.8
 
-  - elementId: t21
+  - elementId: t18
     elementType: text
     bounds:
       - 48
-      - 446
-      - 620
+      - 432
+      - 864
       - 26
     content:
       text: |-
-        每次改完跑一下检查，10738 条，有问题立刻知道。
+        所以六块里我敢写 ● 的只有第一块；其它块现在都还是 ○ 和 ·。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 14
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l3
-    elementType: line
-    bounds:
-      - 700
-      - 152
-      - 1
-      - 312
-    viewBox:
-      - 1
-      - 312
-    points: 0,0 0,312
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t22
-    elementType: text
-    bounds:
-      - 726
-      - 156
-      - 186
-      - 24
-    content:
-      text: |-
-        我做这个的来由
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t23
-    elementType: text
-    bounds:
-      - 724
-      - 192
-      - 200
-      - 46
-    content:
-      text: |-
-        改漏过好几次
-      fontFamily: *ff
-      fontSize: 26
-      lineHeight: 1.25
-      color: '#B5392A'
+      color: '#252824'
       bold: true
 
-  - elementId: t24
+  - elementId: t19
     elementType: text
     bounds:
-      - 724
-      - 248
-      - 200
-      - 120
+      - 48
+      - 460
+      - 864
+      - 26
     content:
       text: |-
-        一开始网页、动画、文档
-        是三份，改一处得手动
-        把另外两处也改掉。
-        我好几次改了一半就忘了。
+        最后一行我放在这儿，是怕前面几行看起来像在夸自己。
       fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.5
+      fontSize: 12
+      lineHeight: 1.25
       color: '#62625c'
-      bold: false
-
-  - elementId: l4
-    elementType: line
-    bounds:
-      - 700
-      - 378
-      - 212
-      - 1
-    viewBox:
-      - 212
-      - 1
-    points: 0,0 212,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t25
-    elementType: text
-    bounds:
-      - 724
-      - 390
-      - 200
-      - 90
-    content:
-      text: |-
-        我就提了一句：能不能
-        只改一份，别的自己跟
-        着变。具体怎么实现是
-        AI 的事。
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.5
-      color: '#252824'
       bold: false
 
   - elementId: t3

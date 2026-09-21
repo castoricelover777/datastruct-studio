@@ -2,7 +2,7 @@ pageType: cover
 background:
   type: solid
   color: '#F0EAE0'
-notes: 封面。去除「学习流程我自己设计」等升格表述，改为学生本人的三件事：想清楚学什么、怎么练、自己用着改。
+notes: 封面。主题是专业知识图谱，不是项目。三个盒子=整理这张图的三个动作。
 elements:
   - elementId: t1
     elementType: text
@@ -13,7 +13,7 @@ elements:
       - 18
     content:
       text: |-
-        研究所入所第一次考核
+        研究所入所第一次考核 · 第一部分
       fontFamily: &ff
         latin: Arial
         mac: PingFang SC
@@ -49,7 +49,7 @@ elements:
       - 64
     content:
       text: |-
-        我做了个东西，用来学数据结构
+        我的专业知识图谱
       fontFamily: *ff
       fontSize: 31
       lineHeight: 1.25
@@ -97,8 +97,8 @@ elements:
       - 180
     content:
       text: |-
-        数据结构
-        研习社
+        我的
+        专业图谱
       fontFamily: *ff
       fontSize: 64
       lineHeight: 1.15
@@ -114,8 +114,8 @@ elements:
       - 90
     content:
       text: |-
-        大一，开学第二周开始做的
-        代码是 AI 写的，我提要求、自己用
+        大一，开学第二周开始整理的
+        整个专业分成六块，每块标上我学到哪
       fontFamily: *ff
       fontSize: 23
       lineHeight: 1.3
@@ -551,7 +551,7 @@ elements:
       - 26
     content:
       text: |-
-        01 先想清楚学什么
+        一块一块问自己
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.25
@@ -583,7 +583,7 @@ elements:
       - 26
     content:
       text: |-
-        02 想清楚怎么练
+        标上我现在在哪
       fontFamily: *ff
       fontSize: 16
       lineHeight: 1.25
@@ -612,9 +612,9 @@ elements:
       - 26
     content:
       text: |-
-        03 自己拿它学，卡手就改
+        再照着去学
       fontFamily: *ff
-      fontSize: 15
+      fontSize: 16
       lineHeight: 1.25
       color: '#F0EAE0'
       bold: false

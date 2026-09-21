@@ -560,7 +560,11 @@ elements:
     content:
       text: |-
         PROJECT SELECTION
-      fontFamily: *ff
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 10
       lineHeight: 1.25
       color: '#62625c'
@@ -592,11 +596,7 @@ elements:
     content:
       text: |-
         02
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
+      fontFamily: *ff
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'

@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 六个分支的细项为学生自己列的。三级标注：● 学过 / ○ 只在项目里跟做过或看得懂写不出 / · 还没碰过；只有数据结构标为 ●。
+notes: 三级标注：● 写过题 / ○ 跟做过或看得懂写不出 / · 还没碰过。只有 C 语言与数据结构标为 ●。
 elements:
   - elementId: g1
     elementType: line
@@ -595,7 +595,7 @@ elements:
       - 64
     content:
       text: |-
-        六个分支里具体有什么
+        每一块里具体有什么
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
@@ -932,7 +932,7 @@ elements:
       - 24
     content:
       text: |-
-        ● 学过　　○ 只在项目里跟着做过，或看得懂但写不出　　· 还没碰过
+        ● 写过题　　○ 跟做过，或看得懂但写不出　　· 还没碰过
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25

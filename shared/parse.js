@@ -2,53 +2,83 @@
 /*
  * LinkList Studio —— 参考源码解析器
  * ---------------------------------------------------------------------------
- * 把 resources/reference/*.c 解析成"模块 / 三档注释"的结构化数据。
+ * 把 resources/reference/ 下的参考源码解析成"模块 / 三档注释"的结构化数据。
+ * 目前支持两种语言，标记语法完全一样，只差注释前缀（C 是 //，Python 是 #）：
  *
- * 标记语法（全部是合法的 C 注释，所以参考文件本身可以直接编译）：
+ *   C：      resources/reference/<节>/modules.c
+ *   Python： resources/reference/<节>/modules.py
  *
- *   //%module | 编号 | 函数名 | 中文标题 | 难度 | 依赖编号(逗号分隔)
- *   //%summary | 一句话作用
- *   //@s  关键步骤注释    → 详细模式 + 精简模式 都显示
- *   //@d  逐行补充/ASCII  → 只有详细模式显示
- *   //%end
+ * 标记语法（都是该语言的合法注释，所以参考文件本身可以直接编译/运行）：
+ *
+ *   //%module | 编号 | 函数名 | 中文标题 | 难度 | 依赖编号(逗号分隔)     # 同上
+ *   //%summary | 一句话作用                                            # 同上
+ *   //@s  关键步骤注释    → 详细模式 + 精简模式 都显示                 # 同上
+ *   //@d  逐行补充/ASCII  → 只有详细模式显示                          # 同上
+ *   //%end                                                            # 同上
  *   //%driver | 模块编号   ... //%driver-end     （练习模式脚手架用的测试驱动）
  *
- * 三档模式的唯一差别就是"保留哪些 //@ 行"：
+ * 三档模式的唯一差别就是"保留哪些 @ 行"：
  *     详细 = @s + @d      精简 = @s      无注释 = 都不保留
- * 代码行原样输出，所以签名、变量名、缩进在三种模式下逐字节一致。
+ * 代码行原样输出，所以签名、变量名、缩进在三种模式下逐字节一致（Python 的
+ * 缩进也要逐字节一致，否则会报 IndentationError）。
  */
 
 const MODULE_RE = /^\/\/%module\s*\|\s*([^|]*)\|\s*([^|]*)\|\s*([^|]*)\|\s*([^|]*)\|\s*(.*)$/;
 const SUMMARY_RE = /^\/\/%summary\s*\|\s*(.*)$/;
 const DRIVER_RE = /^\/\/%driver\s*\|\s*(.*)$/;
 
+/** 注释前缀：C 用 //，Python 用 #。以 # 开头的标记行更少，放前面先判 */
+function prefixOf(raw) {
+  const t = raw.trim();
+  if (t.startsWith('//%') || t.startsWith('//@')) return '//';
+  if (t.startsWith('#%') || t.startsWith('#@')) return '#';
+  return '//';
+}
+
+/** 标记与渲染全部按前缀参数化，C 和 Python 走同一套逻辑 */
+function mres(p) {
+  const e = p === '#' ? '#' : '\\/\\/';
+  return {
+    module: new RegExp(`^${e}%module\\s*\\|\\s*([^|]*)\\|\\s*([^|]*)\\|\\s*([^|]*)\\|\\s*([^|]*)\\|\\s*(.*)$`),
+    summary: new RegExp(`^${e}%summary\\s*\\|\\s*(.*)$`),
+    driver: new RegExp(`^${e}%driver\\s*\\|\\s*(.*)$`),
+    end: new RegExp(`^${e}%end\\s*$`),
+    driverEnd: new RegExp(`^${e}%driver-end\\s*$`),
+  };
+}
+
 /** 判断一行是否是"注释型"行（决定它在三档模式中是否出现） */
-function classify(rawLine) {
-  const trimmed = rawLine.trim();
-  if (trimmed.startsWith('//@s')) return { kind: 'short-detail', text: trimmed.slice(4).replace(/^\s?/, '') };
-  if (trimmed.startsWith('//@d')) return { kind: 'detail', text: trimmed.slice(4).replace(/^\s?/, '') };
-  if (/^\/\/[^@%]/.test(trimmed) || trimmed === '//') return { kind: 'plain-comment', text: trimmed.replace(/^\/\/\s?/, '') };
+function classify(rawLine, prefix = '//') {
+  const t = rawLine.trim();
+  const at = prefix + '@';
+  const pl = prefix.length;
+  if (t.startsWith(at + 's')) return { kind: 'short-detail', text: t.slice(pl + 2).replace(/^\s?/, '') };
+  if (t.startsWith(at + 'd')) return { kind: 'detail', text: t.slice(pl + 2).replace(/^\s?/, '') };
+  const plain = new RegExp(`^${prefix === '#' ? '#' : '\\/\\/'}[^@%]`);
+  if (plain.test(t) || t === prefix) {
+    return { kind: 'plain-comment', text: t.replace(new RegExp(`^${prefix === '#' ? '#' : '\\/\\/'}\\s?`), '') };
+  }
   return null;
 }
 
-/** 把原始行还原成"输出行"：注释行 → // 文本，代码行 → 原样 */
-function toOutputLine(rawLine, info) {
+/** 把原始行还原成"输出行"：注释行 → 前缀 + 文本，代码行 → 原样 */
+function toOutputLine(rawLine, info, prefix = '//') {
   const indent = rawLine.slice(0, rawLine.length - rawLine.trimStart().length);
-  if (info) return indent + '//' + (info.text ? ' ' + info.text : '');
+  if (info) return indent + prefix + (info.text ? ' ' + info.text : '');
   return rawLine;
 }
 
 /**
  * 解析单个模块体，产出三档渲染结果。
- * body: string[]  模块内的原始行（不含 //%module 与 //%end）
+ * body: string[]  模块内的原始行（不含 %module 与 %end）
  */
-function renderModes(body) {
+function renderModes(body, prefix = '//') {
   const out = { detail: [], short: [], none: [] };
   for (const raw of body) {
-    const info = classify(raw);
+    const info = classify(raw, prefix);
     if (info) {
-      if (info.kind !== 'detail') out.short.push(toOutputLine(raw, info));
-      out.detail.push(toOutputLine(raw, info));
+      if (info.kind !== 'detail') out.short.push(toOutputLine(raw, info, prefix));
+      out.detail.push(toOutputLine(raw, info, prefix));
     } else {
       out.detail.push(raw);
       out.short.push(raw);
@@ -81,17 +111,21 @@ function parse(sources) {
   let driver = null;
 
   for (const src of sources) {
-    preambles.push(extractPreamble(src.text));
+    // 按文件内容判断这是 C 还是 Python：两种语言走同一套标记逻辑，
+    // 只差注释前缀。C 文件里 //% 在前，Python 文件里 #% 在前。
+    const prefix = prefixOf(src.text);
+    const R = mres(prefix);
+    preambles.push(prefix === '#' ? '' : extractPreamble(src.text));
     const lines = src.text.replace(/\r\n?/g, '\n').split('\n');
     for (const raw of lines) {
       // —— driver 块 ——
-      const dm = raw.match(DRIVER_RE);
+      const dm = raw.match(R.driver);
       if (dm) {
         driver = { id: dm[1].trim(), lines: [] };
         continue;
       }
       if (driver) {
-        if (raw.trim() === '//%driver-end') {
+        if (R.driverEnd.test(raw.trim())) {
           drivers[driver.id] = trimTrailingBlank(driver.lines).join('\n');
           driver = null;
           continue;
@@ -101,7 +135,7 @@ function parse(sources) {
       }
 
       // —— module 块 ——
-      const mm = raw.match(MODULE_RE);
+      const mm = raw.match(R.module);
       if (mm) {
         current = {
           id: mm[1].trim(),
@@ -119,8 +153,8 @@ function parse(sources) {
         };
         continue;
       }
-      if (current && /^\/\/%end\s*$/.test(raw)) {
-        const modes = renderModes(trimTrailingBlank(current.body));
+      if (current && R.end.test(raw)) {
+        const modes = renderModes(trimTrailingBlank(current.body), prefix);
         const codeLines = modes.none.split('\n');
         modules.push({
           id: current.id,
@@ -137,7 +171,7 @@ function parse(sources) {
         continue;
       }
       if (current) {
-        const sm = raw.match(SUMMARY_RE);
+        const sm = raw.match(R.summary);
         if (sm) {
           current.summary = sm[1].trim();
         } else {

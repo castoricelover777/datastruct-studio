@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 全部指标来自仓库与构建产物实测，无估算。
+notes: 四步顺序为学生自述规划，依据是先修关系；大二四门课依据培养方案。
 elements:
   - elementId: g1
     elementType: line
@@ -595,7 +595,7 @@ elements:
       - 64
     content:
       text: |-
-        现在做出来什么样
+        接下来的顺序
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
@@ -606,46 +606,62 @@ elements:
     elementType: text
     bounds:
       - 48
-      - 160
-      - 280
+      - 152
+      - 700
       - 24
     content:
       text: |-
-        指标
+        按上面那张图和标准，我给自己排的顺序。
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 16
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#252824'
+      bold: true
 
   - elementId: t6
     elementType: text
     bounds:
-      - 370
-      - 160
-      - 170
-      - 24
+      - 48
+      - 200
+      - 90
+      - 30
     content:
       text: |-
-        实测值
+        现在
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 16
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#B5392A'
+      bold: true
 
   - elementId: t7
     elementType: text
     bounds:
-      - 540
-      - 160
-      - 370
-      - 24
+      - 148
+      - 202
+      - 260
+      - 30
     content:
       text: |-
-        说明
+        把数据结构学完
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 430
+      - 204
+      - 480
+      - 28
+    content:
+      text: |-
+        树后面还有图、排序、散列，现在学到二叉树
+      fontFamily: *ff
+      fontSize: 12.5
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -654,7 +670,7 @@ elements:
     elementType: line
     bounds:
       - 48
-      - 186
+      - 250
       - 864
       - 1
     viewBox:
@@ -662,370 +678,184 @@ elements:
       - 1
     points: 0,0 864,0
     border:
-      color: '#c3bfb7'
-      width: 0.6
-
-  - elementId: t8
-    elementType: text
-    bounds:
-      - 60
-      - 198
-      - 280
-      - 28
-    content:
-      text: |-
-        Git 提交
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      color: '#ded8ce'
+      width: 0.5
 
   - elementId: t9
     elementType: text
     bounds:
-      - 370
-      - 194
-      - 160
-      - 32
+      - 48
+      - 262
+      - 90
+      - 30
     content:
       text: |-
-        56
+        接着
       fontFamily: *ff
-      fontSize: 24
+      fontSize: 16
       lineHeight: 1.25
-      color: '#252824'
+      color: '#62625c'
       bold: true
 
   - elementId: t10
     elementType: text
     bounds:
-      - 540
-      - 200
-      - 370
-      - 26
+      - 148
+      - 264
+      - 260
+      - 30
     content:
       text: |-
-        7 天内完成，峰值一天 43 次
+        C 语言再多写一点
       fontFamily: *ff
-      fontSize: 13
+      fontSize: 17
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#252824'
+      bold: true
 
   - elementId: t11
     elementType: text
     bounds:
-      - 60
-      - 234
-      - 280
-      - 28
-    content:
-      text: |-
-        C 源文件
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 370
-      - 230
-      - 160
-      - 32
-    content:
-      text: |-
-        175
-      fontFamily: *ff
-      fontSize: 24
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 540
-      - 236
-      - 370
-      - 26
-    content:
-      text: |-
-        58 个 .c 与 81 个 .h
-      fontFamily: *ff
-      fontSize: 13
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 60
-      - 270
-      - 280
-      - 28
-    content:
-      text: |-
-        覆盖模块
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 370
+      - 430
       - 266
-      - 160
-      - 32
-    content:
-      text: |-
-        214
-      fontFamily: *ff
-      fontSize: 24
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 540
-      - 272
-      - 370
-      - 26
-    content:
-      text: |-
-        25 节全课程，不是单章
-      fontFamily: *ff
-      fontSize: 13
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 60
-      - 306
-      - 280
+      - 480
       - 28
     content:
       text: |-
-        生成动画
+        50 题只是入门，想练到能独立写小的程序
       fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 370
-      - 302
-      - 160
-      - 32
-    content:
-      text: |-
-        188
-      fontFamily: *ff
-      fontSize: 24
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t19
-    elementType: text
-    bounds:
-      - 540
-      - 308
-      - 370
-      - 26
-    content:
-      text: |-
-        SMIL 自动生成，可嵌入 README
-      fontFamily: *ff
-      fontSize: 13
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s1
-    elementType: shape
-    bounds:
-      - 48
-      - 336
-      - 864
-      - 34
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#ead7cc'
-
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 48
-      - 336
-      - 3
-      - 34
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#252824'
-
-  - elementId: t20
-    elementType: text
-    bounds:
-      - 60
-      - 342
-      - 280
-      - 28
-    content:
-      text: |-
-        自动化检查
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t21
-    elementType: text
-    bounds:
-      - 370
-      - 338
-      - 160
-      - 32
-    content:
-      text: |-
-        10738
-      fontFamily: *ff
-      fontSize: 24
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t22
-    elementType: text
-    bounds:
-      - 540
-      - 344
-      - 370
-      - 26
-    content:
-      text: |-
-        一条命令跑完，失败 0 个
-      fontFamily: *ff
-      fontSize: 13
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t23
-    elementType: text
-    bounds:
-      - 60
-      - 378
-      - 280
-      - 28
-    content:
-      text: |-
-        构建脚本
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t24
-    elementType: text
-    bounds:
-      - 370
-      - 374
-      - 160
-      - 32
-    content:
-      text: |-
-        3342 行
-      fontFamily: *ff
-      fontSize: 24
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t25
-    elementType: text
-    bounds:
-      - 540
-      - 380
-      - 370
-      - 26
-    content:
-      text: |-
-        20 个脚本的工具链
-      fontFamily: *ff
-      fontSize: 13
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t26
-    elementType: text
-    bounds:
-      - 60
-      - 414
-      - 280
-      - 28
-    content:
-      text: |-
-        已发版本
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t27
-    elementType: text
-    bounds:
-      - 370
-      - 410
-      - 160
-      - 32
-    content:
-      text: |-
-        6
-      fontFamily: *ff
-      fontSize: 24
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t28
-    elementType: text
-    bounds:
-      - 540
-      - 416
-      - 370
-      - 26
-    content:
-      text: |-
-        v1.0.0 至 v2.1.3，均带 Release
-      fontFamily: *ff
-      fontSize: 13
+      fontSize: 12.5
       lineHeight: 1.25
       color: '#62625c'
       bold: false
 
   - elementId: l3
+    elementType: line
+    bounds:
+      - 48
+      - 312
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 48
+      - 324
+      - 90
+      - 30
+    content:
+      text: |-
+        然后
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 148
+      - 326
+      - 260
+      - 30
+    content:
+      text: |-
+        补 Python
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 430
+      - 328
+      - 480
+      - 28
+    content:
+      text: |-
+        初中学过，忘得差不多了
+      fontFamily: *ff
+      fontSize: 12.5
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l4
+    elementType: line
+    bounds:
+      - 48
+      - 374
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#ded8ce'
+      width: 0.5
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 48
+      - 386
+      - 90
+      - 30
+    content:
+      text: |-
+        大二
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 148
+      - 388
+      - 260
+      - 30
+    content:
+      text: |-
+        四门地基课
+      fontFamily: *ff
+      fontSize: 17
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 430
+      - 390
+      - 480
+      - 28
+    content:
+      text: |-
+        计组、操作系统、网络、数据库，学校里开
+      fontFamily: *ff
+      fontSize: 12.5
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: l5
     elementType: line
     bounds:
       - 48
@@ -1037,24 +867,24 @@ elements:
       - 1
     points: 0,0 864,0
     border:
-      color: '#c3bfb7'
-      width: 0.6
+      color: '#a9a49b'
+      width: 0.8
 
-  - elementId: t29
+  - elementId: t18
     elementType: text
     bounds:
       - 48
       - 466
       - 864
-      - 24
+      - 26
     content:
       text: |-
-        质量门不是「我觉得对」，是 10738 条断言全过——敢连发 6 个版本靠的就是它。
+        顺序的根据是"哪块是别块的前提"，不是"哪块听起来厉害"。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 13
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#252824'
+      bold: true
 
   - elementId: t3
     elementType: text

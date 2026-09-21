@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 完整 22 问与应答骨架见规划文档第 5 节。
+notes: 收尾页。四点概括图谱本身：六块、24 项、2 个 ●、持续更新。
 elements:
   - elementId: g1
     elementType: line
@@ -550,27 +550,6 @@ elements:
     border:
       width: 0.35
       color: '#e3ddd4'
-  - elementId: t1
-    elementType: text
-    bounds:
-      - 48
-      - 27
-      - 665
-      - 20
-    content:
-      text: |-
-        MUST-PREPARE ANSWERS
-      fontFamily: &ff
-        latin: Arial
-        mac: PingFang SC
-        win: Microsoft YaHei
-        ea: Noto Sans CJK SC
-      fontSize: 10
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      letterSpacing: 1.2
-
   - elementId: l1
     elementType: line
     bounds:
@@ -586,7 +565,7 @@ elements:
       color: '#68665F'
       width: 0.6
 
-  - elementId: t2
+  - elementId: t1
     elementType: text
     bounds:
       - 754
@@ -595,15 +574,19 @@ elements:
       - 13
     content:
       text: |-
-        07
-      fontFamily: *ff
+        12
+      fontFamily: &ff
+        latin: Arial
+        mac: PingFang SC
+        win: Microsoft YaHei
+        ea: Noto Sans CJK SC
       fontSize: 9
       lineHeight: 1.25
       color: '#62625c'
       bold: false
       align: right
 
-  - elementId: t3
+  - elementId: t2
     elementType: text
     bounds:
       - 48
@@ -612,460 +595,34 @@ elements:
       - 64
     content:
       text: |-
-        上台前必背
+        我做的唯一一件不算小事的事
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t6
+  - elementId: t5
     elementType: text
     bounds:
       - 48
       - 152
-      - 500
-      - 24
+      - 860
+      - 30
     content:
       text: |-
-        22 问里优先背这 6 道
+        我做的唯一一件不算小事的事，是把"我该学什么"想清楚了。
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t7
-    elementType: text
-    bounds:
-      - 48
-      - 182
-      - 50
-      - 28
-    content:
-      text: |-
-        Q1
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t8
-    elementType: text
-    bounds:
-      - 110
-      - 182
-      - 300
-      - 28
-    content:
-      text: |-
-        你大几？学过什么？
-      fontFamily: *ff
-      fontSize: 17
+      fontSize: 22
       lineHeight: 1.25
       color: '#252824'
       bold: true
-
-  - elementId: t9
-    elementType: text
-    bounds:
-      - 430
-      - 185
-      - 482
-      - 26
-    content:
-      text: |-
-        大一开学第二周；C 暑假自学，数据结构提前在学
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
 
   - elementId: l2
     elementType: line
     bounds:
       - 48
-      - 214
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 48
-      - 222
-      - 50
-      - 28
-    content:
-      text: |-
-        Q5
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 110
-      - 222
-      - 300
-      - 28
-    content:
-      text: |-
-        数据怎么流动
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 430
-      - 225
-      - 482
-      - 26
-    content:
-      text: |-
-        真源 → 数据 → 动画 → 交付，四层 + 一条检查
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l3
-    elementType: line
-    bounds:
-      - 48
-      - 254
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 48
-      - 262
-      - 50
-      - 28
-    content:
-      text: |-
-        Q7
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 110
-      - 262
-      - 300
-      - 28
-    content:
-      text: |-
-        动画怎么生成
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 430
-      - 265
-      - 482
-      - 26
-    content:
-      text: |-
-        数据写每帧状态，算坐标，生成 SVG 动画标签
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l4
-    elementType: line
-    bounds:
-      - 48
-      - 294
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 48
-      - 302
-      - 50
-      - 28
-    content:
-      text: |-
-        Q10
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 110
-      - 302
-      - 300
-      - 28
-    content:
-      text: |-
-        举个修过的 bug
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 430
-      - 305
-      - 482
-      - 26
-    content:
-      text: |-
-        keyTimes 末项必须正好为 1，否则动画被静默丢弃
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l5
-    elementType: line
-    bounds:
-      - 48
-      - 334
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t19
-    elementType: text
-    bounds:
-      - 48
-      - 342
-      - 50
-      - 28
-    content:
-      text: |-
-        Q14
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t20
-    elementType: text
-    bounds:
-      - 110
-      - 342
-      - 300
-      - 28
-    content:
-      text: |-
-        Agent 与普通程序的区别
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t21
-    elementType: text
-    bounds:
-      - 430
-      - 345
-      - 482
-      - 26
-    content:
-      text: |-
-        路线定死 对 自己在循环里决定下一步
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l6
-    elementType: line
-    bounds:
-      - 48
-      - 374
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t22
-    elementType: text
-    bounds:
-      - 48
-      - 382
-      - 50
-      - 28
-    content:
-      text: |-
-        Q16
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t23
-    elementType: text
-    bounds:
-      - 110
-      - 382
-      - 300
-      - 28
-    content:
-      text: |-
-        RAG 是什么
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t24
-    elementType: text
-    bounds:
-      - 430
-      - 385
-      - 482
-      - 26
-    content:
-      text: |-
-        先在自己知识库里搜片段，再让模型照片段答
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l7
-    elementType: line
-    bounds:
-      - 48
-      - 414
-      - 864
-      - 1
-    viewBox:
-      - 864
-      - 1
-    points: 0,0 864,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t25
-    elementType: text
-    bounds:
-      - 48
-      - 422
-      - 50
-      - 28
-    content:
-      text: |-
-        Q22
-      fontFamily: *ff
-      fontSize: 15
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-
-  - elementId: t26
-    elementType: text
-    bounds:
-      - 110
-      - 422
-      - 300
-      - 28
-    content:
-      text: |-
-        如果给你更多时间
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t27
-    elementType: text
-    bounds:
-      - 430
-      - 425
-      - 482
-      - 26
-    content:
-      text: |-
-        接好生成层 · 检查上 GitHub · 补可访问性
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: l8
-    elementType: line
-    bounds:
-      - 48
-      - 430
+      - 200
       - 864
       - 1
     viewBox:
@@ -1076,39 +633,182 @@ elements:
       color: '#a9a49b'
       width: 0.8
 
-  - elementId: t28
+  - elementId: t6
     elementType: text
     bounds:
       - 48
-      - 442
+      - 220
+      - 160
+      - 34
+    content:
+      text: |-
+        六块
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t7
+    elementType: text
+    bounds:
+      - 230
+      - 224
+      - 680
+      - 30
+    content:
+      text: |-
+        整个专业分六块：写程序、懂机器、做工程、做产品、搞智能、保安全
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 48
+      - 266
+      - 160
+      - 34
+    content:
+      text: |-
+        24 项
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 230
+      - 270
+      - 680
+      - 30
+    content:
+      text: |-
+        每一块底下列了具体要学的东西，一共 24 项
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 48
+      - 312
+      - 160
+      - 34
+    content:
+      text: |-
+        2 个 ●
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 230
+      - 316
+      - 680
+      - 30
+    content:
+      text: |-
+        其中真正写过题的只有 2 项：C 语言和数据结构
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 48
+      - 358
+      - 160
+      - 34
+    content:
+      text: |-
+        一路标到底
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 230
+      - 362
+      - 680
+      - 30
+    content:
+      text: |-
+        每学完一块回来改状态，从 · 改到 ○ 再改到 ●
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#252824'
+      bold: false
+
+  - elementId: l3
+    elementType: line
+    bounds:
+      - 48
+      - 418
+      - 864
+      - 1
+    viewBox:
+      - 864
+      - 1
+    points: 0,0 864,0
+    border:
+      color: '#a9a49b'
+      width: 0.8
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 48
+      - 432
+      - 864
+      - 28
+    content:
+      text: |-
+        我大一，刚开学两周多，专业课大部分还没上到。
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 48
+      - 462
       - 864
       - 26
     content:
       text: |-
-        Q9 那段 keyTimes 的故事要练到能一口气讲完——它是你最能打的一张牌。
+        所以我先做的事不是学某一门课，是先知道自己要学哪些课、大概什么时候学。
       fontFamily: *ff
-      fontSize: 13
+      fontSize: 14
       lineHeight: 1.25
-      color: '#B5392A'
+      color: '#62625c'
       bold: false
 
-  - elementId: t29
-    elementType: text
-    bounds:
-      - 48
-      - 470
-      - 864
-      - 24
-    content:
-      text: |-
-        代码不是我写的——这件事第一句就主动说清，别等人问。被问出来 = 一票否决。
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
-
-  - elementId: t4
+  - elementId: t3
     elementType: text
     bounds:
       - 48
@@ -1124,7 +824,7 @@ elements:
       color: '#62625c'
       bold: false
 
-  - elementId: t5
+  - elementId: t4
     elementType: text
     bounds:
       - 860
@@ -1133,7 +833,7 @@ elements:
       - 18
     content:
       text: |-
-        07
+        12
       fontFamily: *ff
       fontSize: 11
       lineHeight: 1.25

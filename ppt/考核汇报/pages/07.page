@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 明确交代：全部代码为 AI 生成。四件事为学生的真实角色——想清楚学什么与怎么练、遇疑去查、自己使用并提改进。
+notes: 学习框架为看懂 → 写出来 → 讲出来三步，以及每块学完后要填的三样。
 elements:
   - elementId: g1
     elementType: line
@@ -595,7 +595,7 @@ elements:
       - 64
     content:
       text: |-
-        我做的四件事
+        学习框架：三件事循环
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
@@ -607,346 +607,376 @@ elements:
     bounds:
       - 48
       - 152
-      - 300
-      - 22
+      - 700
+      - 24
     content:
       text: |-
-        代码不是我写的
+        这是我给自己定的学法，也是我做那个练习工具的原因。
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 16
       lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
-      letterSpacing: 1.2
+      color: '#252824'
+      bold: true
+
+  - elementId: s1
+    elementType: shape
+    bounds:
+      - 48
+      - 196
+      - 264
+      - 116
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
 
   - elementId: t6
     elementType: text
     bounds:
-      - 48
-      - 180
-      - 400
-      - 140
+      - 66
+      - 210
+      - 200
+      - 26
     content:
       text: |-
-        我不会写代码，
-        所以我把"怎么学"
-        想清楚，让它去做。
+        01
       fontFamily: *ff
-      fontSize: 28
+      fontSize: 15
       lineHeight: 1.25
-      color: '#252824'
+      color: '#62625c'
       bold: true
 
   - elementId: t7
     elementType: text
     bounds:
-      - 60
-      - 344
-      - 380
-      - 96
+      - 66
+      - 240
+      - 228
+      - 30
     content:
       text: |-
-        整个项目的代码，包括 C 语言
-        那些，都是 AI 写的。
-        下面这四件事它替不了我。
+        看懂
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t8
+    elementType: text
+    bounds:
+      - 66
+      - 276
+      - 246
+      - 34
+    content:
+      text: |-
+        把一块代码分开读，先弄明白它在干嘛
+      fontFamily: *ff
+      fontSize: 11.5
+      lineHeight: 1.4
+      color: '#62625c'
+      bold: false
+
+  - elementId: t9
+    elementType: text
+    bounds:
+      - 312
+      - 240
+      - 24
+      - 28
+    content:
+      text: |-
+        →
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s2
+    elementType: shape
+    bounds:
+      - 336
+      - 196
+      - 264
+      - 116
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#F0EAE0'
+    border:
+      color: '#b3b0a8'
+      width: 0.7
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 354
+      - 210
+      - 200
+      - 26
+    content:
+      text: |-
+        02
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: true
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 354
+      - 240
+      - 228
+      - 30
+    content:
+      text: |-
+        写出来
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t12
+    elementType: text
+    bounds:
+      - 354
+      - 276
+      - 246
+      - 34
+    content:
+      text: |-
+        把注释遮掉，自己默写一遍，写完编译看对不对
+      fontFamily: *ff
+      fontSize: 11.5
+      lineHeight: 1.4
+      color: '#62625c'
+      bold: false
+
+  - elementId: t13
+    elementType: text
+    bounds:
+      - 600
+      - 240
+      - 24
+      - 28
+    content:
+      text: |-
+        →
+      fontFamily: *ff
+      fontSize: 16
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+      align: center
+
+  - elementId: s3
+    elementType: shape
+    bounds:
+      - 624
+      - 196
+      - 264
+      - 116
+    shapeName: rect
+    fill:
+      type: solid
+      color: '#B5392A'
+
+  - elementId: t14
+    elementType: text
+    bounds:
+      - 642
+      - 210
+      - 200
+      - 26
+    content:
+      text: |-
+        03
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: true
+
+  - elementId: t15
+    elementType: text
+    bounds:
+      - 642
+      - 240
+      - 228
+      - 30
+    content:
+      text: |-
+        讲出来
+      fontFamily: *ff
+      fontSize: 19
+      lineHeight: 1.25
+      color: '#F0EAE0'
+      bold: true
+
+  - elementId: t16
+    elementType: text
+    bounds:
+      - 642
+      - 276
+      - 246
+      - 34
+    content:
+      text: |-
+        用自己的话讲一遍。讲不顺，就是还没懂
+      fontFamily: *ff
+      fontSize: 11.5
+      lineHeight: 1.4
+      color: '#F0EAE0'
+      bold: false
+
+  - elementId: t17
+    elementType: text
+    bounds:
+      - 48
+      - 336
+      - 864
+      - 26
+    content:
+      text: |-
+        第一步最好糊弄，第三步最不好糊弄。
+      fontFamily: *ff
+      fontSize: 15
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t18
+    elementType: text
+    bounds:
+      - 48
+      - 364
+      - 864
+      - 26
+    content:
+      text: |-
+        我看视频的时候经常觉得"懂了"，第二天默写就写不出来；能讲顺的，才是真记住了。
       fontFamily: *ff
       fontSize: 13
-      lineHeight: 1.5
+      lineHeight: 1.25
       color: '#62625c'
       bold: false
 
   - elementId: l2
     elementType: line
     bounds:
-      - 474
-      - 152
+      - 48
+      - 408
+      - 864
       - 1
-      - 312
     viewBox:
+      - 864
       - 1
-      - 312
-    points: 0,0 0,312
+    points: 0,0 864,0
     border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: s1
-    elementType: shape
-    bounds:
-      - 508
-      - 158
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t8
-    elementType: text
-    bounds:
-      - 522
-      - 164
-      - 36
-      - 24
-    content:
-      text: |-
-        01
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: true
-
-  - elementId: t9
-    elementType: text
-    bounds:
-      - 560
-      - 162
-      - 330
-      - 26
-    content:
-      text: |-
-        想清楚学什么
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 560
-      - 186
-      - 330
-      - 22
-    content:
-      text: |-
-        照着课程顺序排，先学哪一节后学哪一节
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 508
-      - 218
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 522
-      - 224
-      - 36
-      - 24
-    content:
-      text: |-
-        02
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: true
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 560
-      - 222
-      - 330
-      - 26
-    content:
-      text: |-
-        想清楚怎么练
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: true
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 560
-      - 246
-      - 330
-      - 22
-    content:
-      text: |-
-        每个模块要三种版本：全注释 / 少注释 / 没注释
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#F0EAE0'
-      bold: false
-
-  - elementId: s3
-    elementType: shape
-    bounds:
-      - 508
-      - 278
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 522
-      - 284
-      - 36
-      - 24
-    content:
-      text: |-
-        03
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: true
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 560
-      - 282
-      - 330
-      - 26
-    content:
-      text: |-
-        看不懂就问
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 560
-      - 306
-      - 330
-      - 22
-    content:
-      text: |-
-        有几处我觉得它讲得不对，回去翻了教材
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s4
-    elementType: shape
-    bounds:
-      - 508
-      - 338
-      - 396
-      - 50
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#E7E0D4'
-    border:
-      color: '#b3b0a8'
-      width: 0.7
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 522
-      - 344
-      - 36
-      - 24
-    content:
-      text: |-
-        04
-      fontFamily: *ff
-      fontSize: 14
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: true
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 560
-      - 342
-      - 330
-      - 26
-    content:
-      text: |-
-        自己拿它学
-      fontFamily: *ff
-      fontSize: 17
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
+      color: '#a9a49b'
+      width: 0.8
 
   - elementId: t19
     elementType: text
     bounds:
-      - 560
-      - 366
-      - 330
-      - 22
+      - 48
+      - 422
+      - 200
+      - 24
     content:
       text: |-
-        哪一步卡住了，我就让它改
+        每块学完填三样
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 14
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
+      color: '#B5392A'
+      bold: true
 
   - elementId: t20
     elementType: text
     bounds:
-      - 48
-      - 462
-      - 420
-      - 22
+      - 252
+      - 422
+      - 660
+      - 24
     content:
       text: |-
-        三种注释版本是我提的，这条最关键。
+        它讲什么 / 我练到哪一步 / 下一步学什么
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
-      color: '#B5392A'
+      color: '#62625c'
       bold: false
 
   - elementId: t21
     elementType: text
     bounds:
-      - 508
-      - 462
-      - 400
-      - 22
+      - 48
+      - 450
+      - 200
+      - 24
     content:
       text: |-
-        我自己练的顺序：读一遍 → 遮掉注释 → 默写 → 编译 → 对教材
+        先填"讲什么"
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t22
+    elementType: text
+    bounds:
+      - 252
+      - 450
+      - 660
+      - 24
+    content:
+      text: |-
+        这一块是干嘛的，一句话说不出来就说明还没搞清
+      fontFamily: *ff
+      fontSize: 12
+      lineHeight: 1.25
+      color: '#62625c'
+      bold: false
+
+  - elementId: t23
+    elementType: text
+    bounds:
+      - 48
+      - 478
+      - 200
+      - 24
+    content:
+      text: |-
+        再填"练到哪"
+      fontFamily: *ff
+      fontSize: 14
+      lineHeight: 1.25
+      color: '#B5392A'
+      bold: true
+
+  - elementId: t24
+    elementType: text
+    bounds:
+      - 252
+      - 478
+      - 660
+      - 24
+    content:
+      text: |-
+        按 ● ○ · 标，写不出"会"就不写
+      fontFamily: *ff
+      fontSize: 12
       lineHeight: 1.25
       color: '#62625c'
       bold: false

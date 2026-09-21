@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 提交数据来自仓库 git 历史实测；无提交的两天已如实标注。
+notes: 三级标准与判断依据：● 有可查的产出；○ 只在项目里用过或看得懂写不出；· 只是听来的。
 elements:
   - elementId: g1
     elementType: line
@@ -595,7 +595,7 @@ elements:
       - 64
     content:
       text: |-
-        这七天我做了什么
+        我是拿什么标准标"会"的
       fontFamily: *ff
       fontSize: 32
       lineHeight: 1.25
@@ -607,366 +607,124 @@ elements:
     bounds:
       - 48
       - 152
-      - 560
-      - 22
+      - 700
+      - 24
     content:
       text: |-
-        开学第二周 · 七日提交曲线 · 共 56 次提交 · 峰值 43 次
+        标之前先定规矩，不然容易把"看过"当成"会"。
       fontFamily: *ff
-      fontSize: 12
+      fontSize: 16
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: s1
-    elementType: shape
-    bounds:
-      - 56
-      - 388
-      - 52
-      - 8
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
+      color: '#252824'
+      bold: true
 
   - elementId: t6
     elementType: text
     bounds:
-      - 58
-      - 354
       - 48
-      - 28
+      - 206
+      - 44
+      - 40
     content:
       text: |-
-        1
+        ●
       fontFamily: *ff
-      fontSize: 16
+      fontSize: 30
       lineHeight: 1.25
-      color: '#252824'
+      color: '#B5392A'
       bold: true
-      align: center
 
   - elementId: t7
     elementType: text
     bounds:
-      - 42
-      - 404
-      - 80
-      - 24
+      - 104
+      - 204
+      - 200
+      - 28
     content:
       text: |-
-        09-12
+        写过题的
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 18
       lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s2
-    elementType: shape
-    bounds:
-      - 134
-      - 394
-      - 52
-      - 2
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
+      color: '#252824'
+      bold: true
 
   - elementId: t8
     elementType: text
     bounds:
-      - 136
-      - 360
-      - 48
-      - 28
+      - 104
+      - 232
+      - 760
+      - 26
     content:
       text: |-
-        —
+        有能查到的产出：牛客过了 50 题、链表增删查改刷过题
       fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t9
-    elementType: text
-    bounds:
-      - 120
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-13
-      fontFamily: *ff
-      fontSize: 11
+      fontSize: 13
       lineHeight: 1.25
       color: '#62625c'
       bold: false
-      align: center
-
-  - elementId: s3
-    elementType: shape
-    bounds:
-      - 212
-      - 360
-      - 52
-      - 36
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t10
-    elementType: text
-    bounds:
-      - 214
-      - 326
-      - 48
-      - 28
-    content:
-      text: |-
-        8
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t11
-    elementType: text
-    bounds:
-      - 198
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-14
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s4
-    elementType: shape
-    bounds:
-      - 290
-      - 200
-      - 52
-      - 196
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#B5392A'
-
-  - elementId: t12
-    elementType: text
-    bounds:
-      - 292
-      - 166
-      - 48
-      - 28
-    content:
-      text: |-
-        43
-      fontFamily: *ff
-      fontSize: 22
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: true
-      align: center
-
-  - elementId: t13
-    elementType: text
-    bounds:
-      - 276
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-15
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s5
-    elementType: shape
-    bounds:
-      - 368
-      - 382
-      - 52
-      - 14
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t14
-    elementType: text
-    bounds:
-      - 370
-      - 348
-      - 48
-      - 28
-    content:
-      text: |-
-        3
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t15
-    elementType: text
-    bounds:
-      - 354
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-16
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s6
-    elementType: shape
-    bounds:
-      - 446
-      - 394
-      - 52
-      - 2
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t16
-    elementType: text
-    bounds:
-      - 448
-      - 360
-      - 48
-      - 28
-    content:
-      text: |-
-        —
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t17
-    elementType: text
-    bounds:
-      - 432
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-17
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
-
-  - elementId: s7
-    elementType: shape
-    bounds:
-      - 524
-      - 388
-      - 52
-      - 8
-    shapeName: rect
-    fill:
-      type: solid
-      color: '#c9c4ba'
-
-  - elementId: t18
-    elementType: text
-    bounds:
-      - 526
-      - 354
-      - 48
-      - 28
-    content:
-      text: |-
-        1
-      fontFamily: *ff
-      fontSize: 16
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-      align: center
-
-  - elementId: t19
-    elementType: text
-    bounds:
-      - 510
-      - 404
-      - 80
-      - 24
-    content:
-      text: |-
-        09-18
-      fontFamily: *ff
-      fontSize: 11
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-      align: center
 
   - elementId: l2
     elementType: line
     bounds:
-      - 56
-      - 396
-      - 520
+      - 48
+      - 262
+      - 864
       - 1
     viewBox:
-      - 520
+      - 864
       - 1
-    points: 0,0 520,0
+    points: 0,0 864,0
     border:
-      color: '#a9a49b'
-      width: 0.8
+      color: '#ded8ce'
+      width: 0.5
 
-  - elementId: t20
+  - elementId: t9
     elementType: text
     bounds:
       - 48
-      - 434
-      - 560
-      - 22
+      - 280
+      - 44
+      - 40
     content:
       text: |-
-        09-13 与 09-17 无提交。
+        ○
       fontFamily: *ff
-      fontSize: 11
+      fontSize: 30
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t10
+    elementType: text
+    bounds:
+      - 104
+      - 278
+      - 200
+      - 28
+    content:
+      text: |-
+        跟做过的
+      fontFamily: *ff
+      fontSize: 18
+      lineHeight: 1.25
+      color: '#252824'
+      bold: true
+
+  - elementId: t11
+    elementType: text
+    bounds:
+      - 104
+      - 306
+      - 760
+      - 26
+    content:
+      text: |-
+        只在项目里用过，或者看得懂但自己写不出来
+      fontFamily: *ff
+      fontSize: 13
       lineHeight: 1.25
       color: '#62625c'
       bold: false
@@ -974,211 +732,96 @@ elements:
   - elementId: l3
     elementType: line
     bounds:
-      - 620
-      - 152
+      - 48
+      - 336
+      - 864
       - 1
-      - 300
     viewBox:
+      - 864
       - 1
-      - 300
-    points: 0,0 0,300
+    points: 0,0 864,0
     border:
       color: '#ded8ce'
       width: 0.5
 
-  - elementId: t21
+  - elementId: t12
     elementType: text
     bounds:
-      - 640
-      - 152
       - 48
+      - 354
       - 44
+      - 40
     content:
       text: |-
-        01
+        ·
       fontFamily: *ff
-      fontSize: 26
+      fontSize: 30
       lineHeight: 1.25
       color: '#62625c'
-      bold: false
+      bold: true
 
-  - elementId: t22
+  - elementId: t13
     elementType: text
     bounds:
-      - 692
-      - 150
-      - 220
-      - 26
+      - 104
+      - 352
+      - 200
+      - 28
     content:
       text: |-
-        开学第五天动手
+        还没碰过的
       fontFamily: *ff
       fontSize: 18
       lineHeight: 1.25
       color: '#252824'
       bold: true
 
-  - elementId: t23
+  - elementId: t14
     elementType: text
     bounds:
-      - 692
-      - 180
-      - 220
-      - 70
+      - 104
+      - 380
+      - 760
+      - 26
     content:
       text: |-
-        9/12 开学第 5 天立项，
-        先做了个链表小工具。
+        连"它大概讲什么"都只是听来的
       fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.4
+      fontSize: 13
+      lineHeight: 1.25
       color: '#62625c'
       bold: false
 
   - elementId: l4
     elementType: line
     bounds:
-      - 640
-      - 246
-      - 272
+      - 48
+      - 448
+      - 864
       - 1
     viewBox:
-      - 272
+      - 864
       - 1
-    points: 0,0 272,0
+    points: 0,0 864,0
     border:
-      color: '#ded8ce'
-      width: 0.5
+      color: '#a9a49b'
+      width: 0.8
 
-  - elementId: t24
+  - elementId: t15
     elementType: text
     bounds:
-      - 640
-      - 256
       - 48
-      - 44
-    content:
-      text: |-
-        02
-      fontFamily: *ff
-      fontSize: 26
-      lineHeight: 1.25
-      color: '#62625c'
-      bold: false
-
-  - elementId: t25
-    elementType: text
-    bounds:
-      - 692
-      - 254
-      - 220
+      - 458
+      - 864
       - 26
     content:
       text: |-
-        主动扩大范围
+        为什么先定规矩：不先定，我就会把"看过视频"也算成"会"，那这张图就没用了。
       fontFamily: *ff
-      fontSize: 18
+      fontSize: 13
       lineHeight: 1.25
       color: '#252824'
       bold: true
-
-  - elementId: t26
-    elementType: text
-    bounds:
-      - 692
-      - 284
-      - 220
-      - 70
-    content:
-      text: |-
-        发现只覆盖一章没用，
-        9/14 重做成全课程平台。
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.4
-      color: '#62625c'
-      bold: false
-
-  - elementId: l5
-    elementType: line
-    bounds:
-      - 640
-      - 350
-      - 272
-      - 1
-    viewBox:
-      - 272
-      - 1
-    points: 0,0 272,0
-    border:
-      color: '#ded8ce'
-      width: 0.5
-
-  - elementId: t27
-    elementType: text
-    bounds:
-      - 640
-      - 360
-      - 48
-      - 44
-    content:
-      text: |-
-        03
-      fontFamily: *ff
-      fontSize: 26
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
-
-  - elementId: t28
-    elementType: text
-    bounds:
-      - 692
-      - 358
-      - 220
-      - 26
-    content:
-      text: |-
-        敢加也敢删
-      fontFamily: *ff
-      fontSize: 18
-      lineHeight: 1.25
-      color: '#252824'
-      bold: true
-
-  - elementId: t29
-    elementType: text
-    bounds:
-      - 692
-      - 388
-      - 220
-      - 70
-    content:
-      text: |-
-        9/16 新增第 07 章，
-        判定不达标，主动回退，
-        并删除该 Release。
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.4
-      color: '#62625c'
-      bold: false
-
-  - elementId: t30
-    elementType: text
-    bounds:
-      - 640
-      - 434
-      - 272
-      - 24
-    content:
-      text: |-
-        第三条分量最重
-      fontFamily: *ff
-      fontSize: 12
-      lineHeight: 1.25
-      color: '#B5392A'
-      bold: false
 
   - elementId: t3
     elementType: text

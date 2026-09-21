@@ -2,7 +2,7 @@ pageType: content
 background:
   type: solid
   color: '#F0EAE0'
-notes: 六行的「认识从哪来」均为学生自述的真实来源：自己学过的、看过概要描述的、跟着做过的，以及尚未接触的。这一页对应考核任务一里「主动了解专业相关知识」。
+notes: 如实区分：加底色的三行为真正接触过的（自学、看过概要、跟做过）；其余三行只是初步了解。
 elements:
   - elementId: g1
     elementType: line
@@ -850,7 +850,7 @@ elements:
       - 26
     content:
       text: |-
-        一个软件从想法到交付的全过程
+        一个东西从想法到做完的全过程
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -938,7 +938,7 @@ elements:
       - 26
     content:
       text: |-
-        做这个项目的时候跟着做过
+        做项目的时候跟着做过
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25
@@ -1065,7 +1065,7 @@ elements:
       - 26
     content:
       text: |-
-        说清楚：加底色的三行是我真碰过的；另外三行我只是知道它讲什么，还没学。
+        加底色的三行是我真碰过的；另外三行我只是知道它讲什么，还没学。
       fontFamily: *ff
       fontSize: 12
       lineHeight: 1.25

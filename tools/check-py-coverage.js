@@ -87,7 +87,7 @@ console.log('  逐节覆盖：');
 perSec.forEach((l) => console.log(l));
 console.log('');
 console.log(`  真实模块:   ${realPy} / ${real} 个有 Python`);
-console.log(`  拼装视图:   ${asmPy} / ${asm} 个有 Python（本来就不该有）`);
+console.log(`  拼装视图:   ${asmPy} / ${asm} 个有 Python（把整节的 Python 拼起来）`);
 console.log('');
 if (missing.length) {
   console.log(`  ❌ 还有 ${missing.length} 个真实模块没写 Python：`);

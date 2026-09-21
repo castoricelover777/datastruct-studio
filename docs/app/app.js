@@ -127,6 +127,23 @@
     return p.modes[mode || state.mode];
   }
 
+  /**
+   * 和 currentModes 一样，但把"实际用的是哪种语言"也返回。
+   * 语法高亮要知道这份代码是 C 还是 Python —— 选了 Python 但模块没有，
+   * 实际显示的是 C，那就要按 C 上色。
+   */
+  function currentCode(target, lang, mode) {
+    const p = (target && typeof target === 'object')
+      ? target
+      : codeOf(target || state.moduleId);
+    if (!p || !p.modes) return { code: '', lang: 'c' };
+    const wantPy = (lang || state.lang) === 'py';
+    if (wantPy && p.py && p.py.modes) {
+      return { code: p.py.modes[mode || state.mode], lang: 'py' };
+    }
+    return { code: p.modes[mode || state.mode], lang: 'c' };
+  }
+
   function sectionMeta(secId) {
     const ch = state.chapters[chapterIdOf(secId)];
     return ch ? ch.sections.find((s) => s.id === secId) : null;
@@ -494,13 +511,13 @@
       el.compareRight.innerHTML = '';
       return;
     }
-    const left = sec.code.views.singly[pair.singly];
-    const right = sec.code.views.doubly[pair.doubly];
     el.compareTitle.textContent = '对比：' + pair.label;
     el.compareLeftHead.textContent = '单链表 · ' + pair.singly;
     el.compareRightHead.textContent = '双链表 · ' + pair.doubly;
-    el.compareLeft.innerHTML = HL.codeViewHtml(currentModes(pair.singly, state.lang, state.mode));
-    el.compareRight.innerHTML = HL.codeViewHtml(currentModes(pair.doubly, state.lang, state.mode));
+    const lc = currentCode(pair.singly, state.lang, state.mode);
+    const rc = currentCode(pair.doubly, state.lang, state.mode);
+    el.compareLeft.innerHTML = HL.codeViewHtml(lc.code, { lang: lc.lang });
+    el.compareRight.innerHTML = HL.codeViewHtml(rc.code, { lang: rc.lang });
     // 把双链表里"多出来的 prior 相关行"标出来（PRD 3.2 的对比视图灵魂）
     el.compareRight.querySelectorAll('.code-line').forEach((n) => {
       const t = n.textContent || '';
@@ -515,7 +532,8 @@
     if (!m) return;
     const payload = codeOf(m.id);
     if (!payload) { el.codeView.innerHTML = '<div class="out-line is-message">代码加载中…</div>'; return; }
-    el.codeView.innerHTML = HL.codeViewHtml(currentModes(m.id, state.lang, state.mode));
+    const cc = currentCode(m.id, state.lang, state.mode);
+    el.codeView.innerHTML = HL.codeViewHtml(cc.code, { lang: cc.lang });
     renderPlayer();
     setPane('read');
   }
@@ -693,7 +711,8 @@
       renderTree();
       renderHeader();
     } else {
-      el.refView.innerHTML = HL.codeViewHtml(currentModes(m.id, state.lang, state.mode));
+      const rf = currentCode(m.id, state.lang, state.mode);
+    el.refView.innerHTML = HL.codeViewHtml(rf.code, { lang: rf.lang });
       el.refCardTitle.textContent = '官方实现 · ' + label(state.mode);
       el.outputStatus.textContent = '';
     }

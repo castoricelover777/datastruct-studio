@@ -1,7 +1,12 @@
 /* ==========================================================================
-   LinkList Studio —— C 语法高亮
+   LinkList Studio —— C / Python 语法高亮
    逐行词法扫描，块注释状态跨行保持，因此每一行产出的 HTML 都是自闭合的，
    可以安全地拆成"行数组"用于行号栏、错误行高亮和编辑器的覆盖层。
+
+   两种语言共用同一套扫描器，差别集中在三处：
+     1. 注释符号：C 用双斜杠与斜杠星号，Python 只用井号
+     2. 字符串：Python 有三引号
+     3. 行首的井号：C 里是预处理指令（整行标绿），Python 里只是注释
    ========================================================================== */
 (function (global) {
   'use strict';
@@ -13,6 +18,37 @@
     'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile', 'while',
     '_Bool', '_Complex', '_Imaginary', 'NULL', 'true', 'false',
   ]);
+
+  /** Python 关键字。and/or/not/in/is 是运算符但按关键字上色更好认 */
+  const PY_KEYWORDS = new Set([
+    'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break',
+    'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for',
+    'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not',
+    'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield',
+  ]);
+
+  /** Python 里"看着像类型/常量"的词，和 C 的 BUILTIN_TYPES 对应 */
+  const PY_BUILTINS = new Set([
+    'int', 'float', 'str', 'bool', 'list', 'dict', 'set', 'tuple', 'bytes',
+    'object', 'type', 'super', 'self', 'cls', 'print', 'len', 'range', 'enumerate',
+    'zip', 'sorted', 'reversed', 'sum', 'min', 'max', 'abs', 'round', 'input',
+    'isinstance', 'getattr', 'setattr', 'hasattr', 'repr', 'id', 'iter', 'next',
+    'ValueError', 'TypeError', 'IndexError', 'KeyError', 'Exception',
+  ]);
+
+  /**
+   * 猜这段代码是 C 还是 Python。
+   * 靠几个 C 里不可能出现的词判断（def / import / elif / self…），
+   * 认不出来就当 C —— 项目里绝大多数代码是 C，猜错的代价最小。
+   */
+  function detectLang(code) {
+    const t = String(code || '');
+    if (/^[ \t]*(def|class)[ \t]+\w+[^\n]*:/m.test(t)) return 'py';
+    if (/^[ \t]*(import|from)[ \t]+\w+/m.test(t)) return 'py';
+    if (/^[ \t]*(elif|self\.|yield|lambda)[ \t(]/m.test(t)) return 'py';
+    if (/#%module|#@[sd]\b/.test(t)) return 'py';
+    return 'c';
+  }
 
   /** 常见标准库类型名，没有 typedef 也要按"类型"上色 */
   const BUILTIN_TYPES = new Set([
@@ -65,23 +101,39 @@
   /**
    * 把一个逻辑行切成 token 并上色。
    * @param {string} line
-   * @param {object} state 跨行状态 { inBlockComment: boolean }
+   * @param {object} state 跨行状态 { inBlockComment: boolean, inTriple: string|null }
    * @param {Set<string>} types
    * @param {Set<string>} macros
+   * @param {string} lang 'c' | 'py'
    */
-  function highlightLine(line, state, types, macros) {
+  function highlightLine(line, state, types, macros, lang) {
+    const py = lang === 'py';
+    if (py && state.inTriple == null) state.inTriple = null;
     let out = '';
     let i = 0;
     const n = line.length;
 
-    // 行首的预处理指令整行标绿
+    // 三引号跨行字符串：上一行没闭合，这一行整行都还在字符串里
+    if (py && state.inTriple) {
+      const close = line.indexOf(state.inTriple, i);
+      if (close === -1) {
+        return `<span class="t-str">${escapeHtml(line)}</span>`;
+      }
+      out += `<span class="t-str">${escapeHtml(line.slice(0, close + 3))}</span>`;
+      i = close + 3;
+      state.inTriple = null;
+      // 三引号闭合后本行可能还有代码，继续往下扫
+    }
+
+    // 行首的 # ：C 里是预处理指令（整行标绿），Python 里就是注释
     const pre = line.match(/^[ \t]*#/);
-    if (pre && !state.inBlockComment) {
+    if (pre && !state.inBlockComment && !py) {
       return `<span class="t-pp">${escapeHtml(line)}</span>`;
     }
 
     while (i < n) {
-      if (state.inBlockComment) {
+      // 块注释只在 C 里有
+      if (!py && state.inBlockComment) {
         const end = line.indexOf('*/', i);
         if (end === -1) {
           out += `<span class="t-com">${escapeHtml(line.slice(i))}</span>`;
@@ -96,12 +148,18 @@
 
       const c = line[i];
 
-      // 注释
-      if (c === '/' && line[i + 1] === '/') {
+      // Python 注释：# 到行尾
+      if (py && c === '#') {
         out += `<span class="t-com">${escapeHtml(line.slice(i))}</span>`;
         break;
       }
-      if (c === '/' && line[i + 1] === '*') {
+
+      // C 注释
+      if (!py && c === '/' && line[i + 1] === '/') {
+        out += `<span class="t-com">${escapeHtml(line.slice(i))}</span>`;
+        break;
+      }
+      if (!py && c === '/' && line[i + 1] === '*') {
         const end = line.indexOf('*/', i + 2);
         if (end === -1) {
           out += `<span class="t-com">${escapeHtml(line.slice(i))}</span>`;
@@ -110,6 +168,21 @@
         } else {
           out += `<span class="t-com">${escapeHtml(line.slice(i, end + 2))}</span>`;
           i = end + 2;
+        }
+        continue;
+      }
+
+      // Python 的三引号（docstring / 多行字符串）
+      if (py && (c === '"' || c === "'") && line.slice(i, i + 3) === c.repeat(3)) {
+        const mark = c.repeat(3);
+        const close = line.indexOf(mark, i + 3);
+        if (close === -1) {
+          out += `<span class="t-str">${escapeHtml(line.slice(i))}</span>`;
+          state.inTriple = mark;
+          i = n;
+        } else {
+          out += `<span class="t-str">${escapeHtml(line.slice(i, close + 3))}</span>`;
+          i = close + 3;
         }
         continue;
       }
@@ -140,7 +213,16 @@
         while (j < n && ID_CHAR.test(line[j])) j++;
         const word = line.slice(i, j);
         let cls = '';
-        if (KEYWORDS.has(word)) {
+        if (py) {
+          if (PY_KEYWORDS.has(word)) cls = 't-key';
+          else if (PY_BUILTINS.has(word)) cls = 't-type';
+          else {
+            // 后面紧跟 ( 的就是函数名或方法名
+            let k = j;
+            while (k < n && (line[k] === ' ' || line[k] === '\t')) k++;
+            if (line[k] === '(') cls = 't-func';
+          }
+        } else if (KEYWORDS.has(word)) {
           cls = (word === 'NULL' || word === 'true' || word === 'false') ? 't-macro' : 't-key';
         } else if (types.has(word) || BUILTIN_TYPES.has(word)) {
           cls = 't-type';
@@ -176,14 +258,17 @@
 
   /**
    * 把整段代码按行高亮。
+   * @param {string} code
+   * @param {string} [lang] 'c' | 'py'，不传就自动判断
    * @returns {string[]} 每行一个 HTML 片段
    */
-  function highlightLines(code) {
+  function highlightLines(code, lang) {
     const text = String(code == null ? '' : code).replace(/\r\n?/g, '\n');
-    const types = extractTypedefNames(text);
-    const macros = extractMacroNames(text);
-    const state = { inBlockComment: false };
-    return text.split('\n').map((line) => highlightLine(line, state, types, macros));
+    const L = lang || detectLang(text);
+    const types = L === 'py' ? new Set() : extractTypedefNames(text);
+    const macros = L === 'py' ? new Set() : extractMacroNames(text);
+    const state = { inBlockComment: false, inTriple: null };
+    return text.split('\n').map((line) => highlightLine(line, state, types, macros, L));
   }
 
   /**
@@ -204,7 +289,7 @@
     const hot = new Set(opts.hotLines || []);
     const lineClasses = opts.lineClasses || null;
     const linePrefixes = opts.linePrefixes || null;
-    const hl = opts.plain ? rawLines.map(escapeHtml) : highlightLines(text);
+    const hl = opts.plain ? rawLines.map(escapeHtml) : highlightLines(text, opts.lang);
 
     let gutter = '';
     let body = '';
@@ -225,9 +310,12 @@
    * 单独高亮一行，类型名/宏名从 contextText 里提取
    * （diff 视图的每一行都是拼出来的，需要借上下文才能认出 LinkList 这类类型）
    */
-  function highlightSingleLine(line, contextText) {
+  function highlightSingleLine(line, contextText, lang) {
     const ctx = contextText || line;
-    return highlightLine(line, { inBlockComment: false }, extractTypedefNames(ctx), extractMacroNames(ctx));
+    const L = lang || detectLang(ctx);
+    return highlightLine(line, { inBlockComment: false, inTriple: null },
+      L === 'py' ? new Set() : extractTypedefNames(ctx),
+      L === 'py' ? new Set() : extractMacroNames(ctx), L);
   }
 
   global.LS = global.LS || {};
@@ -236,6 +324,7 @@
     highlightLines,
     highlightSingleLine,
     codeViewHtml,
+    detectLang,
     extractTypedefNames,
     extractMacroNames,
   };

@@ -165,7 +165,7 @@ void DestroyTable(HashTable H)
 //@d 复杂度上，试除是 O(√p)，而素数之间的平均间隔是 O(log p)，
 //@d 所以找下一个素数的开销可以接受 —— 而且它只在建表时做一次。
 
-//@s 取不小于 N 的下一个素数（和 06-01 一样）
+//@s 取不小于 N 的下一个素数（和 06-02、06-03 那份实现一样）
 int NextPrime(int N)
 {
 //@s 循环用
@@ -653,7 +653,7 @@ int main(void)
             H->Cells[i].Info = Empty;
         }
 
-//@s 用移位法把字符串塞进去（这里用哈希值当关键字）
+//@s 先把整数关键字用"打散版取余"算出初始位置，再用线性探测找空位
         for (i = 0; i < n; i++)
         {
             Index h = HashModScramble(keys[i], m);

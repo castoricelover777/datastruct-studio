@@ -36,10 +36,9 @@
 #@d   后面要判断 Info != Empty、Info == Legitimate，数字对不上判断就全错了。
 #@d
 #@d   C 的 struct 到 Python 就是一个 class，字段名一个都没改；C 的 H->Data
-#@d   到 Python 是 H.Data，箭头换成一个小圆点。
-#@d
-#@d   C 的 typedef struct TblNode *HashTable 是"指向表结点的指针"的别名，
-#@d   Python 没有指针，所以直接写 HashTable = TblNode，用法上是一回事。
+#@d   到 Python 是 H.Data，箭头换成一个小圆点。C 那句 typedef struct TblNode
+#@d   *HashTable 是"指向表结点的指针"的别名，Python 没有指针，
+#@d   所以直接写 HashTable = TblNode，用法上是一回事。
 
 #@s 元素类型
 ElementType = int
@@ -657,16 +656,15 @@ def PrintTable(H):
 #@d
 #@d   C 的 int InsertBatch(..., int *maxProbes) 是把最大探测次数写回给调用者，
 #@d   Python 直接返回两个值：total, maxProbes = InsertBatch(H, keys, n, 1)。
-#@d
-#@d   C 的 static const ElementType keys[] = { 20, 31, ... }; 要先说类型、
+#@d   另外 C 的 static const ElementType keys[] = { 20, 31, ... }; 要先说类型、
 #@d   长度也由编译器数；Python 直接 keys = [20, 31, ...]，一行就完事。
 #@d
 #@d   C 的 printf("...%d...\n", x) 在这儿写成 f'...{x}...'（字符串前面带 f，
-#@d   花括号里直接填变量），打出来的字一模一样。要注意 print(a, b) 中间会
-#@d   自动塞一个空格，而 printf 不会 —— 所以能用一条 f-string 拼完的就别拆开。
-#@d
-#@d   C 的 printf("%d ", x) 每个数后面都带一个空格（最后一个也带），
-#@d   Python 得写成 print(f'{x} ', end='')，不能用 ' '.join(...)，那样最后一个没空格。
+#@d   花括号里直接填变量），打出来的字一模一样。这里有两个空格上的坑：
+#@d   print(a, b) 中间会自动塞一个空格而 printf 不会，所以能用一条 f-string
+#@d   拼完的就别拆开；C 的 printf("%d ", x) 每个数后面都带一个空格（最后一个
+#@d   也带），Python 得写 print(f'{x} ', end='')，不能用 ' '.join(...)，
+#@d   那样最后一个数后面就没空格了。
 #@d
 #@d   C 的 (double)total1 / n 是先转小数再除，Python 的 / 本来就是小数除法，
 #@d   所以写成 total1 / n；平均次数保留一位小数用 f'{v:.1f}'，和 %.1f 一样。

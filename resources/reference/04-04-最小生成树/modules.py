@@ -403,7 +403,7 @@ def Kruskal(G, edges, edgeCount):
 #%end
 
 #%module | 06 | main | main —— 两种算法对着跑 | 3 | 01,02,03,04,05 |
-#@summary | 同一张图，Prim 和 Kruskal 应该给出同一个总权值。
+#%summary | 同一张图，Prim 和 Kruskal 应该给出同一个总权值。
 #@d ============ 为什么要两个都算一遍 ============
 #@d
 #@d 因为它们是两种完全不同的思路，**结果必须一样**。

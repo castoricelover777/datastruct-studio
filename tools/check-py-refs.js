@@ -71,11 +71,19 @@ for (const d of dirs) {
 
   nFiles++;
   const text = fs.readFileSync(pyFile, 'utf8');
+  const openTags = (text.match(/^#%module\s*\|/gm) || []).length;
+  const endTags = (text.match(/^#%end\s*$/gm) || []).length;
   const r = P.parse([{ name: 'modules.py', text }]);
   const pyIds = r.modules.map((m) => m.id);
   nMods += pyIds.length;
 
   const errs = [];
+
+  // 0) 文件是否写完整：每个 %module 都要有 %end 收尾，
+  //    否则解析器会把整个尾巴吃掉，报出来只是"缺模块"，看不出真正原因
+  if (openTags !== endTags) {
+    errs.push(`文件没写完整：有 ${openTags} 个 #%module 但只有 ${endTags} 个 #%end（缺 ${openTags - endTags} 个）`);
+  }
 
   // 1) 模块对应关系
   if (hasC) {

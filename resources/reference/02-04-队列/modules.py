@@ -1,17 +1,3 @@
-# ============================================================================
-#  数据结构研习社 —— 02 线性结构 / 02-04 队列（Python 版）
-# ============================================================================
-#
-#  队列：只允许一端进、另一端出的线性表。**先进先出（FIFO）**。
-#
-#  如果照搬顺序表的写法，队列很快会撞上一个尴尬：元素一直出队，
-#  front 一直往后走，前面的格子空着却再也用不上 —— 这叫**假溢出**。
-#
-#  解决办法很漂亮：把数组首尾接成一个环。这一节的重点全在这个"环"上。
-#
-#  标记约定同前（本文件本身可以直接跑）。
-# ============================================================================
-
 #%module | 01 | typedef | 头文件与 typedef | 1 |
 #%summary | front 指队头、rear 指队尾的下一个位置，数组首尾相连成环。
 #@d ============ 先看不用环会怎样（假溢出） ============
@@ -81,12 +67,12 @@ Status = int
 
 #@s 循环队列
 class Queue:
-#@s 连续内存，当成环来用
+    #@s 连续内存，当成环来用
     def __init__(self):
         self.data = [None] * MAXSIZE
-#@s 队头元素的下标
+        #@s 队头元素的下标
         self.front = 0
-#@s 队尾元素的下一个位置
+        #@s 队尾元素的下一个位置
         self.rear = 0
 #%end
 
@@ -113,11 +99,11 @@ class Queue:
 
 #@s 传指针：两个指针都要改
     def InitQueue(self):
-#@s 队头归零
+        #@s 队头归零
         self.front = 0
-#@s 队尾归零 —— 与 front 重合即队空
+        #@s 队尾归零 —— 与 front 重合即队空
         self.rear = 0
-#@s 成功
+        #@s 成功
         return OK
 #%end
 
@@ -157,24 +143,25 @@ class Queue:
 #@d   取模这个运算是两边完全一样的行为：正数取模的时候，C 的 % 和 Python 的 %
 #@d   结果相同，所以 rear 到头绕回 0 这件事一模一样。
 #@d
-#@d   C 里 e 是 ElemType（其实就是 int），Python 不写类型，直接 self.data[self.rear] = e。
+#@d   C 里 e 是 ElemType（其实就是 int），Python 不写类型，
+#@d   直接 self.data[self.rear] = e 就完事了。
 
 #@s 入队
     def EnQueue(self, e):
-#@s 先判满 —— 注意是"下一格是否会撞上 front"
+        #@s 先判满 —— 注意是"下一格是否会撞上 front"
         if (self.rear + 1) % MAXSIZE == self.front:
-#@s 满了就拒绝
+            #@s 满了就拒绝
             return ERROR
 
-#@s 放入 rear 所指的空位
+        #@s 放入 rear 所指的空位
         self.data[self.rear] = e
 
-#@s rear 绕环前进一格（到头了就回到 0）
-#@d 这个 % MAXSIZE 就是"环"的全部实现。没有它，rear 会一直涨下去，
-#@d 很快越界 —— 而不取模导致的 bug 往往要到队列跑很多轮之后才暴露。
+        #@s rear 绕环前进一格（到头了就回到 0）
+        #@d 这个 % MAXSIZE 就是"环"的全部实现。没有它，rear 会一直涨下去，
+        #@d 很快越界 —— 而不取模导致的 bug 往往要到队列跑很多轮之后才暴露。
         self.rear = (self.rear + 1) % MAXSIZE
 
-#@s 成功
+        #@s 成功
         return OK
 #%end
 
@@ -206,23 +193,25 @@ class Queue:
 #@d   Python 可以直接返回两个值，所以这里写成 return OK, e，调用者用
 #@d   r, e = Q.DeQueue() 一次就接住了。
 #@d
-#@d   有个小地方要当心：队空的时候 C 的 *e 压根没被赋值，Python 这里返回
-#@d   的是 OK 之外的 None，比"E 里留着上次的旧值"老实一点。
-#@d   判空那句 front == rear 前提是一模一样的，别忘了判。
+#@d   有个小地方要当心：队空的时候 C 的 *e 压根不赋值，调用者那个 e 里留着
+#@d   的还是上一次的老值；Python 这边返回的是 ERROR 和 None，一眼就能看出来
+#@d   "这次什么都没取到"。
+#@d
+#@d   判空那句 front == rear 一模一样，出队前别忘了判。
 
 #@s 出队，元素由 e 带回
     def DeQueue(self):
-#@s 先判空
+        #@s 先判空
         if self.front == self.rear:
             return ERROR, None
 
-#@s 取走队头元素
+        #@s 取走队头元素
         e = self.data[self.front]
 
-#@s front 绕环前进一格
+        #@s front 绕环前进一格
         self.front = (self.front + 1) % MAXSIZE
 
-#@s 成功
+        #@s 成功
         return OK, e
 #%end
 
@@ -246,8 +235,10 @@ class Queue:
 #@d   Python 直接传对象，函数里拿到的就是同一个队列，不拷贝。反正打印函数
 #@d   只看不改，看起来一样。
 #@d
-#@d   出队那里差别最大：C 写 DeQueue(&Q, &e)，Python 写 r, e = Q.DeQueue()，
-#@d   一个语句同时拿到状态和元素，不用再准备一个 e 变量放在外面等着。
+#@d   出队那里差别最大：C 写 DeQueue(&Q, &e)，状态和元素分开两份；
+#@d   Python 写 r, e = Q.DeQueue()，一句话就把两个值一起接住了。
+#@d   如果哪次只想要元素、不关心状态，还可以把第一个接收变量写成下划线
+#@d   （_, e = Q.DeQueue()），这也是 Python 里约定俗成的一个小习惯。
 
 #@s 打印队列内容（从 front 开始，按逻辑顺序）
 #@d 注意不能简单地 for (i = 0; i < MAXSIZE; i++)：
@@ -267,40 +258,40 @@ def PrintQueue(tag, Q):
 
 #@s 主函数
 if __name__ == '__main__':
-#@s 定义队列
+    #@s 定义队列
     Q = Queue()
-#@s 出口参数
+    #@s 出口参数
     e = None
-#@s 循环用
+    #@s 循环用
     i = 0
 
-#@s 初始化
+    #@s 初始化
     Q.InitQueue()
     PrintQueue('初始化后:', Q)
 
-#@s 入队 10 20 30
+    #@s 入队 10 20 30
     Q.EnQueue(10)
     Q.EnQueue(20)
     Q.EnQueue(30)
     PrintQueue('入队 10 20 30 后:', Q)
 
-#@s 出队一个 —— 应该是最先进入的 10
+    #@s 出队一个 —— 应该是最先进入的 10
     #@d 就是这个写法：C 要传 &e 出去接，Python 两个变量一次接住
     r, e = Q.DeQueue()
     if r == OK:
         print(f'出队一个 -> {e}（最先进去的最先出来）')
     PrintQueue('出队后:', Q)
 
-#@s 反复入队到满，看看到底能装几个
-#@d 把 MAXSIZE 个全塞进去是不行的 —— 会留一个空位用来区分空和满。
+    #@s 反复入队到满，看看到底能装几个
+    #@d 把 MAXSIZE 个全塞进去是不行的 —— 会留一个空位用来区分空和满。
     i = 0
     while Q.EnQueue(100 + i) == OK:
         i += 1
     print(f'最多装下 {i} 个（MAXSIZE={MAXSIZE}，故意留一格）')
     PrintQueue('装满后:', Q)
 
-#@s 关键一幕：边进边出跑很多次，验证不会假溢出
-#@d 普通顺序队列跑到这里早就"溢"了，循环队列能一直跑下去。
+    #@s 关键一幕：边进边出跑很多次，验证不会假溢出
+    #@d 普通顺序队列跑到这里早就"溢"了，循环队列能一直跑下去。
     for i in range(100):
         r, e = Q.DeQueue()
         Q.EnQueue(i)

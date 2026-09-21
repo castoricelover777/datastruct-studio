@@ -114,6 +114,8 @@ def NextPrime(N):
 
 #@s 建一个空表
 def CreateTable(TableSize):
+    #@s 表
+    #@d C 要先写 HashTable H; 声明一个表指针，Python 等下面造好了直接赋给 H。
     #@s 分配表结构
     #@d C 要先 malloc(sizeof(struct TblNode)) 再一格一格填，Python 一句 HashTable() 就够了。
     H = HashTable()
@@ -212,6 +214,7 @@ def LoadFactor(H):
     count = 0
 
     for i in range(H.TableSize):
+        #@s 遍历指针
         #@s 从第一个真结点开始数（跳过虚拟头结点）
         #@d C 写成 for (P = ...; P != NULL; P = P->Next) 一个循环头全包了；
         #@d Python 的 while 要自己把 P = P.next 写在循环体最后，少写一句就死循环。
@@ -536,9 +539,8 @@ def PrintStats(H):
 #@d
 #@d   C 的 int main(void) 换成 Python 的 if __name__ == '__main__':，程序跑到这里才会执行。
 #@d   那些 static const int keys[] 数组，Python 直接写成普通列表就行。
-#@d   三个要注意的：print(x, end=' ') 用来照抄 printf("%d ", x) —— 这样每个数后面都有空格，
-#@d   连最后一个也有；print(a, b) 中间会自动加空格，所以凡是要拼句子都写成一条 f-string；
-#@d   C 的三元 a ? b : c 在 Python 里要写成 b if a else c，条件跑到中间去了。
+#@d   最容易踩的坑是 print：print(x, end=' ') 用来照抄 printf("%d ", x)，这样每个数后面都有空格，
+#@d   连最后一个也有；而 C 的三元 a ? b : c 要写成 b if a else c，条件跑到中间去了。
 
 #@s 主函数
 if __name__ == '__main__':

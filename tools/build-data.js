@@ -31,6 +31,23 @@ const DATA = path.join(ROOT, 'data');
 const DOC_ANIM = path.join(ROOT, 'docs', 'animations');
 const TMP = path.join(ROOT, 'build-cache', 'datagen');
 
+// 每个模块对应的 B 站分P（王卓《数据结构与算法基础》）。
+// 映射表是作者侧数据，放在 resources/bili-map.json，构建时注入到模块上。
+const BILI_MAP_FILE = path.join(ROOT, 'resources', 'bili-map.json');
+let BILI = { map: {}, bvid: '', urlTemplate: '' };
+try {
+  BILI = JSON.parse(fs.readFileSync(BILI_MAP_FILE, 'utf8'));
+} catch {
+  console.log('  ⚠ 没读到 resources/bili-map.json，本次构建不带 B 站链接');
+}
+/** 取某个模块的 B 站地址；没有映射返回 null */
+function biliUrlFor(id) {
+  const p = BILI.map && BILI.map[id];
+  if (!p) return null;
+  const tpl = BILI.urlTemplate || 'https://www.bilibili.com/video/BV1nJ411V7bd/?p={p}';
+  return { page: p, url: tpl.replace('{p}', String(p)) };
+}
+
 // ---------------------------------------------------------------------------
 function findCompiler() {
   for (const c of ['gcc', path.join('E:', 'w64devkit', 'bin', 'gcc.exe'), path.join('C:', 'mingw64', 'bin', 'gcc.exe')]) {
@@ -239,6 +256,7 @@ function buildView(dir, prefix, scenes, gcc, py) {
       isAssembly: false,
       hasPractice: true,
       hasAnimation: !!anim,
+      bili: biliUrlFor(id),
     });
 
     if (anim) animOutLocal[id] = anim;

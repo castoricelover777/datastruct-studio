@@ -22,6 +22,7 @@
 
     mhBreadcrumb: $('mhBreadcrumb'), mhId: $('mhId'), mhName: $('mhName'), mhSummary: $('mhSummary'),
     mhDiff: $('mhDiff'), mhDeps: $('mhDeps'), mhLines: $('mhLines'), mhStatus: $('mhStatus'),
+    btnBili: $('btnBili'), biliText: $('biliText'),
 
     commentModes: $('commentModes'), viewModes: $('viewModes'), langModes: $('langModes'), kbdHint: $('kbdHint'),
     btnPrev: $('btnPrev'), btnNext: $('btnNext'), bigTabs: $('bigTabs'), btnTheme: $('btnTheme'),
@@ -387,6 +388,19 @@
     el.mhStatus.hidden = !has;
     el.mhStatus.className = 'chip chip-status' + (st === 'passed' ? ' is-passed' : (state.drafts[m.id] ? ' is-drafting' : ''));
     el.mhStatus.textContent = st === 'passed' ? '已通过' : (state.drafts[m.id] ? '默写中' : '');
+
+    // 右上角 B 站入口：只有这个模块映射到了分P 才显示
+    if (el.btnBili) {
+      const b = m.bili;
+      el.btnBili.hidden = !b;
+      if (b) {
+        el.btnBili.dataset.url = b.url;
+        el.btnBili.title = '在 B 站看王卓老师讲这一节（第 ' + b.page + ' P）';
+        if (el.biliText) el.biliText.textContent = '王卓网课 p' + b.page;
+      } else {
+        delete el.btnBili.dataset.url;
+      }
+    }
 
     el.readCardTitle.textContent = m.isAssembly ? '完整源码（拼装视图）' : '模块 ' + m.id + ' · ' + m.key;
     const i = siblings().indexOf(state.moduleId);
@@ -932,6 +946,19 @@
     });
     el.btnPrev.addEventListener('click', function () { stepModule(-1); });
     el.btnNext.addEventListener('click', function () { stepModule(1); });
+
+    // 右上角 B 站入口：交给系统浏览器打开，不在应用内导航
+    if (el.btnBili) {
+      el.btnBili.addEventListener('click', async function () {
+        const url = el.btnBili.dataset.url;
+        if (!url) return;
+        if (window.studio && window.studio.openExternal) {
+          await window.studio.openExternal(url);
+        } else {
+          window.open(url, '_blank');
+        }
+      });
+    }
 
     // 深色 / 浅色切换。按钮文字说的是"点了会变成什么"，所以深色时显示"浅色"。
     el.btnTheme.addEventListener('click', function () {

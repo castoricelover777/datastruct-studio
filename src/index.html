@@ -43,6 +43,21 @@
     <!-- ================= 右侧：内容区 ================= -->
     <main class="content">
       <header class="module-header">
+        <!-- 右上角：跳到王卓对应网课。没映射到视频的模块自动隐藏 -->
+        <button type="button" class="bili-link" id="btnBili" hidden
+                title="在 B 站看王卓老师讲这一节">
+          <svg class="bili-logo" viewBox="0 0 40 32" aria-hidden="true" focusable="false">
+            <!-- B 站小电视：两只天线 + 圆角屏幕 + 两只眼睛 -->
+            <path d="M12.6 3.4 8.2 7.6a1.5 1.5 0 0 0 2.1 2.1l4.6-4.4h9.4l4.6 4.4a1.5 1.5 0 0 0 2.1-2.1l-4.4-4.2"
+                  fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="3" y="8.6" width="34" height="20.4" rx="5.4"
+                  fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <rect x="12.2" y="15.4" width="4.6" height="5.6" rx="1.7" fill="currentColor"/>
+            <rect x="23.2" y="15.4" width="4.6" height="5.6" rx="1.7" fill="currentColor"/>
+          </svg>
+          <span class="bili-text" id="biliText">王卓网课</span>
+        </button>
         <div class="mh-line1">
           <span class="mh-breadcrumb" id="mhBreadcrumb"></span>
         </div>

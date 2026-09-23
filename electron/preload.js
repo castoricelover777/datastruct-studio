@@ -35,4 +35,11 @@ contextBridge.exposeInMainWorld('studio', {
 
   /** 复制到剪贴板 */
   copy: (text) => ipcRenderer.invoke('clipboard:write', text),
+
+  /**
+   * 用系统默认浏览器打开外链（B 站网课）。
+   * 走 IPC 而不是 location.href，是因为渲染进程有 CSP 限制，
+   * 而且我们要的是"在外面打开"，不是把整个应用导航走。
+   */
+  openExternal: (url) => ipcRenderer.invoke('shell:openExternal', url),
 });

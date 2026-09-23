@@ -695,6 +695,17 @@ ipcMain.handle('clipboard:write', (_event, text) => {
   return true;
 });
 
+/**
+ * 用系统默认浏览器打开外链（B 站网课）。
+ * 只放行 http/https，避免将来被塞进 file: 或自定义协议。
+ */
+ipcMain.handle('shell:openExternal', async (_event, url) => {
+  const s = String(url || '');
+  if (!/^https?:\/\//i.test(s)) return false;
+  await shell.openExternal(s);
+  return true;
+});
+
 // ---------------------------------------------------------------------------
 app.whenReady().then(() => {
   // 预热：章节树很小，读一次就好；编译器检测放到后台，不挡窗口显示

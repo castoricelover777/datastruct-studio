@@ -16,6 +16,10 @@
   --text-faint: #8C959F;
   --accent: #3B82F6;
   --accent-soft: #EAF2FE;
+  /* B 站入口的颜色（品牌粉）。图标与文字都用 currentColor，跟着这两个变量走 */
+  --bili: #FB7299;
+  --bili-bg: rgba(251, 114, 153, 0.10);
+  --bili-border: rgba(251, 114, 153, 0.42);
   --accent-ring: rgba(59, 130, 246, 0.28);
   --success: #10B981;
   --success-soft: #E7F7F1;
@@ -61,6 +65,10 @@ html[data-theme='dark'] {
   --text: #E6EDF3;
   --text-dim: #8B949E;
   --text-faint: #6E7681;
+  /* B 站入口：深色下底色更暗、边框更淡，避免一大块粉 */
+  --bili: #FF6699;
+  --bili-bg: rgba(255, 102, 153, 0.10);
+  --bili-border: rgba(255, 102, 153, 0.38);
   --accent: #4C8DF6;
   --accent-soft: #16233A;
   --accent-ring: rgba(76, 141, 246, 0.32);
@@ -318,6 +326,49 @@ input { font-family: inherit; font-size: inherit; }
   padding: 18px var(--pad-x) 14px;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
+  position: relative;   /* 右上角 B 站入口按它定位 */
+}
+
+/* 右上角：跳到王卓对应网课。按钮用 currentColor，图标跟着文字色走 */
+.bili-link {
+  position: absolute;
+  top: 14px;
+  right: var(--pad-x);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 15px;
+  border: 1px solid var(--bili-border);
+  background: var(--bili-bg);
+  color: var(--bili);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.14s, color 0.14s, transform 0.14s;
+}
+
+.bili-link:hover {
+  background: var(--bili);
+  border-color: var(--bili);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.bili-link:active { transform: translateY(0); }
+
+.bili-logo {
+  width: 22px;
+  height: 18px;
+  flex: none;
+  display: block;
+}
+
+.bili-text {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2px;
 }
 
 .mh-title {
